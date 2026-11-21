@@ -209,7 +209,7 @@ export function noteTemplate(data: NoteData | null) {
   const pages = Math.max(1, Math.ceil((note?.lines.length ?? 0) / 10));
   return `<!doctype html><html lang="ar" dir="rtl"><meta charset="utf-8"><style>
     ${font("Hacen", "Hacen Tunisia.ttf")}${font("CambriaNote", "cambria.ttc")}${font("TimesBold", "timesbd.ttf", 700)}${font("Aptos", "Aptos-Regular.ttf")}${font("Aptos", "Aptos-Bold.ttf", 700)}
-    @page{size:595.32pt 841.92pt;margin:0}*{margin:0;padding:0}body{direction:ltr}section{width:595.32pt;break-after:page;direction:ltr}section:last-child{break-after:auto}section>svg{display:block;width:100%;height:841.92pt}</style><body>${Array.from({ length: pages }, (_, i) => sheet(note, i, pages)).join("")}<script>
+    text{text-rendering:geometricPrecision}@page{size:595.32pt 841.92pt;margin:0}*{margin:0;padding:0}body{direction:ltr}section{width:595.32pt;break-after:page;direction:ltr}section:last-child{break-after:auto}section>svg{display:block;width:100%;height:841.92pt}</style><body>${Array.from({ length: pages }, (_, i) => sheet(note, i, pages)).join("")}<script>
   // Word crops the supplied JPEG and samples the 48 pt print frame at 200 dpi.
   window.printImagesReady = (async () => {
     await document.fonts.ready;
