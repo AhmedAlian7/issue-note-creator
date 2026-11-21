@@ -1,0 +1,29 @@
+{
+  "transcript": "الصفوة فوتيه سيدني عشرين",
+  "extracted": {
+    "customerId": null,
+    "customerText": "الصفوة",
+    "lines": [
+      {
+        "spokenText": "فوتيه سيدني",
+        "productId": "p4",
+        "quantity": null,
+        "quantityText": "عشرين",
+        "remarks": null,
+        "isDestination": false,
+        "confidence": 0.95
+      }
+    ]
+  },
+  "expected": {
+    "customerId": null,
+    "lines": [
+      {
+        "productId": "p4",
+        "quantity": 20,
+        "remarks": null,
+        "isDestination": false
+      }
+    ]
+  }
+}

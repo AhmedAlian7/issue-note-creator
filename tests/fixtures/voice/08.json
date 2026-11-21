@@ -1,0 +1,29 @@
+{
+  "transcript": "ثلاثية سيدني حداشر",
+  "extracted": {
+    "customerId": null,
+    "customerText": "",
+    "lines": [
+      {
+        "spokenText": "ثلاثية سيدني",
+        "productId": "p1",
+        "quantity": 11,
+        "quantityText": "حداشر",
+        "remarks": null,
+        "isDestination": false,
+        "confidence": 0.95
+      }
+    ]
+  },
+  "expected": {
+    "customerId": null,
+    "lines": [
+      {
+        "productId": "p1",
+        "quantity": 11,
+        "remarks": null,
+        "isDestination": false
+      }
+    ]
+  }
+}

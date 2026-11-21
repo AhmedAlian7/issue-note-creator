@@ -1,0 +1,41 @@
+{
+  "products": [
+    {
+      "id": "p1",
+      "nameAr": "ثلاثية سيدني",
+      "aliases": []
+    },
+    {
+      "id": "p2",
+      "nameAr": "ثنائية سيدني",
+      "aliases": []
+    },
+    {
+      "id": "p3",
+      "nameAr": "ثنائية جولدي",
+      "aliases": []
+    },
+    {
+      "id": "p4",
+      "nameAr": "فوتيه سيدني",
+      "aliases": []
+    },
+    {
+      "id": "p5",
+      "nameAr": "كرسي نوبل",
+      "aliases": ["noble chair"]
+    }
+  ],
+  "customers": [
+    {
+      "id": "c1",
+      "nameAr": "شركة MENON",
+      "aliases": ["MENON", "مينون"]
+    },
+    {
+      "id": "c2",
+      "nameAr": "بيت الأثاث",
+      "aliases": ["بيت الاثاث"]
+    }
+  ]
+}

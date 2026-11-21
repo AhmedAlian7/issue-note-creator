@@ -1,0 +1,29 @@
+{
+  "transcript": "بيت الاثاث الثنائية سيدنى واحد وعشرين",
+  "extracted": {
+    "customerId": "c2",
+    "customerText": "بيت الاثاث",
+    "lines": [
+      {
+        "spokenText": "الثنائية سيدنى",
+        "productId": "p2",
+        "quantity": 21,
+        "quantityText": "واحد وعشرين",
+        "remarks": null,
+        "isDestination": false,
+        "confidence": 0.95
+      }
+    ]
+  },
+  "expected": {
+    "customerId": "c2",
+    "lines": [
+      {
+        "productId": "p2",
+        "quantity": 21,
+        "remarks": null,
+        "isDestination": false
+      }
+    ]
+  }
+}

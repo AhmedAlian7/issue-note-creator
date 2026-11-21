@@ -1,0 +1,29 @@
+{
+  "transcript": "مينون فوتيه سدني تلاتة",
+  "extracted": {
+    "customerId": "c1",
+    "customerText": "مينون",
+    "lines": [
+      {
+        "spokenText": "فوتيه سدني",
+        "productId": "p4",
+        "quantity": 3,
+        "quantityText": "تلاتة",
+        "remarks": null,
+        "isDestination": false,
+        "confidence": 0.95
+      }
+    ]
+  },
+  "expected": {
+    "customerId": "c1",
+    "lines": [
+      {
+        "productId": "p4",
+        "quantity": 3,
+        "remarks": null,
+        "isDestination": false
+      }
+    ]
+  }
+}

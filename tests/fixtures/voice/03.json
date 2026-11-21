@@ -1,0 +1,29 @@
+{
+  "transcript": "بيت الأثاث ثنائية جولدي ٣",
+  "extracted": {
+    "customerId": "c2",
+    "customerText": "بيت الأثاث",
+    "lines": [
+      {
+        "spokenText": "ثنائية جولدي",
+        "productId": "p3",
+        "quantity": null,
+        "quantityText": "٣",
+        "remarks": null,
+        "isDestination": false,
+        "confidence": 0.95
+      }
+    ]
+  },
+  "expected": {
+    "customerId": "c2",
+    "lines": [
+      {
+        "productId": "p3",
+        "quantity": 3,
+        "remarks": null,
+        "isDestination": false
+      }
+    ]
+  }
+}

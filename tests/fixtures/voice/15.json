@@ -1,0 +1,29 @@
+{
+  "transcript": "بيت الأثاث كرسي نوبل ٤٩ للمخزن الخلفي",
+  "extracted": {
+    "customerId": "c2",
+    "customerText": "بيت الأثاث",
+    "lines": [
+      {
+        "spokenText": "كرسي نوبل",
+        "productId": "p5",
+        "quantity": null,
+        "quantityText": "٤٩",
+        "remarks": "المخزن الخلفي",
+        "isDestination": true,
+        "confidence": 0.95
+      }
+    ]
+  },
+  "expected": {
+    "customerId": "c2",
+    "lines": [
+      {
+        "productId": "p5",
+        "quantity": 49,
+        "remarks": "المخزن الخلفي",
+        "isDestination": true
+      }
+    ]
+  }
+}

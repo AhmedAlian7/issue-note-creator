@@ -8,6 +8,7 @@
     "node": "^22.15.0 || ^24.0.0"
   },
   "scripts": {
+    "ai:eval": "tsx scripts/ai-eval.ts",
     "pdf:diff": "tsx scripts/pdf-diff.ts",
     "pdf:sample": "tsx scripts/pdf-sample.ts",
     "db:seed": "tsx prisma/seed.ts",

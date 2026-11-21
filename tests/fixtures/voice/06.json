@@ -1,0 +1,29 @@
+{
+  "transcript": "مينون كرسي نوبل اتناشر لفرع الجيزة",
+  "extracted": {
+    "customerId": "c1",
+    "customerText": "مينون",
+    "lines": [
+      {
+        "spokenText": "كرسي نوبل",
+        "productId": "p5",
+        "quantity": 12,
+        "quantityText": "اتناشر",
+        "remarks": "فرع الجيزة",
+        "isDestination": true,
+        "confidence": 0.95
+      }
+    ]
+  },
+  "expected": {
+    "customerId": "c1",
+    "lines": [
+      {
+        "productId": "p5",
+        "quantity": 12,
+        "remarks": "فرع الجيزة",
+        "isDestination": true
+      }
+    ]
+  }
+}

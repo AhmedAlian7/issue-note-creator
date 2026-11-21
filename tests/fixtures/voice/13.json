@@ -1,0 +1,44 @@
+{
+  "transcript": "MENON سرير معدن واحد وكرسي نوبل تسعة",
+  "extracted": {
+    "customerId": "c1",
+    "customerText": "MENON",
+    "lines": [
+      {
+        "spokenText": "سرير معدن",
+        "productId": null,
+        "quantity": null,
+        "quantityText": "واحد",
+        "remarks": null,
+        "isDestination": false,
+        "confidence": 0.95
+      },
+      {
+        "spokenText": "كرسي نوبل",
+        "productId": "p5",
+        "quantity": null,
+        "quantityText": "تسعة",
+        "remarks": null,
+        "isDestination": false,
+        "confidence": 0.95
+      }
+    ]
+  },
+  "expected": {
+    "customerId": "c1",
+    "lines": [
+      {
+        "productId": null,
+        "quantity": 1,
+        "remarks": null,
+        "isDestination": false
+      },
+      {
+        "productId": "p5",
+        "quantity": 9,
+        "remarks": null,
+        "isDestination": false
+      }
+    ]
+  }
+}
