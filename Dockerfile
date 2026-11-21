@@ -22,6 +22,7 @@ COPY --from=build /app/src/pdf/assets ./src/pdf/assets
 COPY --from=build /app/src/pdf/fonts ./src/pdf/fonts
 ENV PLAYWRIGHT_BROWSERS_PATH=/opt/playwright
 RUN node node_modules/playwright-core/cli.js install --with-deps --only-shell chromium
+RUN mkdir -p /data/pdfs && chown node:node /data/pdfs
 USER node
 EXPOSE 3000
 CMD ["node", "server.js"]

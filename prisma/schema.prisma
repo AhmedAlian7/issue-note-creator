@@ -56,7 +56,7 @@ model Customer {
 
 model IssueNote {
   id           String      @id @default(uuid())
-  number       Int?        @unique
+  number       Int?
   date         DateTime    @db.Date
   customerId   String
   customer     Customer    @relation(fields: [customerId], references: [id])
@@ -73,6 +73,7 @@ model IssueNote {
   updatedAt    DateTime    @updatedAt
   lines        NoteLine[]
   recordings   Recording[]
+  @@unique([number, version])
 }
 
 model NoteLine {

@@ -12,7 +12,8 @@ const grants = {
   "note.edit": ["KEEPER"],
   "note.confirm": ["KEEPER"],
   "note.void": ["ADMIN"],
-  "note.supersede": [],
+  "note.supersede": ["ADMIN"],
+  "note.read": ["ADMIN", "KEEPER"],
   "settings.manage": [],
   "audit.read": [],
 } satisfies Record<string, Role[]>;

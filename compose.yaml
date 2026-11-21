@@ -11,6 +11,8 @@ services:
       DATABASE_URL: postgresql://issue_notes:local_dev_only@db:5432/issue_notes?schema=public
       APP_BASE_URL: ${APP_BASE_URL:-http://localhost:3000}
       TZ: ${TZ:-Africa/Cairo}
+    volumes:
+      - note-pdfs:/data/pdfs
     depends_on:
       db:
         condition: service_healthy
@@ -43,4 +45,5 @@ services:
       retries: 10
 
 volumes:
+  note-pdfs:
   postgres-data:

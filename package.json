@@ -16,8 +16,8 @@
     "build": "next build --webpack",
     "lint": "eslint .",
     "typecheck": "next typegen && tsc --noEmit",
-    "test": "vitest run",
-    "test:e2e": "playwright test",
+    "test": "tsx tests/run-isolated.ts unit",
+    "test:e2e": "tsx tests/run-isolated.ts e2e",
     "format": "prettier --write ."
   },
   "dependencies": {

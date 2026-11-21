@@ -12,7 +12,8 @@ const expected = {
   "note.edit": [false, true, true],
   "note.confirm": [false, true, true],
   "note.void": [true, false, true],
-  "note.supersede": [false, false, true],
+  "note.supersede": [true, false, true],
+  "note.read": [true, true, true],
   "settings.manage": [false, false, true],
   "audit.read": [false, false, true],
 } satisfies Record<Action, boolean[]>;

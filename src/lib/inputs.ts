@@ -48,7 +48,7 @@ export const noteInput = z.object({
         isDestination: z.boolean().optional(),
       }),
     )
-    .min(1)
     .max(500),
 });
 export const reasonInput = z.string().trim().min(1).max(1000);
+export const draftTimestamp = z.iso.datetime().optional();

@@ -5,6 +5,7 @@ process.env.TZ ??= "Africa/Cairo";
 const nextConfig: NextConfig = {
   agentRules: false,
   output: "standalone",
+  serverExternalPackages: ["playwright", "playwright-core"],
 };
 
 export default nextConfig;

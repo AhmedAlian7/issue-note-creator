@@ -24,9 +24,11 @@ Open [the sign-in page](http://localhost:3000/login). The first seed run prints 
 
 Press Ctrl+C to stop Next.js. Use `docker compose stop db` to stop PostgreSQL and keep its data.
 
+Confirmed PDFs use the `note-pdfs` Compose volume mounted at `/data/pdfs`. For host development, set `PDF_STORAGE_DIR` in `.env` to a writable directory. Back up the PDF volume alongside PostgreSQL to retain issued versions.
+
 ## Run checks
 
-Keep PostgreSQL running and apply the migrations before running the tests.
+Keep PostgreSQL running. The unit and browser test commands create a temporary database, apply migrations, and remove the database and its PDFs when the run finishes. The test database user needs permission to create databases.
 
 ```sh
 pnpm lint

@@ -2,8 +2,16 @@ import { z } from "zod";
 import { currentUser } from "@/server/session";
 import { authorize, Denied } from "@/server/permissions";
 import { catalogCommand, changeCatalog } from "@/server/catalog";
-import { changeNote, createDraft, NoteConflict } from "@/server/notes";
-import { id, noteInput, reasonInput } from "@/lib/inputs";
+import {
+  updateDraft,
+  confirmNote,
+  voidNote,
+  supersedeNote,
+  duplicateNote,
+  createDraft,
+  NoteConflict,
+} from "@/server/notes";
+import { draftTimestamp, id, noteInput, reasonInput } from "@/lib/inputs";
 import { Prisma } from "@/generated/prisma/client";
 import { ar } from "@/lib/i18n";
 
@@ -12,8 +20,14 @@ const command = z.discriminatedUnion("action", [
   z.object({ action: z.literal("setting"), setting: settingInput }),
   z.object({ action: z.literal("catalog"), command: catalogCommand }),
   z.object({ action: z.literal("create"), fields: noteInput }),
-  z.object({ action: z.literal("edit"), id, fields: noteInput }),
-  z.object({ action: z.literal("confirm"), id }),
+  z.object({
+    action: z.literal("edit"),
+    id,
+    fields: noteInput,
+    expected: draftTimestamp,
+  }),
+  z.object({ action: z.literal("confirm"), id, expected: draftTimestamp }),
+  z.object({ action: z.literal("duplicate"), id }),
   z.object({ action: z.literal("void"), id, reason: reasonInput }),
   z.object({
     action: z.literal("supersede"),
@@ -39,25 +53,30 @@ export async function POST(request: Request) {
     }
     if (c.action === "catalog")
       return Response.json({ id: await changeCatalog(actor, c.command) });
-    if (c.action === "create" || c.action === "supersede")
-      return Response.json(
-        await createDraft(
-          actor,
-          c.fields,
-          c.action === "supersede" ? { id: c.id, reason: c.reason } : undefined,
-        ),
-        { status: 201 },
-      );
+    const note = await (async () => {
+      switch (c.action) {
+        case "create":
+          return createDraft(actor, c.fields);
+        case "duplicate":
+          return duplicateNote(actor, c.id);
+        case "edit":
+          return updateDraft(actor, c.id, c.fields, c.expected);
+        case "confirm":
+          return confirmNote(actor, c.id, c.expected);
+        case "supersede":
+          return supersedeNote(actor, c.id, c.fields, c.reason);
+        case "void":
+          return voidNote(actor, c.id, c.reason);
+      }
+    })();
+    const { pdfPath, ...result } = note;
     return Response.json(
-      await changeNote(
-        actor,
-        c.id,
-        c.action === "edit"
-          ? { kind: "edit", fields: c.fields }
-          : c.action === "void"
-            ? { kind: "void", reason: c.reason }
-            : { kind: "confirm" },
-      ),
+      { ...result, hasPdf: !!pdfPath },
+      {
+        status: ["duplicate", "create", "supersede"].includes(c.action)
+          ? 201
+          : 200,
+      },
     );
   } catch (err) {
     if (err instanceof Denied)
