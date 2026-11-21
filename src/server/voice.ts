@@ -2,7 +2,7 @@ import { db } from "./db";
 import { authorize, type Actor } from "./permissions";
 import { defaults, thresholds } from "@/ai/contracts";
 import { parseVoice } from "@/ai/pipeline";
-import { openaiExtractor, openaiTranscriber } from "@/ai/openai";
+import { groqExtractor, groqTranscriber } from "@/ai/groq";
 
 // One fixed window per active account in the single application process.
 const windows = new Map<string, { start: number; count: number }>();
@@ -31,7 +31,7 @@ export async function processVoice(
   const result = await parseVoice(
     input,
     { products, customers },
-    { extractor: openaiExtractor, transcriber: openaiTranscriber },
+    { extractor: groqExtractor, transcriber: groqTranscriber },
     thresholds.parse(setting?.value ?? defaults),
     usage,
   );

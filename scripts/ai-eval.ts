@@ -1,17 +1,17 @@
 import "dotenv/config";
 import { fixtures, catalog } from "../tests/fixtures/voice/load";
-import { openaiTranscriber, openaiExtractor } from "../src/ai/openai";
+import { groqTranscriber, groqExtractor } from "../src/ai/groq";
 import { parseVoice } from "../src/ai/pipeline";
-if (!process.env.OPENAI_API_KEY) {
-  console.log("Skipped voice evaluation: OPENAI_API_KEY is unset.");
+if (!process.env.GROQ_API_KEY) {
+  console.log("Skipped voice evaluation: GROQ_API_KEY is unset.");
 } else {
   let total = 0,
     correct = 0;
   for (const { transcript, expected } of fixtures) {
     try {
       const { draft } = await parseVoice(transcript, catalog, {
-        extractor: openaiExtractor,
-        transcriber: openaiTranscriber,
+        extractor: groqExtractor,
+        transcriber: groqTranscriber,
       });
       const count = Math.max(expected.lines.length, draft.lines.length);
       for (let i = 0; i < count; i++) {

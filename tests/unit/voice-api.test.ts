@@ -2,7 +2,7 @@ import { randomInt } from "node:crypto";
 import { it, expect, vi, afterEach } from "vitest";
 import { db } from "@/server/db";
 import { currentUser } from "@/server/session";
-import { openaiExtractor, openaiTranscriber } from "@/ai/openai";
+import { groqExtractor, groqTranscriber } from "@/ai/groq";
 import { POST } from "@/app/api/voice/parse/route";
 import { aliasHandler } from "@/app/api/voice/alias-handler";
 import { allowVoiceRequest } from "@/server/voice";
@@ -58,7 +58,7 @@ it("uses active catalog rows, records the verified draft, and learns corrections
     }
     const transcript = "عميل تجريبي كرسي تجريبي اتنين";
     const transcriber = new FakeTranscriber(transcript);
-    vi.spyOn(openaiTranscriber, "transcribe").mockImplementation(() =>
+    vi.spyOn(groqTranscriber, "transcribe").mockImplementation(() =>
       transcriber.transcribe(),
     );
     const fake = new FakeExtractor(
@@ -83,7 +83,7 @@ it("uses active catalog rows, records the verified draft, and learns corrections
         ],
       ]),
     );
-    vi.spyOn(openaiExtractor, "extract").mockImplementation(
+    vi.spyOn(groqExtractor, "extract").mockImplementation(
       async (text, catalog) => {
         expect(catalog.products.map((p) => p.id)).not.toContain(hidden.id);
         expect(catalog.products).toContainEqual({

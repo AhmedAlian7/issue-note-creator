@@ -28,7 +28,7 @@ Confirmed PDFs use the `note-pdfs` Compose volume mounted at `/data/pdfs`. For h
 
 ## Voice drafts
 
-Open **إذن صرف بالصوت** from the workspace. The microphone requires HTTPS or localhost. Set `OPENAI_API_KEY`, `TRANSCRIBE_MODEL` and `PARSE_MODEL` in the server environment using the model defaults in `.env.example`.
+Open **إذن صرف بالصوت** from the workspace. The microphone requires HTTPS or localhost. Set `GROQ_API_KEY`, `TRANSCRIBE_MODEL` and `PARSE_MODEL` in the server environment using the model defaults in `.env.example`.
 
 `POST /api/voice/parse` accepts an audio/webm or audio/mp4 request body up to 10 MiB, or JSON containing a `transcript` string. The response includes the transcript, verified draft and recording ID. Each account can submit ten requests per minute per app process. The owner can configure the `voiceThresholds` setting with numeric `green` and `yellow` values (defaults 0.85 and 0.6).
 

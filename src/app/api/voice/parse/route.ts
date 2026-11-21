@@ -1,5 +1,5 @@
 import { ar } from "@/lib/i18n";
-import { ProviderQuotaExhausted } from "@/ai/openai";
+import { ProviderQuotaExhausted } from "@/ai/groq";
 import { currentUser } from "@/server/session";
 import { allowed } from "@/server/permissions";
 import { allowVoiceRequest, processVoice } from "@/server/voice";

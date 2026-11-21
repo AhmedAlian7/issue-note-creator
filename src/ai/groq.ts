@@ -25,11 +25,11 @@ async function post<T>(
   body: BodyInit,
   decode: (data: unknown) => T,
 ) {
-  const key = process.env.OPENAI_API_KEY;
+  const key = process.env.GROQ_API_KEY;
   if (!key) throw new Error("Missing API key");
   for (let attempt = 0; ; attempt++) {
     try {
-      const response = await fetch("https://api.openai.com/v1/" + path, {
+      const response = await fetch("https://api.groq.com/openai/v1/" + path, {
         method: "POST",
         body,
         signal: AbortSignal.timeout(25000),
@@ -76,7 +76,7 @@ const schema = z.toJSONSchema(extraction, {
   },
 });
 delete schema.$schema;
-export const openaiTranscriber: Transcriber = {
+export const groqTranscriber: Transcriber = {
   async transcribe(audio, catalog) {
     const form = new FormData();
     form.set("model", z.string().min(1).parse(process.env.TRANSCRIBE_MODEL));
@@ -99,13 +99,12 @@ export const openaiTranscriber: Transcriber = {
     });
   },
 };
-export const openaiExtractor: Extractor = {
+export const groqExtractor: Extractor = {
   async extract(transcript, catalog) {
     return post(
       "chat/completions",
       JSON.stringify({
         model: z.string().min(1).parse(process.env.PARSE_MODEL),
-        store: false,
         messages: [
           { role: "system", content: instructions },
           { role: "user", content: JSON.stringify({ transcript, ...catalog }) },

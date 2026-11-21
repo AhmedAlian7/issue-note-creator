@@ -1,9 +1,9 @@
 import { it, expect, vi, afterEach } from "vitest";
 import {
-  openaiTranscriber,
-  openaiExtractor,
+  groqTranscriber,
+  groqExtractor,
   ProviderQuotaExhausted,
-} from "@/ai/openai";
+} from "@/ai/groq";
 import { fixtures, catalog } from "../fixtures/voice/load";
 afterEach(() => {
   vi.unstubAllGlobals();
@@ -12,24 +12,24 @@ afterEach(() => {
 it.each(["credit_balance_exhausted", "insufficient_quota"])(
   "reports %s immediately for text and audio",
   async (code) => {
-    vi.stubEnv("OPENAI_API_KEY", "test");
+    vi.stubEnv("GROQ_API_KEY", "test");
     vi.stubEnv("PARSE_MODEL", "test");
     vi.stubEnv("TRANSCRIBE_MODEL", "test");
     const fetcher = vi.fn(async () =>
       Response.json({ error: { code } }, { status: 429 }),
     );
     vi.stubGlobal("fetch", fetcher);
+    await expect(groqExtractor.extract("كرسي", catalog)).rejects.toBeInstanceOf(
+      ProviderQuotaExhausted,
+    );
     await expect(
-      openaiExtractor.extract("كرسي", catalog),
-    ).rejects.toBeInstanceOf(ProviderQuotaExhausted);
-    await expect(
-      openaiTranscriber.transcribe(new Blob(["test"]), catalog),
+      groqTranscriber.transcribe(new Blob(["test"]), catalog),
     ).rejects.toBeInstanceOf(ProviderQuotaExhausted);
     expect(fetcher).toHaveBeenCalledTimes(2);
   },
 );
 it("sends Arabic hints, retries a transient timeout once, and reads usage", async () => {
-  vi.stubEnv("OPENAI_API_KEY", "test");
+  vi.stubEnv("GROQ_API_KEY", "test");
   vi.stubEnv("TRANSCRIBE_MODEL", "test-transcriber");
   const fetcher = vi
     .fn<typeof fetch>()
@@ -38,13 +38,16 @@ it("sends Arabic hints, retries a transient timeout once, and reads usage", asyn
       Response.json({ text: "كرسي نوبل", usage: { total_tokens: 17 } }),
     );
   vi.stubGlobal("fetch", fetcher);
-  const result = await openaiTranscriber.transcribe(
+  const result = await groqTranscriber.transcribe(
     new Blob(["audio"], { type: "audio/mp4" }),
     catalog,
   );
   expect(result.tokens).toBe(17);
   expect(fetcher).toHaveBeenCalledTimes(2);
   const form = fetcher.mock.calls[1][1]?.body as FormData;
+  expect(fetcher.mock.calls[1][0]).toBe(
+    "https://api.groq.com/openai/v1/audio/transcriptions",
+  );
   expect(form.get("model")).toBe("test-transcriber");
   expect(form.get("language")).toBe("ar");
   for (const row of [...catalog.products, ...catalog.customers])
@@ -52,7 +55,7 @@ it("sends Arabic hints, retries a transient timeout once, and reads usage", asyn
   expect((form.get("file") as File).name).toBe("voice.mp4");
 });
 it("sends both full catalogs and rejects invalid structured output after one retry", async () => {
-  vi.stubEnv("OPENAI_API_KEY", "test");
+  vi.stubEnv("GROQ_API_KEY", "test");
   vi.stubEnv("PARSE_MODEL", "test-extractor");
   const fetcher = vi
     .fn<typeof fetch>()
@@ -61,9 +64,12 @@ it("sends both full catalogs and rejects invalid structured output after one ret
     );
   vi.stubGlobal("fetch", fetcher);
   const { transcript } = fixtures[0];
-  await expect(openaiExtractor.extract(transcript, catalog)).rejects.toThrow();
+  await expect(groqExtractor.extract(transcript, catalog)).rejects.toThrow();
   expect(fetcher).toHaveBeenCalledTimes(2);
   const body = JSON.parse(String(fetcher.mock.calls[0][1]?.body));
+  expect(fetcher.mock.calls[0][0]).toBe(
+    "https://api.groq.com/openai/v1/chat/completions",
+  );
   expect(JSON.parse(body.messages[1].content)).toEqual({
     transcript,
     ...catalog,
