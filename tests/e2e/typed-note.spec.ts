@@ -37,10 +37,16 @@ test("keeper types, issues, previews and downloads the numbered PDF on a phone",
   await page.getByLabel(t.product).fill("اريكه");
   await page.getByRole("button", { name: product.nameAr }).click();
   await page.getByRole("spinbutton").fill("4");
-  await page.getByLabel(t.remarks, { exact: true }).fill("المدخل");
-  await page.getByLabel(t.destination, { exact: true }).check();
+  const remarks = page.getByLabel(t.remarks, { exact: true });
+  const color = page.getByRole("combobox", { name: t.textColor });
+  await expect(remarks).toHaveValue("استندر");
+  await expect(color).toHaveCount(0);
+  await remarks.fill("المدخل");
+  await expect(color).toHaveValue("default");
+  await color.selectOption("red");
   await expect(page.getByRole("status")).toHaveText(ar.saved);
   await page.reload();
+  await expect(color).toHaveValue("red");
   await expect(page.getByRole("spinbutton")).toHaveValue("4");
   // A partial match must still allow the keeper to register a distinct product.
   await page.getByLabel(t.product).fill("أري");

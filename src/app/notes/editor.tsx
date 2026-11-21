@@ -116,7 +116,7 @@ export function Editor({
             key: crypto.randomUUID(),
             productId,
             quantity: 1,
-            remarks: "",
+            remarks: t.defaultRemarks,
             isDestination: false,
           },
         ],
@@ -245,21 +245,39 @@ export function Editor({
                   <input
                     maxLength={300}
                     value={line.remarks}
+                    style={
+                      line.isDestination ? { color: "#a62225" } : undefined
+                    }
                     onChange={(e) =>
-                      changeLine(line.key, { remarks: e.target.value })
+                      changeLine(line.key, {
+                        remarks: e.target.value,
+                        isDestination:
+                          !!e.target.value.trim() &&
+                          e.target.value.trim() !== t.defaultRemarks &&
+                          line.isDestination,
+                      })
                     }
                   />
                 </label>
-                <label className="toggle">
-                  <input
-                    type="checkbox"
-                    checked={line.isDestination}
-                    onChange={(e) =>
-                      changeLine(line.key, { isDestination: e.target.checked })
-                    }
-                  />
-                  {t.destination}
-                </label>
+                {(line.isDestination ||
+                  (line.remarks.trim() &&
+                    line.remarks.trim() !== t.defaultRemarks)) && (
+                  <label>
+                    {t.textColor}
+                    <select
+                      aria-label={t.textColor}
+                      value={line.isDestination ? "red" : "default"}
+                      onChange={(e) =>
+                        changeLine(line.key, {
+                          isDestination: e.target.value === "red",
+                        })
+                      }
+                    >
+                      <option value="default">{t.defaultColor}</option>
+                      <option value="red">{t.red}</option>
+                    </select>
+                  </label>
+                )}
                 <div className="tools">
                   <button
                     className="secondary"
