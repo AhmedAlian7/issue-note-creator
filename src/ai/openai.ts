@@ -19,6 +19,7 @@ class HttpFailure extends Error {
     super("Provider request failed");
   }
 }
+export class ProviderQuotaExhausted extends Error {}
 async function post<T>(
   path: string,
   body: BodyInit,
@@ -40,13 +41,22 @@ async function post<T>(
         },
       });
       if (!response.ok) {
-        await response.body?.cancel();
+        if (response.status === 429) {
+          const body = await response.json().catch(() => null);
+          if (
+            ["credit_balance_exhausted", "insufficient_quota"].includes(
+              body?.error?.code,
+            )
+          )
+            throw new ProviderQuotaExhausted();
+        } else await response.body?.cancel();
         throw new HttpFailure(response.status);
       }
       return decode(await response.json());
     } catch (error) {
       if (
         attempt ||
+        error instanceof ProviderQuotaExhausted ||
         (error instanceof HttpFailure &&
           error.status < 500 &&
           ![408, 429].includes(error.status))

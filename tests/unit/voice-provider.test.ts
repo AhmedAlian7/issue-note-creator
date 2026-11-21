@@ -1,10 +1,33 @@
 import { it, expect, vi, afterEach } from "vitest";
-import { openaiTranscriber, openaiExtractor } from "@/ai/openai";
+import {
+  openaiTranscriber,
+  openaiExtractor,
+  ProviderQuotaExhausted,
+} from "@/ai/openai";
 import { fixtures, catalog } from "../fixtures/voice/load";
 afterEach(() => {
   vi.unstubAllGlobals();
   vi.unstubAllEnvs();
 });
+it.each(["credit_balance_exhausted", "insufficient_quota"])(
+  "reports %s immediately for text and audio",
+  async (code) => {
+    vi.stubEnv("OPENAI_API_KEY", "test");
+    vi.stubEnv("PARSE_MODEL", "test");
+    vi.stubEnv("TRANSCRIBE_MODEL", "test");
+    const fetcher = vi.fn(async () =>
+      Response.json({ error: { code } }, { status: 429 }),
+    );
+    vi.stubGlobal("fetch", fetcher);
+    await expect(
+      openaiExtractor.extract("كرسي", catalog),
+    ).rejects.toBeInstanceOf(ProviderQuotaExhausted);
+    await expect(
+      openaiTranscriber.transcribe(new Blob(["test"]), catalog),
+    ).rejects.toBeInstanceOf(ProviderQuotaExhausted);
+    expect(fetcher).toHaveBeenCalledTimes(2);
+  },
+);
 it("sends Arabic hints, retries a transient timeout once, and reads usage", async () => {
   vi.stubEnv("OPENAI_API_KEY", "test");
   vi.stubEnv("TRANSCRIBE_MODEL", "test-transcriber");
