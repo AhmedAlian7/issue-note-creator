@@ -1,9 +1,11 @@
 import { z } from "zod";
+import { thresholds } from "@/ai/contracts";
 import { db } from "./db";
 import { audit } from "./audit";
 import { authorize, type Actor } from "./permissions";
 
 export const settingInput = z.discriminatedUnion("key", [
+  z.object({ key: z.literal("voiceThresholds"), value: thresholds }),
   z.object({
     key: z.literal("numberingStart"),
     value: z.int().positive().max(2147483646),
