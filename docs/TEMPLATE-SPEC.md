@@ -39,4 +39,6 @@ The footer anchors the QR image 6075680 EMU from the column origin and −116188
 >
 > **italianfurniture-eg.com** | +20 101 347 8443 | Cairo, Egypt
 
-The available filled Word file contains note 978 dated 19/11/2026. Its run formatting informs the filled-field descriptions above. Comparison against the approved note 972 requires its separate PDF export.
+The corrected filled Word file contains note 972 dated 16/11/2026. Its customer name combines Hacen Tunisia for شركة and Times New Roman Bold at 16 pt for MENON. The Word-exported PDF lists the latter face as TimesNewRomanPS-BoldMT. The package embeds Aptos and Hacen Tunisia, while the repository supplies Cambria separately.
+
+The filled comparison fixture is a Microsoft Word PDF export of a temporary copy of the corrected DOCX. Lock the dynamic TIME field in the copy before opening it in Word to preserve its stored date. Rasterize the PDF with Poppler at 150 DPI.
