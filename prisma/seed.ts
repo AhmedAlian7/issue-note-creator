@@ -11,10 +11,7 @@ const products = [
   "فوتيه سيدني",
   "كرسي نوبل",
 ];
-const customers = [
-  "شركة MENON",
-  ...Array.from({ length: 4 }, (_, i) => "عميل مؤقت " + (i + 1)),
-];
+const customers = ["شركة MENON"];
 const accounts = [
   { name: "مالك تجريبي", role: "OWNER", phone: "01000000973" },
   { name: "مدير تجريبي", role: "ADMIN", phone: "01000000974" },
