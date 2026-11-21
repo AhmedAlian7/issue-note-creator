@@ -1,5 +1,120 @@
 @import "tailwindcss";
 
+.desk {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: clamp(1rem, 4vw, 3rem);
+  color: #163c42;
+}
+.desk.narrow {
+  max-width: 32rem;
+}
+.desk header {
+  border-inline-start: 0.45rem solid #156873;
+  padding-inline-start: 1rem;
+  margin: 1rem 0 2rem;
+}
+.desk h1 {
+  font-size: clamp(2rem, 7vw, 3.4rem);
+  font-weight: 750;
+  line-height: 1.5;
+}
+.desk h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+.desk p,
+.desk output {
+  line-height: 1.8;
+}
+.fields,
+.fields label,
+.menu {
+  display: grid;
+  gap: 0.6rem;
+}
+.fields {
+  gap: 1rem;
+  margin: 1rem 0;
+  background: white;
+  padding: 1.1rem;
+  border-radius: 0.5rem;
+}
+.desk input,
+.desk select {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid #729397;
+  border-radius: 0.3rem;
+  padding: 0.55rem 0.8rem;
+  background: white;
+  color: #17383e;
+}
+.desk button,
+.home-entry,
+.menu a,
+.desk summary {
+  cursor: pointer;
+  border-radius: 0.3rem;
+  padding: 0.65rem 1rem;
+  font-weight: 650;
+}
+.desk button,
+.home-entry,
+.menu a,
+.add > summary {
+  background: #155a65;
+  color: white;
+}
+.home-entry {
+  margin-top: 1.5rem;
+}
+.desk .secondary,
+.tools summary {
+  background: #dfebec;
+  color: #174650;
+}
+.desk :focus-visible,
+.home-entry:focus-visible {
+  outline: 3px solid #b35817;
+  outline-offset: 2px;
+}
+.desk li {
+  padding: 1rem 0;
+  border-bottom: 1px solid #b7cbcd;
+}
+.desk li strong {
+  display: inline-block;
+  background: #ffebaa;
+  color: #634600;
+  padding: 0.2rem 0.6rem;
+  margin: 0.4rem 0;
+}
+.tools,
+.search {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 0.65rem 0;
+}
+.tools details[open] {
+  width: 100%;
+}
+.search {
+  flex-wrap: nowrap;
+  margin: 1.5rem 0;
+}
+.menu {
+  margin-bottom: 1.25rem;
+}
+.desk output:empty {
+  display: none;
+}
+.desk button:disabled {
+  opacity: 0.6;
+}
+
 @theme {
   --font-sans: "Noto Sans Arabic", "Segoe UI", Tahoma, Arial, sans-serif;
 }
