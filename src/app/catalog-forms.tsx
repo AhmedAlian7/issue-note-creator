@@ -55,9 +55,11 @@ function useMutation() {
 export function CatalogForm({
   entity,
   row,
+  initialName,
 }: {
   entity: Entity;
   row?: RecordFields;
+  initialName?: string;
 }) {
   const { submit, busy, message } = useMutation();
   return (
@@ -87,7 +89,7 @@ export function CatalogForm({
           name={entity === "user" ? "name" : "nameAr"}
           required
           maxLength={180}
-          defaultValue={row?.name ?? row?.nameAr}
+          defaultValue={row?.name ?? row?.nameAr ?? initialName}
         />
       </label>
       {entity === "user" ? (

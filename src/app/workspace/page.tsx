@@ -20,6 +20,9 @@ export default async function Workspace() {
         <h1>{ar.workspace}</h1>
       </header>
       <nav className="menu">
+        <Link className="new-note" href="/voice">
+          {ar.voice.title}
+        </Link>
         {recent && (
           <>
             <Link className="new-note" href="/notes/new">

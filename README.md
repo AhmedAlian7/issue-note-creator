@@ -26,6 +26,16 @@ Press Ctrl+C to stop Next.js. Use `docker compose stop db` to stop PostgreSQL an
 
 Confirmed PDFs use the `note-pdfs` Compose volume mounted at `/data/pdfs`. For host development, set `PDF_STORAGE_DIR` in `.env` to a writable directory. Back up the PDF volume alongside PostgreSQL to retain issued versions.
 
+## Voice drafts
+
+Open **إذن صرف بالصوت** from the workspace. The microphone requires HTTPS or localhost. Set `OPENAI_API_KEY`, `TRANSCRIBE_MODEL` and `PARSE_MODEL` in the server environment using the model defaults in `.env.example`.
+
+`POST /api/voice/parse` accepts an audio/webm or audio/mp4 request body up to 10 MiB, or JSON containing a `transcript` string. The response includes the transcript, verified draft and recording ID. Each account can submit ten requests per minute per app process. The owner can configure the `voiceThresholds` setting with numeric `green` and `yellow` values (defaults 0.85 and 0.6).
+
+To save a correction, POST JSON such as `{"alias":"كرسي نوبيل"}` to `/api/products/[id]/aliases` or `/api/customers/[id]/aliases`. Both endpoints use the signed-in session.
+
+Run `pnpm ai:eval` for a live extraction and matching evaluation against the transcript fixtures. It skips when the API key is absent. The automated test suite uses fake providers.
+
 ## Run checks
 
 Keep PostgreSQL running. The unit and browser test commands create a temporary database, apply migrations, and remove the database and its PDFs when the run finishes. The test database user needs permission to create databases.
