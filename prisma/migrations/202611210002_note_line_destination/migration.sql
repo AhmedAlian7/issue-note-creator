@@ -1,0 +1,1 @@
+ALTER TABLE "NoteLine" ADD COLUMN "isDestination" BOOLEAN NOT NULL DEFAULT false;

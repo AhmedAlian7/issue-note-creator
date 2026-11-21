@@ -76,14 +76,15 @@ model IssueNote {
 }
 
 model NoteLine {
-  id        String    @id @default(uuid())
-  noteId    String
-  note      IssueNote @relation(fields: [noteId], references: [id], onDelete: Restrict)
-  productId String
-  product   Product   @relation(fields: [productId], references: [id])
-  quantity  Int
-  remarks   String?   @db.Text
-  position  Int
+  id            String    @id @default(uuid())
+  noteId        String
+  note          IssueNote @relation(fields: [noteId], references: [id], onDelete: Restrict)
+  productId     String
+  product       Product   @relation(fields: [productId], references: [id])
+  quantity      Int
+  remarks       String?   @db.Text
+  isDestination Boolean   @default(false)
+  position      Int
 
   @@unique([noteId, position])
 }

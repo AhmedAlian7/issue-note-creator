@@ -45,6 +45,7 @@ export const noteInput = z.object({
         productId: id,
         quantity: z.int().positive().max(2147483647),
         remarks: optionalText,
+        isDestination: z.boolean().optional(),
       }),
     )
     .min(1)
