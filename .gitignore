@@ -1,6 +1,7 @@
 /node_modules/
 /.next/
 /out/
+/tests/output/
 /coverage/
 /playwright-report/
 /test-results/

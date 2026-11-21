@@ -1,4 +1,14 @@
 export const ar = {
+  notePdf: {
+    title: "إذن صرف مخزن",
+    date: "التاريخ",
+    number: "رقم",
+    customer: "الجهة",
+    headings: ["ملاحظات", "الكمية", "البيان", "م"],
+    receipt: "أقر باستلام البضائع المذكورة أعلاه بحالة جيدة وبكامل الكمية.",
+    signatures: ["السائق:", "أمين المخزن:", "يعتمد:"],
+    page: (current: number, total: number) => `صفحة ${current} من ${total}`,
+  },
   appName: "أذون صرف المخزن",
   login: "تسجيل الدخول",
   logout: "خروج",

@@ -42,3 +42,11 @@ The footer anchors the QR image 6075680 EMU from the column origin and −116188
 The corrected filled Word file contains note 972 dated 16/11/2026. Its customer name combines Hacen Tunisia for شركة and Times New Roman Bold at 16 pt for MENON. The Word-exported PDF lists the latter face as TimesNewRomanPS-BoldMT. The package embeds Aptos and Hacen Tunisia, while the repository supplies Cambria separately.
 
 The filled comparison fixture is a Microsoft Word PDF export of a temporary copy of the corrected DOCX. Lock the dynamic TIME field in the copy before opening it in Word to preserve its stored date. Rasterize the PDF with Poppler at 150 DPI.
+
+## Rendering and comparison
+
+`renderNotePdf(data)` returns a PDF Buffer. Pass `null` to render the empty stationery. Each page holds ten numbered rows. A continued note repeats the metadata, table headings, signature block and footer, and shows its page number below the signatures.
+
+The renderer uses the supplied Hacen Tunisia, Cambria collection and Times New Roman Bold files. Aptos Regular and Bold were recovered from the template's embedded Open XML font parts by reversing their package obfuscation. The supplied logo and QR files match the package's image1.png and image3.jpeg byte for byte. The logo's transparent padding is accounted for in the header frame. For the QR, Word crops the source and embeds a 133 × 133 pixel print image.
+
+Run `pnpm pdf:sample` to generate `out/sample-972.pdf`. Run `pnpm pdf:diff` with Poppler's `pdftoppm` on PATH for the expected, actual, diff, side-by-side and 50% overlay PNGs under `tests/output/{Template,Sample-972}/`. Both comparisons use the complete 150 DPI page, Pixelmatch's 0.1 color threshold and its anti-alias detection. The acceptance limit is strictly less than 0.2% of all pixels.
