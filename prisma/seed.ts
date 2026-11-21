@@ -10,7 +10,6 @@ const products = [
   "ثنائية جولدي",
   "فوتيه سيدني",
   "كرسي نوبل",
-  ...Array.from({ length: 20 }, (_, i) => "صنف مؤقت " + (i + 1)),
 ];
 const customers = [
   "شركة MENON",
