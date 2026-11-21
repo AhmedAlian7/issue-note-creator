@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Noto Sans Arabic", "Segoe UI", Tahoma, Arial, sans-serif;
+}
+
+@layer base {
+  :where(
+    button,
+    input:not([type="hidden"]),
+    select,
+    textarea,
+    a[href],
+    summary,
+    [role="button"]
+  ) {
+    min-inline-size: 48px;
+    min-block-size: 48px;
+  }
+
+  :where(a[href], [role="button"]) {
+    display: inline-flex;
+    align-items: center;
+  }
+}
