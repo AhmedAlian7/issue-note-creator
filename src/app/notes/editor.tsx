@@ -140,12 +140,14 @@ export function Editor({
       .catch((e) => setMessage(e instanceof Error ? e.message : t.error))
       .finally(() => setBusy(false));
   }
+  const search = normalizeArabic(query);
   const matches = products.filter(
     (p) =>
       p.active &&
-      [p.nameAr, ...p.aliases].some((v) =>
-        normalizeArabic(v).includes(normalizeArabic(query)),
-      ),
+      [p.nameAr, ...p.aliases].some((v) => normalizeArabic(v).includes(search)),
+  );
+  const exactMatch = matches.some((p) =>
+    [p.nameAr, ...p.aliases].some((v) => normalizeArabic(v) === search),
   );
   const name = (productId: string) =>
     products.find((p) => p.id === productId)?.nameAr;
@@ -313,7 +315,7 @@ export function Editor({
                   </button>
                 ))}
               </div>
-              {query.trim() && !matches.length && !adding && (
+              {search && !exactMatch && !adding && (
                 <button
                   onClick={() => {
                     setNewName(query.trim());

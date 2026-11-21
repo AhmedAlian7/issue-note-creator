@@ -42,6 +42,19 @@ test("keeper types, issues, previews and downloads the numbered PDF on a phone",
   await expect(page.getByRole("status")).toHaveText(ar.saved);
   await page.reload();
   await expect(page.getByRole("spinbutton")).toHaveValue("4");
+  // A partial match must still allow the keeper to register a distinct product.
+  await page.getByLabel(t.product).fill("أري");
+  await page.getByRole("button", { name: t.addNew }).click();
+  const newName = page.getByRole("textbox", { name: ar.name, exact: true });
+  await expect(newName).toHaveValue("أري");
+  await newName.fill("أريكة صغيرة");
+  await page.getByRole("button", { name: ar.save, exact: true }).click();
+  await expect(
+    page.getByRole("heading", { name: "2. أريكة صغيرة" }),
+  ).toBeVisible();
+  expect(
+    await db.product.findFirstOrThrow({ where: { nameAr: "أريكة صغيرة" } }),
+  ).toMatchObject({ needsReview: true, createdByKeeper: true });
   await page.getByRole("button", { name: t.summary }).click();
   await page.getByRole("button", { name: t.confirm }).click();
   await expect(
