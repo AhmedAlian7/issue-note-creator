@@ -8,6 +8,14 @@ import {
 } from "./contracts";
 import { match } from "./matching";
 import { recoverQuantity } from "./quantity";
+export class MissingQuantity extends Error {
+  constructor(
+    readonly transcript: string,
+    readonly item: string,
+  ) {
+    super("Missing quantity");
+  }
+}
 export async function parseVoice(
   input: string | Blob,
   catalog: Catalog,
@@ -42,7 +50,8 @@ export async function parseVoice(
     const quantity =
       line.quantity ??
       recoverQuantity(transcript, line.spokenText, line.quantityText);
-    if (quantity === null) throw new Error("Missing quantity");
+    if (quantity === null)
+      throw new MissingQuantity(transcript, line.spokenText);
     return {
       spokenText: line.spokenText,
       productId,

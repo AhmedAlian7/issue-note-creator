@@ -800,7 +800,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "ai_contracts_thresholds",
-      "community": 3,
+      "community": 0,
       "norm_label": "thresholds"
     },
     {
@@ -914,6 +914,106 @@
       "norm_label": ".extract()"
     },
     {
+      "label": "groq.ts",
+      "file_type": "code",
+      "source_file": "src/ai/groq.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "ai_groq",
+      "community": 3,
+      "norm_label": "groq.ts"
+    },
+    {
+      "label": "instructions",
+      "file_type": "code",
+      "source_file": "src/ai/groq.ts",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "ai_groq_instructions",
+      "community": 3,
+      "norm_label": "instructions"
+    },
+    {
+      "label": "HttpFailure",
+      "file_type": "code",
+      "source_file": "src/ai/groq.ts",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "ai_groq_httpfailure",
+      "community": 3,
+      "norm_label": "httpfailure"
+    },
+    {
+      "label": ".constructor()",
+      "file_type": "code",
+      "source_file": "src/ai/groq.ts",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "ai_groq_httpfailure_constructor",
+      "community": 3,
+      "norm_label": ".constructor()"
+    },
+    {
+      "label": "ProviderQuotaExhausted",
+      "file_type": "code",
+      "source_file": "src/ai/groq.ts",
+      "source_location": "L22",
+      "_origin": "ast",
+      "id": "ai_groq_providerquotaexhausted",
+      "community": 3,
+      "norm_label": "providerquotaexhausted"
+    },
+    {
+      "label": "post()",
+      "file_type": "code",
+      "source_file": "src/ai/groq.ts",
+      "source_location": "L23",
+      "_origin": "ast",
+      "id": "ai_groq_post",
+      "community": 3,
+      "norm_label": "post()"
+    },
+    {
+      "label": "usage",
+      "file_type": "code",
+      "source_file": "src/ai/groq.ts",
+      "source_location": "L69",
+      "_origin": "ast",
+      "id": "ai_groq_usage",
+      "community": 3,
+      "norm_label": "usage"
+    },
+    {
+      "label": "schema",
+      "file_type": "code",
+      "source_file": "src/ai/groq.ts",
+      "source_location": "L70",
+      "_origin": "ast",
+      "id": "ai_groq_schema",
+      "community": 3,
+      "norm_label": "schema"
+    },
+    {
+      "label": "groqTranscriber",
+      "file_type": "code",
+      "source_file": "src/ai/groq.ts",
+      "source_location": "L79",
+      "_origin": "ast",
+      "id": "ai_groq_groqtranscriber",
+      "community": 3,
+      "norm_label": "groqtranscriber"
+    },
+    {
+      "label": "groqExtractor",
+      "file_type": "code",
+      "source_file": "src/ai/groq.ts",
+      "source_location": "L102",
+      "_origin": "ast",
+      "id": "ai_groq_groqextractor",
+      "community": 3,
+      "norm_label": "groqextractor"
+    },
+    {
       "label": "matching.ts",
       "file_type": "code",
       "source_file": "src/ai/matching.ts",
@@ -964,106 +1064,6 @@
       "norm_label": "match()"
     },
     {
-      "label": "openai.ts",
-      "file_type": "code",
-      "source_file": "src/ai/openai.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "ai_openai",
-      "community": 3,
-      "norm_label": "openai.ts"
-    },
-    {
-      "label": "instructions",
-      "file_type": "code",
-      "source_file": "src/ai/openai.ts",
-      "source_location": "L9",
-      "_origin": "ast",
-      "id": "ai_openai_instructions",
-      "community": 3,
-      "norm_label": "instructions"
-    },
-    {
-      "label": "HttpFailure",
-      "file_type": "code",
-      "source_file": "src/ai/openai.ts",
-      "source_location": "L17",
-      "_origin": "ast",
-      "id": "ai_openai_httpfailure",
-      "community": 3,
-      "norm_label": "httpfailure"
-    },
-    {
-      "label": ".constructor()",
-      "file_type": "code",
-      "source_file": "src/ai/openai.ts",
-      "source_location": "L18",
-      "_origin": "ast",
-      "id": "ai_openai_httpfailure_constructor",
-      "community": 3,
-      "norm_label": ".constructor()"
-    },
-    {
-      "label": "ProviderQuotaExhausted",
-      "file_type": "code",
-      "source_file": "src/ai/openai.ts",
-      "source_location": "L22",
-      "_origin": "ast",
-      "id": "ai_openai_providerquotaexhausted",
-      "community": 3,
-      "norm_label": "providerquotaexhausted"
-    },
-    {
-      "label": "post()",
-      "file_type": "code",
-      "source_file": "src/ai/openai.ts",
-      "source_location": "L23",
-      "_origin": "ast",
-      "id": "ai_openai_post",
-      "community": 3,
-      "norm_label": "post()"
-    },
-    {
-      "label": "usage",
-      "file_type": "code",
-      "source_file": "src/ai/openai.ts",
-      "source_location": "L69",
-      "_origin": "ast",
-      "id": "ai_openai_usage",
-      "community": 3,
-      "norm_label": "usage"
-    },
-    {
-      "label": "schema",
-      "file_type": "code",
-      "source_file": "src/ai/openai.ts",
-      "source_location": "L70",
-      "_origin": "ast",
-      "id": "ai_openai_schema",
-      "community": 3,
-      "norm_label": "schema"
-    },
-    {
-      "label": "openaiTranscriber",
-      "file_type": "code",
-      "source_file": "src/ai/openai.ts",
-      "source_location": "L79",
-      "_origin": "ast",
-      "id": "ai_openai_openaitranscriber",
-      "community": 3,
-      "norm_label": "openaitranscriber"
-    },
-    {
-      "label": "openaiExtractor",
-      "file_type": "code",
-      "source_file": "src/ai/openai.ts",
-      "source_location": "L102",
-      "_origin": "ast",
-      "id": "ai_openai_openaiextractor",
-      "community": 3,
-      "norm_label": "openaiextractor"
-    },
-    {
       "label": "pipeline.ts",
       "file_type": "code",
       "source_file": "src/ai/pipeline.ts",
@@ -1074,10 +1074,30 @@
       "norm_label": "pipeline.ts"
     },
     {
-      "label": "parseVoice()",
+      "label": "MissingQuantity",
       "file_type": "code",
       "source_file": "src/ai/pipeline.ts",
       "source_location": "L11",
+      "_origin": "ast",
+      "id": "ai_pipeline_missingquantity",
+      "community": 3,
+      "norm_label": "missingquantity"
+    },
+    {
+      "label": ".constructor()",
+      "file_type": "code",
+      "source_file": "src/ai/pipeline.ts",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "ai_pipeline_missingquantity_constructor",
+      "community": 3,
+      "norm_label": ".constructor()"
+    },
+    {
+      "label": "parseVoice()",
+      "file_type": "code",
+      "source_file": "src/ai/pipeline.ts",
+      "source_location": "L19",
       "_origin": "ast",
       "id": "ai_pipeline_parsevoice",
       "community": 3,
@@ -1087,7 +1107,7 @@
       "label": "VoiceResult",
       "file_type": "code",
       "source_file": "src/ai/pipeline.ts",
-      "source_location": "L63",
+      "source_location": "L72",
       "_origin": "ast",
       "id": "ai_pipeline_voiceresult",
       "community": 30,
@@ -1160,7 +1180,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "section_page",
-      "community": 30,
+      "community": 5,
       "norm_label": "page.tsx"
     },
     {
@@ -1170,7 +1190,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "section_page_sections",
-      "community": 30,
+      "community": 5,
       "norm_label": "sections"
     },
     {
@@ -1180,7 +1200,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "section_page_catalog",
-      "community": 30,
+      "community": 5,
       "norm_label": "catalog()"
     },
     {
@@ -1300,17 +1320,17 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "parse_route",
-      "community": 5,
+      "community": 3,
       "norm_label": "route.ts"
     },
     {
       "label": "POST()",
       "file_type": "code",
       "source_file": "src/app/api/voice/parse/route.ts",
-      "source_location": "L7",
+      "source_location": "L8",
       "_origin": "ast",
       "id": "parse_route_post",
-      "community": 5,
+      "community": 3,
       "norm_label": "post()"
     },
     {
@@ -1350,7 +1370,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "archive_page",
-      "community": 29,
+      "community": 5,
       "norm_label": "page.tsx"
     },
     {
@@ -1360,7 +1380,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "archive_page_archive",
-      "community": 29,
+      "community": 5,
       "norm_label": "archive()"
     },
     {
@@ -1370,7 +1390,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_catalog_forms",
-      "community": 30,
+      "community": 5,
       "norm_label": "catalog-forms.tsx"
     },
     {
@@ -1380,7 +1400,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_catalog_forms_entity",
-      "community": 30,
+      "community": 5,
       "norm_label": "entity"
     },
     {
@@ -1390,7 +1410,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_catalog_forms_recordfields",
-      "community": 30,
+      "community": 5,
       "norm_label": "recordfields"
     },
     {
@@ -1400,7 +1420,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "app_catalog_forms_usemutation",
-      "community": 30,
+      "community": 5,
       "norm_label": "usemutation()"
     },
     {
@@ -1410,7 +1430,7 @@
       "source_location": "L55",
       "_origin": "ast",
       "id": "app_catalog_forms_catalogform",
-      "community": 30,
+      "community": 5,
       "norm_label": "catalogform()"
     },
     {
@@ -1420,7 +1440,7 @@
       "source_location": "L166",
       "_origin": "ast",
       "id": "app_catalog_forms_statebutton",
-      "community": 30,
+      "community": 5,
       "norm_label": "statebutton()"
     },
     {
@@ -1490,7 +1510,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "login_page",
-      "community": 0,
+      "community": 30,
       "norm_label": "page.tsx"
     },
     {
@@ -1500,7 +1520,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "login_page_login",
-      "community": 0,
+      "community": 30,
       "norm_label": "login()"
     },
     {
@@ -1510,7 +1530,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "id_page",
-      "community": 29,
+      "community": 5,
       "norm_label": "page.tsx"
     },
     {
@@ -1520,7 +1540,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "id_page_notepage",
-      "community": 29,
+      "community": 5,
       "norm_label": "notepage()"
     },
     {
@@ -1620,7 +1640,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "notes_note_list",
-      "community": 29,
+      "community": 5,
       "norm_label": "note-list.tsx"
     },
     {
@@ -1630,7 +1650,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "notes_note_list_notelist",
-      "community": 29,
+      "community": 5,
       "norm_label": "notelist()"
     },
     {
@@ -1700,7 +1720,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "new_page",
-      "community": 30,
+      "community": 5,
       "norm_label": "page.tsx"
     },
     {
@@ -1710,7 +1730,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "new_page_newproduct",
-      "community": 30,
+      "community": 5,
       "norm_label": "newproduct()"
     },
     {
@@ -1780,7 +1800,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "workspace_page",
-      "community": 29,
+      "community": 5,
       "norm_label": "page.tsx"
     },
     {
@@ -1790,7 +1810,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "workspace_page_workspace",
-      "community": 29,
+      "community": 5,
       "norm_label": "workspace()"
     },
     {
@@ -2240,7 +2260,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "server_auth_hashpin",
-      "community": 0,
+      "community": 30,
       "norm_label": "hashpin()"
     },
     {
@@ -2470,7 +2490,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "notes_index_archivestatus",
-      "community": 29,
+      "community": 5,
       "norm_label": "archivestatus()"
     },
     {
@@ -2610,7 +2630,7 @@
       "source_location": "L226",
       "_origin": "ast",
       "id": "notes_index_listnotes",
-      "community": 29,
+      "community": 5,
       "norm_label": "listnotes()"
     },
     {
@@ -2620,7 +2640,7 @@
       "source_location": "L268",
       "_origin": "ast",
       "id": "notes_index_notecatalog",
-      "community": 29,
+      "community": 5,
       "norm_label": "notecatalog()"
     },
     {
@@ -2630,7 +2650,7 @@
       "source_location": "L282",
       "_origin": "ast",
       "id": "notes_index_recentnotes",
-      "community": 29,
+      "community": 5,
       "norm_label": "recentnotes()"
     },
     {
@@ -2640,7 +2660,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_permissions",
-      "community": 29,
+      "community": 5,
       "norm_label": "permissions.ts"
     },
     {
@@ -2650,7 +2670,7 @@
       "source_location": "L2",
       "_origin": "ast",
       "id": "server_permissions_actor",
-      "community": 29,
+      "community": 0,
       "norm_label": "actor"
     },
     {
@@ -2710,7 +2730,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "server_session_currentuser",
-      "community": 5,
+      "community": 3,
       "norm_label": "currentuser()"
     },
     {
@@ -2720,7 +2740,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "server_session_guard",
-      "community": 30,
+      "community": 5,
       "norm_label": "guard()"
     },
     {
@@ -2730,7 +2750,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_settings",
-      "community": 29,
+      "community": 0,
       "norm_label": "settings.ts"
     },
     {
@@ -2740,7 +2760,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "server_settings_settinginput",
-      "community": 29,
+      "community": 0,
       "norm_label": "settinginput"
     },
     {
@@ -2790,7 +2810,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "server_voice_body_inputfailure",
-      "community": 5,
+      "community": 3,
       "norm_label": "inputfailure"
     },
     {
@@ -2800,7 +2820,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "server_voice_body_inputfailure_constructor",
-      "community": 5,
+      "community": 3,
       "norm_label": ".constructor()"
     },
     {
@@ -2820,7 +2840,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "server_voice_body_voicebody",
-      "community": 5,
+      "community": 3,
       "norm_label": "voicebody()"
     },
     {
@@ -2850,7 +2870,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "server_voice_allowvoicerequest",
-      "community": 5,
+      "community": 3,
       "norm_label": "allowvoicerequest()"
     },
     {
@@ -2880,7 +2900,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "e2e_keeper_spec",
-      "community": 0,
+      "community": 30,
       "norm_label": "keeper.spec.ts"
     },
     {
@@ -2890,7 +2910,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "e2e_typed_note_spec",
-      "community": 0,
+      "community": 30,
       "norm_label": "typed-note.spec.ts"
     },
     {
@@ -2900,7 +2920,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "e2e_voice_spec",
-      "community": 0,
+      "community": 30,
       "norm_label": "voice.spec.ts"
     },
     {
@@ -3070,7 +3090,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_voice_api_test",
-      "community": 5,
+      "community": 3,
       "norm_label": "voice-api.test.ts"
     },
     {
@@ -3080,7 +3100,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "unit_voice_api_test_post",
-      "community": 5,
+      "community": 3,
       "norm_label": "post()"
     },
     {
@@ -4837,9 +4857,9 @@
       "source_file": "scripts/ai-eval.ts",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_ai_eval",
-      "target": "ai_openai"
+      "target": "ai_groq",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -4848,9 +4868,9 @@
       "source_file": "scripts/ai-eval.ts",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_ai_eval",
-      "target": "ai_openai_openaiextractor"
+      "target": "ai_groq_groqextractor",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -4859,9 +4879,9 @@
       "source_file": "scripts/ai-eval.ts",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_ai_eval",
-      "target": "ai_openai_openaitranscriber"
+      "target": "ai_groq_groqtranscriber",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -5229,22 +5249,22 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/ai/matching.ts",
-      "source_location": "L1",
+      "source_file": "src/ai/groq.ts",
+      "source_location": "L2",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "ai_matching",
-      "target": "ai_contracts"
+      "source": "ai_groq",
+      "target": "ai_contracts",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/ai/openai.ts",
-      "source_location": "L2",
+      "source_file": "src/ai/matching.ts",
+      "source_location": "L1",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "ai_openai",
+      "source": "ai_matching",
       "target": "ai_contracts"
     },
     {
@@ -5361,12 +5381,12 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/ai/openai.ts",
+      "source_file": "src/ai/groq.ts",
       "source_location": "L2",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "ai_openai",
-      "target": "ai_contracts_extraction"
+      "source": "ai_groq",
+      "target": "ai_contracts_extraction",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -5449,12 +5469,12 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/ai/openai.ts",
+      "source_file": "src/ai/groq.ts",
       "source_location": "L2",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "ai_openai",
-      "target": "ai_contracts_transcriptinput"
+      "source": "ai_groq",
+      "target": "ai_contracts_transcriptinput",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -5504,12 +5524,12 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/ai/openai.ts",
+      "source_file": "src/ai/groq.ts",
       "source_location": "L2",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "ai_openai",
-      "target": "ai_contracts_transcriber"
+      "source": "ai_groq",
+      "target": "ai_contracts_transcriber",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -5548,12 +5568,12 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/ai/openai.ts",
+      "source_file": "src/ai/groq.ts",
       "source_location": "L2",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "ai_openai",
-      "target": "ai_contracts_extractor"
+      "source": "ai_groq",
+      "target": "ai_contracts_extractor",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -5691,6 +5711,228 @@
       "confidence_score": 1.0,
       "source": "unit_voice_test",
       "target": "ai_fakes_fakeextractor"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ai/groq.ts",
+      "source_location": "L102",
+      "weight": 1.0,
+      "source": "ai_groq",
+      "target": "ai_groq_groqextractor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ai/groq.ts",
+      "source_location": "L79",
+      "weight": 1.0,
+      "source": "ai_groq",
+      "target": "ai_groq_groqtranscriber",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ai/groq.ts",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "ai_groq",
+      "target": "ai_groq_httpfailure",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ai/groq.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "ai_groq",
+      "target": "ai_groq_instructions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ai/groq.ts",
+      "source_location": "L23",
+      "weight": 1.0,
+      "source": "ai_groq",
+      "target": "ai_groq_post",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ai/groq.ts",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "ai_groq",
+      "target": "ai_groq_providerquotaexhausted",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ai/groq.ts",
+      "source_location": "L70",
+      "weight": 1.0,
+      "source": "ai_groq",
+      "target": "ai_groq_schema",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ai/groq.ts",
+      "source_location": "L69",
+      "weight": 1.0,
+      "source": "ai_groq",
+      "target": "ai_groq_usage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/voice/parse/route.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "parse_route",
+      "target": "ai_groq",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/server/voice.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "server_voice",
+      "target": "ai_groq",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/voice-api.test.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "unit_voice_api_test",
+      "target": "ai_groq",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/voice-provider.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "unit_voice_provider_test",
+      "target": "ai_groq",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ai/groq.ts",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "ai_groq_httpfailure",
+      "target": "ai_groq_httpfailure_constructor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/voice/parse/route.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "parse_route",
+      "target": "ai_groq_providerquotaexhausted",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/voice-provider.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "unit_voice_provider_test",
+      "target": "ai_groq_providerquotaexhausted",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/server/voice.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "server_voice",
+      "target": "ai_groq_groqtranscriber",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/voice-api.test.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "unit_voice_api_test",
+      "target": "ai_groq_groqtranscriber",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/voice-provider.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "unit_voice_provider_test",
+      "target": "ai_groq_groqtranscriber",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/server/voice.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "server_voice",
+      "target": "ai_groq_groqextractor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/voice-api.test.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "unit_voice_api_test",
+      "target": "ai_groq_groqextractor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/voice-provider.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "unit_voice_provider_test",
+      "target": "ai_groq_groqextractor",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5922,224 +6164,12 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "src/ai/openai.ts",
-      "source_location": "L17",
+      "source_file": "src/ai/pipeline.ts",
+      "source_location": "L11",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "ai_openai",
-      "target": "ai_openai_httpfailure"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/ai/openai.ts",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "ai_openai",
-      "target": "ai_openai_instructions"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/ai/openai.ts",
-      "source_location": "L92",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "ai_openai",
-      "target": "ai_openai_openaiextractor"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/ai/openai.ts",
-      "source_location": "L69",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "ai_openai",
-      "target": "ai_openai_openaitranscriber"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/ai/openai.ts",
-      "source_location": "L22",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "ai_openai",
-      "target": "ai_openai_post"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/ai/openai.ts",
-      "source_location": "L22",
-      "weight": 1.0,
-      "source": "ai_openai",
-      "target": "ai_openai_providerquotaexhausted",
+      "source": "ai_pipeline",
+      "target": "ai_pipeline_missingquantity",
       "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/ai/openai.ts",
-      "source_location": "L60",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "ai_openai",
-      "target": "ai_openai_schema"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/ai/openai.ts",
-      "source_location": "L59",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "ai_openai",
-      "target": "ai_openai_usage"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/api/voice/parse/route.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "source": "parse_route",
-      "target": "ai_openai",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/server/voice.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "server_voice",
-      "target": "ai_openai"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "tests/unit/voice-api.test.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "unit_voice_api_test",
-      "target": "ai_openai"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "tests/unit/voice-provider.test.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "unit_voice_provider_test",
-      "target": "ai_openai"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/ai/openai.ts",
-      "source_location": "L18",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "ai_openai_httpfailure",
-      "target": "ai_openai_httpfailure_constructor"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/api/voice/parse/route.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "source": "parse_route",
-      "target": "ai_openai_providerquotaexhausted",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "tests/unit/voice-provider.test.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "source": "unit_voice_provider_test",
-      "target": "ai_openai_providerquotaexhausted",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/server/voice.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "server_voice",
-      "target": "ai_openai_openaitranscriber"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "tests/unit/voice-api.test.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "unit_voice_api_test",
-      "target": "ai_openai_openaitranscriber"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "tests/unit/voice-provider.test.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "unit_voice_provider_test",
-      "target": "ai_openai_openaitranscriber"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/server/voice.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "server_voice",
-      "target": "ai_openai_openaiextractor"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "tests/unit/voice-api.test.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "unit_voice_api_test",
-      "target": "ai_openai_openaiextractor"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "tests/unit/voice-provider.test.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "unit_voice_provider_test",
-      "target": "ai_openai_openaiextractor"
     },
     {
       "relation": "contains",
@@ -6187,6 +6217,17 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "src/app/api/voice/parse/route.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "parse_route",
+      "target": "ai_pipeline",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "src/server/voice.ts",
       "source_location": "L4",
       "weight": 1.0,
@@ -6215,6 +6256,27 @@
       "confidence_score": 1.0,
       "source": "voice_recorder",
       "target": "ai_pipeline"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ai/pipeline.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "ai_pipeline_missingquantity",
+      "target": "ai_pipeline_missingquantity_constructor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/voice/parse/route.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "parse_route",
+      "target": "ai_pipeline_missingquantity",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -12979,5 +13041,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "c4f6ef5a4a035254f676018e981cfe0324e7638f"
+  "built_at_commit": "378c4bb44921220e6d904c04d02c9eb5c075a585"
 }

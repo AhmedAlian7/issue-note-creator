@@ -1,16 +1,16 @@
 # Graph Report - issue-note-creator  (2026-11-21)
 
 ## Corpus Check
-- 114 files · ~42,916 words
+- 114 files · ~42,995 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 419 nodes · 828 edges · 30 communities (24 shown, 6 thin omitted)
+- 421 nodes · 832 edges · 30 communities (24 shown, 6 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `c4f6ef5a`
+- Built from commit: `378c4bb4`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -56,14 +56,14 @@
 ## Surprising Connections (you probably didn't know these)
 - `compareNote()` --calls--> `renderNotePdf()`  [EXTRACTED]
   scripts/pdf-comparison.ts → src/pdf/render-note-pdf.ts
-- `Catalog()` --calls--> `listCatalog()`  [EXTRACTED]
-  src/app/admin/[section]/page.tsx → src/server/catalog-list.ts
+- `VoicePage()` --calls--> `guard()`  [EXTRACTED]
+  src/app/voice/page.tsx → src/server/session.ts
 - `GET()` --calls--> `currentUser()`  [EXTRACTED]
   src/app/api/notes/[id]/pdf/route.ts → src/server/session.ts
-- `POST()` --calls--> `processVoice()`  [EXTRACTED]
-  src/app/api/voice/parse/route.ts → src/server/voice.ts
-- `POST()` --calls--> `currentUser()`  [EXTRACTED]
-  src/app/api/warehouse/route.ts → src/server/session.ts
+- `GET()` --calls--> `currentUser()`  [EXTRACTED]
+  src/app/api/users/route.ts → src/server/session.ts
+- `aliasHandler()` --calls--> `currentUser()`  [EXTRACTED]
+  src/app/api/voice/alias-handler.ts → src/server/session.ts
 
 ## Import Cycles
 - None detected.
@@ -72,7 +72,7 @@
 
 ### Community 0 - "Community 0"
 Cohesion: 0.11
-Nodes (17): loginInput, signIn(), signOut(), accounts, customers, products, audit(), snapshot() (+9 more)
+Nodes (19): thresholds, loginInput, signIn(), signOut(), accounts, customers, products, audit() (+11 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.08
@@ -84,15 +84,15 @@ Nodes (20): devDependencies, dotenv, esbuild, eslint, eslint-config-next, eslint
 
 ### Community 3 - "Community 3"
 Cohesion: 0.08
-Nodes (34): Catalog, defaults, Entry, Extraction, Extractor, phrase, score, thresholds (+26 more)
+Nodes (39): Catalog, defaults, Entry, Extraction, Extractor, phrase, score, Transcriber (+31 more)
 
 ### Community 4 - "Community 4"
 Cohesion: 0.10
 Nodes (19): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModules, jsx, lib, module (+11 more)
 
 ### Community 5 - "Community 5"
-Cohesion: 0.16
-Nodes (15): POST(), listCatalog(), listUsers(), Action, allowed(), currentUser(), learnAlias(), allowVoiceRequest() (+7 more)
+Cohesion: 0.11
+Nodes (27): CatalogForm(), Entity, RecordFields, StateButton(), useMutation(), Archive(), NotePage(), NewProduct() (+19 more)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.16
@@ -139,12 +139,12 @@ Cohesion: 0.33
 Nodes (5): Images and footer, Page and table geometry, Rendering and comparison, Text, Warehouse issue note template
 
 ### Community 29 - "Community 29"
-Cohesion: 0.08
-Nodes (52): Archive(), NotePage(), aliases, customerInput, draftTimestamp, id, name, noteInput (+44 more)
+Cohesion: 0.09
+Nodes (42): aliases, customerInput, draftTimestamp, id, name, noteInput, optionalText, phone (+34 more)
 
 ### Community 30 - "Community 30"
-Cohesion: 0.09
-Nodes (27): VoiceResult, CatalogForm(), Entity, RecordFields, StateButton(), useMutation(), metadata, RootLayout() (+19 more)
+Cohesion: 0.10
+Nodes (19): VoiceResult, metadata, RootLayout(), Home(), ar, normalizeArabic(), command(), Choice (+11 more)
 
 ## Knowledge Gaps
 - **176 isolated node(s):** `nextConfig`, `name`, `version`, `private`, `type` (+171 more)
@@ -154,16 +154,16 @@ Nodes (27): VoiceResult, CatalogForm(), Entity, RecordFields, StateButton(), use
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `ar` connect `Community 30` to `Community 0`, `Community 5`, `Community 29`, `Community 6`?**
+- **Why does `ar` connect `Community 30` to `Community 29`, `Community 3`, `Community 5`, `Community 6`?**
   _High betweenness centrality (0.051) - this node is a cross-community bridge._
 - **Why does `authorize()` connect `Community 29` to `Community 0`, `Community 3`, `Community 5`?**
-  _High betweenness centrality (0.020) - this node is a cross-community bridge._
+  _High betweenness centrality (0.019) - this node is a cross-community bridge._
 - **Why does `devDependencies` connect `Community 2` to `Community 8`?**
   _High betweenness centrality (0.009) - this node is a cross-community bridge._
 - **What connects `nextConfig`, `name`, `version` to the rest of the system?**
   _176 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
-  _Cohesion score 0.10756302521008404 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.10606060606060606 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
   _Cohesion score 0.08333333333333333 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**

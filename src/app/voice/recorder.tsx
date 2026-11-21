@@ -44,6 +44,12 @@ export function VoiceRecorder() {
       });
       const data = await response.json();
       if (!response.ok) {
+        if (
+          !typed &&
+          response.status === 422 &&
+          typeof data.transcript === "string"
+        )
+          setText(data.transcript);
         fail(data.error ?? labels.failed);
         return;
       }

@@ -37,7 +37,10 @@ test("keeper records, pauses, resumes and can recover by typing", async ({
     await page.route("**/api/voice/parse", async (route) => {
       if (route.request().headers()["content-type"].startsWith("audio/")) {
         bytes = route.request().postDataBuffer()?.length ?? 0;
-        return route.fulfill({ status: 503, json: { error: ar.voice.failed } });
+        return route.fulfill({
+          status: 422,
+          json: { error: ar.voice.missingQuantity("مكتب"), transcript: "مكتب" },
+        });
       }
       const { transcript } = route.request().postDataJSON();
       return route.fulfill({
@@ -49,10 +52,11 @@ test("keeper records, pauses, resumes and can recover by typing", async ({
     });
     await page.getByRole("button", { name: ar.voice.stop }).click();
     await expect(page.locator("main").getByRole("alert")).toHaveText(
-      ar.voice.failed,
+      ar.voice.missingQuantity("مكتب"),
     );
     expect(bytes).toBeGreaterThan(0);
     await expect(page.getByLabel(ar.voice.text)).toBeFocused();
+    await expect(page.getByLabel(ar.voice.text)).toHaveValue("مكتب");
     await page.getByLabel(ar.voice.text).fill("مكتب اتنين");
     await page.getByRole("button", { name: ar.voice.parse }).click();
     await expect(

@@ -1,5 +1,6 @@
 import { ar } from "@/lib/i18n";
 import { ProviderQuotaExhausted } from "@/ai/groq";
+import { MissingQuantity } from "@/ai/pipeline";
 import { currentUser } from "@/server/session";
 import { allowed } from "@/server/permissions";
 import { allowVoiceRequest, processVoice } from "@/server/voice";
@@ -20,6 +21,14 @@ export async function POST(request: Request) {
       }),
     );
   } catch (error) {
+    if (error instanceof MissingQuantity)
+      return Response.json(
+        {
+          error: ar.voice.missingQuantity(error.item),
+          transcript: error.transcript,
+        },
+        { status: 422 },
+      );
     if (error instanceof ProviderQuotaExhausted)
       return Response.json({ error: ar.voice.quota }, { status: 503 });
     if (error instanceof InputFailure)
