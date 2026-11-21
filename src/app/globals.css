@@ -138,3 +138,116 @@
     align-items: center;
   }
 }
+
+.desk .new-note {
+  font-size: 1.6rem;
+  justify-content: center;
+  min-height: 76px;
+}
+.choices,
+.line-title,
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.choices {
+  margin-block: 0.75rem;
+}
+.line-title {
+  justify-content: space-between;
+}
+.line-card,
+.picker,
+.note-table {
+  display: grid;
+  gap: 0.7rem;
+  border: 1px solid #bbcfd0;
+  border-radius: 0.55rem;
+  padding: 1rem;
+  min-width: 0;
+}
+.stepper {
+  flex-wrap: nowrap;
+}
+.stepper input {
+  max-width: 6rem;
+  text-align: center;
+}
+.fields .toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.toggle input {
+  width: 48px;
+  accent-color: #155a65;
+}
+.note-table table {
+  border-collapse: collapse;
+  width: 100%;
+  overflow-wrap: anywhere;
+}
+.note-table th,
+.note-table td {
+  text-align: start;
+  padding: 0.45rem;
+  border-bottom: 1px solid #bed1d3;
+}
+.note-table th {
+  background: #edf3f2;
+}
+.destination {
+  color: #a62225;
+}
+.note-row {
+  display: grid;
+  gap: 0.3rem;
+}
+.note-row span {
+  font-size: 0.9rem;
+}
+.filter-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+.pdf-pages canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 1rem auto;
+  border: 1px solid #aebfc1;
+}
+.action {
+  padding-inline: 1rem;
+  background: #155a65;
+  color: white;
+  border-radius: 0.3rem;
+}
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  .issued {
+    padding: 0;
+    max-width: none;
+  }
+  .issued header,
+  .issued nav,
+  .issued .tools,
+  .issued p {
+    display: none;
+  }
+  .pdf-pages canvas {
+    width: 100%;
+    margin: 0;
+    border: none;
+    break-after: page;
+  }
+  .pdf-pages canvas:last-child {
+    break-after: auto;
+  }
+}
