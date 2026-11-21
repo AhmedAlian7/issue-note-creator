@@ -6,3 +6,132 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+enum Role {
+  ADMIN
+  KEEPER
+  OWNER
+}
+
+enum NoteStatus {
+  DRAFT
+  CONFIRMED
+  VOIDED
+}
+
+model User {
+  id         String      @id @default(uuid())
+  name       String
+  phone      String      @unique
+  pinHash    String
+  role       Role
+  active     Boolean     @default(true)
+  notes      IssueNote[]
+  recordings Recording[]
+  logs       AuditLog[]
+  sessions   Session[]
+}
+
+model Product {
+  id              String     @id @default(uuid())
+  nameAr          String
+  aliases         String[]   @default([])
+  category        String?
+  active          Boolean    @default(true)
+  createdByKeeper Boolean    @default(false)
+  needsReview     Boolean    @default(false)
+  lines           NoteLine[]
+}
+
+model Customer {
+  id                 String      @id @default(uuid())
+  nameAr             String
+  aliases            String[]    @default([])
+  defaultDestination String?
+  whatsappGroupName  String?
+  needsReview        Boolean     @default(false)
+  active             Boolean     @default(true)
+  notes              IssueNote[]
+}
+
+model IssueNote {
+  id           String      @id @default(uuid())
+  number       Int?        @unique
+  date         DateTime    @db.Date
+  customerId   String
+  customer     Customer    @relation(fields: [customerId], references: [id])
+  status       NoteStatus  @default(DRAFT)
+  version      Int         @default(1)
+  supersedesId String?     @unique
+  supersedes   IssueNote?  @relation("Versions", fields: [supersedesId], references: [id], onDelete: Restrict)
+  successor    IssueNote?  @relation("Versions")
+  createdById  String
+  creator      User        @relation(fields: [createdById], references: [id])
+  pdfPath      String?
+  voidReason   String?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  lines        NoteLine[]
+  recordings   Recording[]
+}
+
+model NoteLine {
+  id        String    @id @default(uuid())
+  noteId    String
+  note      IssueNote @relation(fields: [noteId], references: [id], onDelete: Restrict)
+  productId String
+  product   Product   @relation(fields: [productId], references: [id])
+  quantity  Int
+  remarks   String?   @db.Text
+  position  Int
+
+  @@unique([noteId, position])
+}
+
+model Recording {
+  id          String     @id @default(uuid())
+  noteId      String?
+  note        IssueNote? @relation(fields: [noteId], references: [id])
+  transcript  String
+  parsedJson  Json
+  createdById String
+  creator     User       @relation(fields: [createdById], references: [id])
+  createdAt   DateTime   @default(now())
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  action    String
+  entity    String
+  entityId  String
+  before    Json?
+  after     Json?
+  createdAt DateTime @default(now())
+}
+
+model Setting {
+  key   String @id
+  value Json
+}
+
+model NoteCounter {
+  id         Int  @id @default(1)
+  nextNumber Int?
+}
+
+model Session {
+  tokenHash String   @id
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+
+  @@index([userId])
+}
+
+model LoginAttempt {
+  key       String   @id
+  count     Int
+  expiresAt DateTime
+}
