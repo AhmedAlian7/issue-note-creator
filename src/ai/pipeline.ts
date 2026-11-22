@@ -16,6 +16,31 @@ export class MissingQuantity extends Error {
     super("Missing quantity");
   }
 }
+export function verifyLine(
+  line: import("./contracts").Extraction["lines"][number],
+  transcript: string,
+  catalog: Catalog,
+  limits = defaults,
+) {
+  const { id: productId, ...verified } = match(
+    line.spokenText,
+    line.productId,
+    catalog.products,
+    limits,
+  );
+  const quantity =
+    line.quantity ??
+    recoverQuantity(transcript, line.spokenText, line.quantityText);
+  if (quantity === null) throw new MissingQuantity(transcript, line.spokenText);
+  return {
+    spokenText: line.spokenText,
+    productId,
+    quantity,
+    remarks: line.remarks,
+    isDestination: line.isDestination,
+    ...verified,
+  };
+}
 export async function parseVoice(
   input: string | Blob,
   catalog: Catalog,
@@ -41,25 +66,7 @@ export async function parseVoice(
     limits,
   );
   const lines = raw.lines.map((line) => {
-    const { id: productId, ...verified } = match(
-      line.spokenText,
-      line.productId,
-      catalog.products,
-      limits,
-    );
-    const quantity =
-      line.quantity ??
-      recoverQuantity(transcript, line.spokenText, line.quantityText);
-    if (quantity === null)
-      throw new MissingQuantity(transcript, line.spokenText);
-    return {
-      spokenText: line.spokenText,
-      productId,
-      quantity,
-      remarks: line.remarks,
-      isDestination: line.isDestination,
-      ...verified,
-    };
+    return verifyLine(line, transcript, catalog, limits);
   });
   return {
     transcript,

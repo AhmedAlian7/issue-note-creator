@@ -17,6 +17,21 @@ export async function voiceBody(request: Request) {
   const limit = json ? 64 * 1024 : audioLimit;
   if (Number(request.headers.get("content-length")) > limit)
     throw new InputFailure(413);
+  const blob = await boundedBlob(request, limit, type);
+  if (!json) return blob;
+  try {
+    return z
+      .strictObject({ transcript: transcriptInput })
+      .parse(JSON.parse(await blob.text())).transcript;
+  } catch {
+    throw new InputFailure(400);
+  }
+}
+export async function boundedBlob(
+  request: Request,
+  limit: number,
+  type?: string,
+) {
   const reader = request.body?.getReader();
   if (!reader) throw new InputFailure(400);
   const chunks: ArrayBuffer[] = [];
@@ -40,12 +55,5 @@ export async function voiceBody(request: Request) {
     .refine((b) => b.size > 0)
     .safeParse(new Blob(chunks, { type }));
   if (!blob.success) throw new InputFailure(400);
-  if (!json) return blob.data;
-  try {
-    return z
-      .strictObject({ transcript: transcriptInput })
-      .parse(JSON.parse(await blob.data.text())).transcript;
-  } catch {
-    throw new InputFailure(400);
-  }
+  return blob.data;
 }
