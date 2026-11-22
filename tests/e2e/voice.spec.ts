@@ -28,7 +28,7 @@ test("keeper records, pauses, resumes and can recover by typing", async ({
     await page.getByLabel(ar.phone).fill(keeper.phone);
     await page.getByLabel(ar.pin).fill("01234");
     await page.getByRole("button", { name: ar.login }).click();
-    await page.getByRole("link", { name: ar.voice.title }).click();
+    await page.getByRole("button", { name: ar.flow.skip }).click();
     await page.getByRole("button", { name: ar.voice.start }).click();
     await page.getByRole("button", { name: ar.voice.pause }).click();
     await page.getByRole("button", { name: ar.voice.resume }).click();
@@ -46,7 +46,19 @@ test("keeper records, pauses, resumes and can recover by typing", async ({
       return route.fulfill({
         json: {
           transcript,
-          draft: { lines: [{ spokenText: "مكتب", unmatched: true }] },
+          draft: {
+            customer: { customerId: null },
+            lines: [
+              {
+                spokenText: "مكتب",
+                level: "RED",
+                productId: null,
+                quantity: 2,
+                unmatched: true,
+                candidates: [],
+              },
+            ],
+          },
         },
       });
     });
@@ -60,9 +72,9 @@ test("keeper records, pauses, resumes and can recover by typing", async ({
     await page.getByLabel(ar.voice.text).fill("مكتب اتنين");
     await page.getByRole("button", { name: ar.voice.parse }).click();
     await expect(
-      page.getByRole("heading", { name: ar.voice.result }),
+      page.getByRole("heading", { name: ar.notes.summary }),
     ).toBeVisible();
-    await page.getByRole("link", { name: ar.voice.add }).click();
+    await page.getByRole("button", { name: ar.voice.add }).click();
     await expect(page.getByLabel(ar.name, { exact: true })).toHaveValue("مكتب");
   } finally {
     await db.auditLog.deleteMany({ where: { userId: keeper.id } });

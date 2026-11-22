@@ -1,19 +1,28 @@
 "use client";
-import Link from "next/link";
+import type { EditContext } from "@/ai/edits";
+import type { processEdit } from "@/server/voice";
 import { useEffect, useRef, useState } from "react";
 import { ar } from "@/lib/i18n";
 import type { VoiceResult } from "@/ai/pipeline";
 import { capture } from "./capture";
 
 const labels = ar.voice;
-export function VoiceRecorder() {
+type Props = {
+  onResult: (result: VoiceResult) => void;
+  label?: string;
+  correction?: {
+    current: EditContext;
+    apply: (result: Awaited<ReturnType<typeof processEdit>>) => void;
+  };
+};
+export function VoiceRecorder({ onResult, label, correction }: Props) {
   const [state, setState] = useState<
     "idle" | "opening" | "recording" | "paused" | "busy"
   >("idle");
   const [meter, setMeter] = useState({ ms: 0, level: 0 });
   const [text, setText] = useState("");
   const [error, setError] = useState("");
-  const [result, setResult] = useState<VoiceResult | null>(null);
+  const [typing, setTyping] = useState(false);
   const active = useRef<Awaited<ReturnType<typeof capture>> | null>(null);
   const mounted = useRef(false);
   const box = useRef<HTMLTextAreaElement>(null);
@@ -26,6 +35,7 @@ export function VoiceRecorder() {
   }, []);
   function fail(message: string) {
     if (!mounted.current) return;
+    setTyping(true);
     setError(message);
     setState("idle");
     requestAnimationFrame(() => box.current?.focus());
@@ -33,15 +43,29 @@ export function VoiceRecorder() {
   async function submit(input: Blob | string) {
     setState("busy");
     setError("");
-    setResult(null);
+
     try {
       const typed = typeof input === "string";
-      const response = await fetch("/api/voice/parse", {
-        method: "POST",
-        headers: { "Content-Type": typed ? "application/json" : input.type },
-        body: typed ? JSON.stringify({ transcript: input }) : input,
-        signal: AbortSignal.timeout(115000),
-      });
+      const form = new FormData();
+      if (correction) {
+        form.set("current", JSON.stringify(correction.current));
+        form.set("input", input);
+      }
+      const response = await fetch(
+        correction ? "/api/voice/edit" : "/api/voice/parse",
+        {
+          method: "POST",
+          headers: correction
+            ? undefined
+            : { "Content-Type": typed ? "application/json" : input.type },
+          body: correction
+            ? form
+            : typed
+              ? JSON.stringify({ transcript: input })
+              : input,
+          signal: AbortSignal.timeout(115000),
+        },
+      );
       const data = await response.json();
       if (!response.ok) {
         if (
@@ -54,7 +78,8 @@ export function VoiceRecorder() {
         return;
       }
       if (mounted.current) {
-        setResult(data);
+        if (correction) correction.apply(data);
+        else onResult(data);
         setText(data.transcript);
         setState("idle");
       }
@@ -65,7 +90,7 @@ export function VoiceRecorder() {
   async function start() {
     setState("opening");
     setError("");
-    setResult(null);
+
     setMeter({ ms: 0, level: 0 });
     try {
       const recording = await capture(
@@ -96,24 +121,40 @@ export function VoiceRecorder() {
   return (
     <div className="fields">
       <button
-        className="voice-mic"
+        className={label ? "voice-small" : "voice-mic"}
         disabled={!recording && state !== "idle"}
         onClick={() => (recording ? active.current?.stop() : void start())}
       >
-        <span aria-hidden="true">🎙</span>{" "}
-        {recording ? labels.stop : labels.start}
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          width="32"
+          height="32"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+        >
+          <rect x="9" y="2" width="6" height="13" rx="3" />
+          <path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3m-4 0h8" />
+        </svg>
+        {recording ? labels.stop : (label ?? labels.start)}
       </button>
-      <div>
-        {labels.time}{" "}
-        <time dir="ltr">
-          {Math.floor(seconds / 60)}:{String(seconds % 60).padStart(2, "0")}
-        </time>{" "}
-        · {labels.limit}
-      </div>
-      <label>
-        {labels.level}
-        <meter min={0} max={1} value={meter.level} />
-      </label>
+      {recording && (
+        <>
+          {" "}
+          <div>
+            {labels.time}{" "}
+            <time dir="ltr">
+              {Math.floor(seconds / 60)}:{String(seconds % 60).padStart(2, "0")}
+            </time>{" "}
+            · {labels.limit}
+          </div>
+          <label>
+            {labels.level}
+            <meter min={0} max={1} value={meter.level} />
+          </label>
+        </>
+      )}
       {recording && (
         <button
           className="secondary"
@@ -130,22 +171,34 @@ export function VoiceRecorder() {
           {state === "paused" ? labels.resume : labels.pause}
         </button>
       )}
-      <label>
-        {labels.text}
-        <textarea
-          rows={4}
-          maxLength={12000}
-          ref={box}
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
-      </label>
       <button
-        disabled={state !== "idle" || !text.trim()}
-        onClick={() => void submit(text)}
+        className="secondary"
+        aria-expanded={typing}
+        disabled={state !== "idle"}
+        onClick={() => setTyping(!typing)}
       >
-        {labels.parse}
+        {ar.flow.type}
       </button>
+      {typing && (
+        <>
+          <label>
+            {labels.text}
+            <textarea
+              rows={4}
+              maxLength={12000}
+              ref={box}
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+            />
+          </label>
+          <button
+            disabled={state !== "idle" || !text.trim()}
+            onClick={() => void submit(text)}
+          >
+            {labels.parse}
+          </button>
+        </>
+      )}
       <output>
         {state === "busy"
           ? labels.busy
@@ -154,31 +207,6 @@ export function VoiceRecorder() {
             : ""}
       </output>
       {error && <p role="alert">{error}</p>}
-      {result && (
-        <section>
-          <h2>{labels.result}</h2>
-          {result.draft.lines.map(
-            (line, i) =>
-              line.unmatched && (
-                <p key={i}>
-                  {labels.missing} «{line.spokenText}»{" "}
-                  <Link
-                    className="action"
-                    href={
-                      "/products/new?name=" +
-                      encodeURIComponent(line.spokenText)
-                    }
-                  >
-                    {labels.add}
-                  </Link>
-                </p>
-              ),
-          )}
-          <pre className="voice-debug" dir="auto">
-            {JSON.stringify(result, null, 2)}
-          </pre>
-        </section>
-      )}
     </div>
   );
 }

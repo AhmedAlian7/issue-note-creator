@@ -23,13 +23,11 @@ test("keeper types, issues, previews and downloads the numbered PDF on a phone",
     data: { nameAr: "فندق الاختبار" },
   });
   const product = await db.product.create({ data: { nameAr: "أَرِيكَة" } });
-  const expected =
-    (await db.noteCounter.findUniqueOrThrow({ where: { id: 1 } })).nextNumber ??
-    973;
   await page.goto("/login");
   await page.getByLabel(ar.phone).fill(phone);
   await page.getByLabel(ar.pin).fill("12345");
   await page.getByRole("button", { name: ar.login }).click();
+  await page.getByRole("button", { name: ar.flow.skip }).click();
   await page.getByRole("link", { name: t.newNote }).click();
   await page
     .getByRole("combobox", { name: t.customer, exact: true })
@@ -63,6 +61,12 @@ test("keeper types, issues, previews and downloads the numbered PDF on a phone",
   ).toMatchObject({ needsReview: true, createdByKeeper: true });
   await page.getByRole("button", { name: t.summary }).click();
   await page.getByRole("button", { name: t.confirm }).click();
+  await expect(page.locator(".issued")).toBeVisible({ timeout: 30000 });
+  const expected = (
+    await db.issueNote.findFirstOrThrow({
+      where: { customerId: customer.id, status: "CONFIRMED" },
+    })
+  ).number!;
   await expect(
     page.getByRole("heading", { name: ar.notePdf.title + " " + expected }),
   ).toBeVisible({ timeout: 30000 });
