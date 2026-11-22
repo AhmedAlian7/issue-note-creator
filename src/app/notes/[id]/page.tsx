@@ -90,7 +90,7 @@ export default async function NotePage(props: PageProps<"/notes/[id]">) {
       )}
       <nav className="menu">
         {allowed(user.role, "note.create") && (
-          <Link href="/notes/new">{t.newNote}</Link>
+          <Link href="/workspace">{t.newNote}</Link>
         )}
         <Link href="/archive">{t.archive}</Link>
         {note.status === "CONFIRMED" &&

@@ -270,3 +270,97 @@
     break-after: auto;
   }
 }
+
+.desk .voice-mic {
+  width: min(12rem, 100%);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 0.65rem;
+  margin: 0.5rem auto;
+  background: #155a65;
+  box-shadow: 0 0 0 0.45rem #dbe9e9;
+}
+.voice-mic svg {
+  width: 3rem;
+  height: 3rem;
+}
+.voice-small {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+}
+.desk dialog {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: min(92vw, 28rem);
+  max-height: 85dvh;
+  overflow: auto;
+  padding: 1rem;
+  background: white;
+  color: #163c42;
+  border: 2px solid #155a65;
+  border-radius: 0.65rem;
+}
+.desk dialog::backdrop {
+  background: #102a30a6;
+}
+.review {
+  max-width: 34rem;
+  margin: auto;
+}
+.review .review-fields {
+  padding: 0.5rem 0;
+  min-width: 0;
+}
+.review-line {
+  border-inline-start: 5px solid var(--match);
+  background: white;
+}
+.review-line h2 {
+  font-weight: 750;
+  font-size: 1.2rem;
+  overflow-wrap: anywhere;
+}
+.review-line.GREEN {
+  --match: #226144;
+}
+.review-line.YELLOW {
+  --match: #835800;
+}
+.review-line.RED {
+  --match: #9e282b;
+}
+.match-state {
+  color: var(--match);
+}
+.review .confirm-bar {
+  position: sticky;
+  bottom: 0;
+  background: white;
+  padding: 0.55rem 0 max(0.55rem, env(safe-area-inset-bottom));
+  border-top: 1px solid #b7cbcd;
+  z-index: 1;
+}
+.confirm-bar button {
+  width: 100%;
+}
+.review summary,
+.review button,
+.review input,
+.desk dialog button {
+  min-height: 48px;
+  min-width: 48px;
+}
+.review .customer-button {
+  background: #e5eff0;
+  color: #123d43;
+  text-align: start;
+}
+.review details p {
+  white-space: pre-line;
+}

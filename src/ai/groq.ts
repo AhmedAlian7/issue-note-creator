@@ -1,3 +1,5 @@
+import { edits, type EditContext } from "./edits";
+import type { Catalog } from "./contracts";
 import { z } from "zod";
 import {
   extraction,
@@ -67,15 +69,18 @@ async function post<T>(
   }
 }
 const usage = z.object({ total_tokens: z.number().optional() }).optional();
-const schema = z.toJSONSchema(extraction, {
-  target: "draft-7",
-  override({ jsonSchema }) {
-    // Keep string length validation local for Structured Outputs model compatibility.
-    delete jsonSchema.minLength;
-    delete jsonSchema.maxLength;
-  },
-});
-delete schema.$schema;
+function responseSchema(model: z.ZodType) {
+  const schema = z.toJSONSchema(model, {
+    target: "draft-7",
+    override({ jsonSchema }) {
+      // Keep string length validation local for Structured Outputs model compatibility.
+      delete jsonSchema.minLength;
+      delete jsonSchema.maxLength;
+    },
+  });
+  delete schema.$schema;
+  return schema;
+}
 export const groqTranscriber: Transcriber = {
   async transcribe(audio, catalog) {
     const form = new FormData();
@@ -99,37 +104,58 @@ export const groqTranscriber: Transcriber = {
     });
   },
 };
-export const groqExtractor: Extractor = {
-  async extract(transcript, catalog) {
-    return post(
-      "chat/completions",
-      JSON.stringify({
-        model: z.string().min(1).parse(process.env.PARSE_MODEL),
-        messages: [
-          { role: "system", content: instructions },
-          { role: "user", content: JSON.stringify({ transcript, ...catalog }) },
-        ],
-        response_format: {
-          type: "json_schema",
-          json_schema: { name: "warehouse_draft", strict: true, schema },
+async function structured<T extends z.ZodType>(
+  model: T,
+  instructions: string,
+  payload: object,
+) {
+  return post(
+    "chat/completions",
+    JSON.stringify({
+      model: z.string().min(1).parse(process.env.PARSE_MODEL),
+      messages: [
+        { role: "system", content: instructions },
+        { role: "user", content: JSON.stringify(payload) },
+      ],
+      response_format: {
+        type: "json_schema",
+        json_schema: {
+          name: "warehouse_draft",
+          strict: true,
+          schema: responseSchema(model),
         },
-      }),
-      (data) => {
-        const result = z
-          .object({
-            choices: z
-              .array(z.object({ message: z.object({ content: z.string() }) }))
-              .nonempty(),
-            usage,
-          })
-          .parse(data);
-        return {
-          draft: extraction.parse(
-            JSON.parse(result.choices[0].message.content),
-          ),
-          tokens: result.usage?.total_tokens ?? 0,
-        };
       },
-    );
+    }),
+    (data) => {
+      const result = z
+        .object({
+          choices: z
+            .array(z.object({ message: z.object({ content: z.string() }) }))
+            .nonempty(),
+          usage,
+        })
+        .parse(data);
+      return {
+        draft: model.parse(JSON.parse(result.choices[0].message.content)),
+        tokens: result.usage?.total_tokens ?? 0,
+      };
+    },
+  );
+}
+export const groqExtractor: Extractor = {
+  extract(transcript, catalog) {
+    return structured(extraction, instructions, { transcript, ...catalog });
   },
 };
+export function extractEdits(
+  transcript: string,
+  current: EditContext,
+  catalog: Catalog,
+) {
+  return structured(
+    edits,
+    instructions +
+      " In correction mode return only requested operations. Resolve ordinal references against current line order. Use existing stable line keys. For ambiguous targets return no operation.",
+    { transcript, current, ...catalog },
+  );
+}

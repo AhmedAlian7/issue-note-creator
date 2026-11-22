@@ -19,6 +19,7 @@ test("keeper signs in and cannot access any admin page", async ({ page }) => {
     await page.getByLabel(ar.phone).fill(phone);
     await page.getByLabel(ar.pin).fill("01234");
     await page.getByRole("button", { name: ar.login }).click();
+    await page.getByRole("button", { name: ar.flow.skip }).click();
     await expect(page.getByRole("link", { name: ar.addProduct })).toBeVisible();
     for (const section of ["products", "customers", "users"]) {
       await page.goto("/admin/" + section);

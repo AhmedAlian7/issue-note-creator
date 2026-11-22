@@ -1,16 +1,16 @@
-# Graph Report - issue-note-creator  (2026-11-21)
+# Graph Report - issue-note-creator  (2026-11-22)
 
 ## Corpus Check
-- 114 files · ~42,995 words
+- 124 files · ~46,702 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 421 nodes · 832 edges · 30 communities (24 shown, 6 thin omitted)
+- 463 nodes · 996 edges · 31 communities (25 shown, 6 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `378c4bb4`
+- Built from commit: `3f95a6fb`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -38,41 +38,42 @@
 - [[_COMMUNITY_Community 20|Community 20]]
 - [[_COMMUNITY_Community 21|Community 21]]
 - [[_COMMUNITY_Community 27|Community 27]]
+- [[_COMMUNITY_Community 28|Community 28]]
 - [[_COMMUNITY_Community 29|Community 29]]
 - [[_COMMUNITY_Community 30|Community 30]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `ar` - 27 edges
-2. `authorize()` - 26 edges
-3. `guard()` - 17 edges
-4. `compilerOptions` - 16 edges
-5. `allowed()` - 15 edges
-6. `currentUser()` - 14 edges
+1. `ar` - 34 edges
+2. `authorize()` - 27 edges
+3. `allowed()` - 19 edges
+4. `guard()` - 17 edges
+5. `currentUser()` - 16 edges
+6. `compilerOptions` - 16 edges
 7. `scripts` - 13 edges
 8. `What You Must Do When Invoked` - 11 edges
-9. `/graphify` - 10 edges
-10. `renderNotePdf()` - 9 edges
+9. `noteCatalog()` - 10 edges
+10. `/graphify` - 10 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `compareNote()` --calls--> `renderNotePdf()`  [EXTRACTED]
   scripts/pdf-comparison.ts → src/pdf/render-note-pdf.ts
-- `VoicePage()` --calls--> `guard()`  [EXTRACTED]
-  src/app/voice/page.tsx → src/server/session.ts
 - `GET()` --calls--> `currentUser()`  [EXTRACTED]
   src/app/api/notes/[id]/pdf/route.ts → src/server/session.ts
 - `GET()` --calls--> `currentUser()`  [EXTRACTED]
   src/app/api/users/route.ts → src/server/session.ts
-- `aliasHandler()` --calls--> `currentUser()`  [EXTRACTED]
-  src/app/api/voice/alias-handler.ts → src/server/session.ts
+- `aliasHandler()` --calls--> `allowed()`  [EXTRACTED]
+  src/app/api/voice/alias-handler.ts → src/server/permissions.ts
+- `POST()` --calls--> `allowed()`  [EXTRACTED]
+  src/app/api/voice/edit/route.ts → src/server/permissions.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (30 total, 6 thin omitted)
+## Communities (31 total, 6 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.11
-Nodes (19): thresholds, loginInput, signIn(), signOut(), accounts, customers, products, audit() (+11 more)
+Nodes (17): loginInput, signIn(), signOut(), accounts, customers, products, audit(), snapshot() (+9 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.08
@@ -80,19 +81,19 @@ Nodes (23): For /graphify add and --watch, For /graphify query, For the commit h
 
 ### Community 2 - "Community 2"
 Cohesion: 0.10
-Nodes (20): devDependencies, dotenv, esbuild, eslint, eslint-config-next, eslint-config-prettier, pixelmatch, @playwright/test (+12 more)
+Nodes (21): devDependencies, @axe-core/playwright, dotenv, esbuild, eslint, eslint-config-next, eslint-config-prettier, pixelmatch (+13 more)
 
 ### Community 3 - "Community 3"
-Cohesion: 0.08
-Nodes (39): Catalog, defaults, Entry, Extraction, Extractor, phrase, score, Transcriber (+31 more)
+Cohesion: 0.06
+Nodes (58): Catalog, defaults, Entry, Extraction, Extractor, phrase, score, thresholds (+50 more)
 
 ### Community 4 - "Community 4"
 Cohesion: 0.10
 Nodes (19): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModules, jsx, lib, module (+11 more)
 
 ### Community 5 - "Community 5"
-Cohesion: 0.11
-Nodes (27): CatalogForm(), Entity, RecordFields, StateButton(), useMutation(), Archive(), NotePage(), NewProduct() (+19 more)
+Cohesion: 0.14
+Nodes (25): CatalogForm(), Entity, RecordFields, StateButton(), useMutation(), Archive(), NotePage(), NewProduct() (+17 more)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.16
@@ -138,33 +139,37 @@ Nodes (3): For --cluster-only, For --update (incremental re-extraction), graphif
 Cohesion: 0.33
 Nodes (5): Images and footer, Page and table geometry, Rendering and comparison, Text, Warehouse issue note template
 
+### Community 28 - "Community 28"
+Cohesion: 0.24
+Nodes (8): filters, normalizeArabic(), Choice, Editor(), Fields, Line, Product, Props
+
 ### Community 29 - "Community 29"
 Cohesion: 0.09
 Nodes (42): aliases, customerInput, draftTimestamp, id, name, noteInput, optionalText, phone (+34 more)
 
 ### Community 30 - "Community 30"
-Cohesion: 0.10
-Nodes (19): VoiceResult, metadata, RootLayout(), Home(), ar, normalizeArabic(), command(), Choice (+11 more)
+Cohesion: 0.11
+Nodes (26): VoiceResult, metadata, RootLayout(), Home(), ar, command(), PdfPreview(), VoidForm() (+18 more)
 
 ## Knowledge Gaps
-- **176 isolated node(s):** `nextConfig`, `name`, `version`, `private`, `type` (+171 more)
+- **182 isolated node(s):** `nextConfig`, `name`, `version`, `private`, `type` (+177 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **6 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `ar` connect `Community 30` to `Community 29`, `Community 3`, `Community 5`, `Community 6`?**
-  _High betweenness centrality (0.051) - this node is a cross-community bridge._
+- **Why does `ar` connect `Community 30` to `Community 0`, `Community 3`, `Community 5`, `Community 6`, `Community 28`, `Community 29`?**
+  _High betweenness centrality (0.062) - this node is a cross-community bridge._
 - **Why does `authorize()` connect `Community 29` to `Community 0`, `Community 3`, `Community 5`?**
-  _High betweenness centrality (0.019) - this node is a cross-community bridge._
-- **Why does `devDependencies` connect `Community 2` to `Community 8`?**
-  _High betweenness centrality (0.009) - this node is a cross-community bridge._
+  _High betweenness centrality (0.021) - this node is a cross-community bridge._
+- **Why does `renderNotePdf()` connect `Community 6` to `Community 29`?**
+  _High betweenness centrality (0.008) - this node is a cross-community bridge._
 - **What connects `nextConfig`, `name`, `version` to the rest of the system?**
-  _176 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _182 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
-  _Cohesion score 0.10606060606060606 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.10756302521008404 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
   _Cohesion score 0.08333333333333333 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**
-  _Cohesion score 0.1 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.09523809523809523 - nodes in this community are weakly interconnected._
