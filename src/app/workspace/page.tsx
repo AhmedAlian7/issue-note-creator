@@ -22,6 +22,12 @@ export default async function Workspace() {
   );
   const navigation = (
     <nav className="menu">
+      {user.role === "OWNER" && (
+        <>
+          <Link href="/dashboard">{ar.reports.dashboard}</Link>
+          <Link href="/settings">{ar.reports.settings}</Link>
+        </>
+      )}
       {recent && (
         <>
           <Link className="new-note" href="/notes/new">

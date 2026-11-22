@@ -1,5 +1,57 @@
 @import "tailwindcss";
 
+.report-desk.desk {
+  max-width: 72rem;
+}
+.report-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: 1rem;
+  margin-block: 1rem;
+}
+.report-grid.charts {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 25rem), 1fr));
+}
+.report-panel {
+  min-width: 0;
+  background: white;
+  border: 1px solid #ccdbdc;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-block: 0.5rem;
+}
+.report-panel td,
+.report-panel th {
+  padding: 0.3rem;
+  text-align: start;
+}
+.kpi {
+  font-size: 2.4rem;
+  font-variant-numeric: tabular-nums;
+}
+.fields fieldset label {
+  margin-block: 0.75rem;
+}
+.fields label:has(input[type="checkbox"]) {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 48px;
+}
+.fields input[type="checkbox"] {
+  width: 1.3rem;
+  min-height: 1.3rem;
+}
+.settings-feedback:not(:empty) {
+  position: sticky;
+  top: 0.5rem;
+  display: block;
+  background: #174650;
+  color: white;
+  padding: 0.7rem;
+  z-index: 1;
+}
+
 .desk .voice-mic {
   min-height: 6rem;
   font-size: 1.5rem;

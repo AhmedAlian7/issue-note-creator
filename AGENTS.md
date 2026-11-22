@@ -25,6 +25,8 @@ Copy `.env.example` to `.env` for local integration settings. Its database URL c
 
 ## Folder layout
 
+For local reports run `docker compose up -d db mailhog`. MailHog accepts SMTP on localhost:1025 and displays messages at http://localhost:8025. Set a random SESSION_SECRET for signed PDF links. Compose defaults to the mailhog hostname, with SMTP_HOST available for external SMTP. Apply migrations with `pnpm exec prisma migrate deploy` before starting the app.
+
 - `src/app/` contains App Router pages, layouts and route handlers.
 - `src/server/` contains services and business logic. Keep it free of UI code.
 - `src/lib/` contains shared utilities, Zod schemas and `i18n.ts`.

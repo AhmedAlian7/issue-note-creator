@@ -118,6 +118,17 @@ model Setting {
   value Json
 }
 
+model ReportLog {
+  type      String
+  period    String
+  sentAt    DateTime?
+  status    String
+  error     String?
+  updatedAt DateTime @default(now()) @updatedAt
+  @@id([type, period])
+  @@index([status, updatedAt])
+}
+
 model NoteCounter {
   id         Int  @id @default(1)
   nextNumber Int?

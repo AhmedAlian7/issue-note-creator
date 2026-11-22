@@ -5,6 +5,7 @@ import { draftTimestamp, id, noteInput, reasonInput } from "@/lib/inputs";
 import { filters } from "@/lib/note-filters";
 import { renderNotePdf } from "@/pdf/render-note-pdf";
 import { db, type Prisma } from "../db";
+import { company } from "@/lib/report-config";
 import { allocateNumber } from "../counter";
 import { audit } from "../audit";
 import { authorize, type Actor } from "../permissions";
@@ -143,6 +144,9 @@ async function issue(tx: Tx, note: Note, number: number, pdfPath: string) {
     include: detail,
   });
   const pdf = await renderNotePdf({
+    company: company.safeParse(
+      (await tx.setting.findUnique({ where: { key: "company" } }))?.value,
+    ).data,
     number,
     date: date.toISOString().slice(0, 10).split("-").reverse().join("/"),
     customerName: note.customer.nameAr,
