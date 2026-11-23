@@ -5,8 +5,11 @@ import {
   useEffectEvent,
   useRef,
   useState,
+  useTransition,
 } from "react";
+import Link from "@/app/brand/pending-link";
 import { useRouter } from "next/navigation";
+import { PendingIndicator } from "@/app/brand/pending-indicator";
 import { ar } from "@/lib/i18n";
 import { normalizeArabic } from "@/lib/note-filters";
 import { command } from "./command";
@@ -38,12 +41,14 @@ export function Editor({
   amend,
 }: Props) {
   const router = useRouter();
+  const [navigating, startNavigation] = useTransition();
   const [data, setData] = useState(initial),
     [products, setProducts] = useState(catalog);
   const [savedData, setSavedData] = useState(initial);
   const [summary, setSummary] = useState(false),
-    [busy, setBusy] = useState(false),
+    [working, setBusy] = useState(false),
     [message, setMessage] = useState("");
+  const busy = working || navigating;
   const [query, setQuery] = useState(""),
     [adding, setAdding] = useState(false),
     [newName, setNewName] = useState(""),
@@ -436,8 +441,10 @@ export function Editor({
                           expected: timestamp.current,
                         },
                   );
-                  router.replace("/notes/" + result.id);
-                  router.refresh();
+                  startNavigation(() => {
+                    router.replace("/notes/" + result.id);
+                    router.refresh();
+                  });
                 })
               }
             >
@@ -461,10 +468,16 @@ export function Editor({
           </button>
         )}
       </fieldset>
-      <p role="status">
-        {message === ar.saved && savedData !== data ? "" : message}
+      <p role="status" className={busy ? "navigation-progress" : undefined}>
+        {busy || message === t.waiting ? (
+          <PendingIndicator>{t.waiting}</PendingIndicator>
+        ) : message === ar.saved && savedData !== data ? (
+          ""
+        ) : (
+          message
+        )}
       </p>
-      <a href="/workspace">{ar.back}</a>
+      <Link href="/workspace">{ar.back}</Link>
     </main>
   );
 }

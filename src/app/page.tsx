@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/app/brand/pending-link";
 import { Wordmark } from "./brand/wordmark";
 import { ar } from "@/lib/i18n";
 

@@ -1,4 +1,5 @@
-import Link from "next/link";
+import Link from "@/app/brand/pending-link";
+import { SubmitButton } from "@/app/brand/submit-button";
 import { ar } from "@/lib/i18n";
 import { allowed } from "@/server/permissions";
 import { currentUser } from "@/server/session";
@@ -45,7 +46,7 @@ export default async function WorkspaceLayout({
           account={
             <form action={signOut} className="brand-account">
               <bdi>{user.name}</bdi>
-              <button>{ar.logout}</button>
+              <SubmitButton>{ar.logout}</SubmitButton>
             </form>
           }
         />

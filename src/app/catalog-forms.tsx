@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { PendingIndicator } from "@/app/brand/pending-indicator";
 import { ar } from "@/lib/i18n";
 import type { Role } from "@/generated/prisma/enums";
 export type Entity = "product" | "customer" | "user";
@@ -160,7 +161,7 @@ export function CatalogForm({
         </>
       )}
       <button disabled={busy}>{ar.save}</button>
-      <output>{message}</output>
+      <output>{busy ? <PendingIndicator /> : message}</output>
     </form>
   );
 }
@@ -183,7 +184,7 @@ export function StateButton({
       >
         {ar[operation]}
       </button>
-      <output>{message}</output>
+      <output>{busy ? <PendingIndicator /> : message}</output>
     </span>
   );
 }

@@ -1,7 +1,8 @@
 import { VoiceFlow } from "../voice/flow";
-import Link from "next/link";
+import Link from "@/app/brand/pending-link";
 import { guard } from "@/server/session";
 import { allowed } from "@/server/permissions";
+import { SubmitButton } from "@/app/brand/submit-button";
 import { ar } from "@/lib/i18n";
 import { recentNotes, duplicateNote, noteCatalog } from "@/server/notes";
 import { redirect } from "next/navigation";
@@ -52,7 +53,9 @@ export default async function Workspace() {
               redirect("/notes/" + copy.id);
             }}
           >
-            <button className="secondary">{ar.notes.duplicate}</button>
+            <SubmitButton className="secondary">
+              {ar.notes.duplicate}
+            </SubmitButton>
           </form>
         )}
         <NoteList rows={recent.rows} />

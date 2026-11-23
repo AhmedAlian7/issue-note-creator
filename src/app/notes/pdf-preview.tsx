@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { PendingIndicator } from "@/app/brand/pending-indicator";
 import { ar } from "@/lib/i18n";
 const t = ar.notes;
 export function PdfPreview({
@@ -90,7 +91,11 @@ export function PdfPreview({
           {t.open}
         </a>
       </div>
-      {!ready && <p role="status">{error ? t.error : t.loading}</p>}
+      {!ready && (
+        <p role="status">
+          {error ? t.error : <PendingIndicator>{t.loading}</PendingIndicator>}
+        </p>
+      )}
       <div className="pdf-pages" aria-label={t.preview} ref={pages} />
     </section>
   );

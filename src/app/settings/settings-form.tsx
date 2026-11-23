@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { PendingIndicator } from "@/app/brand/pending-indicator";
 import { ar } from "@/lib/i18n";
 import {
   defaultCompany,
@@ -32,7 +33,7 @@ export function SettingsForm(props: {
   return (
     <>
       <output role="status" aria-live="polite" className="settings-feedback">
-        {message}
+        {busy ? <PendingIndicator /> : message}
       </output>
       <form
         className="fields"

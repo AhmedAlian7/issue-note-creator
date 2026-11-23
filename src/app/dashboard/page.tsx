@@ -1,4 +1,5 @@
-import Link from "next/link";
+import Link from "@/app/brand/pending-link";
+import { SearchForm } from "@/app/brand/search-form";
 import { ar } from "@/lib/i18n";
 import { guard } from "@/server/session";
 import { loadReport } from "@/server/reports";
@@ -63,7 +64,7 @@ export default async function Dashboard({
       </nav>
       <details>
         <summary>{t.custom}</summary>
-        <form className="fields filter-grid">
+        <SearchForm className="fields filter-grid">
           <label>
             {ar.notes.from}
             <input
@@ -77,8 +78,7 @@ export default async function Dashboard({
             {ar.notes.to}
             <input required type="date" name="to" defaultValue={r.range.to} />
           </label>
-          <button>{ar.search}</button>
-        </form>
+        </SearchForm>
       </details>
       <div className="report-grid">
         {[

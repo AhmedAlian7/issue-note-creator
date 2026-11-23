@@ -621,3 +621,58 @@ body {
     display: none;
   }
 }
+
+.pending-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+.pending-indicator::before {
+  content: "";
+  width: 1em;
+  height: 1em;
+  flex: none;
+  border: 2px solid currentColor;
+  border-inline-end-color: transparent;
+  border-radius: 50%;
+  animation: pending-spin 0.8s linear infinite;
+}
+
+.navigation-progress {
+  position: fixed;
+  inset-block-start: max(0.75rem, env(safe-area-inset-top));
+  inset-inline-start: 50%;
+  translate: 50%;
+  z-index: 10;
+  padding: 0.5rem 0.85rem;
+  background: var(--graphite);
+  color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--corner);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+body:has(.route-progress) .link-progress {
+  display: none;
+}
+
+@keyframes pending-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pending-indicator::before {
+    animation: none;
+  }
+}
+
+@media print {
+  .navigation-progress {
+    display: none;
+  }
+}

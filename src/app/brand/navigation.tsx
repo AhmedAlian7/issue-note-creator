@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link";
+import Link from "@/app/brand/pending-link";
 import { usePathname } from "next/navigation";
 import { useRef } from "react";
 import { ar } from "@/lib/i18n";

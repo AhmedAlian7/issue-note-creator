@@ -1,6 +1,7 @@
-import Link from "next/link";
+import Link from "@/app/brand/pending-link";
 import { notFound } from "next/navigation";
 import { z } from "zod";
+import { SearchForm } from "@/app/brand/search-form";
 import { ar } from "@/lib/i18n";
 import { listCatalog } from "@/server/catalog-list";
 import { guard } from "@/server/session";
@@ -42,7 +43,7 @@ export default async function Catalog({
         <summary>{ar[add]}</summary>
         <CatalogForm entity={entity} />
       </details>
-      <form className="search">
+      <SearchForm className="search">
         <input
           name="q"
           aria-label={ar.search}
@@ -50,8 +51,7 @@ export default async function Catalog({
           maxLength={180}
           defaultValue={query.data}
         />
-        <button>{ar.search}</button>
-      </form>
+      </SearchForm>
       <ul>
         {matches.map((row) => (
           <li key={row.id}>

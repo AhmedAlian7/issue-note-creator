@@ -1,4 +1,8 @@
 export const ar = {
+  pending: {
+    navigation: "جارٍ تحميل الصفحة…",
+    action: "جارٍ تنفيذ الطلب…",
+  },
   navigation: {
     menu: "القائمة",
     recordHint: "قل اسم العميل والأصناف والكميات، ثم راجع الإذن قبل التأكيد.",

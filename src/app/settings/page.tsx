@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/app/brand/pending-link";
 import { ar } from "@/lib/i18n";
 import { company, defaultCompany, frequencies } from "@/lib/report-config";
 import { defaults, thresholds } from "@/ai/contracts";

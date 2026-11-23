@@ -1,5 +1,5 @@
 import { allowed } from "@/server/permissions";
-import Link from "next/link";
+import Link from "@/app/brand/pending-link";
 import { guard } from "@/server/session";
 import { ar } from "@/lib/i18n";
 import { VoiceFlow } from "./flow";

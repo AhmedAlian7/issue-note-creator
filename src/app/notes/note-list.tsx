@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/app/brand/pending-link";
 import { ar } from "@/lib/i18n";
 import { hasPdf } from "@/server/pdf-storage";
 import { archiveStatus, type listNotes } from "@/server/notes";

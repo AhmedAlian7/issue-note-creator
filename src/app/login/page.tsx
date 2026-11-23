@@ -1,5 +1,6 @@
+import { SubmitButton } from "@/app/brand/submit-button";
 import { ar } from "@/lib/i18n";
-import Link from "next/link";
+import Link from "@/app/brand/pending-link";
 import Image from "next/image";
 import { Wordmark } from "../brand/wordmark";
 import banner from "../brand/sign-in.png";
@@ -63,7 +64,9 @@ export default async function Login({
             </label>
           )}
           {query.failed === "1" && <p role="alert">{ar.loginError}</p>}
-          <button>{handle.success ? ar.login : ar.loginContinue}</button>
+          <SubmitButton>
+            {handle.success ? ar.login : ar.loginContinue}
+          </SubmitButton>
           {handle.success && (
             <Link href="/login">{ar.loginChangeUsername}</Link>
           )}
