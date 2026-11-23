@@ -36,11 +36,6 @@ export async function saveSetting(
   data: z.infer<typeof settingInput>,
 ) {
   authorize(actor, "settings.manage");
-  const scheduler =
-    data.key === "reportSchedule"
-      ? await import("./reports/scheduler")
-      : undefined;
-  const boss = await scheduler?.reportWorker();
   await db.$transaction(async (tx) => {
     // Also serialize concurrent inserts when the setting does not yet exist.
     await tx.$queryRaw`SELECT pg_advisory_xact_lock(hashtext(${data.key}))::text`;
@@ -50,8 +45,6 @@ export async function saveSetting(
       create: data,
       update: { value: data.value },
     });
-    if (data.key === "reportSchedule" && boss && scheduler)
-      await scheduler.configure(boss, tx, data.value);
     await audit(
       tx,
       actor.id,
