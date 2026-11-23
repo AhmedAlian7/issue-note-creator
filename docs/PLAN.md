@@ -140,8 +140,8 @@ Every request from the keeper, admin or owner goes through the API; the API alon
 - **Frontend:** mobile-first PWA with Tailwind and Arabic RTL layout, installable on the phone's home screen, using the browser's microphone recording.
 - **AI:** a speech-to-text API that supports Egyptian Arabic, then an LLM with structured JSON output checked against the Zod schema and your product list.
 - **PDF:** your template rebuilt as an HTML page with an embedded Arabic font, rendered to PDF with headless Chromium (Playwright) for exact RTL shaping and layout.
-- **Scheduled reports:** pg-boss, a job queue and scheduler that runs inside PostgreSQL (no Redis), with email sent through Nodemailer or a transactional provider.
-- **Hosting:** Docker Compose on one small cloud server, because Chromium needs a normal server rather than a serverless function, with daily database backups.
+- **Scheduled reports:** an hourly GitHub Actions call to a protected `/api/cron/reports` endpoint, with `ReportLog` rows making each period idempotent, and email sent through Resend or Nodemailer.
+- **Hosting:** Netlify Free for the Next.js app, Neon Free PostgreSQL for data and issued PDF bytes, and Cloudflare Browser Run for PDF rendering, with nightly database backups. See `docs/FREE_CLOUD_DEPLOYMENT.md`.
 
 **Making the project easy for an AI coding agent (Codex)**
 

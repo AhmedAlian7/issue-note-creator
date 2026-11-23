@@ -24,7 +24,11 @@ Open [the sign-in page](http://localhost:3000/login). The first seed run prints 
 
 Press Ctrl+C to stop Next.js. Use `docker compose stop db` to stop PostgreSQL and keep its data.
 
-Confirmed PDFs use the `note-pdfs` Compose volume mounted at `/data/pdfs`. For host development, set `PDF_STORAGE_DIR` in `.env` to a writable directory. Back up the PDF volume alongside PostgreSQL to retain issued versions.
+Confirmed PDFs are stored in PostgreSQL in the `PdfDocument` table. For local Docker, set `PDF_STORAGE_DIR` in `.env` to keep them on the `note-pdfs` volume mounted at `/data/pdfs` instead. Leave `PDF_STORAGE_DIR` empty in serverless production so PDFs are stored in the database. To copy existing filesystem PDFs into the database, run `pnpm db:migrate-pdfs` with `PDF_STORAGE_DIR` pointing at the folder; add `--dry-run` to preview.
+
+## Deploy for free
+
+`docs/FREE_CLOUD_DEPLOYMENT.md` explains the $0 hosting setup: Netlify Free for the app, Neon Free PostgreSQL for data and PDFs, Cloudflare Browser Run for PDF rendering, Resend Free for report email, and GitHub Actions for the hourly report cron and nightly backup. It lists verified free-tier limits, required environment variables, migration steps, rollback and a feature checklist.
 
 ## Voice drafts
 
