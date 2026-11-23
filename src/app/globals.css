@@ -297,6 +297,9 @@ body {
 .note-table th {
   background: var(--stone);
 }
+.red-remark {
+  color: var(--error);
+}
 .note-row {
   display: grid;
   gap: 0.3rem;

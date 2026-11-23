@@ -145,6 +145,7 @@ export const ar = {
     quantity: "الكمية",
     remarks: "ملاحظات",
     defaultRemarks: "استندر",
+    redRemark: "طباعة الملاحظة بالأحمر",
     remove: "حذف",
     up: "رفع",
     down: "خفض",

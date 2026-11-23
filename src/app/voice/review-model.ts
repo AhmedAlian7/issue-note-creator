@@ -5,6 +5,7 @@ export type Line = Omit<ParsedLine, "level" | "remarks"> & {
   key: string;
   level: "RED" | "GREEN" | "YELLOW";
   remarks: string;
+  redRemark: boolean;
 };
 export type Draft = {
   customerId: string | null;
@@ -19,6 +20,7 @@ export function reviewLine(l: ParsedLine): Line {
     level:
       l.level === "GREEN" ? "GREEN" : l.level === "YELLOW" ? "YELLOW" : "RED",
     remarks: l.remarks ?? "",
+    redRemark: false,
   };
 }
 export function fromSpeech(r: VoiceResult): Draft {

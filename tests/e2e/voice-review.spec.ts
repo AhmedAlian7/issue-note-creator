@@ -67,10 +67,18 @@ test("mobile keeper reviews speech, resolves matches, corrects and issues a PDF"
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(
     viewport.width,
   );
+  await page.getByLabel(t.remarks, { exact: true }).fill("فندق كارما");
+  await page.getByRole("checkbox", { name: t.redRemark }).check();
   await button(t.confirm).click();
   await expect(page.locator(".pdf-pages canvas")).toBeVisible({
     timeout: 30000,
   });
+  expect(
+    await db.noteLine.findFirst({
+      where: { noteId: page.url().split("/").pop() },
+      select: { remarks: true, redRemark: true },
+    }),
+  ).toEqual({ remarks: "فندق كارما", redRemark: true });
   await page.getByRole("link", { name: t.newNote }).click();
   await record(page, ar.voice.start);
   await page.getByRole("button", { name: f.editVoice }).click();

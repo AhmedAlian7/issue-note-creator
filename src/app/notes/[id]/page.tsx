@@ -58,6 +58,7 @@ export default async function NotePage(props: PageProps<"/notes/[id]">) {
               productId: l.productId,
               quantity: l.quantity,
               remarks: l.remarks ?? "",
+              redRemark: l.redRemark,
             })) ?? [],
         }}
       />

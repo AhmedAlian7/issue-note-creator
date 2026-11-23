@@ -93,6 +93,7 @@ model NoteLine {
   product   Product   @relation(fields: [productId], references: [id])
   quantity  Int
   remarks   String?   @db.Text
+  redRemark Boolean   @default(false)
   position  Int
 
   @@unique([noteId, position])

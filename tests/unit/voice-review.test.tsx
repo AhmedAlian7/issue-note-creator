@@ -10,6 +10,7 @@ const base: Line = {
   spokenText: "كرسي",
   quantity: 2,
   remarks: "",
+  redRemark: false,
   productId: "p",
   candidates: [{ id: "p", nameAr: "اقتراح", score: 0.7 }],
   confidence: 1,

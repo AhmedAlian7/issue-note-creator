@@ -13,5 +13,6 @@ export const sample: NoteData = {
     productName,
     quantity: [1, 1, 1, 4, 18][i],
     remarks: i === 4 ? "فندق الكارما" : "استندر",
+    redRemark: i === 4,
   })),
 };

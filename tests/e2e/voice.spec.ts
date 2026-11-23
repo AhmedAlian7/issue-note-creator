@@ -78,6 +78,11 @@ test("keeper records, pauses, resumes and can recover by typing", async ({
     const preview = page.getByRole("region", { name: ar.notes.preview });
     await expect(preview.getByText(ar.notes.numberPending)).toBeVisible();
     await expect(preview.getByRole("cell", { name: "مكتب" })).toBeVisible();
+    await page.getByLabel(ar.notes.remarks, { exact: true }).fill("المعرض");
+    await page.getByRole("checkbox", { name: ar.notes.redRemark }).check();
+    await expect(preview.getByRole("cell", { name: "المعرض" })).toHaveClass(
+      "red-remark",
+    );
     await expect(
       preview.getByRole("cell", { name: "2", exact: true }),
     ).toBeVisible();

@@ -13,6 +13,7 @@ import { PendingIndicator } from "@/app/brand/pending-indicator";
 import { ar } from "@/lib/i18n";
 import { normalizeArabic } from "@/lib/note-filters";
 import { command } from "./command";
+import { RemarkFields } from "./remark-fields";
 const t = ar.notes;
 type Choice = { id: string; nameAr: string; active: boolean };
 type Product = Choice & { aliases: string[] };
@@ -20,6 +21,7 @@ type Line = {
   productId: string;
   quantity: number;
   remarks: string;
+  redRemark: boolean;
   key: string;
 };
 type Fields = { customerId: string; lines: Line[] };
@@ -121,6 +123,7 @@ export function Editor({
             productId,
             quantity: 1,
             remarks: t.defaultRemarks,
+            redRemark: false,
           },
         ],
       }));
@@ -243,16 +246,11 @@ export function Editor({
                     </button>
                   </span>
                 </label>
-                <label>
-                  {t.remarks}
-                  <input
-                    maxLength={300}
-                    value={line.remarks}
-                    onChange={(e) =>
-                      changeLine(line.key, { remarks: e.target.value })
-                    }
-                  />
-                </label>
+                <RemarkFields
+                  remarks={line.remarks}
+                  redRemark={line.redRemark}
+                  onChange={(patch) => changeLine(line.key, patch)}
+                />
                 <div className="tools">
                   <button
                     className="secondary"
@@ -372,7 +370,9 @@ export function Editor({
                   <td>{i + 1}</td>
                   <td>{name(l.productId)}</td>
                   <td>{l.quantity}</td>
-                  <td>{l.remarks}</td>
+                  <td className={l.redRemark ? "red-remark" : undefined}>
+                    {l.remarks}
+                  </td>
                 </tr>
               ))}
             </tbody>

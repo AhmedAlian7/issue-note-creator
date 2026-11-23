@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { canColorRemark } from "./remarks";
 const digits = (s: string) =>
   s.replace(/[٠-٩]/g, (c) => String(c.charCodeAt(0) - 1632));
 export const username = z
@@ -43,11 +44,17 @@ export const noteInput = z.object({
   customerId: id,
   lines: z
     .array(
-      z.object({
-        productId: id,
-        quantity: z.int().positive().max(2147483647),
-        remarks: optionalText,
-      }),
+      z
+        .object({
+          productId: id,
+          quantity: z.int().positive().max(2147483647),
+          remarks: optionalText,
+          redRemark: z.boolean().default(false),
+        })
+        .transform((line) => ({
+          ...line,
+          redRemark: line.redRemark && canColorRemark(line.remarks),
+        })),
     )
     .max(500),
 });
