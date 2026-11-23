@@ -1,0 +1,22 @@
+# Netlify Free plan. The OpenNext adapter is installed automatically for
+# Next.js projects; do not pin it unless you need to roll back an adapter.
+[build]
+  command = "pnpm build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22.15.0"
+  NEXT_TELEMETRY_DISABLED = "1"
+  TZ = "Africa/Cairo"
+
+# Make the PDF fonts and images available to the serverless function.
+[functions]
+  included_files = ["src/pdf/**/*"]
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), geolocation=(), microphone=(self)"
