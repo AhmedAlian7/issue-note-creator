@@ -54,7 +54,7 @@ test("owner saves a Cairo schedule and sends a report to MailHog", async ({
       return (await res.json()).total;
     })
     .toBeGreaterThan(0);
-  await page.getByRole("link", { name: t.dashboard }).click();
+  await page.getByRole("main").getByRole("link", { name: t.dashboard }).click();
   await page.waitForURL("**/dashboard",{timeout:30000});
   await expect(page.getByRole("heading", { name: t.dashboard })).toBeVisible();
   await expect(page.getByRole("link", { name: t.excel })).toBeVisible();
