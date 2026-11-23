@@ -42,16 +42,6 @@ export function reportPeriod(type: Frequency, now = new Date()): Range {
   const to = shift(day.slice(0, 8) + "01", -1);
   return { from: to.slice(0, 8) + "01", to };
 }
-export function cron(type: Frequency, s: Schedule) {
-  const [h, m] = s[type].time.split(":").map(Number);
-  return [
-    m,
-    h,
-    type === "monthly" ? s.monthly.monthday : "*",
-    "*",
-    type === "weekly" ? s.weekly.weekday : "*",
-  ].join(" ");
-}
 // A catch-up job may be created after midnight. Resolve its latest due local date.
 export function scheduledDay(type: Frequency, s: Schedule, instant: Date) {
   const time = new Intl.DateTimeFormat("en-GB", {

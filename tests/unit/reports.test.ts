@@ -6,7 +6,6 @@ import {
   preset,
   reportPeriod,
   previous,
-  cron,
   scheduledDay,
 } from "@/server/reports/period";
 import { emailHtml } from "@/server/reports/email";
@@ -71,9 +70,6 @@ it("schedules by Cairo civil dates including month rollover, delayed jobs and su
     from: "2026-07-01",
     to: "2026-07-31",
   });
-  expect(cron("daily", defaultSchedule)).toBe("0 22 * * *");
-  expect(cron("weekly", defaultSchedule)).toBe("0 5 * * 4");
-  expect(cron("monthly", defaultSchedule)).toBe("0 9 1 * *");
   expect(scheduledDay("daily", defaultSchedule, new Date())).toBe("2026-07-31");
   expect(scheduledDay("monthly", defaultSchedule, new Date())).toBe(
     "2026-07-01",

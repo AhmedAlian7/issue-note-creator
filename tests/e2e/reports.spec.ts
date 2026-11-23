@@ -37,12 +37,11 @@ test("owner saves a Cairo schedule and sends a report to MailHog", async ({
   await expect(page.getByRole("status")).toHaveText(ar.saved);
   await page.reload();
   await expect(daily.getByLabel(t.time)).toHaveValue("21:45");
-  const [schedule] = await db.$queryRaw<
-    { cron: string; timezone: string }[]
-  >`select cron, timezone from pgboss.schedule where name='report-daily'`;
-  expect(schedule).toMatchObject({
-    cron: "45 21 * * *",
-    timezone: "Africa/Cairo",
+  const saved = await db.setting.findUnique({
+    where: { key: "reportSchedule" },
+  });
+  expect(saved?.value).toMatchObject({
+    daily: { enabled: true, time: "21:45", recipients: [recipient] },
   });
   await daily.getByRole("button", { name: t.test }).click();
   await expect(page.getByRole("status")).toHaveText(t.tested);
