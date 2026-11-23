@@ -144,7 +144,7 @@ $env:DATABASE_URL = "postgresql://...-pooler.../neondb?sslmode=require"
 pnpm exec prisma migrate deploy
 ```
 
-`prisma migrate deploy` only applies migrations. It never drops data.
+`prisma migrate deploy` applies pending migration files. Review their SQL before running it against production.
 
 ### 2. Create the Cloudflare API token
 
@@ -181,10 +181,9 @@ yourself.
 
 1. In Netlify choose **Add new site > Import an existing project**.
 2. Connect GitHub and pick this repository and the `main` branch.
-3. Netlify reads `netlify.toml`: build command `pnpm build`, Node 22.15.
+3. Netlify reads `netlify.toml` and uses Node 22.15. Give `DATABASE_URL` access to both Builds and Functions. The production build checks that the database is up to date before running `pnpm build`.
 4. Add every environment variable from the table above before the first deploy.
-5. Deploy. The first build installs dependencies, runs `prisma generate` from
-   `postinstall`, and publishes the site.
+5. Apply migrations with the direct Neon connection before deploying. The build installs dependencies, checks the schema, generates the Prisma client, and publishes the site.
 
 If the build fails on a missing PDF asset, check that
 `outputFileTracingIncludes` in `next.config.ts` still lists `./src/pdf/**/*` and
