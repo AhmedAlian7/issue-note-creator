@@ -29,7 +29,7 @@ test("mobile keeper reviews speech, resolves matches, corrects and issues a PDF"
   test.setTimeout(120000);
   const keeper = await db.user.create({
     data: {
-      phone: "09000000455",
+      username: "09000000455",
       role: "KEEPER",
       name: "أمين المخزن",
       pinHash: await hashPin("12345"),
@@ -41,7 +41,8 @@ test("mobile keeper reviews speech, resolves matches, corrects and issues a PDF"
     data: [{ nameAr: "فوتيه سيدني" }, { nameAr: "كنبة جولدي" }],
   });
   await page.goto("/login");
-  await page.getByLabel(ar.phone).fill(keeper.phone);
+  await page.getByLabel(ar.username).fill(keeper.username);
+  await page.getByRole("button", { name: ar.loginContinue }).click();
   await page.getByLabel(ar.pin).fill("12345");
   await page.getByRole("button", { name: ar.login }).click();
   const button = (name: string) =>

@@ -22,7 +22,7 @@ it("rolls back failed issuance and serializes twenty full confirmations", async 
   const keeper = await db.user.create({
     data: {
       name: "test",
-      phone: "09000000000",
+      username: "09000000000",
       pinHash: "unused",
       role: "KEEPER",
     },
@@ -30,7 +30,7 @@ it("rolls back failed issuance and serializes twenty full confirmations", async 
   const admin = await db.user.create({
     data: {
       name: "admin",
-      phone: "09000000001",
+      username: "09000000001",
       pinHash: "unused",
       role: "ADMIN",
     },
