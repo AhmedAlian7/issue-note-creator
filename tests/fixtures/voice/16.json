@@ -10,7 +10,6 @@
         "quantity": 7,
         "quantityText": "سبعة",
         "remarks": "بقماش أزرق",
-        "isDestination": false,
         "confidence": 0.95
       }
     ]
@@ -21,8 +20,7 @@
       {
         "productId": "p3",
         "quantity": 7,
-        "remarks": "بقماش أزرق",
-        "isDestination": false
+        "remarks": "بقماش أزرق"
       }
     ]
   }

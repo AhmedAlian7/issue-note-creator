@@ -10,7 +10,6 @@
         "quantity": null,
         "quantityText": "٤٩",
         "remarks": "المخزن الخلفي",
-        "isDestination": true,
         "confidence": 0.95
       }
     ]
@@ -21,8 +20,7 @@
       {
         "productId": "p5",
         "quantity": 49,
-        "remarks": "المخزن الخلفي",
-        "isDestination": true
+        "remarks": "المخزن الخلفي"
       }
     ]
   }

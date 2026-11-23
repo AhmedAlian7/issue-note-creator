@@ -283,15 +283,6 @@ body {
   max-width: 6rem;
   text-align: center;
 }
-.fields .toggle {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-.toggle input {
-  width: 48px;
-  accent-color: var(--graphite);
-}
 .note-table table {
   border-collapse: collapse;
   width: 100%;
@@ -305,9 +296,6 @@ body {
 }
 .note-table th {
   background: var(--stone);
-}
-.destination {
-  color: var(--error);
 }
 .note-row {
   display: grid;

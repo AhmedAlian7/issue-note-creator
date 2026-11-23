@@ -75,7 +75,6 @@ it("uses active catalog rows, records the verified draft, and learns corrections
                 quantity: null,
                 quantityText: "اتنين",
                 remarks: null,
-                isDestination: false,
                 confidence: 0.2,
               },
             ],

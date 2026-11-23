@@ -13,7 +13,6 @@ const fixture = z.object({
         productId: z.string().nullable(),
         quantity: z.int(),
         remarks: z.string().nullable(),
-        isDestination: z.boolean(),
       }),
     ),
   }),

@@ -20,7 +20,6 @@ type Line = {
   productId: string;
   quantity: number;
   remarks: string;
-  isDestination: boolean;
   key: string;
 };
 type Fields = { customerId: string; lines: Line[] };
@@ -122,7 +121,6 @@ export function Editor({
             productId,
             quantity: 1,
             remarks: t.defaultRemarks,
-            isDestination: false,
           },
         ],
       }));
@@ -250,39 +248,11 @@ export function Editor({
                   <input
                     maxLength={300}
                     value={line.remarks}
-                    style={
-                      line.isDestination ? { color: "var(--error)" } : undefined
-                    }
                     onChange={(e) =>
-                      changeLine(line.key, {
-                        remarks: e.target.value,
-                        isDestination:
-                          !!e.target.value.trim() &&
-                          e.target.value.trim() !== t.defaultRemarks &&
-                          line.isDestination,
-                      })
+                      changeLine(line.key, { remarks: e.target.value })
                     }
                   />
                 </label>
-                {(line.isDestination ||
-                  (line.remarks.trim() &&
-                    line.remarks.trim() !== t.defaultRemarks)) && (
-                  <label>
-                    {t.textColor}
-                    <select
-                      aria-label={t.textColor}
-                      value={line.isDestination ? "red" : "default"}
-                      onChange={(e) =>
-                        changeLine(line.key, {
-                          isDestination: e.target.value === "red",
-                        })
-                      }
-                    >
-                      <option value="default">{t.defaultColor}</option>
-                      <option value="red">{t.red}</option>
-                    </select>
-                  </label>
-                )}
                 <div className="tools">
                   <button
                     className="secondary"
@@ -402,9 +372,7 @@ export function Editor({
                   <td>{i + 1}</td>
                   <td>{name(l.productId)}</td>
                   <td>{l.quantity}</td>
-                  <td className={l.isDestination ? "destination" : ""}>
-                    {l.remarks}
-                  </td>
+                  <td>{l.remarks}</td>
                 </tr>
               ))}
             </tbody>

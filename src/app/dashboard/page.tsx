@@ -110,7 +110,6 @@ export default async function Dashboard({
             [t.days, r.days],
             [t.top, r.top],
             [t.customers, r.customers],
-            [t.destinations, r.destinations],
           ] as const
         ).map(([title, rows]) => (
           <Chart key={title} title={title} rows={rows} />

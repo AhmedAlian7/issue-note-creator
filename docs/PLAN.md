@@ -49,7 +49,6 @@ The keeper's screen has one giant microphone button; everything else is secondar
 
 - Pixel-matched to your attached template: logo and watermark, RTL Arabic layout, customer, number, date, 10-row table with serial, item, quantity and notes, receipt statement, signature lines for approver, storekeeper and driver, and the footer with website, phone and QR code.
 - If a note has more than 10 lines, it continues onto a second page automatically with the same note number and "page 1 of 2".
-- Destination notes such as the hotel name print in red like the current template.
 - Saved permanently and searchable by number, customer and date.
 
 ## Owner features: reports and dashboard
@@ -71,7 +70,7 @@ The owner gets automatic email reports and a mobile-friendly dashboard, with no 
 **Dashboard**
 
 - Today's notes with status, and a live feed as the keeper creates them.
-- Charts: units issued by day, by product, by customer, and by destination.
+- Charts: units issued by day, by product, and by customer.
 - Top and slow-moving products, customer ranking, average notes per day.
 - Searchable archive of all notes with filters (date, customer, product, number) and PDF re-download.
 - Export to Excel or CSV.

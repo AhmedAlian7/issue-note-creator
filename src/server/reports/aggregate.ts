@@ -11,7 +11,6 @@ export type ReportNote = {
     product: Item;
     quantity: number;
     remarks: string | null;
-    isDestination: boolean;
   }[];
 };
 export type Bucket = { name: string; notes: number; units: number };
@@ -19,7 +18,6 @@ export function summarize(range: Range, rows: ReportNote[], catalog: Item[]) {
   const products = new Map<string, Bucket>(),
     customers = new Map<string, Bucket>(),
     remarks = new Map<string, Bucket>(),
-    destinations = new Map<string, Bucket>(),
     days = new Map<string, Bucket>();
   function bucket(map: Map<string, Bucket>, key: string, name: string) {
     let b = map.get(key);
@@ -55,8 +53,6 @@ export function summarize(range: Range, rows: ReportNote[], catalog: Item[]) {
         const groups = [bucket(products, line.product.id, line.product.nameAr)];
         const label = line.remarks?.trim() ?? "";
         groups.push(bucket(remarks, label, label));
-        if (line.isDestination && label)
-          groups.push(bucket(destinations, label, label));
         for (const group of groups) {
           group.units += line.quantity;
           touched.add(group);
@@ -91,6 +87,5 @@ export function summarize(range: Range, rows: ReportNote[], catalog: Item[]) {
     slow: [...byProduct].reverse().slice(0, 10),
     customers: ranked(customers),
     remarks: ranked(remarks),
-    destinations: ranked(destinations),
   };
 }

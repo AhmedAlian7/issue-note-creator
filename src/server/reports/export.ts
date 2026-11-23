@@ -54,7 +54,6 @@ export async function workbook(r: Report) {
     [t.days, r.days],
     [ar.products, r.products],
     [t.customers, r.customers],
-    [t.destinations, r.destinations],
     [ar.notes.remarks, r.remarks],
     [t.slow, r.slow],
   ] as const)

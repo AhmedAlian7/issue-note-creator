@@ -193,14 +193,11 @@ export function Review({
     void run(async () => {
       const fields = {
         customerId: draft.customerId,
-        lines: draft.lines.map(
-          ({ productId, quantity, remarks, isDestination }) => ({
-            productId,
-            quantity,
-            remarks,
-            isDestination,
-          }),
-        ),
+        lines: draft.lines.map(({ productId, quantity, remarks }) => ({
+          productId,
+          quantity,
+          remarks,
+        })),
       };
       if (saved.current?.draft !== draft) {
         const record = await command(
@@ -259,9 +256,7 @@ export function Review({
                     line.spokenText}
                 </td>
                 <td>{line.quantity}</td>
-                <td className={line.isDestination ? "destination" : undefined}>
-                  {line.remarks}
-                </td>
+                <td>{line.remarks}</td>
               </tr>
             ))}
           </tbody>
@@ -401,7 +396,6 @@ export function Review({
                                   productId: i.id,
                                   quantity: 1,
                                   remarks: "",
-                                  isDestination: false,
                                   confidence: 1,
                                   level: "GREEN",
                                   unmatched: false,

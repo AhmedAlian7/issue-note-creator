@@ -23,7 +23,6 @@ export async function loadReport(range: Range, prior = previous(range)) {
             product: item,
             remarks: true,
             quantity: true,
-            isDestination: true,
           },
         },
       },

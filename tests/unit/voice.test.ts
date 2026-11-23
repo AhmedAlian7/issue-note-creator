@@ -92,7 +92,6 @@ it("defaults spoken item names without quantities and preserves explicit details
       quantity: null,
       quantityText: null,
       remarks: null,
-      isDestination: false,
       confidence: 1,
     };
     expect(verifyLine(line, transcript, catalog)).toMatchObject({
@@ -105,14 +104,13 @@ it("defaults spoken item names without quantities and preserves explicit details
     });
     expect(
       verifyLine(
-        { ...line, remarks: "فندق كارما", isDestination: true },
+        { ...line, remarks: "فندق كارما" },
         spokenText + " لفندق كارما",
         catalog,
       ),
     ).toMatchObject({
       quantity: 1,
       remarks: "فندق كارما",
-      isDestination: true,
     });
   }
 });

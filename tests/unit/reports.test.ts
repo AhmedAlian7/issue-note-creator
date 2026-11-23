@@ -27,7 +27,6 @@ const note: ReportNote = {
     quantity,
     product,
     remarks: "القاهرة",
-    isDestination: true,
   })),
 };
 const catalog = [product, { id: "p2", nameAr: "مكتب" }];
@@ -50,7 +49,7 @@ it("counts current issued versions and distinct notes in each group, including z
     catalog,
   );
   expect([r.total, r.units, r.average]).toEqual([2, 10, 1]);
-  for (const group of [r.days, r.top, r.customers, r.remarks, r.destinations])
+  for (const group of [r.days, r.top, r.customers, r.remarks])
     expect(group[0]).toMatchObject({ notes: 2, units: 10 });
   expect(r.days[1].units).toBe(0);
   expect(r.slow[0]).toMatchObject({ name: "مكتب", units: 0 });

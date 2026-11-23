@@ -101,14 +101,6 @@ export function LineCard({
           onChange={(e) => patch({ remarks: e.target.value })}
         />
       </label>
-      <label className="toggle">
-        <input
-          type="checkbox"
-          checked={line.isDestination}
-          onChange={(e) => patch({ isDestination: e.target.checked })}
-        />
-        {f.destination}
-      </label>
       <div className="tools">
         <button
           className="secondary"

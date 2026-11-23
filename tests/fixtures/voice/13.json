@@ -10,7 +10,6 @@
         "quantity": null,
         "quantityText": "واحد",
         "remarks": null,
-        "isDestination": false,
         "confidence": 0.95
       },
       {
@@ -19,7 +18,6 @@
         "quantity": null,
         "quantityText": "تسعة",
         "remarks": null,
-        "isDestination": false,
         "confidence": 0.95
       }
     ]
@@ -30,14 +28,12 @@
       {
         "productId": null,
         "quantity": 1,
-        "remarks": null,
-        "isDestination": false
+        "remarks": null
       },
       {
         "productId": "p5",
         "quantity": 9,
-        "remarks": null,
-        "isDestination": false
+        "remarks": null
       }
     ]
   }

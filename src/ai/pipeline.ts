@@ -32,7 +32,6 @@ export function verifyLine(
       quantity === null && !line.remarks?.trim()
         ? ar.notes.defaultRemarks
         : line.remarks,
-    isDestination: line.isDestination,
     ...verified,
   };
 }

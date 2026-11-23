@@ -26,7 +26,6 @@ const fields = {
       productName: z.string().trim().min(1),
       quantity: z.number().int().positive(),
       remarks: z.string().nullish(),
-      isDestination: z.boolean().default(false),
     }),
   ),
 };
@@ -125,9 +124,7 @@ function itemTable(lines: Note["lines"], offset: number) {
         baseline,
         15.96,
         escape(line.remarks ?? ""),
-        centered +
-          ' data-fit="178.01"' +
-          (line.isDestination ? ' fill="#ee0000"' : ""),
+        centered + ' data-fit="178.01"',
       );
       svg += textAt(
         centers[1],

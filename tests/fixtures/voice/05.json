@@ -10,7 +10,6 @@
         "quantity": null,
         "quantityText": "عشرة",
         "remarks": null,
-        "isDestination": false,
         "confidence": 0.95
       }
     ]
@@ -21,8 +20,7 @@
       {
         "productId": null,
         "quantity": 10,
-        "remarks": null,
-        "isDestination": false
+        "remarks": null
       }
     ]
   }

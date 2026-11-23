@@ -22,8 +22,7 @@ if (!process.env.GROQ_API_KEY) {
           !!actual &&
           actual.productId === want.productId &&
           actual.quantity === want.quantity &&
-          actual.remarks === want.remarks &&
-          actual.isDestination === want.isDestination;
+          actual.remarks === want.remarks;
         total++;
         if (ok) correct++;
         console.log(ok ? "PASS" : "FAIL", transcript, "line", i + 1);
