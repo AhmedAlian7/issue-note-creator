@@ -15,7 +15,7 @@
     "db:migrate-pdfs": "tsx scripts/migrate-pdfs.ts",
     "postinstall": "prisma generate",
     "dev": "next dev",
-    "build": "next build --webpack",
+    "build": "prisma generate && next build --webpack",
     "lint": "eslint .",
     "typecheck": "next typegen && tsc --noEmit",
     "test": "tsx tests/run-isolated.ts unit",
