@@ -6,6 +6,7 @@ import { ar } from "@/lib/i18n";
 import { Prisma } from "@/generated/prisma/client";
 import { guard } from "@/server/session";
 import { allowed } from "@/server/permissions";
+import { hasPdf } from "@/server/pdf-storage";
 import { getNote, noteCatalog, archiveStatus } from "@/server/notes";
 import { Editor } from "../editor";
 import { PdfPreview } from "../pdf-preview";
@@ -75,7 +76,7 @@ export default async function NotePage(props: PageProps<"/notes/[id]">) {
         </h1>
         <p>{note.date.toISOString().slice(0, 10)}</p>
       </header>
-      {note.pdfPath && note.number && (
+      {hasPdf(note) && note.number && (
         <PdfPreview
           key={note.id}
           id={note.id}

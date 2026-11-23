@@ -1,8 +1,8 @@
-import { readFile } from "node:fs/promises";
 import { z } from "zod";
 import { id } from "@/lib/inputs";
 import { db } from "@/server/db";
 import { validPdf } from "@/server/reports/links";
+import { readPdf } from "@/server/pdf-storage";
 export async function GET(
   request: Request,
   context: RouteContext<"/api/reports/pdf/[id]">,
@@ -22,10 +22,12 @@ export async function GET(
     return new Response(null, { status: 403 });
   const note = await db.issueNote.findUnique({
     where: { id: path.data.id },
-    select: { number: true, pdfPath: true },
+    select: { id: true, number: true, pdfPath: true },
   });
-  if (!note?.pdfPath) return new Response(null, { status: 404 });
-  return new Response(new Uint8Array(await readFile(note.pdfPath)), {
+  if (!note) return new Response(null, { status: 404 });
+  const pdf = await readPdf(note);
+  if (!pdf) return new Response(null, { status: 404 });
+  return new Response(new Uint8Array(pdf), {
     headers: {
       "Content-Type": "application/pdf",
       "Content-Disposition":

@@ -1,6 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { mkdir, writeFile, rm } from "node:fs/promises";
-import { dirname, resolve } from "node:path";
+import { resolve } from "node:path";
 import { draftTimestamp, id, noteInput, reasonInput } from "@/lib/inputs";
 import { filters } from "@/lib/note-filters";
 import { renderNotePdf } from "@/pdf/render-note-pdf";
@@ -9,12 +8,14 @@ import { company } from "@/lib/report-config";
 import { allocateNumber } from "../counter";
 import { audit } from "../audit";
 import { authorize, type Actor } from "../permissions";
+import { removePdfFile, savePdf } from "../pdf-storage";
 
 type Tx = Prisma.TransactionClient;
 const detail = {
   customer: true,
   successor: { select: { status: true } },
   lines: { orderBy: { position: "asc" }, include: { product: true } },
+  pdf: { select: { byteSize: true } },
 } as const;
 type Note = Prisma.IssueNoteGetPayload<{ include: typeof detail }>;
 export class NoteConflict extends Error {}
@@ -131,7 +132,7 @@ async function issueTransaction(
       timeout: 180000,
     });
   } catch (error) {
-    await rm(path, { force: true });
+    await removePdfFile(path);
     throw error;
   }
 }
@@ -140,7 +141,7 @@ async function issue(tx: Tx, note: Note, number: number, pdfPath: string) {
   const date = today();
   const confirmed = await tx.issueNote.update({
     where: { id: note.id },
-    data: { status: "CONFIRMED", date, number, pdfPath },
+    data: { status: "CONFIRMED", date, number },
     include: detail,
   });
   const pdf = await renderNotePdf({
@@ -155,9 +156,12 @@ async function issue(tx: Tx, note: Note, number: number, pdfPath: string) {
       productName: line.product.nameAr,
     })),
   });
-  await mkdir(dirname(pdfPath), { recursive: true });
-  await writeFile(pdfPath, pdf, { flag: "wx" });
-  return confirmed;
+  const stored = await savePdf(tx, note.id, pdf, pdfPath);
+  return {
+    ...confirmed,
+    pdfPath: stored.pdfPath,
+    pdf: { byteSize: stored.byteSize },
+  };
 }
 export async function confirmNote(
   actor: Actor,
@@ -263,6 +267,7 @@ export async function listNotes(actor: Actor, input: unknown = {}) {
         customer: true,
         successor: { select: { status: true } },
         _count: { select: { lines: true } },
+        pdf: { select: { byteSize: true } },
       },
     });
     await audit(tx, actor.id, "list", "IssueNote", "archive", undefined, f);
@@ -295,6 +300,7 @@ export async function recentNotes(actor: Actor) {
         customer: true,
         successor: { select: { status: true } },
         _count: { select: { lines: true } },
+        pdf: { select: { byteSize: true } },
       },
     });
     const customers = await tx.$queryRaw<{ id: string; nameAr: string }[]>`

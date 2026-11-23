@@ -5,6 +5,7 @@ import { loadReport } from "@/server/reports";
 import { preset, rangeSchema } from "@/server/reports/period";
 import { db } from "@/server/db";
 import { archiveStatus } from "@/server/notes";
+import { hasPdf } from "@/server/pdf-storage";
 import { Chart, FeedRefresh } from "./charts";
 const t = ar.reports;
 export default async function Dashboard({
@@ -33,6 +34,7 @@ export default async function Dashboard({
         status: true,
         successor: { select: { status: true } },
         pdfPath: true,
+        pdf: { select: { byteSize: true } },
         date: true,
         customer: { select: { nameAr: true } },
       },
@@ -134,7 +136,7 @@ export default async function Dashboard({
               {n.number ?? ar.notes.DRAFT} · {n.customer.nameAr} ·{" "}
               {ar.notes[archiveStatus(n)]} · {n.date.toISOString().slice(0, 10)}
             </Link>
-            {n.pdfPath && (
+            {hasPdf(n) && (
               <a href={"/api/notes/" + n.id + "/pdf"}>{ar.notes.download}</a>
             )}
           </div>

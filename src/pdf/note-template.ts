@@ -46,11 +46,22 @@ const cache = new Map<string, string>();
 function asset(file: string, type: string) {
   let url = cache.get(file);
   if (!url) {
-    url =
-      "data:" +
-      type +
-      ";base64," +
-      readFileSync(join(process.cwd(), "src/pdf", file)).toString("base64");
+    const roots = [
+      process.cwd(),
+      join(process.cwd(), ".next", "standalone"),
+      join(process.cwd(), "..", ".."),
+    ];
+    let bytes: Buffer | undefined;
+    for (const root of roots) {
+      try {
+        bytes = readFileSync(join(root, "src/pdf", file));
+        break;
+      } catch (error) {
+        if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
+      }
+    }
+    if (!bytes) throw new Error("Missing PDF asset: " + file);
+    url = "data:" + type + ";base64," + bytes.toString("base64");
     cache.set(file, url);
   }
   return url;

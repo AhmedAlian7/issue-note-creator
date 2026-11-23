@@ -14,6 +14,7 @@ import {
 import { draftTimestamp, id, noteInput, reasonInput } from "@/lib/inputs";
 import { Prisma } from "@/generated/prisma/client";
 import { ar } from "@/lib/i18n";
+import { hasPdf } from "@/server/pdf-storage";
 
 import { saveSetting, settingInput } from "@/server/settings";
 const command = z.discriminatedUnion("action", [
@@ -69,9 +70,9 @@ export async function POST(request: Request) {
           return voidNote(actor, c.id, c.reason);
       }
     })();
-    const { pdfPath, ...result } = note;
+    const { pdfPath, pdf, ...result } = note;
     return Response.json(
-      { ...result, hasPdf: !!pdfPath },
+      { ...result, hasPdf: hasPdf({ pdfPath, pdf }) },
       {
         status: ["duplicate", "create", "supersede"].includes(c.action)
           ? 201

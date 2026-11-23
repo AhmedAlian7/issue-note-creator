@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ar } from "@/lib/i18n";
+import { hasPdf } from "@/server/pdf-storage";
 import { archiveStatus, type listNotes } from "@/server/notes";
 const t = ar.notes;
 export function NoteList({
@@ -20,7 +21,9 @@ export function NoteList({
               {t.items} {n._count.lines} · {t.version} {n.version}
             </span>
           </Link>
-          {n.pdfPath && <a href={"/api/notes/" + n.id + "/pdf"}>{t.open}</a>}
+          {hasPdf(n) && (
+            <a href={"/api/notes/" + n.id + "/pdf"}>{t.open}</a>
+          )}
         </li>
       ))}
     </ul>

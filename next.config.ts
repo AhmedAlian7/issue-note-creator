@@ -4,14 +4,18 @@ process.env.TZ ??= "Africa/Cairo";
 
 const nextConfig: NextConfig = {
   agentRules: false,
-  output: "standalone",
+  output: process.env.NETLIFY ? undefined : "standalone",
   serverExternalPackages: [
     "playwright",
     "playwright-core",
-    "pg-boss",
     "exceljs",
     "nodemailer",
+    "@node-rs/argon2",
   ],
+  // Serverless bundles must include the PDF fonts and images read at runtime.
+  outputFileTracingIncludes: {
+    "/**/*": ["./src/pdf/**/*"],
+  },
 };
 
 export default nextConfig;

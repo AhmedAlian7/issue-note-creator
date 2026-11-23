@@ -1,10 +1,22 @@
+import { execFileSync } from "node:child_process";
 import { expect, it } from "vitest";
 import { PDFDocument } from "pdf-lib";
 import { renderNotePdf } from "../../src/pdf/render-note-pdf";
 import { sample } from "../../scripts/pdf-sample-data";
 import { compareNote } from "../../scripts/pdf-comparison";
 
-it.each(["Template", "Sample-972"] as const)(
+// The pixel comparison needs Poppler. CI installs it; a bare Windows machine
+// still verifies page geometry with the structural test below.
+const poppler = (() => {
+  try {
+    execFileSync("pdftoppm", ["-v"], { stdio: "ignore" });
+    return true;
+  } catch {
+    return false;
+  }
+})();
+
+it.skipIf(!poppler).each(["Template", "Sample-972"] as const)(
   "matches the Word export for %s",
   async (name) => {
     expect(await compareNote(name)).toBeLessThan(0.2);
