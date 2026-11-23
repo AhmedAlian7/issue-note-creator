@@ -18,6 +18,9 @@ import { LineCard } from "./line-card";
 import { VoiceRecorder } from "./recorder";
 const t = ar.notes,
   f = ar.flow;
+const previewDate = new Intl.DateTimeFormat("ar-EG", {
+  timeZone: "Africa/Cairo",
+});
 type Panel =
   | { kind: "customer" | "add" | "append" | "replace" | "correct" }
   | { kind: "product" | "create"; key: string };
@@ -227,6 +230,43 @@ export function Review({
       <header>
         <h1>{t.summary}</h1>
       </header>
+      <section className="note-table" aria-labelledby="voice-preview">
+        <h2 id="voice-preview">{t.preview}</h2>
+        <dl>
+          <dt>{ar.notePdf.customer}</dt>
+          <dd>{customer?.nameAr ?? t.choose}</dd>
+          <dt>{ar.notePdf.number}</dt>
+          <dd>{t.numberPending}</dd>
+          <dt>{ar.notePdf.date}</dt>
+          <dd>{previewDate.format(new Date())}</dd>
+        </dl>
+        <table>
+          <thead>
+            <tr>
+              {[...ar.notePdf.headings].reverse().map((heading) => (
+                <th key={heading} scope="col">
+                  {heading}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {draft.lines.map((line, index) => (
+              <tr key={line.key}>
+                <td>{index + 1}</td>
+                <td>
+                  {products.find((p) => p.id === line.productId)?.nameAr ??
+                    line.spokenText}
+                </td>
+                <td>{line.quantity}</td>
+                <td className={line.isDestination ? "destination" : undefined}>
+                  {line.remarks}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
       <fieldset disabled={busy} className="fields review-fields">
         <button
           className="customer-button"

@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from "vitest";
 import { FakeExtractor, FakeTranscriber } from "@/ai/fakes";
 import { normalize, match } from "@/ai/matching";
 import { parseQuantity, recoverQuantity } from "@/ai/quantity";
-import { parseVoice } from "@/ai/pipeline";
+import { parseVoice, verifyLine } from "@/ai/pipeline";
 import { fixtures, catalog } from "../fixtures/voice/load";
 import { voiceBody } from "@/server/voice-body";
 import { audioLimit } from "@/ai/contracts";
@@ -82,6 +82,39 @@ it("parses Egyptian words from one through fifty", () => {
   expect(
     recoverQuantity("تلاتة سيدني لفرع الجيزة", "تلاتة سيدني", null),
   ).toBeNull();
+});
+it("defaults spoken item names without quantities and preserves explicit details", () => {
+  const transcript = "ثلاثية سيدني وثنائية سيدني";
+  for (const spokenText of ["ثلاثية سيدني", "ثنائية سيدني"]) {
+    const line = {
+      spokenText,
+      productId: null,
+      quantity: null,
+      quantityText: null,
+      remarks: null,
+      isDestination: false,
+      confidence: 1,
+    };
+    expect(verifyLine(line, transcript, catalog)).toMatchObject({
+      quantity: 1,
+      remarks: "استندر",
+    });
+    expect(verifyLine(line, spokenText + " واحد", catalog)).toMatchObject({
+      quantity: 1,
+      remarks: null,
+    });
+    expect(
+      verifyLine(
+        { ...line, remarks: "فندق كارما", isDestination: true },
+        spokenText + " لفندق كارما",
+        catalog,
+      ),
+    ).toMatchObject({
+      quantity: 1,
+      remarks: "فندق كارما",
+      isDestination: true,
+    });
+  }
 });
 it("bounds audio uploads with or without content-length", async () => {
   const request = (body: BodyInit, headers: Record<string, string> = {}) =>

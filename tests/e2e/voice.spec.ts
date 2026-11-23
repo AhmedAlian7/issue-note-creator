@@ -40,7 +40,7 @@ test("keeper records, pauses, resumes and can recover by typing", async ({
         bytes = route.request().postDataBuffer()?.length ?? 0;
         return route.fulfill({
           status: 422,
-          json: { error: ar.voice.missingQuantity("مكتب"), transcript: "مكتب" },
+          json: { error: ar.voice.failed, transcript: "مكتب" },
         });
       }
       const { transcript } = route.request().postDataJSON();
@@ -65,7 +65,7 @@ test("keeper records, pauses, resumes and can recover by typing", async ({
     });
     await page.getByRole("button", { name: ar.voice.stop }).click();
     await expect(page.locator("main").getByRole("alert")).toHaveText(
-      ar.voice.missingQuantity("مكتب"),
+      ar.voice.failed,
     );
     expect(bytes).toBeGreaterThan(0);
     await expect(page.getByLabel(ar.voice.text)).toBeFocused();
@@ -74,6 +74,12 @@ test("keeper records, pauses, resumes and can recover by typing", async ({
     await page.getByRole("button", { name: ar.voice.parse }).click();
     await expect(
       page.getByRole("heading", { name: ar.notes.summary }),
+    ).toBeVisible();
+    const preview = page.getByRole("region", { name: ar.notes.preview });
+    await expect(preview.getByText(ar.notes.numberPending)).toBeVisible();
+    await expect(preview.getByRole("cell", { name: "مكتب" })).toBeVisible();
+    await expect(
+      preview.getByRole("cell", { name: "2", exact: true }),
     ).toBeVisible();
     await page.getByRole("button", { name: ar.voice.add }).click();
     await expect(page.getByLabel(ar.name, { exact: true })).toHaveValue("مكتب");
