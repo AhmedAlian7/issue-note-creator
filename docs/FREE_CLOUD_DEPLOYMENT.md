@@ -99,7 +99,6 @@ every secret as a secret value.
 | `SESSION_SECRET`        | Yes      | Long random string. Signs report PDF links. Rotating it invalidates old links. |
 | `APP_BASE_URL`          | Yes      | Public site URL, for example `https://issue-notes.netlify.app`.        |
 | `TZ`                    | Yes      | `Africa/Cairo`.                                                        |
-| `PDF_RENDERER`          | Yes      | `cloudflare`.                                                          |
 | `CLOUDFLARE_ACCOUNT_ID` | Yes      | Account ID from the Cloudflare dashboard URL.                          |
 | `CLOUDFLARE_API_TOKEN`  | Yes      | Token with the Browser Rendering permission.                           |
 | `RESEND_API_KEY`        | Yes      | Resend API key.                                                        |
@@ -111,6 +110,8 @@ every secret as a secret value.
 | `AI_PROVIDER`           | No       | Leave unset in production. `fake` is for tests only.                    |
 | `PDF_STORAGE_DIR`       | No       | **Leave unset in production.** Setting it switches to filesystem storage. |
 | `SMTP_*`                | No       | Only when you want SMTP instead of Resend.                             |
+
+Netlify Functions select Cloudflare Browser Run automatically. Make both Cloudflare variables available to the production Functions and redeploy after changing them.
 
 Generate random secrets with Node.js:
 

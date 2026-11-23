@@ -1,7 +1,7 @@
 import { execFileSync } from "node:child_process";
-import { expect, it } from "vitest";
+import { expect, it, vi } from "vitest";
 import { PDFDocument } from "pdf-lib";
-import { renderNotePdf } from "../../src/pdf/render-note-pdf";
+import { rendererName, renderNotePdf } from "../../src/pdf/render-note-pdf";
 import { sample } from "../../scripts/pdf-sample-data";
 import { compareNote } from "../../scripts/pdf-comparison";
 
@@ -15,6 +15,19 @@ const poppler = (() => {
     return false;
   }
 })();
+
+it("uses Cloudflare on Netlify even if Playwright is configured", () => {
+  vi.stubEnv("PDF_RENDERER", "playwright");
+  vi.stubEnv("SITE_ID", "test-site-id");
+  vi.stubEnv("SITE_NAME", "test-site");
+  try {
+    expect(rendererName()).toBe("cloudflare");
+    vi.stubEnv("SITE_ID", undefined);
+    expect(rendererName()).toBe("playwright");
+  } finally {
+    vi.unstubAllEnvs();
+  }
+});
 
 it.skipIf(!poppler).each(["Template", "Sample-972"] as const)(
   "matches the Word export for %s",

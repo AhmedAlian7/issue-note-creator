@@ -4,6 +4,8 @@ import { noteTemplate, paper, type NoteData } from "./note-template";
 export type PdfRenderer = "playwright" | "cloudflare";
 
 export function rendererName(): PdfRenderer {
+  // Netlify Functions do not ship the Chromium executable Playwright expects.
+  if (process.env.SITE_ID && process.env.SITE_NAME) return "cloudflare";
   const value = process.env.PDF_RENDERER || "playwright";
   if (value === "playwright" || value === "cloudflare") return value;
   throw new Error("Unsupported PDF_RENDERER: " + value);
