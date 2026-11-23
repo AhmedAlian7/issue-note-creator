@@ -59,13 +59,13 @@ The owner gets automatic email reports and a mobile-friendly dashboard, with no 
 
 | Report | When | Contents |
 | --- | --- | --- |
-| Daily | End of day, time you choose (default 8 PM) | Notes issued today, per customer, per product, total units, PDF attached or linked |
+| Daily | End of day, time you choose (default 8 PM) | Each issued note number and recipient, with its released products and quantities |
 | Weekly | Start of week, day and time you choose | Totals vs previous week, top customers and products, busiest day |
 | Monthly | First day of month | Full summary, trends, customer ranking, slow-moving products, Excel export attached |
 
 - Recipients are configurable (several emails, for example you and an accountant).
 - Reports are skipped or marked "no activity" on days without notes, as you prefer.
-- Each email includes a link that opens the matching dashboard view.
+- Weekly and monthly emails include a link to the matching dashboard view.
 
 **Dashboard**
 

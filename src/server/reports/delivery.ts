@@ -3,7 +3,7 @@ import type { Frequency } from "@/lib/report-config";
 import { db } from "../db";
 import { getSchedule } from "../settings";
 import { loadReport } from "./index";
-import { emailHtml } from "./email";
+import { emailHtml, emailSubject } from "./email";
 import { workbook } from "./export";
 import { reportPeriod, rangeSchema, type Range } from "./period";
 import { sendMail } from "./mailer";
@@ -122,7 +122,7 @@ export async function sendReport(
       const info = await sendMail({
         from: process.env.MAIL_FROM || "warehouse@localhost.test",
         to: s.recipients,
-        subject: t[type] + " · " + range.from + " — " + range.to,
+        subject: emailSubject(type, range),
         html,
         attachments,
       });

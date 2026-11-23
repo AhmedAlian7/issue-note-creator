@@ -8,7 +8,7 @@ import {
   previous,
   scheduledDay,
 } from "@/server/reports/period";
-import { emailHtml } from "@/server/reports/email";
+import { emailHtml, emailSubject } from "@/server/reports/email";
 import { signedPdf, validPdf, lifetime } from "@/server/reports/links";
 import { csv, workbook } from "@/server/reports/export";
 import { deliverOnce } from "@/server/reports/delivery";
@@ -94,19 +94,30 @@ it("binds signed links to the PDF and expires them at seven days", () => {
 it.each(["daily", "weekly", "monthly"] as const)(
   "renders %s RTL email and export",
   async (type) => {
-    vi.stubEnv("SESSION_SECRET", "unit secret");
     const r = {
       ...summarize(range, [note], catalog),
       previous: { range: previous(range), total: 0, units: 0 },
       delta: { total: 1, units: 5 },
     };
-    expect(
-      emailHtml(type, r, "https://example.test", new Date(range.from)),
-    ).toMatchSnapshot();
+    expect(emailHtml(type, r, "https://example.test")).toMatchSnapshot();
     expect(csv(r)).toContain("<عميل>");
     expect((await workbook(r)).subarray(0, 2).toString()).toBe("PK");
   },
 );
+it("dates the daily subject and shows the empty-day message", () => {
+  const day = { from: "2026-11-23", to: "2026-11-23" };
+  const r = {
+    ...summarize(day, [], catalog),
+    previous: { range: previous(day), total: 0, units: 0 },
+    delta: { total: 0, units: 0 },
+  };
+  expect(emailSubject("daily", day)).toBe(
+    "تقرير أذون الصرف اليومي — ٢٣ نوفمبر ٢٠٢٦",
+  );
+  expect(emailHtml("daily", r, "https://example.test")).toContain(
+    "لم تصدر أي أذون صرف اليوم.",
+  );
+});
 it("claims a period once across concurrent workers and redelivery, retries definite rejection, preserves unknown outcomes", async () => {
   const key = { type: "daily" as const, period: randomUUID() },
     send = vi.fn(async () => {});

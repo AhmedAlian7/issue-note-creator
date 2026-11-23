@@ -19,6 +19,7 @@ export async function loadReport(range: Range, prior = previous(range)) {
         customer: item,
         successor: { select: { status: true } },
         lines: {
+          orderBy: { position: "asc" },
           select: {
             product: item,
             remarks: true,

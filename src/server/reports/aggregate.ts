@@ -68,6 +68,10 @@ export function summarize(range: Range, rows: ReportNote[], catalog: Item[]) {
         day,
         customer: n.customer.nameAr,
         units: count,
+        lines: n.lines.map(({ product, quantity }) => ({
+          name: product.nameAr,
+          quantity,
+        })),
       };
     });
   const ranked = (map: Map<string, Bucket>) =>
