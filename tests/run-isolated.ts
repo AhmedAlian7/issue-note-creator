@@ -5,10 +5,14 @@ import { createRequire } from "node:module";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { db } from "../src/server/db";
 const require = createRequire(import.meta.url);
+// Tests create and drop a throwaway database. Keep that on a local server even
+// when DATABASE_URL points at hosted Neon.
+const base = process.env.DATABASE_URL_TEST || process.env.DATABASE_URL!;
+process.env.DATABASE_URL = base;
+const { db } = await import("../src/server/db");
 const database = "notes_test_" + randomUUID().replaceAll("-", "");
-const url = new URL(process.env.DATABASE_URL!);
+const url = new URL(base);
 url.pathname = "/" + database;
 const dir = await mkdtemp(join(tmpdir(), "note-pdfs-"));
 const env = {

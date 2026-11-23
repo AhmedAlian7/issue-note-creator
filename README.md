@@ -26,6 +26,34 @@ Press Ctrl+C to stop Next.js. Use `docker compose stop db` to stop PostgreSQL an
 
 Confirmed PDFs are stored in PostgreSQL in the `PdfDocument` table. For local Docker, set `PDF_STORAGE_DIR` in `.env` to keep them on the `note-pdfs` volume mounted at `/data/pdfs` instead. Leave `PDF_STORAGE_DIR` empty in serverless production so PDFs are stored in the database. To copy existing filesystem PDFs into the database, run `pnpm db:migrate-pdfs` with `PDF_STORAGE_DIR` pointing at the folder; add `--dry-run` to preview.
 
+## Run locally against Neon
+
+Use the hosted database from your machine while keeping tests on local PostgreSQL.
+
+1. In `.env`, set `DATABASE_URL` to the Neon **pooled** connection string (the host contains `-pooler`) and add `?sslmode=require`:
+
+   ```
+   DATABASE_URL=postgresql://USER:PASSWORD@ep-xxxx-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require
+   DATABASE_URL_TEST=postgresql://issue_notes:local_dev_only@localhost:5432/issue_notes?schema=public
+   ```
+
+2. Apply migrations once through the **direct** host, not the pooler. Neon's pooler can drop the advisory locks that Prisma migrations rely on:
+
+   ```sh
+   $env:DATABASE_URL = "postgresql://USER:PASSWORD@ep-xxxx.eu-central-1.aws.neon.tech/neondb?sslmode=require"
+   pnpm exec prisma migrate deploy
+   ```
+
+   The direct host is the same string without `-pooler`. Restore the pooled value in `.env` afterwards.
+
+3. Start the app: `pnpm dev`. The first request after five idle minutes takes about half a second while Neon resumes the compute.
+
+4. Run tests: `pnpm test`. The runner reads `DATABASE_URL_TEST` and creates its throwaway database there, so it never creates or drops databases on Neon. Start the local database first with `docker compose up -d db`.
+
+`docker compose up --build` still forces the container to the Compose database, because the container reaches PostgreSQL by service name. Use `pnpm dev` on the host for Neon.
+
+Never point `DATABASE_URL_TEST` at Neon: the test runner runs `CREATE DATABASE` and `DROP DATABASE ... WITH (FORCE)`.
+
 ## Deploy for free
 
 `docs/FREE_CLOUD_DEPLOYMENT.md` explains the $0 hosting setup: Netlify Free for the app, Neon Free PostgreSQL for data and PDFs, Cloudflare Browser Run for PDF rendering, Resend Free for report email, and GitHub Actions for the hourly report cron and nightly backup. It lists verified free-tier limits, required environment variables, migration steps, rollback and a feature checklist.
