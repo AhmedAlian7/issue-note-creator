@@ -18,14 +18,15 @@ test("keeper records, pauses, resumes and can recover by typing", async ({
   const keeper = await db.user.create({
     data: {
       name: "أمين",
-      phone: "08" + randomInt(100000000, 999999999),
+      username: "08" + randomInt(100000000, 999999999),
       pinHash: await hashPin("01234"),
       role: "KEEPER",
     },
   });
   try {
     await page.goto("/login");
-    await page.getByLabel(ar.phone).fill(keeper.phone);
+    await page.getByLabel(ar.username).fill(keeper.username);
+    await page.getByRole("button", { name: ar.loginContinue }).click();
     await page.getByLabel(ar.pin).fill("01234");
     await page.getByRole("button", { name: ar.login }).click();
     await page.getByRole("button", { name: ar.flow.skip }).click();

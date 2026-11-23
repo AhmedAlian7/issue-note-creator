@@ -6,11 +6,11 @@ export function listUsers(actor: Actor, q?: string) {
     where: {
       role: actor.role === "ADMIN" ? { not: "OWNER" } : undefined,
       OR: q
-        ? [{ name: { contains: q } }, { phone: { contains: q } }]
+        ? [{ name: { contains: q } }, { username: { contains: q } }]
         : undefined,
     },
     orderBy: { name: "asc" },
-    select: { id: true, name: true, phone: true, role: true, active: true },
+    select: { id: true, name: true, username: true, role: true, active: true },
   });
 }
 export async function listCatalog(

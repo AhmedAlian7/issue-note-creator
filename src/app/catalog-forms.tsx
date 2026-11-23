@@ -8,7 +8,7 @@ type RecordFields = {
   id: string;
   name?: string;
   nameAr?: string;
-  phone?: string;
+  username?: string;
   role?: Role;
   aliases?: string[];
   category?: string | null;
@@ -95,27 +95,28 @@ export function CatalogForm({
       {entity === "user" ? (
         <>
           <label>
-            {ar.phone}
+            {ar.username}
             <input
-              name="phone"
-              type="tel"
+              name="username"
+              autoComplete="off"
               dir="ltr"
               required
-              defaultValue={row?.phone}
+              defaultValue={row?.username}
             />
           </label>
-          <label>
-            {row ? ar.pinOptional : ar.pin}
-            <input
-              type="password"
-              name="pin"
-              inputMode="numeric"
-              autoComplete="new-password"
-              minLength={4}
-              maxLength={6}
-              required={!row}
-            />
-          </label>
+          {row && (
+            <label>
+              {ar.pinOptional}
+              <input
+                type="password"
+                name="pin"
+                inputMode="numeric"
+                autoComplete="new-password"
+                minLength={4}
+                maxLength={6}
+              />
+            </label>
+          )}
           <label>
             {ar.role}
             <select name="role" defaultValue={row?.role ?? "KEEPER"}>

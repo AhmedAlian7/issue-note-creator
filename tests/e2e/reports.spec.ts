@@ -10,18 +10,19 @@ test("owner saves a Cairo schedule and sends a report to MailHog", async ({
   request,
 }) => {
   test.setTimeout(120000);
-  const phone = "09000000991",
+  const username = "09000000991",
     recipient = randomUUID() + "@example.test";
   await db.user.create({
     data: {
-      phone,
+      username,
       name: "مالك",
       role: "OWNER",
       pinHash: await hashPin("12345"),
     },
   });
   await page.goto("/login");
-  await page.getByLabel(ar.phone).fill(phone);
+  await page.getByLabel(ar.username).fill(username);
+  await page.getByRole("button", { name: ar.loginContinue }).click();
   await page.getByLabel(ar.pin).fill("12345");
   await page.getByRole("button", { name: ar.login }).click();
   await page.waitForURL("**/workspace");

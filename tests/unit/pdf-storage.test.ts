@@ -10,9 +10,9 @@ import {
   usesFilesystem,
 } from "@/server/pdf-storage";
 
-async function draft(phone: string) {
+async function draft(username: string) {
   const user = await db.user.create({
-    data: { name: "storage", phone, pinHash: "unused", role: "ADMIN" },
+    data: { name: "storage", username, pinHash: "unused", role: "ADMIN" },
   });
   const customer = await db.customer.create({ data: { nameAr: "عميل" } });
   return db.issueNote.create({

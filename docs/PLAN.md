@@ -19,7 +19,7 @@ The goal is to cut a warehouse issue note from a WhatsApp message plus a Word fi
 
 ## Roles and permissions
 
-Three roles cover the process; each user logs in with a phone number or PIN, so the keeper never types a password.
+Three roles cover the process; each user signs in with a username and PIN. On first sign-in, a provisioned user sets their own PIN.
 
 | Role | Main job | Can do | Cannot do |
 | --- | --- | --- | --- |
@@ -162,7 +162,7 @@ Every request from the keeper, admin or owner goes through the API; the API alon
 | IssueNote | number, date, customer, status, version, creator, PDF file |
 | NoteLine | note, product, quantity, notes |
 | Recording | note, transcript, match confidence |
-| User | name, role, phone and PIN |
+| User | name, role, username and PIN |
 | AuditLog | who, what, when, old and new value |
 | ReportSetting | frequency, time, recipients |
 

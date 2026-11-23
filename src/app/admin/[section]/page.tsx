@@ -58,7 +58,7 @@ export default async function Catalog({
             <h2>{"nameAr" in row ? row.nameAr : row.name}</h2>
             {"role" in row && (
               <p>
-                {ar[row.role]} · <bdi>{row.phone}</bdi>
+                {ar[row.role]} · <bdi>{row.username}</bdi>
               </p>
             )}
             {!row.active && <strong>{ar.archived}</strong>}

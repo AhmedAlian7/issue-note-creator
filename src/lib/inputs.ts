@@ -1,16 +1,18 @@
 import { z } from "zod";
 const digits = (s: string) =>
   s.replace(/[٠-٩]/g, (c) => String(c.charCodeAt(0) - 1632));
-export const phone = z
+export const username = z
   .string()
   .trim()
-  .transform(digits)
-  .pipe(z.string().regex(/^\+?[0-9]{7,15}$/));
+  .min(1)
+  .max(80)
+  .regex(/^[\p{L}\p{N}_.-]+$/u)
+  .transform((value) => value.toLowerCase());
 export const pin = z
   .string()
   .transform(digits)
   .pipe(z.string().regex(/^\d{4,6}$/));
-export const loginInput = z.object({ phone, pin });
+export const loginInput = z.object({ username, pin });
 export const id = z.uuid();
 const name = z.string().trim().min(1).max(180);
 const optionalText = z
@@ -33,7 +35,7 @@ export const customerInput = z.object({
 });
 export const userInput = z.object({
   name,
-  phone,
+  username,
   role: z.enum(["KEEPER", "ADMIN", "OWNER"]),
   pin: pin.optional(),
 });

@@ -1,8 +1,6 @@
 import "dotenv/config";
-import { randomInt } from "node:crypto";
 import { db } from "../src/server/db";
 import { audit } from "../src/server/audit";
-import { hashPin } from "../src/server/auth";
 
 const products = [
   "ثلاثية سيدني",
@@ -13,26 +11,23 @@ const products = [
 ];
 const customers = ["شركة MENON"];
 const accounts = [
-  { name: "مالك تجريبي", role: "OWNER", phone: "01000000973" },
-  { name: "مدير تجريبي", role: "ADMIN", phone: "01000000974" },
-  { name: "أمين مخزن تجريبي", role: "KEEPER", phone: "01000000975" },
+  { name: "Ayman", role: "OWNER", username: "ayman" },
+  { name: "Ahmed", role: "ADMIN", username: "ahmed" },
+  { name: "محمود الدسوقي- أمين مخزن", role: "KEEPER", username: "mahmoud" },
 ] as const;
 const seedId = (group: number, i: number) =>
   `00000000-0000-4000-800${group}-${String(i + 1).padStart(12, "0")}`;
 
 try {
-  const credentials = await db.$transaction(
+  await db.$transaction(
     async (tx) => {
-      const credentials: string[] = [];
       for (const account of accounts) {
-        if (await tx.user.findUnique({ where: { phone: account.phone } }))
+        if (await tx.user.findUnique({ where: { username: account.username } }))
           continue;
-        const pin = String(randomInt(100000, 1000000));
         const user = await tx.user.create({
-          data: { ...account, pinHash: await hashPin(pin) },
+          data: account,
         });
         await audit(tx, null, "seed.create", "User", user.id, undefined, user);
-        credentials.push([account.role, account.phone, pin].join("  "));
       }
       for (const [i, nameAr] of products.entries()) {
         const id = seedId(1, i);
@@ -48,14 +43,8 @@ try {
         });
         await audit(tx, null, "seed.create", "Customer", id, undefined, row);
       }
-      return credentials;
     },
     { timeout: 30000 },
-  );
-  console.log(
-    credentials.length
-      ? "Demo accounts (role, phone, PIN)\n" + credentials.join("\n")
-      : "Seed already applied.",
   );
 } finally {
   await db.$disconnect();

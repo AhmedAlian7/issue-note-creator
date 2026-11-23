@@ -10,10 +10,10 @@ test("keeper types, issues, previews and downloads the numbered PDF on a phone",
   page,
 }) => {
   test.setTimeout(120000);
-  const phone = "09000000002";
+  const username = "09000000002";
   await db.user.create({
     data: {
-      phone,
+      username,
       name: "أمين",
       role: "KEEPER",
       pinHash: await hashPin("12345"),
@@ -24,7 +24,8 @@ test("keeper types, issues, previews and downloads the numbered PDF on a phone",
   });
   const product = await db.product.create({ data: { nameAr: "أَرِيكَة" } });
   await page.goto("/login");
-  await page.getByLabel(ar.phone).fill(phone);
+  await page.getByLabel(ar.username).fill(username);
+  await page.getByRole("button", { name: ar.loginContinue }).click();
   await page.getByLabel(ar.pin).fill("12345");
   await page.getByRole("button", { name: ar.login }).click();
   await page.getByRole("button", { name: ar.flow.skip }).click();
