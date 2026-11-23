@@ -5,12 +5,10 @@ import { ar } from "@/lib/i18n";
 const t = ar.notes;
 export function PdfPreview({
   id,
-  number,
-  version,
+  filename,
 }: {
   id: string;
-  number: number;
-  version: number;
+  filename: string;
 }) {
   const pages = useRef<HTMLDivElement>(null);
   const downloadLink = useRef<HTMLAnchorElement>(null);
@@ -28,7 +26,7 @@ export function PdfPreview({
       const blob = await res.blob();
       if (abort.signal.aborted) return;
       setFile(
-        new File([blob], "note-" + number + "-v" + version + ".pdf", {
+        new File([blob], filename, {
           type: "application/pdf",
         }),
       );
@@ -62,7 +60,7 @@ export function PdfPreview({
       void task?.destroy();
       container.replaceChildren();
     };
-  }, [url, number, version]);
+  }, [url, filename]);
   const download = url + "?download=1";
   async function share() {
     if (file && navigator.canShare?.({ files: [file] })) {

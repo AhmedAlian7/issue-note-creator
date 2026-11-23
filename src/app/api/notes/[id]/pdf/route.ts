@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { id } from "@/lib/inputs";
+import { notePdfDisposition } from "@/lib/note-pdf-name";
 import { currentUser } from "@/server/session";
 import { getNote } from "@/server/notes";
 import { readPdf } from "@/server/pdf-storage";
@@ -24,13 +25,11 @@ export async function GET(
       headers: {
         "Content-Type": "application/pdf",
         "Cache-Control": "private, no-store",
-        "Content-Disposition":
-          (query.data.download ? "attachment" : "inline") +
-          '; filename="note-' +
-          note.number +
-          "-v" +
-          note.version +
-          '.pdf"',
+        "Content-Disposition": notePdfDisposition(
+          query.data.download ? "attachment" : "inline",
+          note.number,
+          note.customer.nameAr,
+        ),
       },
     });
   } catch (error) {

@@ -2,6 +2,7 @@ import Link from "@/app/brand/pending-link";
 import { notFound, redirect } from "next/navigation";
 import { z } from "zod";
 import { id } from "@/lib/inputs";
+import { notePdfName } from "@/lib/note-pdf-name";
 import { ar } from "@/lib/i18n";
 import { Prisma } from "@/generated/prisma/client";
 import { guard } from "@/server/session";
@@ -80,8 +81,7 @@ export default async function NotePage(props: PageProps<"/notes/[id]">) {
         <PdfPreview
           key={note.id}
           id={note.id}
-          number={note.number}
-          version={note.version}
+          filename={notePdfName(note.number, note.customer.nameAr)}
         />
       )}
       {note.voidReason && (

@@ -82,7 +82,9 @@ test("keeper types, issues, previews and downloads the numbered PDF on a phone",
   const downloaded = page.waitForEvent("download");
   await page.getByRole("link", { name: t.download }).click();
   const pdf = await downloaded;
-  expect(pdf.suggestedFilename()).toBe("note-" + expected + "-v1.pdf");
+  expect(pdf.suggestedFilename()).toBe(
+    `منصرف مخزن (${expected}) - ${customer.nameAr}.pdf`,
+  );
   expect(
     (
       await PDFDocument.load(await readFile((await pdf.path())!))

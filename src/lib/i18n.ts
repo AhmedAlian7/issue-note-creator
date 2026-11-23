@@ -184,6 +184,7 @@ export const ar = {
     error: "تعذّر إتمام العملية. حاول مرة أخرى.",
   },
   notePdf: {
+    filename: "منصرف مخزن",
     title: "إذن صرف مخزن",
     date: "التاريخ",
     number: "رقم",
