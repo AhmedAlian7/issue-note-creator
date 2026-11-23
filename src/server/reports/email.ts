@@ -60,7 +60,11 @@ export function emailHtml(type: Frequency, r: Report, base: string) {
     return (
       start +
       t.issuedToday +
-      "</h1>" +
+      "</h1><p>" +
+      t.total +
+      " " +
+      number.format(r.total) +
+      "</p>" +
       (r.notes.length
         ? r.notes
             .map(
@@ -73,10 +77,11 @@ export function emailHtml(type: Frequency, r: Report, base: string) {
                     name(note.customer),
                 ) +
                 table(
-                  [t.item, ar.notes.quantity],
+                  [t.item, ar.notes.quantity, ar.notes.remarks],
                   note.lines.map((line) => [
                     name(line.name),
                     number.format(line.quantity),
+                    name(line.remarks ?? ""),
                   ]),
                 ),
             )

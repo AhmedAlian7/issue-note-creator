@@ -68,9 +68,10 @@ export function summarize(range: Range, rows: ReportNote[], catalog: Item[]) {
         day,
         customer: n.customer.nameAr,
         units: count,
-        lines: n.lines.map(({ product, quantity }) => ({
+        lines: n.lines.map(({ product, quantity, remarks }) => ({
           name: product.nameAr,
           quantity,
+          remarks,
         })),
       };
     });

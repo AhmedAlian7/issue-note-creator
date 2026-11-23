@@ -59,7 +59,7 @@ The owner gets automatic email reports and a mobile-friendly dashboard, with no 
 
 | Report | When | Contents |
 | --- | --- | --- |
-| Daily | End of day, time you choose (default 8 PM) | Each issued note number and recipient, with its released products and quantities |
+| Daily | End of day, time you choose (default 8 PM) | Issued-note count, then each note number and recipient with its products, quantities and remarks |
 | Weekly | Start of week, day and time you choose | Totals vs previous week, top customers and products, busiest day |
 | Monthly | First day of month | Full summary, trends, customer ranking, slow-moving products, Excel export attached |
 
