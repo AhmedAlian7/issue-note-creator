@@ -5,11 +5,15 @@ import {
   useEffectEvent,
   useRef,
   useState,
+  useTransition,
 } from "react";
+import Link from "@/app/brand/pending-link";
 import { useRouter } from "next/navigation";
+import { PendingIndicator } from "@/app/brand/pending-indicator";
 import { ar } from "@/lib/i18n";
 import { normalizeArabic } from "@/lib/note-filters";
 import { command } from "./command";
+import { RemarkFields } from "./remark-fields";
 const t = ar.notes;
 type Choice = { id: string; nameAr: string; active: boolean };
 type Product = Choice & { aliases: string[] };
@@ -17,7 +21,7 @@ type Line = {
   productId: string;
   quantity: number;
   remarks: string;
-  isDestination: boolean;
+  redRemark: boolean;
   key: string;
 };
 type Fields = { customerId: string; lines: Line[] };
@@ -38,12 +42,14 @@ export function Editor({
   amend,
 }: Props) {
   const router = useRouter();
+  const [navigating, startNavigation] = useTransition();
   const [data, setData] = useState(initial),
     [products, setProducts] = useState(catalog);
   const [savedData, setSavedData] = useState(initial);
   const [summary, setSummary] = useState(false),
-    [busy, setBusy] = useState(false),
+    [working, setBusy] = useState(false),
     [message, setMessage] = useState("");
+  const busy = working || navigating;
   const [query, setQuery] = useState(""),
     [adding, setAdding] = useState(false),
     [newName, setNewName] = useState(""),
@@ -117,7 +123,7 @@ export function Editor({
             productId,
             quantity: 1,
             remarks: t.defaultRemarks,
-            isDestination: false,
+            redRemark: false,
           },
         ],
       }));
@@ -240,44 +246,11 @@ export function Editor({
                     </button>
                   </span>
                 </label>
-                <label>
-                  {t.remarks}
-                  <input
-                    maxLength={300}
-                    value={line.remarks}
-                    style={
-                      line.isDestination ? { color: "#a62225" } : undefined
-                    }
-                    onChange={(e) =>
-                      changeLine(line.key, {
-                        remarks: e.target.value,
-                        isDestination:
-                          !!e.target.value.trim() &&
-                          e.target.value.trim() !== t.defaultRemarks &&
-                          line.isDestination,
-                      })
-                    }
-                  />
-                </label>
-                {(line.isDestination ||
-                  (line.remarks.trim() &&
-                    line.remarks.trim() !== t.defaultRemarks)) && (
-                  <label>
-                    {t.textColor}
-                    <select
-                      aria-label={t.textColor}
-                      value={line.isDestination ? "red" : "default"}
-                      onChange={(e) =>
-                        changeLine(line.key, {
-                          isDestination: e.target.value === "red",
-                        })
-                      }
-                    >
-                      <option value="default">{t.defaultColor}</option>
-                      <option value="red">{t.red}</option>
-                    </select>
-                  </label>
-                )}
+                <RemarkFields
+                  remarks={line.remarks}
+                  redRemark={line.redRemark}
+                  onChange={(patch) => changeLine(line.key, patch)}
+                />
                 <div className="tools">
                   <button
                     className="secondary"
@@ -397,7 +370,7 @@ export function Editor({
                   <td>{i + 1}</td>
                   <td>{name(l.productId)}</td>
                   <td>{l.quantity}</td>
-                  <td className={l.isDestination ? "destination" : ""}>
+                  <td className={l.redRemark ? "red-remark" : undefined}>
                     {l.remarks}
                   </td>
                 </tr>
@@ -436,8 +409,10 @@ export function Editor({
                           expected: timestamp.current,
                         },
                   );
-                  router.replace("/notes/" + result.id);
-                  router.refresh();
+                  startNavigation(() => {
+                    router.replace("/notes/" + result.id);
+                    router.refresh();
+                  });
                 })
               }
             >
@@ -461,10 +436,16 @@ export function Editor({
           </button>
         )}
       </fieldset>
-      <p role="status">
-        {message === ar.saved && savedData !== data ? "" : message}
+      <p role="status" className={busy ? "navigation-progress" : undefined}>
+        {busy || message === t.waiting ? (
+          <PendingIndicator>{t.waiting}</PendingIndicator>
+        ) : message === ar.saved && savedData !== data ? (
+          ""
+        ) : (
+          message
+        )}
       </p>
-      <a href="/workspace">{ar.back}</a>
+      <Link href="/workspace">{ar.back}</Link>
     </main>
   );
 }

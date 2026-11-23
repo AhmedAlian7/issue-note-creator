@@ -8,8 +8,12 @@ import { ar } from "@/lib/i18n";
 import { fixtureSpeech } from "@/ai/fixture-provider";
 const t = ar.notes,
   f = ar.flow;
+const viewport =
+  process.env.E2E_DESKTOP === "1"
+    ? { width: 1440, height: 900 }
+    : { width: 360, height: 800 };
 test.use({
-  viewport: { width: 360, height: 800 },
+  viewport,
   permissions: ["microphone"],
   launchOptions: {
     args: [
@@ -29,7 +33,7 @@ test("mobile keeper reviews speech, resolves matches, corrects and issues a PDF"
   test.setTimeout(120000);
   const keeper = await db.user.create({
     data: {
-      phone: "09000000455",
+      username: "09000000455",
       role: "KEEPER",
       name: "أمين المخزن",
       pinHash: await hashPin("12345"),
@@ -41,7 +45,8 @@ test("mobile keeper reviews speech, resolves matches, corrects and issues a PDF"
     data: [{ nameAr: "فوتيه سيدني" }, { nameAr: "كنبة جولدي" }],
   });
   await page.goto("/login");
-  await page.getByLabel(ar.phone).fill(keeper.phone);
+  await page.getByLabel(ar.username).fill(keeper.username);
+  await page.getByRole("button", { name: ar.loginContinue }).click();
   await page.getByLabel(ar.pin).fill("12345");
   await page.getByRole("button", { name: ar.login }).click();
   const button = (name: string) =>
@@ -60,12 +65,20 @@ test("mobile keeper reviews speech, resolves matches, corrects and issues a PDF"
   const violations = (await new AxeBuilder({ page }).analyze()).violations;
   expect(violations.map((v) => v.id)).toEqual([]);
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(
-    360,
+    viewport.width,
   );
+  await page.getByLabel(t.remarks, { exact: true }).fill("فندق كارما");
+  await page.getByRole("checkbox", { name: t.redRemark }).check();
   await button(t.confirm).click();
   await expect(page.locator(".pdf-pages canvas")).toBeVisible({
     timeout: 30000,
   });
+  expect(
+    await db.noteLine.findFirst({
+      where: { noteId: page.url().split("/").pop() },
+      select: { remarks: true, redRemark: true },
+    }),
+  ).toEqual({ remarks: "فندق كارما", redRemark: true });
   await page.getByRole("link", { name: t.newNote }).click();
   await record(page, ar.voice.start);
   await page.getByRole("button", { name: f.editVoice }).click();

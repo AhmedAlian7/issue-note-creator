@@ -10,7 +10,6 @@
         "quantity": 11,
         "quantityText": "حداشر",
         "remarks": null,
-        "isDestination": false,
         "confidence": 0.95
       }
     ]
@@ -21,8 +20,7 @@
       {
         "productId": "p1",
         "quantity": 11,
-        "remarks": null,
-        "isDestination": false
+        "remarks": null
       }
     ]
   }

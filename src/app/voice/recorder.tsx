@@ -2,6 +2,7 @@
 import type { EditContext } from "@/ai/edits";
 import type { processEdit } from "@/server/voice";
 import { useEffect, useRef, useState } from "react";
+import { PendingIndicator } from "@/app/brand/pending-indicator";
 import { ar } from "@/lib/i18n";
 import type { VoiceResult } from "@/ai/pipeline";
 import { capture } from "./capture";
@@ -200,11 +201,13 @@ export function VoiceRecorder({ onResult, label, correction }: Props) {
         </>
       )}
       <output>
-        {state === "busy"
-          ? labels.busy
-          : state === "opening"
-            ? labels.waiting
-            : ""}
+        {state === "busy" ? (
+          <PendingIndicator>{labels.busy}</PendingIndicator>
+        ) : state === "opening" ? (
+          <PendingIndicator>{labels.waiting}</PendingIndicator>
+        ) : (
+          ""
+        )}
       </output>
       {error && <p role="alert">{error}</p>}
     </div>

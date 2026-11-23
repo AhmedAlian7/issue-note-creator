@@ -15,7 +15,6 @@ export const extraction = z.strictObject({
         quantity: z.int().positive().max(2147483647).nullable(),
         quantityText: phrase.nullable(),
         remarks: phrase.nullable(),
-        isDestination: z.boolean(),
         confidence: score,
       }),
     )

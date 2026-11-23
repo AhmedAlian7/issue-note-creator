@@ -1,8 +1,9 @@
-import { readFile } from "node:fs/promises";
 import { z } from "zod";
 import { id } from "@/lib/inputs";
+import { notePdfDisposition } from "@/lib/note-pdf-name";
 import { currentUser } from "@/server/session";
 import { getNote } from "@/server/notes";
+import { readPdf } from "@/server/pdf-storage";
 import { Prisma } from "@/generated/prisma/client";
 export async function GET(
   request: Request,
@@ -18,18 +19,17 @@ export async function GET(
     return new Response(null, { status: 400 });
   try {
     const note = await getNote(actor, path.data.id);
-    if (!note.pdfPath) return new Response(null, { status: 404 });
-    return new Response(new Uint8Array(await readFile(note.pdfPath)), {
+    const pdf = await readPdf(note);
+    if (!pdf) return new Response(null, { status: 404 });
+    return new Response(new Uint8Array(pdf), {
       headers: {
         "Content-Type": "application/pdf",
         "Cache-Control": "private, no-store",
-        "Content-Disposition":
-          (query.data.download ? "attachment" : "inline") +
-          '; filename="note-' +
-          note.number +
-          "-v" +
-          note.version +
-          '.pdf"',
+        "Content-Disposition": notePdfDisposition(
+          query.data.download ? "attachment" : "inline",
+          note.number,
+          note.customer.nameAr,
+        ),
       },
     });
   } catch (error) {

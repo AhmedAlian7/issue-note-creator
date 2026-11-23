@@ -1,16 +1,19 @@
 import { z } from "zod";
+import { canColorRemark } from "./remarks";
 const digits = (s: string) =>
   s.replace(/[٠-٩]/g, (c) => String(c.charCodeAt(0) - 1632));
-export const phone = z
+export const username = z
   .string()
   .trim()
-  .transform(digits)
-  .pipe(z.string().regex(/^\+?[0-9]{7,15}$/));
+  .min(1)
+  .max(80)
+  .regex(/^[\p{L}\p{N}_.-]+$/u)
+  .transform((value) => value.toLowerCase());
 export const pin = z
   .string()
   .transform(digits)
   .pipe(z.string().regex(/^\d{4,6}$/));
-export const loginInput = z.object({ phone, pin });
+export const loginInput = z.object({ username, pin });
 export const id = z.uuid();
 const name = z.string().trim().min(1).max(180);
 const optionalText = z
@@ -33,7 +36,7 @@ export const customerInput = z.object({
 });
 export const userInput = z.object({
   name,
-  phone,
+  username,
   role: z.enum(["KEEPER", "ADMIN", "OWNER"]),
   pin: pin.optional(),
 });
@@ -41,12 +44,17 @@ export const noteInput = z.object({
   customerId: id,
   lines: z
     .array(
-      z.object({
-        productId: id,
-        quantity: z.int().positive().max(2147483647),
-        remarks: optionalText,
-        isDestination: z.boolean().optional(),
-      }),
+      z
+        .object({
+          productId: id,
+          quantity: z.int().positive().max(2147483647),
+          remarks: optionalText,
+          redRemark: z.boolean().default(false),
+        })
+        .transform((line) => ({
+          ...line,
+          redRemark: line.redRemark && canColorRemark(line.remarks),
+        })),
     )
     .max(500),
 });

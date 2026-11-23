@@ -22,8 +22,8 @@ enum NoteStatus {
 model User {
   id         String      @id @default(uuid())
   name       String
-  phone      String      @unique
-  pinHash    String
+  username   String      @unique
+  pinHash    String?
   role       Role
   active     Boolean     @default(true)
   notes      IssueNote[]
@@ -68,6 +68,7 @@ model IssueNote {
   createdById  String
   creator      User        @relation(fields: [createdById], references: [id])
   pdfPath      String?
+  pdf          PdfDocument?
   voidReason   String?
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
@@ -76,16 +77,24 @@ model IssueNote {
   @@unique([number, version])
 }
 
+model PdfDocument {
+  noteId    String    @id
+  note      IssueNote @relation(fields: [noteId], references: [id], onDelete: Cascade)
+  bytes     Bytes
+  byteSize  Int
+  createdAt DateTime  @default(now())
+}
+
 model NoteLine {
-  id            String    @id @default(uuid())
-  noteId        String
-  note          IssueNote @relation(fields: [noteId], references: [id], onDelete: Restrict)
-  productId     String
-  product       Product   @relation(fields: [productId], references: [id])
-  quantity      Int
-  remarks       String?   @db.Text
-  isDestination Boolean   @default(false)
-  position      Int
+  id        String    @id @default(uuid())
+  noteId    String
+  note      IssueNote @relation(fields: [noteId], references: [id], onDelete: Restrict)
+  productId String
+  product   Product   @relation(fields: [productId], references: [id])
+  quantity  Int
+  remarks   String?   @db.Text
+  redRemark Boolean   @default(false)
+  position  Int
 
   @@unique([noteId, position])
 }
@@ -116,6 +125,17 @@ model AuditLog {
 model Setting {
   key   String @id
   value Json
+}
+
+model ReportLog {
+  type      String
+  period    String
+  sentAt    DateTime?
+  status    String
+  error     String?
+  updatedAt DateTime @default(now()) @updatedAt
+  @@id([type, period])
+  @@index([status, updatedAt])
 }
 
 model NoteCounter {

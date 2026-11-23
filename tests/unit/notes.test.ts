@@ -22,7 +22,7 @@ it("rolls back failed issuance and serializes twenty full confirmations", async 
   const keeper = await db.user.create({
     data: {
       name: "test",
-      phone: "09000000000",
+      username: "09000000000",
       pinHash: "unused",
       role: "KEEPER",
     },
@@ -30,7 +30,7 @@ it("rolls back failed issuance and serializes twenty full confirmations", async 
   const admin = await db.user.create({
     data: {
       name: "admin",
-      phone: "09000000001",
+      username: "09000000001",
       pinHash: "unused",
       role: "ADMIN",
     },
@@ -65,6 +65,10 @@ it("rolls back failed issuance and serializes twenty full confirmations", async 
     Array.from({ length: 20 }, (_, i) => (start.nextNumber ?? 973) + i),
   );
   expect(await readFile(issued[0].pdfPath!, "utf8")).toBe("%PDF-test");
+  const persisted = await db.issueNote.findUniqueOrThrow({
+    where: { id: issued[0].id },
+  });
+  expect(persisted.pdfPath).toBe(issued[0].pdfPath);
   expect(renderNotePdf).toHaveBeenCalledWith(
     expect.objectContaining({
       number: issued[0].number,

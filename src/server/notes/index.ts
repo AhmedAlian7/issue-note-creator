@@ -1,19 +1,21 @@
 import { randomUUID } from "node:crypto";
-import { mkdir, writeFile, rm } from "node:fs/promises";
-import { dirname, resolve } from "node:path";
+import { resolve } from "node:path";
 import { draftTimestamp, id, noteInput, reasonInput } from "@/lib/inputs";
 import { filters } from "@/lib/note-filters";
 import { renderNotePdf } from "@/pdf/render-note-pdf";
 import { db, type Prisma } from "../db";
+import { company } from "@/lib/report-config";
 import { allocateNumber } from "../counter";
 import { audit } from "../audit";
 import { authorize, type Actor } from "../permissions";
+import { removePdfFile, savePdf } from "../pdf-storage";
 
 type Tx = Prisma.TransactionClient;
 const detail = {
   customer: true,
   successor: { select: { status: true } },
   lines: { orderBy: { position: "asc" }, include: { product: true } },
+  pdf: { select: { byteSize: true } },
 } as const;
 type Note = Prisma.IssueNoteGetPayload<{ include: typeof detail }>;
 export class NoteConflict extends Error {}
@@ -130,19 +132,17 @@ async function issueTransaction(
       timeout: 180000,
     });
   } catch (error) {
-    await rm(path, { force: true });
+    await removePdfFile(path);
     throw error;
   }
 }
 async function issue(tx: Tx, note: Note, number: number, pdfPath: string) {
   if (!note.lines.length) throw new NoteConflict();
   const date = today();
-  const confirmed = await tx.issueNote.update({
-    where: { id: note.id },
-    data: { status: "CONFIRMED", date, number, pdfPath },
-    include: detail,
-  });
   const pdf = await renderNotePdf({
+    company: company.safeParse(
+      (await tx.setting.findUnique({ where: { key: "company" } }))?.value,
+    ).data,
     number,
     date: date.toISOString().slice(0, 10).split("-").reverse().join("/"),
     customerName: note.customer.nameAr,
@@ -151,9 +151,13 @@ async function issue(tx: Tx, note: Note, number: number, pdfPath: string) {
       productName: line.product.nameAr,
     })),
   });
-  await mkdir(dirname(pdfPath), { recursive: true });
-  await writeFile(pdfPath, pdf, { flag: "wx" });
-  return confirmed;
+  const stored = await savePdf(tx, note.id, pdf, pdfPath);
+  const confirmed = await tx.issueNote.update({
+    where: { id: note.id },
+    data: { status: "CONFIRMED", date, number, pdfPath: stored.pdfPath },
+    include: detail,
+  });
+  return { ...confirmed, pdf: { byteSize: stored.byteSize } };
 }
 export async function confirmNote(
   actor: Actor,
@@ -259,6 +263,7 @@ export async function listNotes(actor: Actor, input: unknown = {}) {
         customer: true,
         successor: { select: { status: true } },
         _count: { select: { lines: true } },
+        pdf: { select: { byteSize: true } },
       },
     });
     await audit(tx, actor.id, "list", "IssueNote", "archive", undefined, f);
@@ -291,6 +296,7 @@ export async function recentNotes(actor: Actor) {
         customer: true,
         successor: { select: { status: true } },
         _count: { select: { lines: true } },
+        pdf: { select: { byteSize: true } },
       },
     });
     const customers = await tx.$queryRaw<{ id: string; nameAr: string }[]>`

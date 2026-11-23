@@ -10,12 +10,20 @@ services:
       # The container reaches PostgreSQL by its Compose service name.
       DATABASE_URL: postgresql://issue_notes:local_dev_only@db:5432/issue_notes?schema=public
       APP_BASE_URL: ${APP_BASE_URL:-http://localhost:3000}
+      SMTP_HOST: ${SMTP_HOST:-mailhog}
+      SMTP_PORT: ${SMTP_PORT:-1025}
       TZ: ${TZ:-Africa/Cairo}
     volumes:
       - note-pdfs:/data/pdfs
     depends_on:
       db:
         condition: service_healthy
+
+  mailhog:
+    image: mailhog/mailhog:v1.0.1
+    ports:
+      - "127.0.0.1:1025:1025"
+      - "127.0.0.1:8025:8025"
 
   db:
     image: postgres:17-bookworm

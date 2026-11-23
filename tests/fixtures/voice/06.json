@@ -10,7 +10,6 @@
         "quantity": 12,
         "quantityText": "اتناشر",
         "remarks": "فرع الجيزة",
-        "isDestination": true,
         "confidence": 0.95
       }
     ]
@@ -21,8 +20,7 @@
       {
         "productId": "p5",
         "quantity": 12,
-        "remarks": "فرع الجيزة",
-        "isDestination": true
+        "remarks": "فرع الجيزة"
       }
     ]
   }

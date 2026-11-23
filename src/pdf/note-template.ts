@@ -2,6 +2,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { z } from "zod";
 import { ar } from "../lib/i18n";
+import { company, defaultCompany } from "../lib/report-config";
 
 const date = z
   .string()
@@ -16,6 +17,7 @@ const date = z
     );
   });
 const fields = {
+  company: company.optional(),
   customerName: z.string().trim().min(1),
   number: z.number().int().positive(),
   date,
@@ -24,7 +26,7 @@ const fields = {
       productName: z.string().trim().min(1),
       quantity: z.number().int().positive(),
       remarks: z.string().nullish(),
-      isDestination: z.boolean().default(false),
+      redRemark: z.boolean().default(false),
     }),
   ),
 };
@@ -44,11 +46,22 @@ const cache = new Map<string, string>();
 function asset(file: string, type: string) {
   let url = cache.get(file);
   if (!url) {
-    url =
-      "data:" +
-      type +
-      ";base64," +
-      readFileSync(join(process.cwd(), "src/pdf", file)).toString("base64");
+    const roots = [
+      process.cwd(),
+      join(process.cwd(), ".next", "standalone"),
+      join(process.cwd(), "..", ".."),
+    ];
+    let bytes: Buffer | undefined;
+    for (const root of roots) {
+      try {
+        bytes = readFileSync(join(root, "src/pdf", file));
+        break;
+      } catch (error) {
+        if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
+      }
+    }
+    if (!bytes) throw new Error("Missing PDF asset: " + file);
+    url = "data:" + type + ";base64," + bytes.toString("base64");
     cache.set(file, url);
   }
   return url;
@@ -114,7 +127,7 @@ function itemTable(lines: Note["lines"], offset: number) {
         escape(line.remarks ?? ""),
         centered +
           ' data-fit="178.01"' +
-          (line.isDestination ? ' fill="#ee0000"' : ""),
+          (line.redRemark ? ' fill="#ee0000"' : ""),
       );
       svg += textAt(
         centers[1],
@@ -174,6 +187,8 @@ function sheet(note: Note | null, index: number, total: number) {
       note ? `<tspan fill="red">${note.number}</tspan>` : "",
     ) +
     meta(549.7, labels.customer, customer);
+  const contact=note?.company;
+  const custom=contact && (contact.website!==defaultCompany.website || contact.phone!==defaultCompany.phone || contact.city!==defaultCompany.city);
   const footer =
     textAt(
       36,
@@ -186,9 +201,12 @@ function sheet(note: Note | null, index: number, total: number) {
       36,
       828.12,
       11.04,
-      '<tspan font-weight="bold" fill="#467886">italianfurniture-eg.com</tspan><tspan x="154.70">| +20 101 347 8443 | Cairo, Egypt</tspan>',
+      custom
+        ? escape([contact.website,contact.phone,contact.city].join(" | "))
+        : '<tspan font-weight="bold" fill="#467886">italianfurniture-eg.com</tspan><tspan x="154.70">| +20 101 347 8443 | Cairo, Egypt</tspan>',
+      custom?'data-fit="480"':"",
     ) +
-    box(36, 828.6, 116.42, 0.24, "#467886");
+    (custom?"":box(36, 828.6, 116.42, 0.24, "#467886"));
   return `<section><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 595.32 841.92" fill="${ink}" font-family="Hacen,CambriaNote">
   <image href="${logo}" x="115.40" y="350.85" width="364.45" height="137.95" opacity=".06"/>
   <image href="${logo}" x="251.24" y="13.44" width="91.82" height="37.79" preserveAspectRatio="none"/>

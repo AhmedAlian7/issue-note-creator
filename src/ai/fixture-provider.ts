@@ -27,7 +27,6 @@ export function fixtureProviders(catalog: Catalog) {
           quantity,
           quantityText: null,
           remarks: null,
-          isDestination: false,
           confidence: 1,
         },
       ],

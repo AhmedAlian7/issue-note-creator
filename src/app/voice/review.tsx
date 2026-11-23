@@ -1,8 +1,9 @@
 "use client";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import type { processEdit } from "@/server/voice";
 import { normalize } from "@/ai/matching";
+import { PendingIndicator } from "@/app/brand/pending-indicator";
 import { ar } from "@/lib/i18n";
 import { command } from "../notes/command";
 import {
@@ -17,6 +18,9 @@ import { LineCard } from "./line-card";
 import { VoiceRecorder } from "./recorder";
 const t = ar.notes,
   f = ar.flow;
+const previewDate = new Intl.DateTimeFormat("ar-EG", {
+  timeZone: "Africa/Cairo",
+});
 type Panel =
   | { kind: "customer" | "add" | "append" | "replace" | "correct" }
   | { kind: "product" | "create"; key: string };
@@ -56,7 +60,7 @@ export function Review({
     [products, setProducts] = useState(catalog);
   const [panel, setPanel] = useState<Panel | null>(null),
     [query, setQuery] = useState(""),
-    [busy, setBusy] = useState(false),
+    [working, setBusy] = useState(false),
     [message, setMessage] = useState("");
   const [undo, setUndo] = useState<{
     apply: () => void;
@@ -67,6 +71,8 @@ export function Review({
   );
   const dialog = useRef<HTMLDialogElement>(null);
   const router = useRouter();
+  const [navigating, startNavigation] = useTransition();
+  const busy = working || navigating;
   useEffect(() => {
     if (!undo?.expires) return;
     const timer = setTimeout(() => setUndo(null), 5000);
@@ -188,11 +194,11 @@ export function Review({
       const fields = {
         customerId: draft.customerId,
         lines: draft.lines.map(
-          ({ productId, quantity, remarks, isDestination }) => ({
+          ({ productId, quantity, remarks, redRemark }) => ({
             productId,
             quantity,
             remarks,
-            isDestination,
+            redRemark,
           }),
         ),
       };
@@ -214,7 +220,7 @@ export function Review({
         id: saved.current.id,
         expected: saved.current.updatedAt,
       });
-      router.replace("/notes/" + record.id);
+      startNavigation(() => router.replace("/notes/" + record.id));
     });
   }
   const list = panel?.kind === "customer" ? customers : products;
@@ -224,6 +230,43 @@ export function Review({
       <header>
         <h1>{t.summary}</h1>
       </header>
+      <section className="note-table" aria-labelledby="voice-preview">
+        <h2 id="voice-preview">{t.preview}</h2>
+        <dl>
+          <dt>{ar.notePdf.customer}</dt>
+          <dd>{customer?.nameAr ?? t.choose}</dd>
+          <dt>{ar.notePdf.number}</dt>
+          <dd>{t.numberPending}</dd>
+          <dt>{ar.notePdf.date}</dt>
+          <dd>{previewDate.format(new Date())}</dd>
+        </dl>
+        <table>
+          <thead>
+            <tr>
+              {[...ar.notePdf.headings].reverse().map((heading) => (
+                <th key={heading} scope="col">
+                  {heading}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {draft.lines.map((line, index) => (
+              <tr key={line.key}>
+                <td>{index + 1}</td>
+                <td>
+                  {products.find((p) => p.id === line.productId)?.nameAr ??
+                    line.spokenText}
+                </td>
+                <td>{line.quantity}</td>
+                <td className={line.redRemark ? "red-remark" : undefined}>
+                  {line.remarks}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
       <fieldset disabled={busy} className="fields review-fields">
         <button
           className="customer-button"
@@ -282,7 +325,9 @@ export function Review({
           </button>
         </details>
         <footer className="confirm-bar">
-          <div role="status">{busy ? t.waiting : message}</div>
+          <div role="status">
+            {busy ? <PendingIndicator>{t.waiting}</PendingIndicator> : message}
+          </div>
           {undo && (
             <button
               onClick={() => {
@@ -356,7 +401,7 @@ export function Review({
                                   productId: i.id,
                                   quantity: 1,
                                   remarks: "",
-                                  isDestination: false,
+                                  redRemark: false,
                                   confidence: 1,
                                   level: "GREEN",
                                   unmatched: false,

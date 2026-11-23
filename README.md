@@ -1,6 +1,6 @@
 # Warehouse Issue Note Creator
 
-An Arabic, right-to-left app for warehouse issue notes and master data.
+An Egyptian Arabic, right-to-left warehouse app for drafting issue notes by voice or by hand, reviewing inventory lines, and sharing numbered PDFs. Owners can manage the catalogue, review the archive and schedule reports. See the [Arabic keeper guide](docs/KEEPER-GUIDE.md).
 
 ## Prerequisites
 
@@ -20,15 +20,19 @@ pnpm db:seed
 pnpm dev
 ```
 
-Open [the sign-in page](http://localhost:3000/login). The first seed run prints the phone numbers and generated PINs for the demo owner, admin, and warehouse keeper. Save those credentials for local use. Rerunning the seed preserves existing demo accounts and their PINs.
+Open [the sign-in page](http://localhost:3000/login). The local seed provisions the owner (`ayman`), admin (`ahmed`), and warehouse keeper (`mahmoud`). Each account sets its PIN on first sign-in. Rerunning the seed preserves existing accounts and PINs.
 
 Press Ctrl+C to stop Next.js. Use `docker compose stop db` to stop PostgreSQL and keep its data.
 
-Confirmed PDFs use the `note-pdfs` Compose volume mounted at `/data/pdfs`. For host development, set `PDF_STORAGE_DIR` in `.env` to a writable directory. Back up the PDF volume alongside PostgreSQL to retain issued versions.
+Confirmed PDFs are stored in PostgreSQL in the `PdfDocument` table. For local Docker, set `PDF_STORAGE_DIR` in `.env` to keep them on the `note-pdfs` volume mounted at `/data/pdfs` instead. Leave `PDF_STORAGE_DIR` empty in serverless production so PDFs are stored in the database. To copy existing filesystem PDFs into the database, run `pnpm db:migrate-pdfs` with `PDF_STORAGE_DIR` pointing at the folder; add `--dry-run` to preview.
+
+## Deploy for free
+
+`docs/FREE_CLOUD_DEPLOYMENT.md` explains the $0 hosting setup: Netlify Free for the app, Neon Free PostgreSQL for data and PDFs, Cloudflare Browser Run for PDF rendering, Resend Free for report email, and GitHub Actions for the hourly report cron and nightly backup. It lists verified free-tier limits, required environment variables, migration steps, rollback and a feature checklist.
 
 ## Voice drafts
 
-Open **إذن صرف بالصوت** from the workspace. The microphone requires HTTPS or localhost. Set `GROQ_API_KEY`, `TRANSCRIBE_MODEL` and `PARSE_MODEL` in the server environment using the model defaults in `.env.example`.
+Use the microphone in **مساحة العمل** to start a voice draft. The microphone requires HTTPS or localhost. Set `GROQ_API_KEY`, `TRANSCRIBE_MODEL` and `PARSE_MODEL` in the server environment using the model defaults in `.env.example`.
 
 `POST /api/voice/parse` accepts an audio/webm or audio/mp4 request body up to 10 MiB, or JSON containing a `transcript` string. The response includes the transcript, verified draft and recording ID. Each account can submit ten requests per minute per app process. The owner can configure the `voiceThresholds` setting with numeric `green` and `yellow` values (defaults 0.85 and 0.6).
 
@@ -53,3 +57,5 @@ Stop the development server before running Playwright. Playwright starts its own
 pnpm exec playwright install chromium
 pnpm test:e2e
 ```
+
+The default browser profile is mobile. Run the same suite at desktop widths with `E2E_DESKTOP=1 pnpm test:e2e` in Bash or `$env:E2E_DESKTOP = "1"; pnpm test:e2e` in PowerShell.

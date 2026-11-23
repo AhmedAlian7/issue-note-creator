@@ -1,6 +1,7 @@
 import { z } from "zod";
+import { company, reportSchedule, defaultSchedule } from "@/lib/report-config";
 import { thresholds } from "@/ai/contracts";
-import { db } from "./db";
+import { db, type Prisma } from "./db";
 import { audit } from "./audit";
 import { authorize, type Actor } from "./permissions";
 
@@ -12,17 +13,24 @@ export const settingInput = z.discriminatedUnion("key", [
   }),
   z.object({
     key: z.literal("company"),
-    value: z.record(z.string(), z.string().max(2000)),
+    value: company,
   }),
   z.object({
     key: z.literal("reportSchedule"),
-    value: z.record(z.string(), z.json()),
+    value: reportSchedule,
   }),
   z.object({
     key: z.literal("reportRecipients"),
     value: z.array(z.email()).max(100),
   }),
 ]);
+export async function getSchedule(client: Prisma.TransactionClient = db) {
+  const row = await client.setting.findUnique({
+    where: { key: "reportSchedule" },
+  });
+  const parsed = reportSchedule.safeParse(row?.value);
+  return parsed.success ? parsed.data : defaultSchedule;
+}
 export async function saveSetting(
   actor: Actor,
   data: z.infer<typeof settingInput>,

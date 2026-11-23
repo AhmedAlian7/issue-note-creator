@@ -8,14 +8,7 @@ import {
 } from "./contracts";
 import { match } from "./matching";
 import { recoverQuantity } from "./quantity";
-export class MissingQuantity extends Error {
-  constructor(
-    readonly transcript: string,
-    readonly item: string,
-  ) {
-    super("Missing quantity");
-  }
-}
+import { ar } from "@/lib/i18n";
 export function verifyLine(
   line: import("./contracts").Extraction["lines"][number],
   transcript: string,
@@ -31,13 +24,14 @@ export function verifyLine(
   const quantity =
     line.quantity ??
     recoverQuantity(transcript, line.spokenText, line.quantityText);
-  if (quantity === null) throw new MissingQuantity(transcript, line.spokenText);
   return {
     spokenText: line.spokenText,
     productId,
-    quantity,
-    remarks: line.remarks,
-    isDestination: line.isDestination,
+    quantity: quantity ?? 1,
+    remarks:
+      quantity === null && !line.remarks?.trim()
+        ? ar.notes.defaultRemarks
+        : line.remarks,
     ...verified,
   };
 }

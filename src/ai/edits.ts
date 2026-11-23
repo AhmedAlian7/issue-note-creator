@@ -12,7 +12,6 @@ export const editContext = z.object({
         spokenText: z.string().max(300),
         quantity: z.int().nonnegative().max(2147483647),
         remarks: z.string().max(300),
-        isDestination: z.boolean(),
       }),
     )
     .max(500),

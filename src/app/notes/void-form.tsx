@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { command } from "./command";
+import { PendingIndicator } from "@/app/brand/pending-indicator";
 import { ar } from "@/lib/i18n";
 export function VoidForm({ id }: { id: string }) {
   const router = useRouter(),
@@ -31,7 +32,7 @@ export function VoidForm({ id }: { id: string }) {
           <input name="reason" required maxLength={1000} />
         </label>
         <button disabled={busy}>{ar.notes.void}</button>
-        <output>{error}</output>
+        <output>{busy ? <PendingIndicator /> : error}</output>
       </form>
     </details>
   );

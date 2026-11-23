@@ -1,4 +1,5 @@
 import { ar } from "@/lib/i18n";
+import { RemarkFields } from "../notes/remark-fields";
 import type { Line } from "./review-model";
 const t = ar.notes,
   f = ar.flow;
@@ -93,22 +94,11 @@ export function LineCard({
           </button>
         </div>
       </div>
-      <label>
-        {t.remarks}
-        <input
-          value={line.remarks}
-          maxLength={300}
-          onChange={(e) => patch({ remarks: e.target.value })}
-        />
-      </label>
-      <label className="toggle">
-        <input
-          type="checkbox"
-          checked={line.isDestination}
-          onChange={(e) => patch({ isDestination: e.target.checked })}
-        />
-        {f.destination}
-      </label>
+      <RemarkFields
+        remarks={line.remarks}
+        redRemark={line.redRemark}
+        onChange={patch}
+      />
       <div className="tools">
         <button
           className="secondary"

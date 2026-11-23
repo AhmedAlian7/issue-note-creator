@@ -1,0 +1,29 @@
+name: Database backup
+
+on:
+  schedule:
+    - cron: "17 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  dump:
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+    steps:
+      - name: Dump PostgreSQL
+        run: |
+          set -euo pipefail
+          test -n "$DATABASE_URL"
+          mkdir -p backup
+          pg_dump --no-owner --no-privileges --format=custom \
+            --file="backup/issue-notes-$(date -u +%Y%m%d).dump" "$DATABASE_URL"
+          ls -lh backup
+      - uses: actions/upload-artifact@v4
+        with:
+          name: issue-notes-backup-${{ github.run_id }}
+          path: backup/
+          retention-days: 14

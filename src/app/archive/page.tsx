@@ -1,7 +1,8 @@
-import Link from "next/link";
+import Link from "@/app/brand/pending-link";
 import { guard } from "@/server/session";
 import { listNotes, noteCatalog } from "@/server/notes";
 import { filters } from "@/lib/note-filters";
+import { SearchForm } from "@/app/brand/search-form";
 import { ar } from "@/lib/i18n";
 import { NoteList } from "../notes/note-list";
 const t = ar.notes;
@@ -23,7 +24,7 @@ export default async function Archive({ searchParams }: PageProps<"/archive">) {
       <header>
         <h1>{t.archive}</h1>
       </header>
-      <form className="fields">
+      <SearchForm className="fields">
         <label>
           {t.search}
           <input name="q" defaultValue={f.q} />
@@ -62,8 +63,7 @@ export default async function Archive({ searchParams }: PageProps<"/archive">) {
             </select>
           </label>
         </div>
-        <button>{ar.search}</button>
-      </form>
+      </SearchForm>
       {parsed.success ? <NoteList rows={rows} /> : <p>{ar.invalid}</p>}
     </main>
   );

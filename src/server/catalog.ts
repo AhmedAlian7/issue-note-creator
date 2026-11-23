@@ -18,7 +18,6 @@ export const catalogCommand = z
       operation: z.enum(["archive", "review"]),
     }),
   ])
-  .refine((c) => c.kind !== "user" || !!c.id || !!c.fields.pin)
   .refine(
     (c) =>
       c.kind !== "state" || c.entity !== "user" || c.operation === "archive",
@@ -51,14 +50,13 @@ export async function changeCatalog(actor: Actor, command: Command) {
       let after;
       if (command.kind === "user") {
         const { pin, ...fields } = command.fields;
-        if (!userId && !pin) throw new Error("Missing PIN");
         const pinHash = pin ? await hashPin(pin) : undefined;
         after = userId
           ? await tx.user.update({
               where: { id: userId },
               data: { ...fields, pinHash },
             })
-          : await tx.user.create({ data: { ...fields, pinHash: pinHash! } });
+          : await tx.user.create({ data: { ...fields, pinHash } });
       } else if (command.kind === "state" && command.operation === "archive") {
         after = await tx.user.update({
           where: { id: userId },

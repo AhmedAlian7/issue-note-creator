@@ -10,10 +10,10 @@ test("keeper types, issues, previews and downloads the numbered PDF on a phone",
   page,
 }) => {
   test.setTimeout(120000);
-  const phone = "09000000002";
+  const username = "09000000002";
   await db.user.create({
     data: {
-      phone,
+      username,
       name: "أمين",
       role: "KEEPER",
       pinHash: await hashPin("12345"),
@@ -24,7 +24,8 @@ test("keeper types, issues, previews and downloads the numbered PDF on a phone",
   });
   const product = await db.product.create({ data: { nameAr: "أَرِيكَة" } });
   await page.goto("/login");
-  await page.getByLabel(ar.phone).fill(phone);
+  await page.getByLabel(ar.username).fill(username);
+  await page.getByRole("button", { name: ar.loginContinue }).click();
   await page.getByLabel(ar.pin).fill("12345");
   await page.getByRole("button", { name: ar.login }).click();
   await page.getByRole("button", { name: ar.flow.skip }).click();
@@ -36,15 +37,20 @@ test("keeper types, issues, previews and downloads the numbered PDF on a phone",
   await page.getByRole("button", { name: product.nameAr }).click();
   await page.getByRole("spinbutton").fill("4");
   const remarks = page.getByLabel(t.remarks, { exact: true });
-  const color = page.getByRole("combobox", { name: t.textColor });
+  const redRemark = page.getByRole("checkbox", { name: t.redRemark });
   await expect(remarks).toHaveValue("استندر");
-  await expect(color).toHaveCount(0);
+  await expect(redRemark).toHaveCount(0);
   await remarks.fill("المدخل");
-  await expect(color).toHaveValue("default");
-  await color.selectOption("red");
+  await redRemark.check();
+  await remarks.fill("استندر");
+  await expect(redRemark).toHaveCount(0);
+  await remarks.fill("المدخل");
+  await expect(redRemark).not.toBeChecked();
+  await redRemark.check();
   await expect(page.getByRole("status")).toHaveText(ar.saved);
   await page.reload();
-  await expect(color).toHaveValue("red");
+  await expect(remarks).toHaveValue("المدخل");
+  await expect(redRemark).toBeChecked();
   await expect(page.getByRole("spinbutton")).toHaveValue("4");
   // A partial match must still allow the keeper to register a distinct product.
   await page.getByLabel(t.product).fill("أري");
@@ -76,7 +82,9 @@ test("keeper types, issues, previews and downloads the numbered PDF on a phone",
   const downloaded = page.waitForEvent("download");
   await page.getByRole("link", { name: t.download }).click();
   const pdf = await downloaded;
-  expect(pdf.suggestedFilename()).toBe("note-" + expected + "-v1.pdf");
+  expect(pdf.suggestedFilename()).toBe(
+    `منصرف مخزن (${expected}) - ${customer.nameAr}.pdf`,
+  );
   expect(
     (
       await PDFDocument.load(await readFile((await pdf.path())!))
@@ -113,7 +121,7 @@ test("keeper types, issues, previews and downloads the numbered PDF on a phone",
   );
   await page.getByRole("button", { name: t.print }).click();
   await expect(page.locator("body")).toHaveAttribute("data-printed", "true");
-  await page.getByRole("link", { name: t.archive }).click();
+  await page.getByRole("main").getByRole("link", { name: t.archive }).click();
   await page.getByLabel(t.search).fill(String(expected));
   await page.getByRole("button", { name: ar.search }).click();
   await expect(

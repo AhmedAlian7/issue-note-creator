@@ -25,6 +25,8 @@ Copy `.env.example` to `.env` for local integration settings. Its database URL c
 
 ## Folder layout
 
+For local reports run `docker compose up -d db mailhog`. MailHog accepts SMTP on localhost:1025 and displays messages at http://localhost:8025. Set a random SESSION_SECRET for signed PDF links. Compose defaults to the mailhog hostname, with SMTP_HOST available for external SMTP. Apply migrations with `pnpm exec prisma migrate deploy` before starting the app.
+
 - `src/app/` contains App Router pages, layouts and route handlers.
 - `src/server/` contains services and business logic. Keep it free of UI code.
 - `src/lib/` contains shared utilities, Zod schemas and `i18n.ts`.
@@ -33,6 +35,12 @@ Copy `.env.example` to `.env` for local integration settings. Its database URL c
 - `prisma/` contains the schema and future migrations.
 - `tests/unit/` contains Vitest tests. `tests/e2e/` contains Playwright tests.
 - `reference/` points to the original files in `references/`. Treat both as read-only.
+
+## Interface
+
+- Use the Italin wordmark, self-hosted Cairo and the color tokens in `src/app/globals.css`.
+- Keep signed-in navigation in `src/app/brand/`. Check the sidebar on desktop and the top-bar menu on mobile. Run Playwright once with the default mobile profile and once with `E2E_DESKTOP=1`.
+- Keep the [Arabic keeper guide](docs/KEEPER-GUIDE.md) aligned with the controls in the app.
 
 ## Coding rules
 
@@ -56,6 +64,7 @@ This project has a knowledge graph at graphify-out/ with god nodes, community st
 When the user types `/graphify`, invoke the `skill` tool with `skill: "graphify"` before doing anything else.
 
 Rules:
+
 - For codebase questions, first run `graphify query "<question>"` when graphify-out/graph.json exists. Use `graphify path "<A>" "<B>"` for relationships and `graphify explain "<concept>"` for focused concepts. These return a scoped subgraph, usually much smaller than GRAPH_REPORT.md or raw grep output.
 - Dirty graphify-out/ files are expected after hooks or incremental updates; dirty graph files are not a reason to skip graphify. Only skip graphify if the task is about stale or incorrect graph output, or the user explicitly says not to use it.
 - If graphify-out/wiki/index.md exists, use it for broad navigation instead of raw source browsing.

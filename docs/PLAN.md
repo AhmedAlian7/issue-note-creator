@@ -19,7 +19,7 @@ The goal is to cut a warehouse issue note from a WhatsApp message plus a Word fi
 
 ## Roles and permissions
 
-Three roles cover the process; each user logs in with a phone number or PIN, so the keeper never types a password.
+Three roles cover the process; each user signs in with a username and PIN. On first sign-in, a provisioned user sets their own PIN.
 
 | Role | Main job | Can do | Cannot do |
 | --- | --- | --- | --- |
@@ -49,7 +49,6 @@ The keeper's screen has one giant microphone button; everything else is secondar
 
 - Pixel-matched to your attached template: logo and watermark, RTL Arabic layout, customer, number, date, 10-row table with serial, item, quantity and notes, receipt statement, signature lines for approver, storekeeper and driver, and the footer with website, phone and QR code.
 - If a note has more than 10 lines, it continues onto a second page automatically with the same note number and "page 1 of 2".
-- Destination notes such as the hotel name print in red like the current template.
 - Saved permanently and searchable by number, customer and date.
 
 ## Owner features: reports and dashboard
@@ -60,18 +59,18 @@ The owner gets automatic email reports and a mobile-friendly dashboard, with no 
 
 | Report | When | Contents |
 | --- | --- | --- |
-| Daily | End of day, time you choose (default 8 PM) | Notes issued today, per customer, per product, total units, PDF attached or linked |
+| Daily | End of day, time you choose (default 8 PM) | Issued-note count, then each note number and recipient with its products, quantities and remarks |
 | Weekly | Start of week, day and time you choose | Totals vs previous week, top customers and products, busiest day |
 | Monthly | First day of month | Full summary, trends, customer ranking, slow-moving products, Excel export attached |
 
 - Recipients are configurable (several emails, for example you and an accountant).
 - Reports are skipped or marked "no activity" on days without notes, as you prefer.
-- Each email includes a link that opens the matching dashboard view.
+- Weekly and monthly emails include a link to the matching dashboard view.
 
 **Dashboard**
 
 - Today's notes with status, and a live feed as the keeper creates them.
-- Charts: units issued by day, by product, by customer, and by destination.
+- Charts: units issued by day, by product, and by customer.
 - Top and slow-moving products, customer ranking, average notes per day.
 - Searchable archive of all notes with filters (date, customer, product, number) and PDF re-download.
 - Export to Excel or CSV.
@@ -140,8 +139,8 @@ Every request from the keeper, admin or owner goes through the API; the API alon
 - **Frontend:** mobile-first PWA with Tailwind and Arabic RTL layout, installable on the phone's home screen, using the browser's microphone recording.
 - **AI:** a speech-to-text API that supports Egyptian Arabic, then an LLM with structured JSON output checked against the Zod schema and your product list.
 - **PDF:** your template rebuilt as an HTML page with an embedded Arabic font, rendered to PDF with headless Chromium (Playwright) for exact RTL shaping and layout.
-- **Scheduled reports:** pg-boss, a job queue and scheduler that runs inside PostgreSQL (no Redis), with email sent through Nodemailer or a transactional provider.
-- **Hosting:** Docker Compose on one small cloud server, because Chromium needs a normal server rather than a serverless function, with daily database backups.
+- **Scheduled reports:** an hourly GitHub Actions call to a protected `/api/cron/reports` endpoint, with `ReportLog` rows making each period idempotent, and email sent through Resend or Nodemailer.
+- **Hosting:** Netlify Free for the Next.js app, Neon Free PostgreSQL for data and issued PDF bytes, and Cloudflare Browser Run for PDF rendering, with nightly database backups. See `docs/FREE_CLOUD_DEPLOYMENT.md`.
 
 **Making the project easy for an AI coding agent (Codex)**
 
@@ -162,7 +161,7 @@ Every request from the keeper, admin or owner goes through the API; the API alon
 | IssueNote | number, date, customer, status, version, creator, PDF file |
 | NoteLine | note, product, quantity, notes |
 | Recording | note, transcript, match confidence |
-| User | name, role, phone and PIN |
+| User | name, role, username and PIN |
 | AuditLog | who, what, when, old and new value |
 | ReportSetting | frequency, time, recipients |
 

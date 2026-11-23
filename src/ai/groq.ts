@@ -13,7 +13,8 @@ const instructions = [
   "Choose only from provided active IDs. Never invent a product. Return null productId or customerId when unsure.",
   "Preserve the actual spoken product name in spokenText and customer phrase in customerText (empty if absent). Exclude filler, quantity and destinations from names.",
   "Understand Egyptian Arabic number words and digits. A number may be part of a product name: تلاتة سيدني واحد means one three-seater Sydney. Preserve the spoken quantity separately in quantityText.",
-  "Return null quantity if you cannot determine it. Put hotels, branches and other place names in the applicable line's remarks with isDestination true, never in a separate product line.",
+  "Return null for both quantity and quantityText when no quantity is spoken for that item. Do not infer quantity from the product name. Leave remarks null unless spoken. Put hotels, branches and other place names in the applicable line's remarks, never in a separate product line.",
+  "For ثلاثية سيدني وثنائية سيدني, return separate lines for ثلاثية سيدني and ثنائية سيدني, both with null quantities.",
   "Return one line per spoken item, in order, including unmatched items.",
 ].join(" ");
 class HttpFailure extends Error {

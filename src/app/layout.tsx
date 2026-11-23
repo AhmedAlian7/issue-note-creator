@@ -11,10 +11,8 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="ar" dir="rtl">
-      <body className="bg-stone-50 font-sans text-stone-950 antialiased">
-        {children}
-      </body>
+    <html lang="ar-EG" dir="rtl">
+      <body className="font-sans antialiased">{children}</body>
     </html>
   );
 }

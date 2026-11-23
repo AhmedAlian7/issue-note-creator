@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { PendingIndicator } from "@/app/brand/pending-indicator";
 import { ar } from "@/lib/i18n";
 import type { Role } from "@/generated/prisma/enums";
 export type Entity = "product" | "customer" | "user";
@@ -8,7 +9,7 @@ type RecordFields = {
   id: string;
   name?: string;
   nameAr?: string;
-  phone?: string;
+  username?: string;
   role?: Role;
   aliases?: string[];
   category?: string | null;
@@ -95,27 +96,28 @@ export function CatalogForm({
       {entity === "user" ? (
         <>
           <label>
-            {ar.phone}
+            {ar.username}
             <input
-              name="phone"
-              type="tel"
+              name="username"
+              autoComplete="off"
               dir="ltr"
               required
-              defaultValue={row?.phone}
+              defaultValue={row?.username}
             />
           </label>
-          <label>
-            {row ? ar.pinOptional : ar.pin}
-            <input
-              type="password"
-              name="pin"
-              inputMode="numeric"
-              autoComplete="new-password"
-              minLength={4}
-              maxLength={6}
-              required={!row}
-            />
-          </label>
+          {row && (
+            <label>
+              {ar.pinOptional}
+              <input
+                type="password"
+                name="pin"
+                inputMode="numeric"
+                autoComplete="new-password"
+                minLength={4}
+                maxLength={6}
+              />
+            </label>
+          )}
           <label>
             {ar.role}
             <select name="role" defaultValue={row?.role ?? "KEEPER"}>
@@ -159,7 +161,7 @@ export function CatalogForm({
         </>
       )}
       <button disabled={busy}>{ar.save}</button>
-      <output>{message}</output>
+      <output>{busy ? <PendingIndicator /> : message}</output>
     </form>
   );
 }
@@ -182,7 +184,7 @@ export function StateButton({
       >
         {ar[operation]}
       </button>
-      <output>{message}</output>
+      <output>{busy ? <PendingIndicator /> : message}</output>
     </span>
   );
 }

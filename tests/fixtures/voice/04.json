@@ -10,7 +10,6 @@
         "quantity": 5,
         "quantityText": "خمسة",
         "remarks": null,
-        "isDestination": false,
         "confidence": 0.95
       }
     ]
@@ -21,8 +20,7 @@
       {
         "productId": "p4",
         "quantity": 5,
-        "remarks": null,
-        "isDestination": false
+        "remarks": null
       }
     ]
   }
