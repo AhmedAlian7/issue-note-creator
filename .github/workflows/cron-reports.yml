@@ -19,12 +19,19 @@ jobs:
     steps:
       - name: Call the protected report endpoint
         env:
-          APP_BASE_URL: ${{ secrets.APP_BASE_URL }}
+          # APP_BASE_URL is not sensitive, so accept a repository variable too.
+          APP_BASE_URL: ${{ secrets.APP_BASE_URL || vars.APP_BASE_URL }}
           CRON_SECRET: ${{ secrets.CRON_SECRET }}
         run: |
           set -euo pipefail
-          test -n "$APP_BASE_URL" || { echo "::error::APP_BASE_URL secret is empty"; exit 1; }
-          test -n "$CRON_SECRET" || { echo "::error::CRON_SECRET secret is empty"; exit 1; }
+          echo "APP_BASE_URL length: ${#APP_BASE_URL}"
+          if [ -n "$CRON_SECRET" ]; then echo "CRON_SECRET: set"; else echo "CRON_SECRET: empty"; fi
+          test -n "$APP_BASE_URL" || { echo "::error::APP_BASE_URL is empty: add a repository secret or variable with that exact name"; exit 1; }
+          test -n "$CRON_SECRET" || { echo "::error::CRON_SECRET is empty: add a repository secret with that exact name"; exit 1; }
+          case "$APP_BASE_URL" in
+            https://*) ;;
+            *) echo "::error::APP_BASE_URL must start with https://"; exit 1 ;;
+          esac
           status=$(curl --silent --show-error --output body.json --write-out '%{http_code}' \
             --max-time 60 --retry 2 --retry-delay 10 \
             -H "Authorization: Bearer $CRON_SECRET" \
