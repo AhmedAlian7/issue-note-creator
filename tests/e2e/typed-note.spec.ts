@@ -114,7 +114,7 @@ test("keeper types, issues, previews and downloads the numbered PDF on a phone",
   );
   await page.getByRole("button", { name: t.print }).click();
   await expect(page.locator("body")).toHaveAttribute("data-printed", "true");
-  await page.getByRole("link", { name: t.archive }).click();
+  await page.getByRole("main").getByRole("link", { name: t.archive }).click();
   await page.getByLabel(t.search).fill(String(expected));
   await page.getByRole("button", { name: ar.search }).click();
   await expect(

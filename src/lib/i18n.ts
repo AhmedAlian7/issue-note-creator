@@ -1,4 +1,8 @@
 export const ar = {
+  navigation: {
+    menu: "القائمة",
+    recordHint: "قل اسم العميل والأصناف والكميات، ثم راجع الإذن قبل التأكيد.",
+  },
   username: "اسم المستخدم",
   loginChangeUsername: "تغيير اسم المستخدم",
   loginContinue: "متابعة",

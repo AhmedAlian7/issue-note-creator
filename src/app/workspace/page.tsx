@@ -3,7 +3,6 @@ import Link from "next/link";
 import { guard } from "@/server/session";
 import { allowed } from "@/server/permissions";
 import { ar } from "@/lib/i18n";
-import { signOut } from "../login/actions";
 import { recentNotes, duplicateNote, noteCatalog } from "@/server/notes";
 import { redirect } from "next/navigation";
 import { NoteList } from "../notes/note-list";
@@ -15,67 +14,50 @@ export default async function Workspace() {
   const header = (
     <header>
       <p>
-        {user.name} · {ar[user.role]}
+        <bdi>{user.name}</bdi> · {ar[user.role]}
       </p>
       <h1>{ar.workspace}</h1>
+      {recent && <p>{ar.navigation.recordHint}</p>}
     </header>
   );
-  const navigation = (
-    <nav className="menu">
-      {user.role === "OWNER" && (
-        <>
-          <Link href="/dashboard">{ar.reports.dashboard}</Link>
-          <Link href="/settings">{ar.reports.settings}</Link>
-        </>
-      )}
-      {recent && (
-        <>
-          <Link className="new-note" href="/notes/new">
-            {ar.notes.newNote}
-          </Link>
-          {!!recent.customers.length && (
-            <section>
-              <h2>{ar.notes.shortcuts}</h2>
-              <div className="choices">
-                {recent.customers.map((c) => (
-                  <Link key={c.id} href={"/notes/new?customerId=" + c.id}>
-                    {c.nameAr}
-                  </Link>
-                ))}
-              </div>
-            </section>
-          )}
-          <section>
-            <h2>{ar.notes.recent}</h2>
-            {recent.rows[0] && (
-              <form
-                action={async () => {
-                  "use server";
-                  const actor = await guard("note.create");
-                  const copy = await duplicateNote(actor, recent.rows[0].id);
-                  redirect("/notes/" + copy.id);
-                }}
+  const shortcuts = recent && (
+    <div className="workspace-notes">
+      <Link className="action new-note" href="/notes/new">
+        {ar.notes.newNote}
+      </Link>
+      {!!recent.customers.length && (
+        <section>
+          <h2>{ar.notes.shortcuts}</h2>
+          <div className="choices">
+            {recent.customers.map((c) => (
+              <Link
+                className="shortcut-link"
+                key={c.id}
+                href={"/notes/new?customerId=" + c.id}
               >
-                <button>{ar.notes.duplicate}</button>
-              </form>
-            )}
-            <NoteList rows={recent.rows} />
-          </section>
-        </>
+                <bdi>{c.nameAr}</bdi>
+              </Link>
+            ))}
+          </div>
+        </section>
       )}
-      <Link href="/archive">{ar.notes.archive}</Link>
-      {allowed(user.role, "product.manage") ? (
-        <>
-          <Link href="/admin/products">{ar.products}</Link>
-          <Link href="/admin/customers">{ar.customers}</Link>
-        </>
-      ) : (
-        <Link href="/products/new">{ar.addProduct}</Link>
-      )}
-      {allowed(user.role, "user.screen") && (
-        <Link href="/admin/users">{ar.users}</Link>
-      )}
-    </nav>
+      <section className="fields">
+        <h2>{ar.notes.recent}</h2>
+        {recent.rows[0] && (
+          <form
+            action={async () => {
+              "use server";
+              const actor = await guard("note.create");
+              const copy = await duplicateNote(actor, recent.rows[0].id);
+              redirect("/notes/" + copy.id);
+            }}
+          >
+            <button className="secondary">{ar.notes.duplicate}</button>
+          </form>
+        )}
+        <NoteList rows={recent.rows} />
+      </section>
+    </div>
   );
   const catalog = recent ? await noteCatalog(user) : null;
   return (
@@ -87,18 +69,14 @@ export default async function Workspace() {
           products={catalog.products.filter((p) => p.active)}
           customers={catalog.customers.filter((c) => c.active)}
         >
-          {navigation}
+          {shortcuts}
         </VoiceFlow>
       ) : (
         <>
           {header}
           <Link href="/voice">{ar.voice.title}</Link>
-          {navigation}
         </>
       )}
-      <form action={signOut}>
-        <button className="secondary">{ar.logout}</button>
-      </form>
     </main>
   );
 }

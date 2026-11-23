@@ -12,7 +12,7 @@ describe("Arabic home page", () => {
       </RootLayout>,
     );
 
-    expect(html).toContain('<html lang="ar" dir="rtl">');
+    expect(html).toContain('<html lang="ar-EG" dir="rtl">');
     expect(html).toContain(`${ar.appName}</h1>`);
     expect(metadata.title).toBe(ar.appName);
   });

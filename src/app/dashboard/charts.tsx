@@ -36,7 +36,7 @@ export function Chart({ title, rows }: { title: string; rows: Bucket[] }) {
                 <Bar
                   dataKey="units"
                   name={ar.reports.units}
-                  fill="#156873"
+                  fill="var(--graphite)"
                   radius={[4, 4, 0, 0]}
                 />
               </BarChart>

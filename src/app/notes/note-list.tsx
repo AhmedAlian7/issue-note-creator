@@ -14,16 +14,15 @@ export function NoteList({
         <li key={n.id}>
           <Link className="note-row" href={"/notes/" + n.id}>
             <b>
-              {n.number ?? t.DRAFT} · {n.customer.nameAr}
+              <bdi>{n.number ?? t.DRAFT}</bdi> · <bdi>{n.customer.nameAr}</bdi>
             </b>
             <span>
-              {t[archiveStatus(n)]} · {n.date.toISOString().slice(0, 10)} ·{" "}
-              {t.items} {n._count.lines} · {t.version} {n.version}
+              {t[archiveStatus(n)]} ·{" "}
+              <bdi>{n.date.toISOString().slice(0, 10)}</bdi> · {t.items}{" "}
+              {n._count.lines} · {t.version} {n.version}
             </span>
           </Link>
-          {hasPdf(n) && (
-            <a href={"/api/notes/" + n.id + "/pdf"}>{t.open}</a>
-          )}
+          {hasPdf(n) && <a href={"/api/notes/" + n.id + "/pdf"}>{t.open}</a>}
         </li>
       ))}
     </ul>

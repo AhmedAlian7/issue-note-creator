@@ -1,5 +1,8 @@
 import { ar } from "@/lib/i18n";
 import Link from "next/link";
+import Image from "next/image";
+import { Wordmark } from "../brand/wordmark";
+import banner from "../brand/sign-in.png";
 import { redirect } from "next/navigation";
 import { username } from "@/lib/inputs";
 import { db } from "@/server/db";
@@ -21,46 +24,54 @@ export default async function Login({
     : null;
   const enroll = user?.active === true && user.pinHash === null;
   return (
-    <main className="desk narrow">
-      <header>
-        <p>{ar.appName}</p>
-        <h1>{ar.login}</h1>
-      </header>
-      <form
-        action={handle.success ? signIn.bind(null, enroll) : identify}
-        className="fields"
-      >
-        <label>
-          {ar.username}
-          <input
-            name="username"
-            maxLength={80}
-            autoComplete="username"
-            defaultValue={handle.data}
-            readOnly={handle.success}
-            required
-            dir="ltr"
-          />
-        </label>
-        {handle.success && (
+    <main className="sign-in">
+      <div className="desk narrow sign-in-panel">
+        <Wordmark />
+        <header>
+          <p>{ar.appName}</p>
+          <h1>{ar.login}</h1>
+        </header>
+        <form
+          action={handle.success ? signIn.bind(null, enroll) : identify}
+          className="fields"
+        >
           <label>
-            {enroll ? ar.loginSetPin : ar.pin}
+            {ar.username}
             <input
-              type="password"
-              inputMode="numeric"
-              minLength={4}
-              maxLength={6}
-              name="pin"
+              name="username"
+              maxLength={80}
+              autoComplete="username"
+              defaultValue={handle.data}
+              readOnly={handle.success}
               required
-              autoComplete={enroll ? "new-password" : "current-password"}
               dir="ltr"
             />
           </label>
-        )}
-        {query.failed === "1" && <p role="alert">{ar.loginError}</p>}
-        <button>{handle.success ? ar.login : ar.loginContinue}</button>
-        {handle.success && <Link href="/login">{ar.loginChangeUsername}</Link>}
-      </form>
+          {handle.success && (
+            <label>
+              {enroll ? ar.loginSetPin : ar.pin}
+              <input
+                type="password"
+                inputMode="numeric"
+                minLength={4}
+                maxLength={6}
+                name="pin"
+                required
+                autoComplete={enroll ? "new-password" : "current-password"}
+                dir="ltr"
+              />
+            </label>
+          )}
+          {query.failed === "1" && <p role="alert">{ar.loginError}</p>}
+          <button>{handle.success ? ar.login : ar.loginContinue}</button>
+          {handle.success && (
+            <Link href="/login">{ar.loginChangeUsername}</Link>
+          )}
+        </form>
+      </div>
+      <div className="sign-in-image">
+        <Image src={banner} alt="" fill sizes="55vw" unoptimized />
+      </div>
     </main>
   );
 }

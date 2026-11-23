@@ -5,7 +5,10 @@ const baseURL = `http://127.0.0.1:${port}`;
 
 export default defineConfig({
   testDir: "./tests/e2e",
-  use: { ...devices["Pixel 7"], baseURL },
+  use: {
+    ...devices[process.env.E2E_DESKTOP === "1" ? "Desktop Chrome" : "Pixel 7"],
+    baseURL,
+  },
   webServer: {
     env: {
       AI_PROVIDER: "fake",

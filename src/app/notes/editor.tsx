@@ -246,7 +246,7 @@ export function Editor({
                     maxLength={300}
                     value={line.remarks}
                     style={
-                      line.isDestination ? { color: "#a62225" } : undefined
+                      line.isDestination ? { color: "var(--error)" } : undefined
                     }
                     onChange={(e) =>
                       changeLine(line.key, {

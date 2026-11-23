@@ -8,8 +8,12 @@ import { ar } from "@/lib/i18n";
 import { fixtureSpeech } from "@/ai/fixture-provider";
 const t = ar.notes,
   f = ar.flow;
+const viewport =
+  process.env.E2E_DESKTOP === "1"
+    ? { width: 1440, height: 900 }
+    : { width: 360, height: 800 };
 test.use({
-  viewport: { width: 360, height: 800 },
+  viewport,
   permissions: ["microphone"],
   launchOptions: {
     args: [
@@ -61,7 +65,7 @@ test("mobile keeper reviews speech, resolves matches, corrects and issues a PDF"
   const violations = (await new AxeBuilder({ page }).analyze()).violations;
   expect(violations.map((v) => v.id)).toEqual([]);
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(
-    360,
+    viewport.width,
   );
   await button(t.confirm).click();
   await expect(page.locator(".pdf-pages canvas")).toBeVisible({
