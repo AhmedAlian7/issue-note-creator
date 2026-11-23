@@ -65,6 +65,10 @@ it("rolls back failed issuance and serializes twenty full confirmations", async 
     Array.from({ length: 20 }, (_, i) => (start.nextNumber ?? 973) + i),
   );
   expect(await readFile(issued[0].pdfPath!, "utf8")).toBe("%PDF-test");
+  const persisted = await db.issueNote.findUniqueOrThrow({
+    where: { id: issued[0].id },
+  });
+  expect(persisted.pdfPath).toBe(issued[0].pdfPath);
   expect(renderNotePdf).toHaveBeenCalledWith(
     expect.objectContaining({
       number: issued[0].number,

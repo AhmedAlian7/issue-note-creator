@@ -139,11 +139,6 @@ async function issueTransaction(
 async function issue(tx: Tx, note: Note, number: number, pdfPath: string) {
   if (!note.lines.length) throw new NoteConflict();
   const date = today();
-  const confirmed = await tx.issueNote.update({
-    where: { id: note.id },
-    data: { status: "CONFIRMED", date, number },
-    include: detail,
-  });
   const pdf = await renderNotePdf({
     company: company.safeParse(
       (await tx.setting.findUnique({ where: { key: "company" } }))?.value,
@@ -157,11 +152,12 @@ async function issue(tx: Tx, note: Note, number: number, pdfPath: string) {
     })),
   });
   const stored = await savePdf(tx, note.id, pdf, pdfPath);
-  return {
-    ...confirmed,
-    pdfPath: stored.pdfPath,
-    pdf: { byteSize: stored.byteSize },
-  };
+  const confirmed = await tx.issueNote.update({
+    where: { id: note.id },
+    data: { status: "CONFIRMED", date, number, pdfPath: stored.pdfPath },
+    include: detail,
+  });
+  return { ...confirmed, pdf: { byteSize: stored.byteSize } };
 }
 export async function confirmNote(
   actor: Actor,
