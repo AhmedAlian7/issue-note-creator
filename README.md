@@ -2,6 +2,18 @@
 
 An Egyptian Arabic, right-to-left warehouse app for drafting issue notes by voice or by hand, reviewing inventory lines, and sharing numbered PDFs. Owners can manage the catalogue, review the archive and schedule reports. See the [Arabic keeper guide](docs/KEEPER-GUIDE.md).
 
+## Production deployment
+
+The [Ubuntu deployment guide](docs/DEPLOY.md) covers the Compose stack, HTTPS, owner setup, backups, restores and updates. See the [QA report](docs/QA-REPORT.md) for verification.
+
+## Offline drafts and sharing
+
+After signing in on a phone over HTTPS, install the app from the browser to open it from the home screen. When the connection drops, finish recording or save typed note text. The app keeps the input on the device and sends it for analysis when the connection returns and the keeper has the app open. Review and confirm each draft online to allocate its number.
+
+Use **مشاركة** on the PDF preview to open the phone’s share sheet and select WhatsApp, or download and attach the PDF manually. Printing is available from the same preview.
+
+`ManualShareSender` provides these actions through the `NoteSender` interface. The WhatsApp Business sender is a disabled stub. A future integration needs an approved WhatsApp Business account and sender number, a customer-to-group or phone-number mapping with recipient consent, and an approved message template for outgoing PDF notifications. Confirm that the chosen WhatsApp Business integration supports the intended group destinations before enabling automatic sending.
+
 ## Prerequisites
 
 - Node.js 24 or Node.js 22.15 or newer in the 22.x line

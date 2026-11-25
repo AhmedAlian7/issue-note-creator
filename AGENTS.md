@@ -23,6 +23,13 @@ Use Node.js 24 or Node.js 22.15 or newer in the 22.x line. Use the pnpm version 
 
 Copy `.env.example` to `.env` for local integration settings. Its database URL connects to the Compose database from the host. The Compose app uses `db` as its database hostname. `TZ` defaults to `Africa/Cairo`.
 
+## Production
+
+- Follow `docs/DEPLOY.md` for the Ubuntu Compose stack, owner bootstrap, backups, restores and updates.
+- Keep the production PDF path on its persistent volume. Health probes use the dedicated `HEALTH_SECRET` bearer credential. The report scheduler uses a separate `CRON_SECRET`.
+- Keep private API responses and signed-in HTML out of service-worker caches. The generic offline shell lives in `src/app/offline/`. Drafts in IndexedDB only sync with the keeper’s matching session. Numbering and confirmation always run on the server.
+- Verify production dependencies with `pnpm audit --prod`. The Playwright security test should cover each new API handler.
+
 ## Folder layout
 
 For local reports run `docker compose up -d db mailhog`. MailHog accepts SMTP on localhost:1025 and displays messages at http://localhost:8025. Set a random SESSION_SECRET for signed PDF links. Compose defaults to the mailhog hostname, with SMTP_HOST available for external SMTP. Apply migrations with `pnpm exec prisma migrate deploy` before starting the app.
