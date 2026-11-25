@@ -1,3 +1,5 @@
+import { Prisma } from "@/generated/prisma/client";
+import type { VoiceResult } from "@/ai/pipeline";
 import { db } from "./db";
 import { authorize, type Actor } from "./permissions";
 import { defaults, thresholds, transcriptInput } from "@/ai/contracts";
@@ -26,23 +28,53 @@ export async function processVoice(
   actor: Actor,
   input: string | Blob,
   usage: (n: number) => void,
+  draftId?: string,
 ) {
   authorize(actor, "workspace");
+  const saved = draftId ? await storedRecording(actor.id, draftId) : null;
+  if (saved) return saved;
   const { catalog, limits } = await voiceCatalog();
   const providers =
     process.env.AI_PROVIDER === "fake"
       ? fixtureProviders(catalog)
       : { extractor: groqExtractor, transcriber: groqTranscriber };
   const result = await parseVoice(input, catalog, providers, limits, usage);
-  const { id: recordingId } = await db.recording.create({
-    data: {
-      createdById: actor.id,
-      transcript: result.transcript,
-      parsedJson: result.draft,
-    },
-    select: { id: true },
+  try {
+    const { id: recordingId } = await db.recording.create({
+      data: {
+        id: draftId,
+        createdById: actor.id,
+        transcript: result.transcript,
+        parsedJson: result.draft,
+      },
+      select: { id: true },
+    });
+    return { ...result, recordingId };
+  } catch (error) {
+    if (
+      draftId &&
+      error instanceof Prisma.PrismaClientKnownRequestError &&
+      error.code === "P2002"
+    ) {
+      const concurrent = await storedRecording(actor.id, draftId);
+      if (concurrent) return concurrent;
+    }
+    throw error;
+  }
+}
+
+async function storedRecording(userId: string, id: string) {
+  const row = await db.recording.findUnique({
+    where: { id, createdById: userId },
+    select: { id: true, transcript: true, parsedJson: true },
   });
-  return { ...result, recordingId };
+  return (
+    row && {
+      recordingId: row.id,
+      transcript: row.transcript,
+      draft: row.parsedJson as VoiceResult["draft"],
+    }
+  );
 }
 
 async function voiceCatalog() {

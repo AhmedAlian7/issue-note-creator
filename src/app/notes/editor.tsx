@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { PendingIndicator } from "@/app/brand/pending-indicator";
 import { ar } from "@/lib/i18n";
 import { normalizeArabic } from "@/lib/note-filters";
+import { useOnline } from "../pwa/connectivity";
 import { command } from "./command";
 import { NumberControl } from "./number-control";
 import { RemarkFields } from "./remark-fields";
@@ -54,6 +55,7 @@ export function Editor({
   amend,
 }: Props) {
   const router = useRouter();
+  const online = useOnline();
   const [navigating, startNavigation] = useTransition();
   const [data, setData] = useState(initial),
     [products, setProducts] = useState(catalog);
@@ -184,6 +186,7 @@ export function Editor({
       <header>
         <p>{ar.appName}</p>
         <h1>{summary ? t.summary : amend ? t.supersede : t.editor}</h1>
+        {!online && <p role="status">{ar.pwa.offline}</p>}
       </header>
       <fieldset disabled={busy} className="fields">
         {!summary && (
@@ -412,7 +415,7 @@ export function Editor({
         {summary ? (
           <>
             <button
-              disabled={amend && !reason.trim()}
+              disabled={!online || (amend && !reason.trim())}
               onClick={() =>
                 run(async () => {
                   await save(data);
@@ -446,7 +449,7 @@ export function Editor({
           </>
         ) : (
           <button
-            disabled={!valid}
+            disabled={!online || !valid}
             onClick={() =>
               run(async () => {
                 await save(data);

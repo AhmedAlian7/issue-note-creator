@@ -5,6 +5,7 @@ import type { processEdit } from "@/server/voice";
 import { normalize } from "@/ai/matching";
 import { PendingIndicator } from "@/app/brand/pending-indicator";
 import { ar } from "@/lib/i18n";
+import { useOnline } from "../pwa/connectivity";
 import { command } from "../notes/command";
 import { NumberControl } from "../notes/number-control";
 import {
@@ -28,11 +29,13 @@ type Panel =
 export function ConfirmControl({
   draft,
   onConfirm,
+  offline = false,
 }: {
   draft: Draft;
   onConfirm: () => void;
+  offline?: boolean;
 }) {
-  const reason = blockers(draft);
+  const reason = offline ? ar.pwa.offline : blockers(draft);
   return (
     <div className="confirm-control">
       {reason && <p id="confirm-blocker">{reason}</p>}
@@ -51,8 +54,10 @@ export function Review({
   products: catalog,
   customers,
   canConfirm,
+  onConfirmed,
 }: {
   canConfirm: boolean;
+  onConfirmed?: () => Promise<void>;
   initial: Draft;
   products: Item[];
   customers: Item[];
@@ -73,6 +78,7 @@ export function Review({
   );
   const dialog = useRef<HTMLDialogElement>(null);
   const router = useRouter();
+  const online = useOnline();
   const [navigating, startNavigation] = useTransition();
   const busy = working || navigating;
   useEffect(() => {
@@ -223,6 +229,7 @@ export function Review({
         expected: saved.current.updatedAt,
         number,
       });
+      await onConfirmed?.().catch(() => {});
       startNavigation(() => router.replace("/notes/" + record.id));
     });
   }
@@ -352,7 +359,13 @@ export function Review({
               {f.undo}
             </button>
           )}
-          {canConfirm && <ConfirmControl draft={draft} onConfirm={confirm} />}
+          {canConfirm && (
+            <ConfirmControl
+              offline={!online}
+              draft={draft}
+              onConfirm={confirm}
+            />
+          )}
         </footer>
       </fieldset>
       <dialog

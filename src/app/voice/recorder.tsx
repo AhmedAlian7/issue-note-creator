@@ -5,10 +5,14 @@ import { useEffect, useRef, useState } from "react";
 import { PendingIndicator } from "@/app/brand/pending-indicator";
 import { ar } from "@/lib/i18n";
 import type { VoiceResult } from "@/ai/pipeline";
+import { enqueue, sendVoice } from "../pwa/drafts";
+import { useOnline } from "../pwa/connectivity";
 import { capture } from "./capture";
 
 const labels = ar.voice;
 type Props = {
+  userId?: string;
+  localOnly?: boolean;
   onResult: (result: VoiceResult) => void;
   label?: string;
   correction?: {
@@ -16,7 +20,15 @@ type Props = {
     apply: (result: Awaited<ReturnType<typeof processEdit>>) => void;
   };
 };
-export function VoiceRecorder({ onResult, label, correction }: Props) {
+export function VoiceRecorder({
+  onResult,
+  label,
+  correction,
+  userId,
+  localOnly,
+}: Props) {
+  const online = useOnline();
+  const [stored, setStored] = useState(false);
   const [state, setState] = useState<
     "idle" | "opening" | "recording" | "paused" | "busy"
   >("idle");
@@ -44,6 +56,21 @@ export function VoiceRecorder({ onResult, label, correction }: Props) {
   async function submit(input: Blob | string) {
     setState("busy");
     setError("");
+    setStored(false);
+
+    async function store() {
+      if (!userId) return fail(labels.failed);
+      try {
+        await enqueue(userId, input);
+        if (!mounted.current) return;
+        setText("");
+        setStored(true);
+        setState("idle");
+      } catch {
+        fail(ar.pwa.storageError);
+      }
+    }
+    if (localOnly || (!navigator.onLine && userId)) return store();
 
     try {
       const typed = typeof input === "string";
@@ -52,21 +79,13 @@ export function VoiceRecorder({ onResult, label, correction }: Props) {
         form.set("current", JSON.stringify(correction.current));
         form.set("input", input);
       }
-      const response = await fetch(
-        correction ? "/api/voice/edit" : "/api/voice/parse",
-        {
-          method: "POST",
-          headers: correction
-            ? undefined
-            : { "Content-Type": typed ? "application/json" : input.type },
-          body: correction
-            ? form
-            : typed
-              ? JSON.stringify({ transcript: input })
-              : input,
-          signal: AbortSignal.timeout(115000),
-        },
-      );
+      const response = correction
+        ? await fetch("/api/voice/edit", {
+            method: "POST",
+            body: form,
+            signal: AbortSignal.timeout(115_000),
+          })
+        : await sendVoice(input, userId);
       const data = await response.json();
       if (!response.ok) {
         if (
@@ -85,7 +104,8 @@ export function VoiceRecorder({ onResult, label, correction }: Props) {
         setState("idle");
       }
     } catch {
-      fail(labels.failed);
+      if (userId) await store();
+      else fail(labels.failed);
     }
   }
   async function start() {
@@ -196,7 +216,7 @@ export function VoiceRecorder({ onResult, label, correction }: Props) {
             disabled={state !== "idle" || !text.trim()}
             onClick={() => void submit(text)}
           >
-            {labels.parse}
+            {(localOnly || !online) && userId ? ar.pwa.save : labels.parse}
           </button>
         </>
       )}
@@ -209,6 +229,7 @@ export function VoiceRecorder({ onResult, label, correction }: Props) {
           ""
         )}
       </output>
+      {stored && <p role="status">{ar.pwa.queued}</p>}
       {error && <p role="alert">{error}</p>}
     </div>
   );

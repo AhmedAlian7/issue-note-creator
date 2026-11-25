@@ -5,6 +5,7 @@ import Home from "@/app/page";
 import { ar } from "@/lib/i18n";
 
 vi.mock("next/server", () => ({ connection: async () => {} }));
+vi.mock("@/app/pwa/register", () => ({ RegisterWorker: () => null }));
 
 describe("Arabic home page", () => {
   it("renders the localized heading and declares the document language and direction", async () => {
