@@ -6,7 +6,8 @@ RUN apt-get update \
     && npm install --global pnpm@11.25.0
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY prisma/schema.prisma ./prisma/schema.prisma
-RUN pnpm install --frozen-lockfile
+RUN --mount=type=cache,id=warehouse-pnpm-store,target=/pnpm/store \
+    pnpm install --frozen-lockfile --store-dir /pnpm/store --network-concurrency=8 --fetch-timeout=120000
 COPY next.config.ts postcss.config.mjs tsconfig.json prisma.config.ts ./
 COPY prisma ./prisma
 COPY src ./src
