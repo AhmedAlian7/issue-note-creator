@@ -11,6 +11,8 @@ export const db =
     adapter: new PrismaPg({
       connectionString: process.env.DATABASE_URL,
       connectionTimeoutMillis: 15_000,
+      // Prisma can load sibling relations concurrently on one transaction connection.
+      pipeline: true,
     }),
     // Starting a transaction can include waking the hosted database.
     transactionOptions: { maxWait: 20_000 },
