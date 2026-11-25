@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { appUrl } from "@/server/app-url";
 import { ar } from "@/lib/i18n";
+import { requestOrigin } from "@/server/request-origin";
 
 const development = process.env.NODE_ENV === "development";
 
@@ -28,13 +28,7 @@ export function proxy(request: NextRequest) {
   const bearerOnly = path === "/api/cron/reports";
   const safe = ["GET", "HEAD", "OPTIONS"].includes(request.method);
   const origin = request.headers.get("origin");
-  const host = request.headers.get("host") ?? "";
-  const local = /^(localhost|127\.0\.0\.1|\[::1\])(?::\d+)?$/i.test(host);
-  const expected = local
-    ? `${request.nextUrl.protocol}//${host}`
-    : process.env.APP_BASE_URL?.trim()
-      ? appUrl("/").origin
-      : request.nextUrl.origin;
+  const expected = requestOrigin(request.headers) ?? request.nextUrl.origin;
   const sameOrigin = origin === expected;
   const action = request.headers.has("next-action");
   const response =
