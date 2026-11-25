@@ -1,16 +1,16 @@
 # Graph Report - issue-note-creator  (2026-11-25)
 
 ## Corpus Check
-- 208 files · ~178,401 words
+- 210 files · ~178,620 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 761 nodes · 1838 edges · 46 communities (34 shown, 12 thin omitted)
+- 767 nodes · 1855 edges · 46 communities (34 shown, 12 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 2 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `dfb2359e`
+- Built from commit: `b06f7089`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -63,9 +63,9 @@
 4. `allowed()` - 22 edges
 5. `currentUser()` - 22 edges
 6. `PendingLink()` - 16 edges
-7. `compilerOptions` - 16 edges
-8. `scripts` - 14 edges
-9. `redirectToApp()` - 14 edges
+7. `redirectToApp()` - 16 edges
+8. `compilerOptions` - 16 edges
+9. `scripts` - 14 edges
 10. `useOnline()` - 13 edges
 
 ## Surprising Connections (you probably didn't know these)
@@ -73,12 +73,12 @@
   scripts/pdf-comparison.ts → src/pdf/render-note-pdf.ts
 - `workbook()` --calls--> `sheet()`  [INFERRED]
   src/server/reports/export.ts → src/pdf/note-template.ts
+- `Catalog()` --calls--> `guard()`  [EXTRACTED]
+  src/app/admin/[section]/page.tsx → src/server/session.ts
 - `GET` --calls--> `currentUser()`  [EXTRACTED]
   src/app/api/notes/[id]/pdf/route.ts → src/server/session.ts
 - `GET` --calls--> `currentUser()`  [EXTRACTED]
   src/app/api/reports/export/route.ts → src/server/session.ts
-- `aliasHandler()` --calls--> `allowed()`  [EXTRACTED]
-  src/app/api/voice/alias-handler.ts → src/server/permissions.ts
 
 ## Import Cycles
 - None detected.
@@ -86,8 +86,8 @@
 ## Communities (46 total, 12 thin omitted)
 
 ### Community 0 - "Community 0"
-Cohesion: 0.07
-Nodes (48): GET, draftTimestamp, noteInput, noteNumber, reasonInput, notePdfDisposition(), notePdfName(), archiveStatus() (+40 more)
+Cohesion: 0.06
+Nodes (62): NotePage(), GET, aliases, customerInput, draftTimestamp, id, name, noteInput (+54 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.08
@@ -99,7 +99,7 @@ Nodes (18): dependencies, exceljs, @fontsource-variable/cairo, next, @node-rs/ar
 
 ### Community 3 - "Community 3"
 Cohesion: 0.06
-Nodes (61): Catalog, defaults, Entry, Extraction, Extractor, phrase, score, thresholds (+53 more)
+Nodes (62): Catalog, defaults, Entry, Extraction, Extractor, phrase, score, thresholds (+54 more)
 
 ### Community 4 - "Community 4"
 Cohesion: 0.10
@@ -107,7 +107,7 @@ Nodes (19): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModu
 
 ### Community 5 - "Community 5"
 Cohesion: 0.05
-Nodes (74): Dashboard(), GET, base, company, defaultCompany, defaultSchedule, field, frequencies (+66 more)
+Nodes (76): Dashboard(), GET, base, company, defaultCompany, defaultSchedule, field, frequencies (+68 more)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.11
@@ -158,8 +158,8 @@ Cohesion: 0.33
 Nodes (5): إنشاء إذن صرف, التأكيد والمشاركة, دليل أمين المخزن, عند انقطاع الإنترنت, مراجعة البنود
 
 ### Community 29 - "Community 29"
-Cohesion: 0.08
-Nodes (28): fixtureSpeech, name, owner, aliases, customerInput, id, loginInput, name (+20 more)
+Cohesion: 0.11
+Nodes (15): name, owner, loginInput, accounts, customers, products, dryRun, audit() (+7 more)
 
 ### Community 30 - "Community 30"
 Cohesion: 0.25
@@ -183,7 +183,7 @@ Nodes (5): Back up and restore, Configure and start, Deploy on Ubuntu with Docke
 
 ### Community 37 - "Community 37"
 Cohesion: 0.09
-Nodes (31): VoiceResult, OfflineRecorder(), useOnline(), deleteDraft(), enqueue(), listDrafts(), putDraft(), QueuedDraft (+23 more)
+Nodes (32): VoiceResult, OfflineRecorder(), useOnline(), deleteDraft(), enqueue(), listDrafts(), putDraft(), QueuedDraft (+24 more)
 
 ### Community 38 - "Community 38"
 Cohesion: 0.40
@@ -191,11 +191,11 @@ Nodes (4): Color palette, Italian Home Furniture — Website Branding Brief, Log
 
 ### Community 45 - "Community 45"
 Cohesion: 0.10
-Nodes (30): Archive(), Navigation(), SubmitButton(), Wordmark(), WorkspaceLayout(), NotePage(), username, identify() (+22 more)
+Nodes (26): Archive(), Navigation(), SubmitButton(), Wordmark(), WorkspaceLayout(), username, identify(), sessionCookie (+18 more)
 
 ### Community 46 - "Community 46"
 Cohesion: 0.07
-Nodes (32): CatalogForm(), Entity, RecordFields, StateButton(), useMutation(), ErrorPage(), metadata, RootLayout() (+24 more)
+Nodes (33): CatalogForm(), Entity, RecordFields, StateButton(), useMutation(), ErrorPage(), metadata, RootLayout() (+25 more)
 
 ## Knowledge Gaps
 - **263 isolated node(s):** `owner`, `name`, `nextConfig`, `name`, `version` (+258 more)
@@ -206,15 +206,15 @@ Nodes (32): CatalogForm(), Entity, RecordFields, StateButton(), useMutation(), E
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `ar` connect `Community 46` to `Community 0`, `Community 3`, `Community 37`, `Community 6`, `Community 5`, `Community 45`, `Community 29`?**
-  _High betweenness centrality (0.103) - this node is a cross-community bridge._
+  _High betweenness centrality (0.105) - this node is a cross-community bridge._
 - **Why does `ManualShareSender` connect `Community 30` to `Community 46`?**
   _High betweenness centrality (0.009) - this node is a cross-community bridge._
-- **Why does `authorize()` connect `Community 0` to `Community 3`, `Community 29`, `Community 5`, `Community 45`?**
+- **Why does `authorize()` connect `Community 0` to `Community 3`, `Community 5`, `Community 45`, `Community 46`, `Community 29`?**
   _High betweenness centrality (0.008) - this node is a cross-community bridge._
 - **What connects `owner`, `name`, `nextConfig` to the rest of the system?**
   _263 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
-  _Cohesion score 0.07431693989071038 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.05981012658227848 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
   _Cohesion score 0.08333333333333333 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**

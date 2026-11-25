@@ -1172,7 +1172,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "ai_fixture_provider_fixturespeech",
-      "community": 29,
+      "community": 3,
       "norm_label": "fixturespeech"
     },
     {
@@ -1502,7 +1502,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "section_page_catalog",
-      "community": 45,
+      "community": 46,
       "norm_label": "catalog()"
     },
     {
@@ -2292,7 +2292,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "id_page",
-      "community": 45,
+      "community": 0,
       "norm_label": "page.tsx"
     },
     {
@@ -2302,7 +2302,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "id_page_notepage",
-      "community": 45,
+      "community": 0,
       "norm_label": "notepage()"
     },
     {
@@ -2482,7 +2482,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "notes_pdf_preview_pdfpreview",
-      "community": 45,
+      "community": 0,
       "norm_label": "pdfpreview()"
     },
     {
@@ -2532,7 +2532,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "notes_void_form_voidform",
-      "community": 45,
+      "community": 0,
       "norm_label": "voidform()"
     },
     {
@@ -2922,7 +2922,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "voice_flow_voiceflow",
-      "community": 45,
+      "community": 37,
       "norm_label": "voiceflow()"
     },
     {
@@ -2992,7 +2992,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "voice_page",
-      "community": 45,
+      "community": 37,
       "norm_label": "page.tsx"
     },
     {
@@ -3222,7 +3222,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_inputs",
-      "community": 29,
+      "community": 0,
       "norm_label": "inputs.ts"
     },
     {
@@ -3232,7 +3232,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "lib_inputs_digits",
-      "community": 29,
+      "community": 0,
       "norm_label": "digits()"
     },
     {
@@ -3252,7 +3252,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "lib_inputs_pin",
-      "community": 29,
+      "community": 0,
       "norm_label": "pin"
     },
     {
@@ -3272,7 +3272,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "lib_inputs_id",
-      "community": 29,
+      "community": 0,
       "norm_label": "id"
     },
     {
@@ -3282,7 +3282,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "lib_inputs_name",
-      "community": 29,
+      "community": 0,
       "norm_label": "name"
     },
     {
@@ -3292,7 +3292,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "lib_inputs_optionaltext",
-      "community": 29,
+      "community": 0,
       "norm_label": "optionaltext"
     },
     {
@@ -3302,7 +3302,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "lib_inputs_aliases",
-      "community": 29,
+      "community": 0,
       "norm_label": "aliases"
     },
     {
@@ -3312,7 +3312,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "lib_inputs_productinput",
-      "community": 29,
+      "community": 0,
       "norm_label": "productinput"
     },
     {
@@ -3322,7 +3322,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "lib_inputs_customerinput",
-      "community": 29,
+      "community": 0,
       "norm_label": "customerinput"
     },
     {
@@ -3332,7 +3332,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "lib_inputs_userinput",
-      "community": 29,
+      "community": 0,
       "norm_label": "userinput"
     },
     {
@@ -3382,7 +3382,7 @@
       "source_location": "L65",
       "_origin": "ast",
       "id": "lib_inputs_notenumbertext",
-      "community": 29,
+      "community": 0,
       "norm_label": "notenumbertext"
     },
     {
@@ -3392,7 +3392,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_note_filters",
-      "community": 46,
+      "community": 0,
       "norm_label": "note-filters.ts"
     },
     {
@@ -3402,7 +3402,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "lib_note_filters_filters",
-      "community": 46,
+      "community": 0,
       "norm_label": "filters"
     },
     {
@@ -3899,7 +3899,7 @@
       "label": "config",
       "file_type": "code",
       "source_file": "src/proxy.ts",
-      "source_location": "L50",
+      "source_location": "L44",
       "_origin": "ast",
       "id": "src_proxy_config",
       "community": 5,
@@ -3919,7 +3919,7 @@
       "label": "redirectToApp()",
       "file_type": "code",
       "source_file": "src/server/app-redirect.ts",
-      "source_location": "L4",
+      "source_location": "L6",
       "_origin": "ast",
       "id": "server_app_redirect_redirecttoapp",
       "community": 45,
@@ -3936,10 +3936,20 @@
       "norm_label": "app-url.ts"
     },
     {
+      "label": "isLoopbackOrigin()",
+      "file_type": "code",
+      "source_file": "src/server/app-url.ts",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "server_app_url_isloopbackorigin",
+      "community": 5,
+      "norm_label": "isloopbackorigin()"
+    },
+    {
       "label": "appUrl()",
       "file_type": "code",
       "source_file": "src/server/app-url.ts",
-      "source_location": "L1",
+      "source_location": "L13",
       "_origin": "ast",
       "id": "server_app_url_appurl",
       "community": 5,
@@ -4052,7 +4062,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "server_catalog_list_listcatalog",
-      "community": 45,
+      "community": 46,
       "norm_label": "listcatalog()"
     },
     {
@@ -4062,7 +4072,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_catalog",
-      "community": 29,
+      "community": 0,
       "norm_label": "catalog.ts"
     },
     {
@@ -4082,7 +4092,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "server_catalog_target",
-      "community": 29,
+      "community": 0,
       "norm_label": "target"
     },
     {
@@ -4102,7 +4112,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "server_catalog_command",
-      "community": 29,
+      "community": 0,
       "norm_label": "command"
     },
     {
@@ -4482,7 +4492,7 @@
       "source_location": "L304",
       "_origin": "ast",
       "id": "notes_index_recentnotes",
-      "community": 0,
+      "community": 45,
       "norm_label": "recentnotes()"
     },
     {
@@ -4582,7 +4592,7 @@
       "source_location": "L2",
       "_origin": "ast",
       "id": "server_permissions_actor",
-      "community": 29,
+      "community": 45,
       "norm_label": "actor"
     },
     {
@@ -5196,6 +5206,26 @@
       "norm_label": "runduereports()"
     },
     {
+      "label": "request-origin.ts",
+      "file_type": "code",
+      "source_file": "src/server/request-origin.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "server_request_origin",
+      "community": 5,
+      "norm_label": "request-origin.ts"
+    },
+    {
+      "label": "requestOrigin()",
+      "file_type": "code",
+      "source_file": "src/server/request-origin.ts",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "server_request_origin_requestorigin",
+      "community": 5,
+      "norm_label": "requestorigin()"
+    },
+    {
       "label": "session.ts",
       "file_type": "code",
       "source_file": "src/server/session.ts",
@@ -5756,6 +5786,16 @@
       "norm_label": "app-redirect.test.ts"
     },
     {
+      "label": "setHeaders()",
+      "file_type": "code",
+      "source_file": "tests/unit/app-redirect.test.ts",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "unit_app_redirect_test_setheaders",
+      "community": 45,
+      "norm_label": "setheaders()"
+    },
+    {
       "label": "confirmation-email.test.ts",
       "file_type": "code",
       "source_file": "tests/unit/confirmation-email.test.ts",
@@ -5894,6 +5934,26 @@
       "id": "unit_permissions_test",
       "community": 45,
       "norm_label": "permissions.test.ts"
+    },
+    {
+      "label": "proxy.test.ts",
+      "file_type": "code",
+      "source_file": "tests/unit/proxy.test.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "unit_proxy_test",
+      "community": 5,
+      "norm_label": "proxy.test.ts"
+    },
+    {
+      "label": "request()",
+      "file_type": "code",
+      "source_file": "tests/unit/proxy.test.ts",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "unit_proxy_test_request",
+      "community": 5,
+      "norm_label": "request()"
     },
     {
       "label": "reports.test.ts",
@@ -21084,6 +21144,28 @@
       "target": "server_app_url_appurl"
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/proxy.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "src_proxy",
+      "target": "server_request_origin",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/proxy.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "src_proxy",
+      "target": "server_request_origin_requestorigin",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/proxy.ts",
@@ -21104,6 +21186,17 @@
       "target": "src_proxy_proxy"
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/proxy.test.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "unit_proxy_test",
+      "target": "src_proxy",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
@@ -21113,6 +21206,28 @@
       "weight": 1.0,
       "source": "src_proxy_proxy",
       "target": "server_app_url_appurl"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/proxy.ts",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "src_proxy_proxy",
+      "target": "server_request_origin_requestorigin"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/proxy.test.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "unit_proxy_test",
+      "target": "src_proxy_proxy",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -21147,6 +21262,39 @@
       "target": "server_app_url_appurl"
     },
     {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/server/app-redirect.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "server_app_redirect",
+      "target": "server_app_url_isloopbackorigin",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/server/app-redirect.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "server_app_redirect",
+      "target": "server_request_origin",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/server/app-redirect.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "server_app_redirect",
+      "target": "server_request_origin_requestorigin",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -21164,9 +21312,9 @@
       "source_file": "tests/unit/app-redirect.test.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_app_redirect_test",
-      "target": "server_app_redirect",
-      "confidence_score": 1.0
+      "target": "server_app_redirect"
     },
     {
       "relation": "calls",
@@ -21178,6 +21326,28 @@
       "weight": 1.0,
       "source": "server_app_redirect_redirecttoapp",
       "target": "server_app_url_appurl"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/app-redirect.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "server_app_redirect_redirecttoapp",
+      "target": "server_app_url_isloopbackorigin"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/app-redirect.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "server_app_redirect_redirecttoapp",
+      "target": "server_request_origin_requestorigin"
     },
     {
       "relation": "imports",
@@ -21208,9 +21378,9 @@
       "source_file": "tests/unit/app-redirect.test.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_app_redirect_test",
-      "target": "server_app_redirect_redirecttoapp",
-      "confidence_score": 1.0
+      "target": "server_app_redirect_redirecttoapp"
     },
     {
       "relation": "imports_from",
@@ -21243,6 +21413,49 @@
       "confidence_score": 1.0,
       "source": "server_app_url",
       "target": "server_app_url_appurl"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/server/app-url.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "server_app_url",
+      "target": "server_app_url_isloopbackorigin",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/server/request-origin.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "server_request_origin",
+      "target": "server_app_url",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/server/request-origin.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "server_request_origin",
+      "target": "server_app_url_isloopbackorigin",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/server/request-origin.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "server_request_origin_requestorigin",
+      "target": "server_app_url_isloopbackorigin"
     },
     {
       "relation": "imports",
@@ -25181,6 +25394,16 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "src/server/request-origin.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "server_request_origin",
+      "target": "server_request_origin_requestorigin",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "src/server/session.ts",
       "source_location": "L7",
       "weight": 1.0,
@@ -25771,6 +25994,16 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "tests/unit/app-redirect.test.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "unit_app_redirect_test",
+      "target": "unit_app_redirect_test_setheaders",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "tests/unit/counter.test.ts",
       "source_location": "L10",
       "weight": 1.0,
@@ -25817,6 +26050,16 @@
       "confidence_score": 1.0,
       "source": "unit_pdf_test",
       "target": "unit_pdf_test_poppler"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/proxy.test.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "unit_proxy_test",
+      "target": "unit_proxy_test_request",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -27270,5 +27513,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "dfb2359efcca7c7ff3dbf969f0f6688801f93cc2"
+  "built_at_commit": "b06f7089fdfb38164654127875d29dfafef6039c"
 }
