@@ -30,10 +30,10 @@ Confirmed PDFs are stored in PostgreSQL in the `PdfDocument` table. For local Do
 
 Use the hosted database from your machine while keeping tests on local PostgreSQL.
 
-1. In `.env`, set `DATABASE_URL` to the Neon **pooled** connection string (the host contains `-pooler`) and add `?sslmode=require`:
+1. In `.env`, set `DATABASE_URL` to the Neon **pooled** connection string (the host contains `-pooler`). Use `sslmode=verify-full` and keep any other parameters from Neon:
 
    ```
-   DATABASE_URL=postgresql://USER:PASSWORD@ep-xxxx-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require
+   DATABASE_URL=postgresql://USER:PASSWORD@ep-xxxx-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=verify-full
    DATABASE_URL_TEST=postgresql://issue_notes:local_dev_only@localhost:5432/issue_notes?schema=public
    ```
 
@@ -42,11 +42,12 @@ Use the hosted database from your machine while keeping tests on local PostgreSQ
    ```sh
    $env:DATABASE_URL = "postgresql://USER:PASSWORD@ep-xxxx.eu-central-1.aws.neon.tech/neondb?sslmode=require"
    pnpm exec prisma migrate deploy
+   Remove-Item Env:DATABASE_URL
    ```
 
-   The direct host is the same string without `-pooler`. Restore the pooled value in `.env` afterwards.
+   The direct host is the same string without `-pooler`. Clearing the shell override lets `pnpm dev` use the pooled URL in `.env`.
 
-3. Start the app: `pnpm dev`. The first request after five idle minutes takes about half a second while Neon resumes the compute.
+3. Start the app with `pnpm dev`. The first database request after an idle period can take a few seconds while Neon resumes the compute.
 
 4. Run tests: `pnpm test`. The runner reads `DATABASE_URL_TEST` and creates its throwaway database there, so it never creates or drops databases on Neon. Start the local database first with `docker compose up -d db`.
 

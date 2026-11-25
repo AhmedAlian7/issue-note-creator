@@ -8,6 +8,11 @@ const globalDb = globalThis as typeof globalThis & {
 export const db =
   globalDb.warehouseDb ??
   new PrismaClient({
-    adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL }),
+    adapter: new PrismaPg({
+      connectionString: process.env.DATABASE_URL,
+      connectionTimeoutMillis: 15_000,
+    }),
+    // Starting a transaction can include waking the hosted database.
+    transactionOptions: { maxWait: 20_000 },
   });
 if (process.env.NODE_ENV !== "production") globalDb.warehouseDb = db;
