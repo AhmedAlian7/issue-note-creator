@@ -610,8 +610,8 @@
     "semantic_hash": ""
   },
   "tests/unit/voice-provider.test.ts": {
-    "mtime": 1795279267.3117166,
-    "ast_hash": "8d18b0f8ee26308469205a38b6989ee6",
+    "mtime": 1795593062.009473,
+    "ast_hash": "e1ea388cb192c709dae3516007712153",
     "semantic_hash": ""
   },
   "tests/unit/voice.test.ts": {
@@ -620,8 +620,8 @@
     "semantic_hash": ""
   },
   "src/ai/groq.ts": {
-    "mtime": 1795450431.657672,
-    "ast_hash": "9c80796fe405d0cab6e64d812da122f9",
+    "mtime": 1795593061.936412,
+    "ast_hash": "4ca0bfe48df6adde61b71ab2bf67d24e",
     "semantic_hash": ""
   },
   "src/ai/edits.ts": {
