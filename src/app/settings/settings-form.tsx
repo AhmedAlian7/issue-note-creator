@@ -11,6 +11,7 @@ import { save, testReport } from "./actions";
 const t = ar.reports;
 export function SettingsForm(props: {
   schedule: Schedule;
+  confirmation: { enabled: boolean; recipients: string[] };
   company: typeof defaultCompany;
   start: number;
   limits: { green: number; yellow: number };
@@ -35,6 +36,38 @@ export function SettingsForm(props: {
       <output role="status" aria-live="polite" className="settings-feedback">
         {busy ? <PendingIndicator /> : message}
       </output>
+      <form
+        className="report-panel fields"
+        action={async (form) => {
+          await submit("confirmationEmail", {
+            enabled: form.has("enabled"),
+            recipients: String(form.get("recipients"))
+              .split(/[,،;\n]/)
+              .map((value) => value.trim())
+              .filter(Boolean),
+          });
+        }}
+      >
+        <h2>{ar.confirmationEmail.settings}</h2>
+        <label>
+          <input
+            type="checkbox"
+            name="enabled"
+            defaultChecked={props.confirmation.enabled}
+          />
+          {ar.confirmationEmail.enabled}
+        </label>
+        <label>
+          {t.recipients}
+          <input
+            name="recipients"
+            defaultValue={props.confirmation.recipients.join(", ")}
+            maxLength={25_500}
+            dir="ltr"
+          />
+        </label>
+        <button disabled={busy}>{ar.save}</button>
+      </form>
       <form
         className="fields"
         action={async (f) => {

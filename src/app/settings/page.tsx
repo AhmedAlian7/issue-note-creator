@@ -4,7 +4,7 @@ import { company, defaultCompany, frequencies } from "@/lib/report-config";
 import { defaults, thresholds } from "@/ai/contracts";
 import { guard } from "@/server/session";
 import { db } from "@/server/db";
-import { getSchedule } from "@/server/settings";
+import { getSchedule, confirmationEmailInput } from "@/server/settings";
 import { failedReports } from "@/server/reports/delivery";
 import { SettingsForm } from "./settings-form";
 const t = ar.reports;
@@ -13,7 +13,16 @@ export default async function Settings() {
   const [schedule, rows, failed] = await Promise.all([
     getSchedule(),
     db.setting.findMany({
-      where: { key: { in: ["numberingStart", "company", "voiceThresholds"] } },
+      where: {
+        key: {
+          in: [
+            "numberingStart",
+            "company",
+            "voiceThresholds",
+            "confirmationEmail",
+          ],
+        },
+      },
     }),
     failedReports(),
   ]);
@@ -29,6 +38,14 @@ export default async function Settings() {
       </header>
       <SettingsForm
         schedule={schedule}
+        confirmation={
+          confirmationEmailInput.safeParse(values.confirmationEmail).data ?? {
+            enabled: false,
+            recipients: Array.from(
+              new Set(frequencies.flatMap((key) => schedule[key].recipients)),
+            ).slice(0, 100),
+          }
+        }
         company={company.safeParse(values.company).data ?? defaultCompany}
         start={Number(values.numberingStart ?? 973)}
         limits={thresholds.safeParse(values.voiceThresholds).data ?? defaults}
@@ -39,8 +56,10 @@ export default async function Settings() {
           <ul>
             {failed.map((r) => (
               <li key={r.type + r.period}>
-                {t[frequencies.find((k) => k === r.type)!]} ·{" "}
-                <bdi>{r.period}</bdi> · {r.error ?? t.uncertain}
+                {r.type === "confirmation"
+                  ? ar.confirmationEmail.settings
+                  : t[frequencies.find((k) => k === r.type)!]}{" "}
+                · <bdi>{r.period}</bdi> · {r.error ?? t.uncertain}
               </li>
             ))}
           </ul>

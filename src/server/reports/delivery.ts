@@ -8,7 +8,7 @@ import { workbook } from "./export";
 import { reportPeriod, rangeSchema, type Range } from "./period";
 import { sendMail } from "./mailer";
 const t = ar.reports;
-type Key = { type: Frequency; period: string };
+type Key = { type: string; period: string };
 export type DeliveryResult = "sent" | "skipped";
 
 export function failedReports() {
@@ -133,10 +133,9 @@ export async function retryReport(type: Frequency, period: string) {
   const plain = period.replace(/^test-[^ ]+ /, "");
   const parsed = rangeSchema.safeParse(
     Object.fromEntries(
-      plain.split("/").map((value, index) => [
-        index === 0 ? "from" : "to",
-        value,
-      ]),
+      plain
+        .split("/")
+        .map((value, index) => [index === 0 ? "from" : "to", value]),
     ),
   );
   if (!parsed.success) return "skipped" as const;

@@ -5,8 +5,19 @@ import { db, type Prisma } from "./db";
 import { audit } from "./audit";
 import { authorize, type Actor } from "./permissions";
 
+export const confirmationEmailInput = z
+  .strictObject({
+    enabled: z.boolean(),
+    recipients: z.array(z.email().max(254)).max(100),
+  })
+  .refine((v) => !v.enabled || v.recipients.length > 0);
+
 export const settingInput = z.discriminatedUnion("key", [
   z.strictObject({ key: z.literal("voiceThresholds"), value: thresholds }),
+  z.strictObject({
+    key: z.literal("confirmationEmail"),
+    value: confirmationEmailInput,
+  }),
   z.strictObject({
     key: z.literal("numberingStart"),
     value: z.int().positive().max(2147483646),

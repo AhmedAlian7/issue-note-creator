@@ -22,6 +22,12 @@ export const ar = {
     missing: "هذه الصفحة غير موجودة",
     provisionPin: "عيّن رقمًا سريًا للمستخدم قبل حفظ الحساب.",
   },
+  confirmationEmail: {
+    settings: "إشعار تأكيد إذن الصرف بالبريد",
+    enabled: "أرسل إشعارًا عند تأكيد كل إذن",
+    subject: "تم تأكيد إذن الصرف رقم",
+    pdf: "فتح ملف الإذن",
+  },
   pending: {
     navigation: "جارٍ تحميل الصفحة…",
     action: "جارٍ تنفيذ الطلب…",

@@ -1,3 +1,4 @@
+import { retryConfirmations } from "@/server/reports/confirmation";
 import { apiRoute } from "@/server/http";
 import { ar } from "@/lib/i18n";
 import { authorizedCron } from "@/server/reports/cron-auth";
@@ -11,7 +12,7 @@ const handle = apiRoute("cron.reports", async (request: Request) => {
     return Response.json({ error: ar.login }, { status: 401 });
   if (request.body)
     return Response.json({ error: ar.invalid }, { status: 400 });
-  const results = await runDueReports();
+  const [results] = await Promise.all([runDueReports(), retryConfirmations()]);
   return Response.json(
     {
       ok: true,

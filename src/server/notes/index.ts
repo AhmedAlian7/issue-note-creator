@@ -1,3 +1,4 @@
+import { saveConfirmationJob } from "@/server/reports/confirmation";
 import { randomUUID } from "node:crypto";
 import { resolve } from "node:path";
 import { draftTimestamp, id, noteInput, reasonInput } from "@/lib/inputs";
@@ -167,6 +168,7 @@ async function issue(tx: Tx, note: Note, number: number, pdfPath: string) {
     data: { status: "CONFIRMED", date, number, pdfPath: stored.pdfPath },
     include: detail,
   });
+  await saveConfirmationJob(tx, note.id);
   return { ...confirmed, pdf: { byteSize: stored.byteSize } };
 }
 export async function confirmNote(

@@ -41,7 +41,9 @@ async function resend(mail: Mail): Promise<MailResult> {
   if (!response.ok) {
     const detail = (await response.text().catch(() => "")).slice(0, 300);
     throw Object.assign(
-      new Error("Resend rejected the message (" + response.status + "): " + detail),
+      new Error(
+        "Resend rejected the message (" + response.status + "): " + detail,
+      ),
       { responseCode: response.status },
     );
   }
@@ -55,6 +57,9 @@ async function smtp(mail: Mail): Promise<MailResult> {
     host: process.env.SMTP_HOST || "localhost",
     port,
     secure: port === 465,
+    connectionTimeout: 10_000,
+    greetingTimeout: 10_000,
+    socketTimeout: 20_000,
     auth: process.env.SMTP_USER
       ? { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS }
       : undefined,

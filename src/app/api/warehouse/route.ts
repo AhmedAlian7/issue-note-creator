@@ -1,3 +1,5 @@
+import { after } from "next/server";
+import { sendConfirmation } from "@/server/reports/confirmation";
 import { boundedJson, apiRoute } from "@/server/http";
 import { z } from "zod";
 import { currentUser } from "@/server/session";
@@ -82,6 +84,8 @@ export const POST = apiRoute("warehouse", async (request: Request) => {
           return voidNote(actor, c.id, c.reason);
       }
     })();
+    if (c.action === "confirm" || c.action === "supersede")
+      after(() => sendConfirmation(note.id));
     const { pdfPath, pdf, ...result } = note;
     return Response.json(
       { ...result, hasPdf: hasPdf({ pdfPath, pdf }) },
