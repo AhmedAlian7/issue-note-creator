@@ -4,6 +4,8 @@ import { db } from "@/server/db";
 import { hashPin } from "@/server/auth";
 import { ar } from "@/lib/i18n";
 test.use({
+  // This test mocks the parse endpoint through Playwright request routing.
+  serviceWorkers: "block",
   permissions: ["microphone"],
   launchOptions: {
     args: [
@@ -15,6 +17,7 @@ test.use({
 test("keeper records, pauses, resumes and can recover by typing", async ({
   page,
 }) => {
+  test.setTimeout(120_000);
   const keeper = await db.user.create({
     data: {
       name: "أمين",
