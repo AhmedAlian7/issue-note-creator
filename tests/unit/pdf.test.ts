@@ -1,5 +1,3 @@
-import { afterAll } from "vitest";
-import { closeChromium } from "../../src/pdf/chromium";
 import { execFileSync } from "node:child_process";
 import { expect, it, vi } from "vitest";
 import { PDFDocument } from "pdf-lib";
@@ -43,8 +41,6 @@ it("continues a note across pages", async () => {
   const pdf = await PDFDocument.load(await renderNotePdf({ ...sample, lines }));
   expect(pdf.getPageCount()).toBe(3);
 }, 60000);
-
-afterAll(closeChromium, 45_000);
 
 it("renders twenty notes submitted concurrently", async () => {
   const results = await Promise.all(
