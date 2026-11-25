@@ -97,15 +97,21 @@ The backup container writes a PostgreSQL custom-format dump and a PDF archive on
 dc exec -T backup ls -1 /backups
 read -rp 'Backup directory name: ' backup_name
 mkdir -m 700 "$backup_name"
-dc cp "backup:/backups/$backup_name/." "./$backup_name/"
+dc exec -T backup tar -C "/backups/$backup_name" -cf - database.dump pdfs.tar.gz \
+  | tar -xf - -C "./$backup_name"
 ```
 
 Restore a matching database dump and PDF archive together. The commands below replace the target database and PDF volume contents. Test on a fresh deployment first. On a live server, stop writes and save a separate backup of its current state before restoring.
 
 ```bash
-test -s "./$backup_name/database.dump" && test -s "./$backup_name/pdfs.tar.gz"
+(
+set -euo pipefail
+test -s "./$backup_name/database.dump"
+tar -tzf "./$backup_name/pdfs.tar.gz" >/dev/null
 dc stop caddy reports backup app
 dc up -d --wait db
+dc exec -T db pg_restore --list < "./$backup_name/database.dump" >/dev/null
+dc run --rm --no-deps backup --once
 dc exec -T db dropdb -U issue_notes --if-exists issue_notes
 dc exec -T db createdb -U issue_notes -T template0 issue_notes
 dc exec -T db pg_restore -U issue_notes -d issue_notes --exit-on-error --single-transaction \
@@ -115,6 +121,7 @@ dc run --rm -T --no-deps --user root --entrypoint sh app -ec \
   < "./$backup_name/pdfs.tar.gz"
 dc run --rm migrate
 dc up -d --wait
+)
 ```
 
 Open an older note and verify that its PDF downloads. Review the app and backup logs.
