@@ -21,17 +21,17 @@ export function verifyLine(
     catalog.products,
     limits,
   );
+  // A model default of 1 can still hide a spoken quantity it missed.
   const quantity =
-    line.quantity ??
-    recoverQuantity(transcript, line.spokenText, line.quantityText);
+    line.quantity === 1 && !line.quantityText?.trim() ? null : line.quantity;
   return {
     spokenText: line.spokenText,
     productId,
-    quantity: quantity ?? 1,
-    remarks:
-      quantity === null && !line.remarks?.trim()
-        ? ar.notes.defaultRemarks
-        : line.remarks,
+    quantity:
+      quantity ??
+      recoverQuantity(transcript, line.spokenText, line.quantityText) ??
+      1,
+    remarks: line.remarks?.trim() ? line.remarks : ar.notes.defaultRemarks,
     ...verified,
   };
 }

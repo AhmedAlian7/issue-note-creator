@@ -98,10 +98,16 @@ it("defaults spoken item names without quantities and preserves explicit details
       quantity: 1,
       remarks: "استندر",
     });
-    expect(verifyLine(line, spokenText + " واحد", catalog)).toMatchObject({
-      quantity: 1,
-      remarks: null,
-    });
+    expect(
+      verifyLine({ ...line, quantity: 2 }, spokenText + " اتنين", catalog),
+    ).toMatchObject({ quantity: 2, remarks: "استندر" });
+    expect(
+      verifyLine(
+        { ...line, quantity: 1, remarks: "  " },
+        spokenText + " اتنين",
+        catalog,
+      ),
+    ).toMatchObject({ quantity: 2, remarks: "استندر" });
     expect(
       verifyLine(
         { ...line, remarks: "فندق كارما" },

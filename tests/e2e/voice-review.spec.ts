@@ -55,6 +55,9 @@ test("mobile keeper reviews speech, resolves matches, corrects and issues a PDF"
   await record(page, ar.voice.start);
   await expect(button(t.confirm)).toBeEnabled();
   await expect(page.getByText(f.green)).toBeVisible();
+  await expect(page.getByLabel(t.remarks, { exact: true })).toHaveValue(
+    t.defaultRemarks,
+  );
   const screenshot = (state: string) =>
     page.screenshot({
       path: info.outputPath("review-" + state + ".png"),

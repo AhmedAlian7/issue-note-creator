@@ -28,12 +28,12 @@
       {
         "productId": null,
         "quantity": 1,
-        "remarks": null
+        "remarks": "استندر"
       },
       {
         "productId": "p5",
         "quantity": 9,
-        "remarks": null
+        "remarks": "استندر"
       }
     ]
   }
