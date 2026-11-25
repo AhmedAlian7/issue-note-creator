@@ -1,23 +1,30 @@
-import { authorizedCron, cronSecretConfigured } from "@/server/reports/cron-auth";
+import { apiRoute } from "@/server/http";
+import { ar } from "@/lib/i18n";
+import { authorizedCron } from "@/server/reports/cron-auth";
 import { runDueReports } from "@/server/reports/schedule";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
 
-async function handle(request: Request) {
-  if (!cronSecretConfigured())
-    return Response.json(
-      { error: "CRON_SECRET is not configured" },
-      { status: 503 },
-    );
+const handle = apiRoute("cron.reports", async (request: Request) => {
   if (!authorizedCron(request.headers))
-    return Response.json({ error: "Unauthorized" }, { status: 401 });
+    return Response.json({ error: ar.login }, { status: 401 });
+  if (request.body)
+    return Response.json({ error: ar.invalid }, { status: 400 });
   const results = await runDueReports();
   return Response.json(
-    { ok: true, checkedAt: new Date().toISOString(), results },
+    {
+      ok: true,
+      checkedAt: new Date().toISOString(),
+      results: results.map(({ type, period, status }) => ({
+        type,
+        period,
+        status,
+      })),
+    },
     { headers: { "Cache-Control": "no-store" } },
   );
-}
+});
 
 export const GET = handle;
 export const POST = handle;

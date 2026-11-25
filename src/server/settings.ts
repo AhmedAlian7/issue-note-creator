@@ -6,22 +6,22 @@ import { audit } from "./audit";
 import { authorize, type Actor } from "./permissions";
 
 export const settingInput = z.discriminatedUnion("key", [
-  z.object({ key: z.literal("voiceThresholds"), value: thresholds }),
-  z.object({
+  z.strictObject({ key: z.literal("voiceThresholds"), value: thresholds }),
+  z.strictObject({
     key: z.literal("numberingStart"),
     value: z.int().positive().max(2147483646),
   }),
-  z.object({
+  z.strictObject({
     key: z.literal("company"),
     value: company,
   }),
-  z.object({
+  z.strictObject({
     key: z.literal("reportSchedule"),
     value: reportSchedule,
   }),
-  z.object({
+  z.strictObject({
     key: z.literal("reportRecipients"),
-    value: z.array(z.email()).max(100),
+    value: z.array(z.email().max(254)).max(100),
   }),
 ]);
 export async function getSchedule(client: Prisma.TransactionClient = db) {

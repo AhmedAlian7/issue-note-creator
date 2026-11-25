@@ -1,3 +1,4 @@
+import { apiRoute } from "@/server/http";
 import { z } from "zod";
 import { editContext } from "@/ai/edits";
 import { audioLimit, transcriptInput } from "@/ai/contracts";
@@ -7,7 +8,7 @@ import { allowed } from "@/server/permissions";
 import { allowVoiceRequest, processEdit } from "@/server/voice";
 import { boundedBlob, InputFailure } from "@/server/voice-body";
 
-export async function POST(request: Request) {
+export const POST = apiRoute("voice.edit", async (request: Request) => {
   const actor = await currentUser();
   if (!actor) return Response.json({ error: ar.login }, { status: 401 });
   if (!allowed(actor.role, "note.create"))
@@ -23,8 +24,15 @@ export async function POST(request: Request) {
       .catch(() => {
         throw new InputFailure(400);
       });
+    const fields = Array.from(form.keys()).sort();
+    if (fields.join(",") !== "current,input") throw new InputFailure(400);
     const current = editContext.parse(
-      JSON.parse(z.string().parse(form.get("current"))),
+      JSON.parse(
+        z
+          .string()
+          .max(256 * 1024)
+          .parse(form.get("current")),
+      ),
     );
     const input = z
       .union([
@@ -52,4 +60,4 @@ export async function POST(request: Request) {
       { status },
     );
   }
-}
+});

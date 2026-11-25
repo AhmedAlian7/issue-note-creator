@@ -1,7 +1,8 @@
+import { boundedJson, apiRoute } from "@/server/http";
 import { z } from "zod";
 import { currentUser } from "@/server/session";
-import { authorize, Denied } from "@/server/permissions";
-import { catalogCommand, changeCatalog } from "@/server/catalog";
+import { allowed, Denied } from "@/server/permissions";
+import { catalogCommand, changeCatalog, MissingPin } from "@/server/catalog";
 import {
   updateDraft,
   confirmNote,
@@ -25,37 +26,36 @@ import { hasPdf } from "@/server/pdf-storage";
 
 import { saveSetting, settingInput } from "@/server/settings";
 const command = z.discriminatedUnion("action", [
-  z.object({ action: z.literal("setting"), setting: settingInput }),
-  z.object({ action: z.literal("catalog"), command: catalogCommand }),
-  z.object({ action: z.literal("create"), fields: noteInput }),
-  z.object({
+  z.strictObject({ action: z.literal("setting"), setting: settingInput }),
+  z.strictObject({ action: z.literal("catalog"), command: catalogCommand }),
+  z.strictObject({ action: z.literal("create"), fields: noteInput }),
+  z.strictObject({
     action: z.literal("edit"),
     id,
     fields: noteInput,
     expected: draftTimestamp,
   }),
-  z.object({
+  z.strictObject({
     action: z.literal("confirm"),
     id,
     expected: draftTimestamp,
     number: noteNumber.optional(),
   }),
-  z.object({ action: z.literal("duplicate"), id }),
-  z.object({ action: z.literal("void"), id, reason: reasonInput }),
-  z.object({
+  z.strictObject({ action: z.literal("duplicate"), id }),
+  z.strictObject({ action: z.literal("void"), id, reason: reasonInput }),
+  z.strictObject({
     action: z.literal("supersede"),
     id,
     fields: noteInput,
     reason: reasonInput,
   }),
 ]);
-export async function POST(request: Request) {
+export const POST = apiRoute("warehouse", async (request: Request) => {
   const actor = await currentUser();
   if (!actor) return Response.json({ error: ar.login }, { status: 401 });
-  authorize(actor, "workspace");
-  if (!request.headers.get("content-type")?.startsWith("application/json"))
-    return Response.json({ error: ar.invalid }, { status: 415 });
-  const parsed = command.safeParse(await request.json().catch(() => null));
+  if (!allowed(actor.role, "workspace"))
+    return Response.json({ error: ar.denied }, { status: 403 });
+  const parsed = command.safeParse(await boundedJson(request, 512 * 1024));
   if (!parsed.success)
     return Response.json({ error: ar.invalid }, { status: 400 });
   const c = parsed.data;
@@ -92,6 +92,8 @@ export async function POST(request: Request) {
       },
     );
   } catch (err) {
+    if (err instanceof MissingPin)
+      return Response.json({ error: ar.errors.provisionPin }, { status: 400 });
     if (err instanceof Denied)
       return Response.json({ error: ar.denied }, { status: 403 });
     if (err instanceof NoteNumberTaken)
@@ -104,4 +106,4 @@ export async function POST(request: Request) {
       return Response.json({ error: ar.conflict }, { status: 409 });
     throw err;
   }
-}
+});

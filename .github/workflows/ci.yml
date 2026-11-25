@@ -22,12 +22,15 @@ jobs:
           - 5432:5432
         options: --health-cmd pg_isready --health-interval 5s --health-timeout 3s --health-retries 10
     steps:
+      - name: Start MailHog
+        run: docker run -d --name mailhog -p 1025:1025 -p 8025:8025 mailhog/mailhog:v1.0.1
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with:
           node-version: 24
       - uses: pnpm/action-setup@v6
       - run: pnpm install --frozen-lockfile
+      - run: pnpm audit --prod
       - run: pnpm lint
       - run: pnpm typecheck
       - run: pnpm exec prisma migrate deploy
@@ -35,6 +38,10 @@ jobs:
       - run: sudo apt-get install -y poppler-utils
       - run: pnpm test
       - run: pnpm build
+      - run: pnpm test:e2e
+      - run: pnpm test:e2e
+        env:
+          E2E_DESKTOP: "1"
       - uses: actions/upload-artifact@v4
         if: failure()
         with:

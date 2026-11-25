@@ -32,6 +32,8 @@ export async function boundedBlob(
   limit: number,
   type?: string,
 ) {
+  if (Number(request.headers.get("content-length")) > limit)
+    throw new InputFailure(413);
   const reader = request.body?.getReader();
   if (!reader) throw new InputFailure(400);
   const chunks: ArrayBuffer[] = [];

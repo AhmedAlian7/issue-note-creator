@@ -1,11 +1,12 @@
+import { log } from "@/server/log";
+import { apiRoute } from "@/server/http";
 import { ar } from "@/lib/i18n";
 import { ProviderQuotaExhausted } from "@/ai/groq";
 import { currentUser } from "@/server/session";
 import { allowed } from "@/server/permissions";
 import { allowVoiceRequest, processVoice } from "@/server/voice";
 import { InputFailure, voiceBody } from "@/server/voice-body";
-export async function POST(request: Request) {
-  const start = Date.now();
+export const POST = apiRoute("voice.parse", async (request: Request) => {
   let tokens = 0;
   try {
     const actor = await currentUser();
@@ -29,6 +30,6 @@ export async function POST(request: Request) {
       );
     return Response.json({ error: ar.voice.failed }, { status: 503 });
   } finally {
-    console.info("voice.parse", { durationMs: Date.now() - start, tokens });
+    log.info({ tokens }, "Voice parse usage");
   }
-}
+});

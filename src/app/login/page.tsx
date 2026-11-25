@@ -23,7 +23,10 @@ export default async function Login({
         select: { pinHash: true, active: true },
       })
     : null;
-  const enroll = user?.active === true && user.pinHash === null;
+  const enroll =
+    process.env.REQUIRE_PROVISIONED_PIN !== "true" &&
+    user?.active === true &&
+    user.pinHash === null;
   return (
     <main className="sign-in">
       <div className="desk narrow sign-in-panel">

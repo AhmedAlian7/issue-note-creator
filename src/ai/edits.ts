@@ -2,11 +2,11 @@ import { z } from "zod";
 import { extraction } from "./contracts";
 import { id } from "@/lib/inputs";
 
-export const editContext = z.object({
+export const editContext = z.strictObject({
   customerId: id.nullable(),
   lines: z
     .array(
-      z.object({
+      z.strictObject({
         key: id,
         productId: id.nullable(),
         spokenText: z.string().max(300),

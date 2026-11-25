@@ -26,6 +26,17 @@ type Line = {
   key: string;
 };
 type Fields = { customerId: string; lines: Line[] };
+function noteFields(value: Fields) {
+  return {
+    customerId: value.customerId,
+    lines: value.lines.map(({ productId, quantity, remarks, redRemark }) => ({
+      productId,
+      quantity,
+      remarks,
+      redRemark,
+    })),
+  };
+}
 type Props = {
   customers: Choice[];
   products: Product[];
@@ -71,7 +82,7 @@ export function Editor({
           action: currentId.current ? "edit" : "create",
           id: currentId.current,
           expected: timestamp.current,
-          fields: value,
+          fields: noteFields(value),
         });
         if (!currentId.current) {
           currentId.current = result.id;
@@ -410,7 +421,7 @@ export function Editor({
                       ? {
                           action: "supersede",
                           id: noteId,
-                          fields: data,
+                          fields: noteFields(data),
                           reason,
                         }
                       : {

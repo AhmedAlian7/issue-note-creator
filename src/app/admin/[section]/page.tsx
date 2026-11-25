@@ -41,7 +41,10 @@ export default async function Catalog({
       </header>
       <details className="add">
         <summary>{ar[add]}</summary>
-        <CatalogForm entity={entity} />
+        <CatalogForm
+          entity={entity}
+          requirePin={process.env.REQUIRE_PROVISIONED_PIN === "true"}
+        />
       </details>
       <SearchForm className="search">
         <input

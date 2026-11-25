@@ -5,13 +5,15 @@ import { audit } from "./audit";
 import { db } from "./db";
 import { hashPin } from "./auth";
 
-const target = z.object({ id: id.optional() });
+export class MissingPin extends Error {}
+
+const target = z.strictObject({ id: id.optional() });
 export const catalogCommand = z
   .discriminatedUnion("kind", [
     target.extend({ kind: z.literal("product"), fields: productInput }),
     target.extend({ kind: z.literal("customer"), fields: customerInput }),
     target.extend({ kind: z.literal("user"), fields: userInput }),
-    z.object({
+    z.strictObject({
       kind: z.literal("state"),
       entity: z.enum(["product", "customer", "user"]),
       id,
@@ -50,6 +52,12 @@ export async function changeCatalog(actor: Actor, command: Command) {
       let after;
       if (command.kind === "user") {
         const { pin, ...fields } = command.fields;
+        if (
+          process.env.REQUIRE_PROVISIONED_PIN === "true" &&
+          !before?.pinHash &&
+          !pin
+        )
+          throw new MissingPin();
         const pinHash = pin ? await hashPin(pin) : undefined;
         after = userId
           ? await tx.user.update({

@@ -3,3 +3,7 @@ allowBuilds:
   esbuild: true
   prisma: false
   sharp: true
+
+overrides:
+  "@prisma/config>effect": 3.22.1
+  "exceljs>uuid": 11.1.1

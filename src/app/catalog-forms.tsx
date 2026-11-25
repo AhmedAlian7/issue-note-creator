@@ -57,10 +57,12 @@ export function CatalogForm({
   entity,
   row,
   initialName,
+  requirePin = false,
 }: {
   entity: Entity;
   row?: RecordFields;
   initialName?: string;
+  requirePin?: boolean;
 }) {
   const { submit, busy, message } = useMutation();
   return (
@@ -105,14 +107,15 @@ export function CatalogForm({
               defaultValue={row?.username}
             />
           </label>
-          {row && (
+          {(row || requirePin) && (
             <label>
-              {ar.pinOptional}
+              {requirePin && !row ? ar.pin : ar.pinOptional}
               <input
                 type="password"
                 name="pin"
                 inputMode="numeric"
                 autoComplete="new-password"
+                required={requirePin && !row}
                 minLength={4}
                 maxLength={6}
               />

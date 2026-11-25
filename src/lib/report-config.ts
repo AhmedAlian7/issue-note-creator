@@ -3,13 +3,13 @@ export const frequencies = ["daily", "weekly", "monthly"] as const;
 export const frequency = z.enum(frequencies);
 export type Frequency = z.infer<typeof frequency>;
 export const zone = "Africa/Cairo";
-const schedule = z.object({
+const schedule = z.strictObject({
   enabled: z.boolean(),
   time: z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/),
-  recipients: z.array(z.email()).max(100),
+  recipients: z.array(z.email().max(254)).max(100),
 });
 export const reportSchedule = z
-  .object({
+  .strictObject({
     skipEmpty: z.boolean(),
     daily: schedule,
     weekly: schedule.extend({ weekday: z.int().min(0).max(6) }),
@@ -27,7 +27,7 @@ export const defaultSchedule: Schedule = {
   monthly: { ...base, time: "09:00", monthday: 1 },
 };
 const field = z.string().trim().min(1).max(80);
-export const company = z.object({
+export const company = z.strictObject({
   website: field,
   phone: field.max(32),
   city: field,

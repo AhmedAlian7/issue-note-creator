@@ -77,7 +77,17 @@ export async function duplicateNote(actor: Actor, key: string) {
   authorize(actor, "note.create");
   return db.$transaction(async (tx) => {
     const source = await find(tx, actor, key, true);
-    const note = await draft(tx, actor, source);
+    const note = await draft(tx, actor, {
+      customerId: source.customerId,
+      lines: source.lines.map(
+        ({ productId, quantity, remarks, redRemark }) => ({
+          productId,
+          quantity,
+          remarks,
+          redRemark,
+        }),
+      ),
+    });
     await audit(
       tx,
       actor.id,

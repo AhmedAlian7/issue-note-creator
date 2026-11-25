@@ -33,6 +33,7 @@
     "nodemailer": "^10.6.1",
     "pdf-lib": "^1.17.1",
     "pdfjs-dist": "^6.5.438",
+    "pino": "^10.4.0",
     "playwright": "1.65.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",

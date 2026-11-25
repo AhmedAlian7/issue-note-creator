@@ -12,6 +12,7 @@ export const hashPin = (pin: string) =>
 const dummyHash = hashPin(randomBytes(24).toString("hex"));
 export async function login(input: unknown, enroll = false) {
   const { username, pin } = loginInput.parse(input);
+  if (enroll && process.env.REQUIRE_PROVISIONED_PIN === "true") return null;
   const key = digest(username);
   return db.$transaction(async (tx) => {
     const [attempt] = await tx.$queryRaw<{ count: number }[]>`

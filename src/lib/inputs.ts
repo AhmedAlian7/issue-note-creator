@@ -11,9 +11,10 @@ export const username = z
   .transform((value) => value.toLowerCase());
 export const pin = z
   .string()
+  .max(6)
   .transform(digits)
   .pipe(z.string().regex(/^\d{4,6}$/));
-export const loginInput = z.object({ username, pin });
+export const loginInput = z.strictObject({ username, pin });
 export const id = z.uuid();
 const name = z.string().trim().min(1).max(180);
 const optionalText = z
@@ -23,29 +24,29 @@ const optionalText = z
   .nullish()
   .transform((v) => v || null);
 const aliases = z.array(name).max(50);
-export const productInput = z.object({
+export const productInput = z.strictObject({
   nameAr: name,
   aliases,
   category: optionalText,
 });
-export const customerInput = z.object({
+export const customerInput = z.strictObject({
   nameAr: name,
   aliases,
   defaultDestination: optionalText,
   whatsappGroupName: optionalText,
 });
-export const userInput = z.object({
+export const userInput = z.strictObject({
   name,
   username,
   role: z.enum(["KEEPER", "ADMIN", "OWNER"]),
   pin: pin.optional(),
 });
-export const noteInput = z.object({
+export const noteInput = z.strictObject({
   customerId: id,
   lines: z
     .array(
       z
-        .object({
+        .strictObject({
           productId: id,
           quantity: z.int().positive().max(2147483647),
           remarks: optionalText,
