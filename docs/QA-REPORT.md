@@ -1,21 +1,25 @@
-# Branding and keeper workflow QA
+# Production QA
 
-23 November 2026
+25 November 2026
 
-Tests ran on Windows with local PostgreSQL and MailHog. The test harness created isolated databases and temporary PDF directories. Browser tests used Chromium with deterministic voice fixtures.
+The release was tested on Windows with Chromium, disposable PostgreSQL databases, and local MailHog. Browser tests use deterministic AI fixtures. Production Compose was checked with a separate Docker project and synthetic credentials.
 
-| Check                                      | Result                                                                                                                                            |
-| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ESLint and TypeScript                      | Passed                                                                                                                                            |
-| Vitest                                     | 101 tests passed, including the two Poppler visual comparisons, multi-page rendering, and PDF file-path persistence                               |
-| Production Next.js build                   | Passed                                                                                                                                            |
-| Playwright mobile                          | 6 tests passed                                                                                                                                    |
-| Playwright desktop                         | 6 tests passed                                                                                                                                    |
-| Lighthouse 13.6.0 accessibility on sign-in | 100 mobile and 100 desktop                                                                                                                        |
-| Visual review                              | Sign-in reviewed at 393 × 852 and 1440 × 900. Mobile note review inspected at 360 × 800. Cairo loaded and the inspected screens fit horizontally. |
+| Check                         | Result                                                                                                                                                                                  |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ESLint and TypeScript         | Passed.                                                                                                                                                                                 |
+| Next.js production build      | Passed.                                                                                                                                                                                 |
+| Production dependency audit   | Passed with zero known advisories.                                                                                                                                                      |
+| Vitest                        | All 107 test assertions passed. A Windows Chromium teardown timeout failed one run. The suite is being rerun with Vitest managing its browser process.                                  |
+| PDF visual comparisons        | The Poppler comparisons against the blank template and sample 972 passed. The multipage and 20-concurrent-render tests passed.                                                          |
+| Playwright mobile and desktop | Both default runs encountered an existing Next.js development server for this checkout. The suites are being rerun against the production build on the dedicated test port.             |
+| Lighthouse 13.6 accessibility | 100 on sign-in and 100 on the offline shell in both mobile and desktop profiles.                                                                                                        |
+| PWA installability            | Modern Lighthouse does not provide a PWA score. The browser suite checks Chromium installability and verifies that an offline reload preserves queued audio and text through reconnect. |
+| Production Compose and Caddy  | Compose configuration and Caddy automatic HTTPS configuration validated. The complete Linux image build and startup are still under verification.                                       |
 
-The browser suite covers keeper sign-in and role gating, archive navigation, owner settings and test email, recording and typing, line corrections, confirmation, and PDF preview and download. The voice review test also runs axe.
+## Acceptance checks that need a real deployment
 
-The production checklist still includes the sharing abstraction and WhatsApp Business stub, installability and offline sync, confirmation email, the Chromium render pool and health checks, API security and observability, and the Ubuntu production stack and backup/restore check.
+- Install the app on a physical phone over a public HTTPS domain. Check its home-screen icon, standalone launch, real microphone permission, and share sheet.
+- Verify that Caddy obtains a public certificate for the warehouse domain. Check the credentials for any enabled production email and voice-analysis provider.
+- The keeper queue sends when the workspace is open or reopened online. Items are available for review before any issue number is assigned.
 
-The browser suite uses a fake microphone and stubs the device share and print dialogs. It does not exercise live WhatsApp delivery or the physical printer. Previously confirmed notes whose filesystem PDF path was never recorded may still require recovery.
+[Chrome documentation on Lighthouse PWA checks](https://developer.chrome.com/blog/update-install-criteria)
