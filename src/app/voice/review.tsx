@@ -482,7 +482,27 @@ export function Review({
                 label={panel.kind === "correct" ? f.editVoice : undefined}
                 correction={
                   panel.kind === "correct"
-                    ? { current: draft, apply: applyEdits }
+                    ? {
+                        current: {
+                          customerId: draft.customerId,
+                          lines: draft.lines.map(
+                            ({
+                              key,
+                              productId,
+                              spokenText,
+                              quantity,
+                              remarks,
+                            }) => ({
+                              key,
+                              productId,
+                              spokenText,
+                              quantity,
+                              remarks,
+                            }),
+                          ),
+                        },
+                        apply: applyEdits,
+                      }
                     : undefined
                 }
                 onResult={(result) => {

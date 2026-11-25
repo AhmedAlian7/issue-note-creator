@@ -60,7 +60,7 @@ export function WaitingDrafts({
             await putDraft({ ...item, result, input: undefined });
           } else if ([400, 413, 415, 422].includes(response.status)) {
             await putDraft({ ...item, error: ar.voice.failed });
-          } else {
+          } else if (response.status !== 503) {
             break;
           }
         }

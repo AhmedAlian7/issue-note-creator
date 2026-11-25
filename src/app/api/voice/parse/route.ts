@@ -46,6 +46,10 @@ export const POST = apiRoute("voice.parse", async (request: Request) => {
         { error: error.status === 413 ? ar.voice.size : ar.invalid },
         { status: error.status },
       );
+    log.warn(
+      { errorType: error instanceof Error ? error.name : "Unknown" },
+      "Voice parse failed",
+    );
     return Response.json({ error: ar.voice.failed }, { status: 503 });
   } finally {
     log.info({ tokens }, "Voice parse usage");
