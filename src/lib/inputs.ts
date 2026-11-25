@@ -60,3 +60,11 @@ export const noteInput = z.object({
 });
 export const reasonInput = z.string().trim().min(1).max(1000);
 export const draftTimestamp = z.iso.datetime().optional();
+export const noteNumber = z.int().positive().max(2147483647);
+export const noteNumberText = z
+  .string()
+  .trim()
+  .transform(digits)
+  .pipe(z.string().regex(/^\d{1,10}$/))
+  .transform(Number)
+  .pipe(noteNumber);

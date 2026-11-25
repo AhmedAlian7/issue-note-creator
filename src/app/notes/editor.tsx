@@ -13,6 +13,7 @@ import { PendingIndicator } from "@/app/brand/pending-indicator";
 import { ar } from "@/lib/i18n";
 import { normalizeArabic } from "@/lib/note-filters";
 import { command } from "./command";
+import { NumberControl } from "./number-control";
 import { RemarkFields } from "./remark-fields";
 const t = ar.notes;
 type Choice = { id: string; nameAr: string; active: boolean };
@@ -49,6 +50,7 @@ export function Editor({
   const [summary, setSummary] = useState(false),
     [working, setBusy] = useState(false),
     [message, setMessage] = useState("");
+  const [number, setNumber] = useState<number>();
   const busy = working || navigating;
   const [query, setQuery] = useState(""),
     [adding, setAdding] = useState(false),
@@ -356,6 +358,14 @@ export function Editor({
         <section className="note-table">
           <h2>{t.preview}</h2>
           <p>{customers.find((c) => c.id === data.customerId)?.nameAr}</p>
+          {summary && !amend && (
+            <dl>
+              <dt>{ar.notePdf.number}</dt>
+              <dd>
+                <NumberControl value={number} onChange={setNumber} />
+              </dd>
+            </dl>
+          )}
           <table>
             <thead>
               <tr>
@@ -407,6 +417,7 @@ export function Editor({
                           action: "confirm",
                           id: currentId.current,
                           expected: timestamp.current,
+                          number,
                         },
                   );
                   startNavigation(() => {

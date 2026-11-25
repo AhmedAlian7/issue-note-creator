@@ -27,6 +27,14 @@ async function record(page: Page, name: string) {
   await expect(page.locator("time")).not.toHaveText("0:00");
   await page.getByRole("button", { name: ar.voice.stop }).click();
 }
+async function setNumber(page: Page, number: string) {
+  await page.getByRole("button", { name: t.changeNumber }).click();
+  const dialog = page.getByRole("dialog", { name: t.changeNumber });
+  await expect(dialog.getByText(t.numberWarning)).toBeVisible();
+  await dialog.getByRole("button", { name: t.numberContinue }).click();
+  await dialog.getByLabel(t.customNumber).fill(number);
+  await dialog.getByRole("button", { name: t.applyNumber }).click();
+}
 test("mobile keeper reviews speech, resolves matches, corrects and issues a PDF", async ({
   page,
 }, info) => {
@@ -72,6 +80,7 @@ test("mobile keeper reviews speech, resolves matches, corrects and issues a PDF"
   );
   await page.getByLabel(t.remarks, { exact: true }).fill("فندق كارما");
   await page.getByRole("checkbox", { name: t.redRemark }).check();
+  await setNumber(page, "1300");
   await button(t.confirm).click();
   await expect(page.locator(".pdf-pages canvas")).toBeVisible({
     timeout: 30000,
@@ -82,8 +91,14 @@ test("mobile keeper reviews speech, resolves matches, corrects and issues a PDF"
       select: { remarks: true, redRemark: true },
     }),
   ).toEqual({ remarks: "فندق كارما", redRemark: true });
+  await expect(
+    page.getByRole("heading", { name: ar.notePdf.title + " 1300" }),
+  ).toBeVisible();
   await page.getByRole("link", { name: t.newNote }).click();
-  await record(page, ar.voice.start);
+  await button(f.type).click();
+  await page.getByLabel(ar.voice.text).fill(fixtureSpeech.green);
+  await button(ar.voice.parse).click();
+  await setNumber(page, "1301");
   await page.getByRole("button", { name: f.editVoice }).click();
   await record(page, f.editVoice);
   await expect(page.getByRole("spinbutton")).toHaveValue("20");
@@ -147,6 +162,7 @@ test("mobile keeper reviews speech, resolves matches, corrects and issues a PDF"
       status: "CONFIRMED",
     },
   });
+  expect(note.number).toBe(1301);
   const download = page.waitForEvent("download");
   await page.getByRole("link", { name: t.download }).click();
   const task = getDocument({

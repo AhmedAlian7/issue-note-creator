@@ -26,6 +26,7 @@ it("serializes 50 concurrent allocations and rolls back an abandoned number", as
       await tx.$executeRawUnsafe(
         'CREATE TABLE "NoteCounter" (id int PRIMARY KEY, "nextNumber" int)',
       );
+      await tx.$executeRawUnsafe('CREATE TABLE "IssueNote" (number int)');
       await tx.$executeRaw`INSERT INTO "NoteCounter" (id) VALUES (1)`;
       expect(await allocateNumber(tx)).toBe(973);
       await tx.$executeRaw`UPDATE "NoteCounter" SET "nextNumber"=NULL`;

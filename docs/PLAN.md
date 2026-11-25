@@ -42,7 +42,7 @@ The keeper's screen has one giant microphone button; everything else is secondar
 3. **AI builds a draft note.** It picks the customer, matches each item to the product list, extracts quantities and puts the destination in the notes column.
 4. **Review screen.** Each line shows the matched product name, quantity and notes. Confident matches are green; uncertain ones are yellow with the top 3 alternatives as tap-to-choose chips; unmatched ones are red: the app says the product does not exist and shows an Add as new product button with a short form pre-filled with the spoken name; once saved, the line is matched automatically.
 5. **Edit anything.** Change quantity with plus and minus buttons, swap a product, edit notes, delete or add a line by voice or search, change the customer.
-6. **Confirm.** The app assigns the next number automatically (continuing from 972) and stamps today's date.
+6. **Confirm.** The app assigns the next available number automatically (continuing from 972) and stamps today's date. During review, the keeper can acknowledge a warning and choose an unused number for this note.
 7. **PDF is generated** and shown as a preview, with Share to WhatsApp, Print and Download buttons.
 
 **PDF requirements**

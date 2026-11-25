@@ -66,6 +66,21 @@ test("keeper types, issues, previews and downloads the numbered PDF on a phone",
     await db.product.findFirstOrThrow({ where: { nameAr: "أريكة صغيرة" } }),
   ).toMatchObject({ needsReview: true, createdByKeeper: true });
   await page.getByRole("button", { name: t.summary }).click();
+  const changeNumber = page.getByRole("button", { name: t.changeNumber });
+  await changeNumber.click();
+  const numberDialog = page.getByRole("dialog", { name: t.changeNumber });
+  const customNumber = numberDialog.getByLabel(t.customNumber);
+  await expect(numberDialog.getByText(t.numberWarning)).toBeVisible();
+  await expect(customNumber).toHaveCount(0);
+  await numberDialog.getByRole("button", { name: t.cancel }).click();
+  await expect(page.getByText(t.numberPending)).toBeVisible();
+  await changeNumber.click();
+  await numberDialog.getByRole("button", { name: t.numberContinue }).click();
+  await customNumber.fill("٠");
+  const applyNumber = numberDialog.getByRole("button", { name: t.applyNumber });
+  await expect(applyNumber).toBeDisabled();
+  await customNumber.fill("١٢٠٠");
+  await applyNumber.click();
   await page.getByRole("button", { name: t.confirm }).click();
   await expect(page.locator(".issued")).toBeVisible({ timeout: 30000 });
   const expected = (
@@ -73,6 +88,7 @@ test("keeper types, issues, previews and downloads the numbered PDF on a phone",
       where: { customerId: customer.id, status: "CONFIRMED" },
     })
   ).number!;
+  expect(expected).toBe(1200);
   await expect(
     page.getByRole("heading", { name: ar.notePdf.title + " " + expected }),
   ).toBeVisible({ timeout: 30000 });

@@ -11,7 +11,14 @@ import {
   createDraft,
   NoteConflict,
 } from "@/server/notes";
-import { draftTimestamp, id, noteInput, reasonInput } from "@/lib/inputs";
+import {
+  draftTimestamp,
+  id,
+  noteInput,
+  noteNumber,
+  reasonInput,
+} from "@/lib/inputs";
+import { NoteNumberTaken } from "@/server/counter";
 import { Prisma } from "@/generated/prisma/client";
 import { ar } from "@/lib/i18n";
 import { hasPdf } from "@/server/pdf-storage";
@@ -27,7 +34,12 @@ const command = z.discriminatedUnion("action", [
     fields: noteInput,
     expected: draftTimestamp,
   }),
-  z.object({ action: z.literal("confirm"), id, expected: draftTimestamp }),
+  z.object({
+    action: z.literal("confirm"),
+    id,
+    expected: draftTimestamp,
+    number: noteNumber.optional(),
+  }),
   z.object({ action: z.literal("duplicate"), id }),
   z.object({ action: z.literal("void"), id, reason: reasonInput }),
   z.object({
@@ -63,7 +75,7 @@ export async function POST(request: Request) {
         case "edit":
           return updateDraft(actor, c.id, c.fields, c.expected);
         case "confirm":
-          return confirmNote(actor, c.id, c.expected);
+          return confirmNote(actor, c.id, c.expected, c.number);
         case "supersede":
           return supersedeNote(actor, c.id, c.fields, c.reason);
         case "void":
@@ -82,6 +94,8 @@ export async function POST(request: Request) {
   } catch (err) {
     if (err instanceof Denied)
       return Response.json({ error: ar.denied }, { status: 403 });
+    if (err instanceof NoteNumberTaken)
+      return Response.json({ error: ar.notes.numberTaken }, { status: 409 });
     if (
       err instanceof NoteConflict ||
       (err instanceof Prisma.PrismaClientKnownRequestError &&

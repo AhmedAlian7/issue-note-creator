@@ -15,6 +15,7 @@ import {
 } from "@/server/notes";
 import { renderNotePdf } from "@/pdf/render-note-pdf";
 import { Denied } from "@/server/permissions";
+import { NoteNumberTaken } from "@/server/counter";
 vi.mock("@/pdf/render-note-pdf", () => ({
   renderNotePdf: vi.fn(async () => Buffer.from("%PDF-test")),
 }));
@@ -125,5 +126,32 @@ it("rolls back failed issuance and serializes twenty full confirmations", async 
     number: null,
     status: "DRAFT",
     version: 1,
+  });
+
+  const requested = (await counter()).nextNumber!;
+  const [first, second] = await Promise.all([
+    createDraft(keeper, fields),
+    createDraft(keeper, fields),
+  ]);
+  const attempts = await Promise.allSettled(
+    [first, second].map((draft) =>
+      confirmNote(keeper, draft.id, undefined, requested),
+    ),
+  );
+  const failedIndex = attempts.findIndex(
+    (attempt) => attempt.status === "rejected",
+  );
+  expect(
+    attempts.filter((attempt) => attempt.status === "fulfilled"),
+  ).toHaveLength(1);
+  expect(attempts[failedIndex]).toMatchObject({
+    status: "rejected",
+    reason: expect.any(NoteNumberTaken),
+  });
+  expect((await counter()).nextNumber).toBe(requested);
+  const pending = [first, second][failedIndex];
+  expect(await getNote(keeper, pending.id)).toMatchObject({ status: "DRAFT" });
+  expect(await confirmNote(keeper, pending.id)).toMatchObject({
+    number: requested + 1,
   });
 }, 120000);

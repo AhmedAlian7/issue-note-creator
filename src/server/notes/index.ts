@@ -163,6 +163,7 @@ export async function confirmNote(
   actor: Actor,
   key: string,
   expected?: string,
+  requestedNumber?: number,
 ) {
   authorize(actor, "note.confirm");
   return issueTransaction(async (tx, pdfPath) => {
@@ -171,11 +172,15 @@ export async function confirmNote(
     const prior = before.supersedesId
       ? await find(tx, actor, before.supersedesId, true)
       : null;
-    if (prior && prior.status !== "CONFIRMED") throw new NoteConflict();
+    if (
+      prior &&
+      (prior.status !== "CONFIRMED" || requestedNumber !== undefined)
+    )
+      throw new NoteConflict();
     const note = await issue(
       tx,
       before,
-      prior?.number ?? (await allocateNumber(tx)),
+      prior?.number ?? (await allocateNumber(tx, requestedNumber)),
       pdfPath,
     );
     await audit(tx, actor.id, "confirm", "IssueNote", key, before, note);

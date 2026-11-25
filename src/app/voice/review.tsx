@@ -6,6 +6,7 @@ import { normalize } from "@/ai/matching";
 import { PendingIndicator } from "@/app/brand/pending-indicator";
 import { ar } from "@/lib/i18n";
 import { command } from "../notes/command";
+import { NumberControl } from "../notes/number-control";
 import {
   blockers,
   reviewLine,
@@ -58,6 +59,7 @@ export function Review({
 }) {
   const [draft, setDraft] = useState(initial),
     [products, setProducts] = useState(catalog);
+  const [number, setNumber] = useState<number>();
   const [panel, setPanel] = useState<Panel | null>(null),
     [query, setQuery] = useState(""),
     [working, setBusy] = useState(false),
@@ -219,6 +221,7 @@ export function Review({
         action: "confirm",
         id: saved.current.id,
         expected: saved.current.updatedAt,
+        number,
       });
       startNavigation(() => router.replace("/notes/" + record.id));
     });
@@ -236,7 +239,17 @@ export function Review({
           <dt>{ar.notePdf.customer}</dt>
           <dd>{customer?.nameAr ?? t.choose}</dd>
           <dt>{ar.notePdf.number}</dt>
-          <dd>{t.numberPending}</dd>
+          <dd>
+            {canConfirm ? (
+              <NumberControl
+                value={number}
+                onChange={setNumber}
+                disabled={busy}
+              />
+            ) : (
+              t.numberPending
+            )}
+          </dd>
           <dt>{ar.notePdf.date}</dt>
           <dd>{previewDate.format(new Date())}</dd>
         </dl>

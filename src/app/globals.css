@@ -389,6 +389,26 @@ body {
 .desk dialog::backdrop {
   background: #102a30a6;
 }
+.note-number-control {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+}
+.desk .note-number-control > button,
+.desk .note-number-form input {
+  min-height: 48px;
+}
+.note-number-form {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.note-number-warning {
+  border-inline-start: 4px solid var(--error);
+  padding: 0.55rem 0.75rem;
+  background: var(--paper);
+}
 .review {
   max-width: 34rem;
   margin: auto;
