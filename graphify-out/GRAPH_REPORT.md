@@ -1,16 +1,16 @@
 # Graph Report - issue-note-creator  (2026-11-25)
 
 ## Corpus Check
-- 178 files · ~169,849 words
+- 208 files · ~178,401 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 653 nodes · 1531 edges · 44 communities (35 shown, 9 thin omitted)
+- 761 nodes · 1838 edges · 46 communities (34 shown, 12 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 2 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `9268accc`
+- Built from commit: `dfb2359e`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -52,85 +52,86 @@
 - [[_COMMUNITY_Community 39|Community 39]]
 - [[_COMMUNITY_Community 40|Community 40]]
 - [[_COMMUNITY_Community 41|Community 41]]
-- [[_COMMUNITY_Community 42|Community 42]]
 - [[_COMMUNITY_Community 45|Community 45]]
+- [[_COMMUNITY_Community 46|Community 46]]
+- [[_COMMUNITY_Community 49|Community 49]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `ar` - 55 edges
+1. `ar` - 70 edges
 2. `authorize()` - 27 edges
-3. `guard()` - 24 edges
-4. `currentUser()` - 22 edges
-5. `allowed()` - 21 edges
-6. `compilerOptions` - 16 edges
-7. `PendingLink()` - 15 edges
+3. `guard()` - 25 edges
+4. `allowed()` - 22 edges
+5. `currentUser()` - 22 edges
+6. `PendingLink()` - 16 edges
+7. `compilerOptions` - 16 edges
 8. `scripts` - 14 edges
-9. `PendingIndicator()` - 12 edges
-10. `renderNotePdf()` - 12 edges
+9. `redirectToApp()` - 14 edges
+10. `useOnline()` - 13 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `compareNote()` --calls--> `renderNotePdf()`  [EXTRACTED]
   scripts/pdf-comparison.ts → src/pdf/render-note-pdf.ts
-- `Login()` --calls--> `currentUser()`  [EXTRACTED]
-  src/app/login/page.tsx → src/server/session.ts
-- `NewProduct()` --calls--> `guard()`  [EXTRACTED]
-  src/app/products/new/page.tsx → src/server/session.ts
 - `workbook()` --calls--> `sheet()`  [INFERRED]
   src/server/reports/export.ts → src/pdf/note-template.ts
-- `Catalog()` --calls--> `guard()`  [EXTRACTED]
-  src/app/admin/[section]/page.tsx → src/server/session.ts
+- `GET` --calls--> `currentUser()`  [EXTRACTED]
+  src/app/api/notes/[id]/pdf/route.ts → src/server/session.ts
+- `GET` --calls--> `currentUser()`  [EXTRACTED]
+  src/app/api/reports/export/route.ts → src/server/session.ts
+- `aliasHandler()` --calls--> `allowed()`  [EXTRACTED]
+  src/app/api/voice/alias-handler.ts → src/server/permissions.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (44 total, 9 thin omitted)
+## Communities (46 total, 12 thin omitted)
 
 ### Community 0 - "Community 0"
-Cohesion: 0.06
-Nodes (63): NotePage(), GET(), aliases, customerInput, draftTimestamp, id, name, noteInput (+55 more)
+Cohesion: 0.07
+Nodes (48): GET, draftTimestamp, noteInput, noteNumber, reasonInput, notePdfDisposition(), notePdfName(), archiveStatus() (+40 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.08
 Nodes (23): For /graphify add and --watch, For /graphify query, For the commit hook and native CLAUDE.md integration, For --update and --cluster-only, /graphify, Honesty Rules, Interpreter guard for subcommands, Part A - Structural extraction for code files (+15 more)
 
 ### Community 2 - "Community 2"
-Cohesion: 0.12
-Nodes (17): dependencies, exceljs, @fontsource-variable/cairo, next, @node-rs/argon2, nodemailer, pdf-lib, pdfjs-dist (+9 more)
+Cohesion: 0.11
+Nodes (18): dependencies, exceljs, @fontsource-variable/cairo, next, @node-rs/argon2, nodemailer, pdf-lib, pdfjs-dist (+10 more)
 
 ### Community 3 - "Community 3"
 Cohesion: 0.06
-Nodes (61): Catalog, defaults, Entry, Extraction, Extractor, phrase, score, Transcriber (+53 more)
+Nodes (61): Catalog, defaults, Entry, Extraction, Extractor, phrase, score, thresholds (+53 more)
 
 ### Community 4 - "Community 4"
 Cohesion: 0.10
 Nodes (19): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModules, jsx, lib, module (+11 more)
 
 ### Community 5 - "Community 5"
-Cohesion: 0.06
-Nodes (70): thresholds, Chart(), FeedRefresh(), Dashboard(), GET(), base, company, defaultCompany (+62 more)
+Cohesion: 0.05
+Nodes (74): Dashboard(), GET, base, company, defaultCompany, defaultSchedule, field, frequencies (+66 more)
 
 ### Community 6 - "Community 6"
-Cohesion: 0.13
-Nodes (24): asset(), box(), cache, centers, date, escape(), fields, font() (+16 more)
+Cohesion: 0.11
+Nodes (32): GET, acquire(), chromiumHealthy(), closeChromium(), deadline(), getBrowser(), renderWithChromium(), waiting (+24 more)
 
 ### Community 7 - "Community 7"
 Cohesion: 0.20
 Nodes (9): AI voice matching design, Architecture and tech stack, Core features: creating a note, Delivery phases, risks and decisions, features for more automation and ease, Overview, Owner features: reports and dashboard, Roles and permissions (+1 more)
 
 ### Community 8 - "Community 8"
-Cohesion: 0.19
-Nodes (7): accounts, customers, products, dryRun, dummyHash, hashPin(), globalDb
+Cohesion: 0.14
+Nodes (14): scripts, ai:eval, build, db:migrate-pdfs, db:seed, dev, format, lint (+6 more)
 
 ### Community 9 - "Community 9"
-Cohesion: 0.25
-Nodes (7): Deploy for free, Prerequisites, Run checks, Run locally, Run locally against Neon, Voice drafts, Warehouse Issue Note Creator
+Cohesion: 0.20
+Nodes (9): Deploy for free, Offline drafts and sharing, Prerequisites, Production deployment, Run checks, Run locally, Run locally against Neon, Voice drafts (+1 more)
 
 ### Community 10 - "Community 10"
 Cohesion: 0.22
 Nodes (8): graphify reference: extra exports and benchmark, Step 6b - Wiki (only if --wiki flag), Step 7 - Neo4j export (only if --neo4j or --neo4j-push flag), Step 7a - FalkorDB export (only if --falkordb or --falkordb-push flag), Step 7b - SVG export (only if --svg flag), Step 7c - GraphML export (only if --graphml flag), Step 7d - MCP server (only if --mcp flag), Step 8 - Token reduction benchmark (only if total_words > 5000)
 
 ### Community 11 - "Community 11"
-Cohesion: 0.25
-Nodes (7): Coding rules, Definition of Done, Folder layout, graphify, Interface, Local development, Repository guide
+Cohesion: 0.22
+Nodes (8): Coding rules, Definition of Done, Folder layout, graphify, Interface, Local development, Production, Repository guide
 
 ### Community 12 - "Community 12"
 Cohesion: 0.50
@@ -153,16 +154,16 @@ Cohesion: 0.33
 Nodes (5): Images and footer, Page and table geometry, Rendering and comparison, Text, Warehouse issue note template
 
 ### Community 28 - "Community 28"
-Cohesion: 0.40
-Nodes (4): إنشاء إذن صرف, التأكيد والمشاركة, دليل أمين المخزن, مراجعة البنود
+Cohesion: 0.33
+Nodes (5): إنشاء إذن صرف, التأكيد والمشاركة, دليل أمين المخزن, عند انقطاع الإنترنت, مراجعة البنود
 
 ### Community 29 - "Community 29"
-Cohesion: 0.18
-Nodes (9): PendingIndicator(), command(), Choice, Fields, Line, Product, Props, PdfPreview() (+1 more)
+Cohesion: 0.08
+Nodes (28): fixtureSpeech, name, owner, aliases, customerInput, id, loginInput, name (+20 more)
 
 ### Community 30 - "Community 30"
-Cohesion: 0.29
-Nodes (6): metadata, RootLayout(), ar, canColorRemark(), Remark, RemarkFields()
+Cohesion: 0.25
+Nodes (3): ManualShareSender, NoteSender, whatsappBusinessSender
 
 ### Community 31 - "Community 31"
 Cohesion: 0.09
@@ -173,56 +174,48 @@ Cohesion: 0.10
 Nodes (21): devDependencies, @axe-core/playwright, dotenv, esbuild, eslint, eslint-config-next, eslint-config-prettier, pixelmatch (+13 more)
 
 ### Community 33 - "Community 33"
-Cohesion: 0.14
-Nodes (14): scripts, ai:eval, build, db:migrate-pdfs, db:seed, dev, format, lint (+6 more)
-
-### Community 34 - "Community 34"
 Cohesion: 0.25
 Nodes (7): engines, node, name, packageManager, private, type, version
 
+### Community 34 - "Community 34"
+Cohesion: 0.33
+Nodes (5): Back up and restore, Configure and start, Deploy on Ubuntu with Docker Compose, Install Docker, Update
+
 ### Community 37 - "Community 37"
-Cohesion: 0.17
-Nodes (17): base, valid, FirstHelp(), LineCard(), Props, VoiceRecorder(), ConfirmControl(), blockers() (+9 more)
+Cohesion: 0.09
+Nodes (31): VoiceResult, OfflineRecorder(), useOnline(), deleteDraft(), enqueue(), listDrafts(), putDraft(), QueuedDraft (+23 more)
 
 ### Community 38 - "Community 38"
 Cohesion: 0.40
 Nodes (4): Color palette, Italian Home Furniture — Website Branding Brief, Logo and photography, Typography and layout
 
-### Community 40 - "Community 40"
-Cohesion: 0.29
-Nodes (5): VoiceResult, capture(), VoiceFlow(), VoicePage(), Props
-
-### Community 41 - "Community 41"
-Cohesion: 0.40
-Nodes (3): env, require, url
-
-### Community 42 - "Community 42"
-Cohesion: 0.22
-Nodes (10): CatalogForm(), Entity, RecordFields, StateButton(), useMutation(), SearchForm(), NewProduct(), Catalog() (+2 more)
-
 ### Community 45 - "Community 45"
 Cohesion: 0.10
-Nodes (18): Home(), Archive(), Navigation(), PendingLink(), SubmitButton(), Wordmark(), loginInput, username (+10 more)
+Nodes (30): Archive(), Navigation(), SubmitButton(), Wordmark(), WorkspaceLayout(), NotePage(), username, identify() (+22 more)
+
+### Community 46 - "Community 46"
+Cohesion: 0.07
+Nodes (32): CatalogForm(), Entity, RecordFields, StateButton(), useMutation(), ErrorPage(), metadata, RootLayout() (+24 more)
 
 ## Knowledge Gaps
-- **243 isolated node(s):** `nextConfig`, `name`, `version`, `private`, `type` (+238 more)
+- **263 isolated node(s):** `owner`, `name`, `nextConfig`, `name`, `version` (+258 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **9 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **12 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `ar` connect `Community 30` to `Community 0`, `Community 3`, `Community 5`, `Community 6`, `Community 37`, `Community 8`, `Community 40`, `Community 42`, `Community 45`, `Community 29`?**
-  _High betweenness centrality (0.077) - this node is a cross-community bridge._
-- **Why does `authorize()` connect `Community 0` to `Community 5`, `Community 42`, `Community 3`, `Community 45`?**
-  _High betweenness centrality (0.012) - this node is a cross-community bridge._
-- **Why does `currentUser()` connect `Community 3` to `Community 0`, `Community 5`, `Community 45`?**
-  _High betweenness centrality (0.010) - this node is a cross-community bridge._
-- **What connects `nextConfig`, `name`, `version` to the rest of the system?**
-  _243 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Why does `ar` connect `Community 46` to `Community 0`, `Community 3`, `Community 37`, `Community 6`, `Community 5`, `Community 45`, `Community 29`?**
+  _High betweenness centrality (0.103) - this node is a cross-community bridge._
+- **Why does `ManualShareSender` connect `Community 30` to `Community 46`?**
+  _High betweenness centrality (0.009) - this node is a cross-community bridge._
+- **Why does `authorize()` connect `Community 0` to `Community 3`, `Community 29`, `Community 5`, `Community 45`?**
+  _High betweenness centrality (0.008) - this node is a cross-community bridge._
+- **What connects `owner`, `name`, `nextConfig` to the rest of the system?**
+  _263 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
-  _Cohesion score 0.058002735978112174 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.07431693989071038 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
   _Cohesion score 0.08333333333333333 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**
-  _Cohesion score 0.11764705882352941 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.1111111111111111 - nodes in this community are weakly interconnected._
