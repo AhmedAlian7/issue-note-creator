@@ -2,14 +2,10 @@
 import { useEffect, useRef, useState } from "react";
 import { PendingIndicator } from "@/app/brand/pending-indicator";
 import { ar } from "@/lib/i18n";
+import { ManualShareSender } from "@/server/sharing/manual";
+const sender = new ManualShareSender();
 const t = ar.notes;
-export function PdfPreview({
-  id,
-  filename,
-}: {
-  id: string;
-  filename: string;
-}) {
+export function PdfPreview({ id, filename }: { id: string; filename: string }) {
   const pages = useRef<HTMLDivElement>(null);
   const downloadLink = useRef<HTMLAnchorElement>(null);
   const [file, setFile] = useState<File | null>(null),
@@ -61,28 +57,25 @@ export function PdfPreview({
       container.replaceChildren();
     };
   }, [url, filename]);
-  const download = url + "?download=1";
-  async function share() {
-    if (file && navigator.canShare?.({ files: [file] })) {
-      try {
-        await navigator.share({ files: [file] });
-        return;
-      } catch (e) {
-        if (e instanceof DOMException && e.name === "AbortError") return;
-      }
-    }
-    downloadLink.current?.click();
-  }
   return (
     <section>
       <div className="tools">
-        <button disabled={!file} onClick={share}>
+        <button
+          disabled={!file}
+          onClick={() =>
+            file && void sender.share(file, () => downloadLink.current?.click())
+          }
+        >
           {t.share}
         </button>
-        <button disabled={!ready} onClick={() => window.print()}>
+        <button disabled={!ready} onClick={() => sender.print()}>
           {t.print}
         </button>
-        <a ref={downloadLink} className="action" href={download} download>
+        <a
+          ref={downloadLink}
+          className="action"
+          {...sender.download(url, filename)}
+        >
           {t.download}
         </a>
         <a href={url} target="_blank" rel="noreferrer">
