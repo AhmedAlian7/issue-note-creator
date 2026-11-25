@@ -82,18 +82,30 @@ function responseSchema(model: z.ZodType) {
   delete schema.$schema;
   return schema;
 }
+function transcriptionPrompt(catalog: Catalog) {
+  const entries = [...catalog.customers, ...catalog.products];
+  const names = new Set([
+    ...entries.map((entry) => entry.nameAr),
+    ...entries.flatMap((entry) => entry.aliases),
+  ]);
+  let prompt = "إذن صرف أثاث باللهجة المصرية. أسماء الأصناف والعملاء";
+  let bytes = Buffer.byteLength(prompt);
+  for (const name of names) {
+    const hint = `، ${name}`;
+    const hintBytes = Buffer.byteLength(hint);
+    // Groq enforces an 896-byte limit on the Whisper prompt.
+    if (bytes + hintBytes > 896) continue;
+    prompt += hint;
+    bytes += hintBytes;
+  }
+  return prompt;
+}
 export const groqTranscriber: Transcriber = {
   async transcribe(audio, catalog) {
     const form = new FormData();
     form.set("model", z.string().min(1).parse(process.env.TRANSCRIBE_MODEL));
     form.set("language", "ar");
-    form.set(
-      "prompt",
-      "إذن صرف أثاث باللهجة المصرية. أسماء الأصناف والعملاء: " +
-        [...catalog.products, ...catalog.customers]
-          .flatMap((e) => [e.nameAr, ...e.aliases])
-          .join("، "),
-    );
+    form.set("prompt", transcriptionPrompt(catalog));
     form.set(
       "file",
       audio,

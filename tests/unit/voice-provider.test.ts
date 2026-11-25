@@ -54,6 +54,27 @@ it("sends Arabic hints, retries a transient timeout once, and reads usage", asyn
     expect(form.get("prompt")).toContain(row.nameAr);
   expect((form.get("file") as File).name).toBe("voice.mp4");
 });
+it("keeps customer and product names ahead of aliases within Groq's byte limit", async () => {
+  vi.stubEnv("GROQ_API_KEY", "test");
+  vi.stubEnv("TRANSCRIBE_MODEL", "test-transcriber");
+  const fetcher = vi.fn<typeof fetch>(async () =>
+    Response.json({ text: "كرسي نوبل" }),
+  );
+  vi.stubGlobal("fetch", fetcher);
+  const aliases = Array.from({ length: 50 }, (_, n) => `اسم بديل ${n}`);
+  await groqTranscriber.transcribe(
+    new Blob(["audio"], { type: "audio/webm" }),
+    {
+      customers: [{ id: "customer", nameAr: "عميل الاختبار", aliases }],
+      products: [{ id: "product", nameAr: "كرسي نوبل", aliases: [] }],
+    },
+  );
+  const form = fetcher.mock.calls[0][1]?.body as FormData;
+  const prompt = String(form.get("prompt"));
+  expect(prompt).toContain("عميل الاختبار، كرسي نوبل، اسم بديل 0");
+  expect(prompt).not.toContain("اسم بديل 49");
+  expect(Buffer.byteLength(prompt)).toBeLessThanOrEqual(896);
+});
 it("sends both full catalogs and rejects invalid structured output after one retry", async () => {
   vi.stubEnv("GROQ_API_KEY", "test");
   vi.stubEnv("PARSE_MODEL", "test-extractor");
