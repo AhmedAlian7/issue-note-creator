@@ -97,7 +97,7 @@ every secret as a secret value.
 | ----------------------- | -------- | --------------------------------------------------------------------- |
 | `DATABASE_URL`          | Yes      | Neon pooled connection string, with `?sslmode=require`.                |
 | `SESSION_SECRET`        | Yes      | Long random string. Signs report PDF links. Rotating it invalidates old links. |
-| `APP_BASE_URL`          | Yes      | Public site URL, for example `https://issue-notes.netlify.app`.        |
+| `APP_BASE_URL`          | Yes      | Public site origin, for example `https://issue-notes.netlify.app`. Used for report email links and hosted redirects. |
 | `TZ`                    | Yes      | `Africa/Cairo`.                                                        |
 | `CLOUDFLARE_ACCOUNT_ID` | Yes      | Account ID from the Cloudflare dashboard URL.                          |
 | `CLOUDFLARE_API_TOKEN`  | Yes      | Token with the Browser Rendering permission.                           |

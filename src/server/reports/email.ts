@@ -1,5 +1,6 @@
 import { ar } from "@/lib/i18n";
 import type { Frequency } from "@/lib/report-config";
+import { appUrl } from "../app-url";
 import type { Report } from "./index";
 const t = ar.reports;
 const number = new Intl.NumberFormat("ar-EG", { useGrouping: false });
@@ -19,7 +20,7 @@ export function emailSubject(type: Frequency, { from, to }: Report["range"]) {
     : t[type] + " · " + from + " — " + to;
 }
 
-export function emailHtml(type: Frequency, r: Report, base: string) {
+export function emailHtml(type: Frequency, r: Report) {
   const start =
     '<div lang="ar" dir="rtl" style="direction:rtl;text-align:right;font:16px Arial,sans-serif;color:#17383e"><h1>';
   const ltr = (s: string) => '<span dir="ltr">' + escape(s) + "</span>";
@@ -100,7 +101,7 @@ export function emailHtml(type: Frequency, r: Report, base: string) {
     );
   }
   const busiest = r.days.reduce((a, b) => (a.notes >= b.notes ? a : b));
-  const dash = new URL("/dashboard?" + new URLSearchParams(r.range), base);
+  const dash = appUrl("/dashboard?" + new URLSearchParams(r.range));
   return (
     start +
     t[type] +

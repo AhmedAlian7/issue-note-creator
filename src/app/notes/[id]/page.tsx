@@ -1,5 +1,6 @@
 import Link from "@/app/brand/pending-link";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
+import { redirectToApp } from "@/server/app-redirect";
 import { z } from "zod";
 import { id } from "@/lib/inputs";
 import { notePdfName } from "@/lib/note-pdf-name";
@@ -44,7 +45,8 @@ export default async function NotePage(props: PageProps<"/notes/[id]">) {
     amend ||
     (note.status === "DRAFT" && allowed(user.role, "note.edit"))
   ) {
-    if (!note && !allowed(user.role, "note.create")) redirect("/workspace");
+    if (!note && !allowed(user.role, "note.create"))
+      return redirectToApp("/workspace");
     return (
       <Editor
         {...await noteCatalog(user)}

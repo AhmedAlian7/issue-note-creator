@@ -4,7 +4,7 @@ import Link from "@/app/brand/pending-link";
 import Image from "next/image";
 import { Wordmark } from "../brand/wordmark";
 import banner from "../brand/sign-in.png";
-import { redirect } from "next/navigation";
+import { redirectToApp } from "@/server/app-redirect";
 import { username } from "@/lib/inputs";
 import { db } from "@/server/db";
 import { currentUser } from "@/server/session";
@@ -14,7 +14,7 @@ export default async function Login({
 }: {
   searchParams: Promise<{ failed?: string; username?: string }>;
 }) {
-  if (await currentUser()) redirect("/workspace");
+  if (await currentUser()) return redirectToApp("/workspace");
   const query = await searchParams;
   const handle = username.safeParse(query.username);
   const user = handle.success

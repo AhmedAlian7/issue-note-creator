@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { redirectToApp } from "./app-redirect";
 import { db } from "./db";
 import { digest } from "./auth";
 import { allowed, type Action } from "./permissions";
@@ -20,7 +20,7 @@ export async function currentUser() {
 }
 export async function guard(action: Action) {
   const actor = await currentUser();
-  if (!actor) redirect("/login");
-  if (!allowed(actor.role, action)) redirect("/workspace");
+  if (!actor) return redirectToApp("/login");
+  if (!allowed(actor.role, action)) return redirectToApp("/workspace");
   return actor;
 }

@@ -5,7 +5,7 @@ import { allowed } from "@/server/permissions";
 import { SubmitButton } from "@/app/brand/submit-button";
 import { ar } from "@/lib/i18n";
 import { recentNotes, duplicateNote, noteCatalog } from "@/server/notes";
-import { redirect } from "next/navigation";
+import { redirectToApp } from "@/server/app-redirect";
 import { NoteList } from "../notes/note-list";
 export default async function Workspace() {
   const user = await guard("workspace");
@@ -50,7 +50,7 @@ export default async function Workspace() {
               "use server";
               const actor = await guard("note.create");
               const copy = await duplicateNote(actor, recent.rows[0].id);
-              redirect("/notes/" + copy.id);
+              return redirectToApp("/notes/" + copy.id);
             }}
           >
             <SubmitButton className="secondary">

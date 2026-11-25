@@ -104,11 +104,7 @@ export async function sendReport(
     if (!s.recipients.length) throw Error(t.noRecipients);
     const r = await loadReport(range);
     if (!testId && !r.total && settings.skipEmpty) return null;
-    const html = emailHtml(
-      type,
-      r,
-      process.env.APP_BASE_URL || "http://localhost:3000",
-    );
+    const html = emailHtml(type, r);
     const attachments =
       type === "monthly"
         ? [

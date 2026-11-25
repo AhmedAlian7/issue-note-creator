@@ -83,10 +83,13 @@ it("schedules by Cairo civil dates including month rollover, delayed jobs and su
 });
 it("binds signed links to the PDF and expires them at seven days", () => {
   vi.stubEnv("SESSION_SECRET", "unit secret");
+  vi.stubEnv("APP_BASE_URL", "reports.example.test");
   const now = new Date("2026-02-01T00:00Z");
-  const url = new URL(signedPdf("a", now), "http://example.test"),
+  const url = new URL(signedPdf("a", now)),
     exp = Number(url.searchParams.get("expires")),
     sig = url.searchParams.get("token")!;
+  expect(url.origin).toBe("https://reports.example.test");
+  expect(url.pathname).toBe("/api/reports/pdf/a");
   expect(validPdf("a", exp, sig, now)).toBe(true);
   expect(validPdf("b", exp, sig, now)).toBe(false);
   expect(validPdf("a", exp, sig, new Date(+now + lifetime * 1000))).toBe(false);
@@ -94,12 +97,13 @@ it("binds signed links to the PDF and expires them at seven days", () => {
 it.each(["daily", "weekly", "monthly"] as const)(
   "renders %s RTL email and export",
   async (type) => {
+    vi.stubEnv("APP_BASE_URL", "example.test/");
     const r = {
       ...summarize(range, [note], catalog),
       previous: { range: previous(range), total: 0, units: 0 },
       delta: { total: 1, units: 5 },
     };
-    expect(emailHtml(type, r, "https://example.test")).toMatchSnapshot();
+    expect(emailHtml(type, r)).toMatchSnapshot();
     expect(csv(r)).toContain("<عميل>");
     expect((await workbook(r)).subarray(0, 2).toString()).toBe("PK");
   },
@@ -114,9 +118,7 @@ it("dates the daily subject and shows the empty-day message", () => {
   expect(emailSubject("daily", day)).toBe(
     "تقرير أذون الصرف اليومي — ٢٣ نوفمبر ٢٠٢٦",
   );
-  expect(emailHtml("daily", r, "https://example.test")).toContain(
-    "لم تصدر أي أذون صرف اليوم.",
-  );
+  expect(emailHtml("daily", r)).toContain("لم تصدر أي أذون صرف اليوم.");
 });
 it("claims a period once across concurrent workers and redelivery, retries definite rejection, preserves unknown outcomes", async () => {
   const key = { type: "daily" as const, period: randomUUID() },
