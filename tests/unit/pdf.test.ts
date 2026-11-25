@@ -44,7 +44,7 @@ it("continues a note across pages", async () => {
   expect(pdf.getPageCount()).toBe(3);
 }, 60000);
 
-afterAll(closeChromium);
+afterAll(closeChromium, 45_000);
 
 it("renders twenty notes submitted concurrently", async () => {
   const results = await Promise.all(

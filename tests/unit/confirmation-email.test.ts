@@ -57,8 +57,6 @@ it("defaults off and delivers one short email with a signed PDF link when enable
       where: { type: "confirmation", period: note.id },
     });
     await db.setting.deleteMany({ where: { key } });
-    await db.issueNote.delete({ where: { id: note.id } });
-    await db.customer.delete({ where: { id: customer.id } });
-    await db.user.delete({ where: { id: actor.id } });
+    // The test database is dropped by the runner. Issued notes are immutable.
   }
 });
