@@ -3,6 +3,7 @@ import {
   useCallback,
   useEffect,
   useEffectEvent,
+  useId,
   useRef,
   useState,
   useTransition,
@@ -85,9 +86,13 @@ export function Editor({
     [adding, setAdding] = useState(false),
     [newName, setNewName] = useState(""),
     [reason, setReason] = useState("");
+  const [pickerOpen, setPickerOpen] = useState(false);
+  const [activeOption, setActiveOption] = useState(-1);
   const [replacing, setReplacing] = useState<string | null>(null);
   const [removed, setRemoved] = useState<{ line: Line; index: number }>();
   const picker = useRef<HTMLInputElement>(null);
+  const options = useRef<HTMLDivElement>(null);
+  const optionsId = useId();
   const productNameInput = useRef<HTMLInputElement>(null);
   const mounted = useRef(false);
   const currentId = useRef(noteId),
@@ -219,6 +224,11 @@ export function Editor({
     setReplacing(null);
     setQuery("");
     setAdding(false);
+    closePicker();
+  }
+  function closePicker() {
+    setPickerOpen(false);
+    setActiveOption(-1);
   }
   function move(index: number, direction: number) {
     const rows = [...data.lines];
@@ -244,6 +254,7 @@ export function Editor({
   const exactMatch = matches.some((p) =>
     [p.nameAr, ...p.aliases].some((v) => normalizeArabic(v) === search),
   );
+  const showPicker = pickerOpen && !adding;
   const name = (productId: string | null) =>
     products.find((p) => p.id === productId)?.nameAr;
   const blocker = blockers(data);
@@ -297,6 +308,8 @@ export function Editor({
                       setReplacing(line.key);
                       setQuery("");
                       setAdding(false);
+                      setActiveOption(-1);
+                      setPickerOpen(true);
                       picker.current?.focus();
                     }}
                   >
@@ -391,42 +404,118 @@ export function Editor({
             ))}
             <section className="picker">
               <h2>{replacing ? t.chooseProduct : t.addLine}</h2>
-              <label>
-                {t.product}
-                <input
-                  ref={picker}
-                  type="search"
-                  value={query}
-                  onChange={(e) => {
-                    setQuery(e.target.value);
-                    setAdding(false);
-                  }}
-                />
-              </label>
-              <div className="choices">
-                {matches.map((p) => (
-                  <button
-                    className="secondary"
-                    key={p.id}
-                    onClick={() => select(p.id)}
-                  >
-                    {p.nameAr}
-                  </button>
-                ))}
+              <div
+                className="product-picker"
+                onBlur={(e) => {
+                  if (!e.currentTarget.contains(e.relatedTarget)) closePicker();
+                }}
+              >
+                <label>
+                  {t.product}
+                  <input
+                    ref={picker}
+                    role="combobox"
+                    autoComplete="off"
+                    aria-autocomplete="list"
+                    aria-expanded={showPicker}
+                    aria-controls={showPicker ? optionsId : undefined}
+                    aria-activedescendant={
+                      showPicker && matches[activeOption]
+                        ? optionsId + "-" + activeOption
+                        : undefined
+                    }
+                    value={query}
+                    onFocus={() => setPickerOpen(true)}
+                    onClick={() => setPickerOpen(true)}
+                    onChange={(e) => {
+                      setQuery(e.target.value);
+                      setAdding(false);
+                      setActiveOption(-1);
+                      setPickerOpen(true);
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.nativeEvent.isComposing) return;
+                      if (e.key === "Escape" && showPicker) {
+                        e.preventDefault();
+                        closePicker();
+                      } else if (
+                        e.key === "Enter" &&
+                        showPicker &&
+                        matches[activeOption]
+                      ) {
+                        e.preventDefault();
+                        select(matches[activeOption].id);
+                      } else if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+                        e.preventDefault();
+                        setPickerOpen(true);
+                        setAdding(false);
+                        if (!matches.length) return;
+                        const next =
+                          e.key === "ArrowDown"
+                            ? Math.min(activeOption + 1, matches.length - 1)
+                            : activeOption < 0
+                              ? matches.length - 1
+                              : Math.max(0, activeOption - 1);
+                        setActiveOption(next);
+                        requestAnimationFrame(() =>
+                          options.current?.children[next]?.scrollIntoView({
+                            block: "nearest",
+                          }),
+                        );
+                      }
+                    }}
+                  />
+                </label>
+                {showPicker && (
+                  <div className="product-picker-dropdown">
+                    <div
+                      ref={options}
+                      id={optionsId}
+                      role="listbox"
+                      aria-label={t.product}
+                    >
+                      {matches.length ? (
+                        matches.map((p, index) => (
+                          <button
+                            type="button"
+                            role="option"
+                            tabIndex={-1}
+                            aria-selected={index === activeOption}
+                            id={optionsId + "-" + index}
+                            key={p.id}
+                            onMouseDown={(e) => e.preventDefault()}
+                            onClick={() => select(p.id)}
+                          >
+                            {p.nameAr}
+                          </button>
+                        ))
+                      ) : (
+                        <div
+                          role="option"
+                          aria-disabled="true"
+                          aria-selected="false"
+                        >
+                          {t.noProducts}
+                        </div>
+                      )}
+                    </div>
+                    {search && !exactMatch && (
+                      <button
+                        onClick={() => {
+                          setNewName(query.trim());
+                          setAdding(true);
+                          closePicker();
+                          requestAnimationFrame(() =>
+                            productNameInput.current?.focus(),
+                          );
+                        }}
+                      >
+                        {t.addNew}
+                      </button>
+                    )}
+                  </div>
+                )}
               </div>
-              {search && !exactMatch && !adding && (
-                <button
-                  onClick={() => {
-                    setNewName(query.trim());
-                    setAdding(true);
-                    requestAnimationFrame(() =>
-                      productNameInput.current?.focus(),
-                    );
-                  }}
-                >
-                  {t.addNew}
-                </button>
-              )}
               {adding && (
                 <div className="fields">
                   <label>
@@ -469,6 +558,7 @@ export function Editor({
                     setReplacing(null);
                     setQuery("");
                     setAdding(false);
+                    closePicker();
                   }}
                 >
                   {f.cancel}
@@ -484,6 +574,7 @@ export function Editor({
                   setReplacing(null);
                   setQuery("");
                   setAdding(false);
+                  closePicker();
                 }}
                 products={products}
                 customers={customers}

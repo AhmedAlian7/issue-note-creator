@@ -174,6 +174,7 @@ export const ar = {
     customer: "العميل",
     choose: "اختر العميل",
     product: "بحث عن صنف",
+    noProducts: "لا توجد أصناف مطابقة.",
     addLine: "إضافة بند",
     quantity: "الكمية",
     remarks: "ملاحظات",

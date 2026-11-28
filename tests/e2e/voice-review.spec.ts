@@ -171,6 +171,9 @@ test("mobile keeper reviews speech, resolves matches, corrects and issues a PDF"
     await expect(button(t.summary)).toBeEnabled();
   }
   await page.getByLabel(t.product).fill("كرسي اختبار جديد");
+  await expect(page.getByRole("listbox", { name: t.product })).toContainText(
+    t.noProducts,
+  );
   await button(t.addNew).click();
   await expect(page.getByLabel(ar.name, { exact: true })).toHaveValue(
     "كرسي اختبار جديد",

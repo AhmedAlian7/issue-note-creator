@@ -23,6 +23,7 @@ test("keeper types, issues, previews and downloads the numbered PDF on a phone",
     data: { nameAr: "فندق الاختبار" },
   });
   const product = await db.product.create({ data: { nameAr: "أَرِيكَة" } });
+  const otherProduct = await db.product.create({ data: { nameAr: "منضدة" } });
   await page.goto("/login");
   await page.getByLabel(ar.username).fill(username);
   await page.getByRole("button", { name: ar.loginContinue }).click();
@@ -33,8 +34,32 @@ test("keeper types, issues, previews and downloads the numbered PDF on a phone",
   await page
     .getByRole("combobox", { name: t.customer, exact: true })
     .selectOption(customer.id);
-  await page.getByLabel(t.product).fill("اريكه");
-  await page.getByRole("button", { name: product.nameAr }).click();
+  const picker = page.getByRole("combobox", { name: t.product });
+  const options = page.getByRole("listbox", { name: t.product });
+  await expect(options).toHaveCount(0);
+  await picker.click();
+  await expect(
+    options.getByRole("option", { name: otherProduct.nameAr }),
+  ).toBeVisible();
+  await picker.fill("اريكه");
+  await expect(options.getByRole("option")).toHaveCount(1);
+  await expect(
+    options.getByRole("option", { name: product.nameAr }),
+  ).toBeVisible();
+  await picker.press("Escape");
+  await expect(picker).toHaveAttribute("aria-expanded", "false");
+  await picker.press("ArrowDown");
+  await expect(options.getByRole("option", { selected: true })).toHaveText(
+    product.nameAr,
+  );
+  await picker.press("Enter");
+  await expect(options).toHaveCount(0);
+  await page
+    .locator(".line-card")
+    .getByRole("button", { name: ar.edit })
+    .click();
+  await options.getByRole("option", { name: product.nameAr }).click();
+  await expect(options).toHaveCount(0);
   await page.getByRole("spinbutton").fill("4");
   const remarks = page.getByLabel(t.remarks, { exact: true });
   const redRemark = page.getByRole("checkbox", { name: t.redRemark });
