@@ -1,18 +1,19 @@
 import type { VoiceResult } from "@/ai/pipeline";
 import { ar } from "@/lib/i18n";
 export type ParsedLine = VoiceResult["draft"]["lines"][number];
-export type Line = Omit<ParsedLine, "level" | "remarks"> & {
-  key: string;
-  level: "RED" | "GREEN" | "YELLOW";
-  remarks: string;
-  redRemark: boolean;
-};
+export type Line = Pick<ParsedLine, "productId" | "quantity"> &
+  Partial<Pick<ParsedLine, "candidates" | "spokenText">> & {
+    key: string;
+    level?: "RED" | "GREEN" | "YELLOW";
+    remarks: string;
+    redRemark: boolean;
+  };
 export type Draft = {
   customerId: string | null;
   lines: Line[];
-  transcript: string;
+  transcript?: string;
 };
-export type Item = { id: string; nameAr: string; aliases?: string[] };
+export type Item = { id: string; nameAr: string; active: boolean };
 export function reviewLine(l: ParsedLine): Line {
   return {
     ...l,

@@ -95,8 +95,17 @@ test("queues voice and text through an offline reload and processes them on reco
   ).toHaveCount(2, { timeout: 60_000 });
   await waiting.getByRole("button", { name: ar.pwa.review }).first().click();
   await expect(
-    page.getByRole("heading", { name: ar.notes.summary }),
+    page.getByRole("heading", { name: ar.notes.editor }),
   ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: ar.notes.summary }),
+  ).toBeDisabled();
+  await page.getByRole("spinbutton").first().fill("7");
+  await page.getByRole("button", { name: ar.notes.saveDraft }).click();
+  await expect(page.getByText(ar.notes.savedOnDevice)).toBeVisible();
+  await page.reload();
+  await page.getByRole("button", { name: ar.pwa.review }).last().click();
+  await expect(page.getByRole("spinbutton").first()).toHaveValue("7");
   expect(await db.recording.count({ where: { createdById: keeper.id } })).toBe(
     2,
   );

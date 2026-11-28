@@ -24,7 +24,7 @@ export function WaitingDrafts({
   review,
 }: {
   userId: string;
-  review?: (result: VoiceResult, id: string) => void;
+  review?: (item: QueuedDraft) => void;
 }) {
   const online = useOnline();
   const [items, setItems] = useState<QueuedDraft[]>([]);
@@ -51,7 +51,7 @@ export function WaitingDrafts({
       const drain = async () => {
         for (const item of await listDrafts(userId)) {
           if (!mounted || !navigator.onLine) break;
-          if (!item.input || item.result || item.error) continue;
+          if (!item.input || item.result || item.editor || item.error) continue;
           setSending(item.id);
           const response = await sendVoice(item.input, userId, item.id);
           if (response.ok) {
@@ -106,23 +106,21 @@ export function WaitingDrafts({
             <span>
               {typeof item.input === "string"
                 ? item.input.slice(0, 60)
-                : item.result
-                  ? item.result.transcript.slice(0, 60)
-                  : t.recording}{" "}
+                : (
+                    item.editor?.data.transcript ?? item.result?.transcript
+                  )?.slice(0, 60) || t.recording}{" "}
               · {time.format(item.createdAt)}
             </span>
             <span role="status">
               {item.error ??
-                (item.result
+                (item.result || item.editor
                   ? t.ready
                   : sending === item.id
                     ? t.sending
                     : t.queued)}
             </span>
-            {item.result && review && (
-              <button onClick={() => review(item.result!, item.id)}>
-                {t.review}
-              </button>
+            {(item.result || item.editor) && review && (
+              <button onClick={() => review(item)}>{t.review}</button>
             )}
             {item.error && (
               <button

@@ -9,17 +9,16 @@ export default async function VoicePage() {
   const catalog = await noteCatalog(user);
   return (
     <main className="desk narrow">
-      <Link href="/workspace">{ar.back}</Link>
       <VoiceFlow
         canConfirm={allowed(user.role, "note.confirm")}
         header={
           <header>
+            <Link href="/workspace">{ar.back}</Link>
             <h1>{ar.voice.title}</h1>
           </header>
         }
         userId={user.id}
-        products={catalog.products.filter((p) => p.active)}
-        customers={catalog.customers.filter((c) => c.active)}
+        {...catalog}
       />
     </main>
   );

@@ -1,4 +1,11 @@
 import type { VoiceResult } from "@/ai/pipeline";
+import type { Draft } from "../voice/review-model";
+
+export type EditorDraft = {
+  data: Draft;
+  noteId?: string;
+  updatedAt?: string;
+};
 
 export type QueuedDraft = {
   id: string;
@@ -6,6 +13,7 @@ export type QueuedDraft = {
   createdAt: number;
   input?: string | Blob;
   result?: VoiceResult;
+  editor?: EditorDraft;
   error?: string;
 };
 
@@ -68,7 +76,11 @@ export function enqueue(userId: string, input: Blob | string) {
   });
 }
 
-export function sendVoice(input: Blob | string, userId?: string, draftId?: string) {
+export function sendVoice(
+  input: Blob | string,
+  userId?: string,
+  draftId?: string,
+) {
   const typed = typeof input === "string";
   return fetch("/api/voice/parse", {
     method: "POST",

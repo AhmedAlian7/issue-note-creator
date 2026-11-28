@@ -1,8 +1,7 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { expect, it } from "vitest";
-import { LineCard } from "@/app/voice/line-card";
-import { ConfirmControl } from "@/app/voice/review";
-import type { Line, Draft } from "@/app/voice/review-model";
+import { MatchOptions } from "@/app/voice/match-options";
+import { blockers, type Line, type Draft } from "@/app/voice/review-model";
 import { ar } from "@/lib/i18n";
 const base: Line = {
   key: "a",
@@ -13,26 +12,13 @@ const base: Line = {
   redRemark: false,
   productId: "p",
   candidates: [{ id: "p", nameAr: "اقتراح", score: 0.7 }],
-  confidence: 1,
-  unmatched: false,
 };
 const noop = () => {};
 it.each(["GREEN", "YELLOW", "RED"] as const)(
   "renders %s with its next action",
   (level) => {
     const html = renderToStaticMarkup(
-      <LineCard
-        line={{ ...base, level }}
-        index={0}
-        count={1}
-        name="كرسي"
-        patch={noop}
-        choose={noop}
-        search={noop}
-        create={noop}
-        remove={noop}
-        move={noop}
-      />,
+      <MatchOptions line={{ ...base, level }} choose={noop} create={noop} />,
     );
     expect(html).toContain(
       level === "GREEN"
@@ -62,10 +48,6 @@ it.each([
 ] as [Draft, string][])(
   "explains each confirmation blocker",
   (draft, reason) => {
-    const html = renderToStaticMarkup(
-      <ConfirmControl draft={draft} onConfirm={noop} />,
-    );
-    expect(html.includes("disabled")).toBe(!!reason);
-    if (reason) expect(html).toContain(reason);
+    expect(blockers(draft)).toBe(reason);
   },
 );

@@ -11,23 +11,28 @@ import Link from "@/app/brand/pending-link";
 import { useRouter } from "next/navigation";
 import { PendingIndicator } from "@/app/brand/pending-indicator";
 import { ar } from "@/lib/i18n";
+import { noteInput } from "@/lib/inputs";
 import { normalizeArabic } from "@/lib/note-filters";
 import { useOnline } from "../pwa/connectivity";
+import { deleteDraft, putDraft } from "../pwa/drafts";
+import { SpeechTools } from "../voice/speech-tools";
+import {
+  blockers,
+  type Draft,
+  type Item,
+  type Line,
+} from "../voice/review-model";
+import { MatchOptions } from "../voice/match-options";
 import { command } from "./command";
 import { NumberControl } from "./number-control";
 import { RemarkFields } from "./remark-fields";
-const t = ar.notes;
-type Choice = { id: string; nameAr: string; active: boolean };
-type Product = Choice & { aliases: string[] };
-type Line = {
-  productId: string;
-  quantity: number;
-  remarks: string;
-  redRemark: boolean;
-  key: string;
-};
-type Fields = { customerId: string; lines: Line[] };
-function noteFields(value: Fields) {
+const t = ar.notes,
+  f = ar.flow;
+const previewDate = new Intl.DateTimeFormat("ar-EG", {
+  timeZone: "Africa/Cairo",
+});
+type Product = Item & { aliases: string[] };
+function noteFields(value: Draft) {
   return {
     customerId: value.customerId,
     lines: value.lines.map(({ productId, quantity, remarks, redRemark }) => ({
@@ -39,12 +44,17 @@ function noteFields(value: Fields) {
   };
 }
 type Props = {
-  customers: Choice[];
+  customers: Item[];
   products: Product[];
-  initial: Fields;
+  initial: Draft;
   noteId?: string;
   updatedAt?: string;
   amend?: boolean;
+  voice?: boolean;
+  canConfirm?: boolean;
+  userId?: string;
+  queueId?: string;
+  onBack?: () => void;
 };
 export function Editor({
   customers,
@@ -53,6 +63,11 @@ export function Editor({
   noteId,
   updatedAt,
   amend,
+  voice,
+  canConfirm = true,
+  userId,
+  queueId,
+  onBack,
 }: Props) {
   const router = useRouter();
   const online = useOnline();
@@ -64,35 +79,74 @@ export function Editor({
     [working, setBusy] = useState(false),
     [message, setMessage] = useState("");
   const [number, setNumber] = useState<number>();
+  const [hasDraftUrl, setHasDraftUrl] = useState(false);
   const busy = working || navigating;
   const [query, setQuery] = useState(""),
     [adding, setAdding] = useState(false),
     [newName, setNewName] = useState(""),
     [reason, setReason] = useState("");
   const [replacing, setReplacing] = useState<string | null>(null);
+  const [removed, setRemoved] = useState<{ line: Line; index: number }>();
   const picker = useRef<HTMLInputElement>(null);
+  const productNameInput = useRef<HTMLInputElement>(null);
+  const mounted = useRef(false);
   const currentId = useRef(noteId),
     timestamp = useRef(updatedAt),
-    saved = useRef(initial),
+    saved = useRef(noteId && !queueId ? initial : null),
+    localId = useRef(queueId),
     queue = useRef(Promise.resolve());
   const save = useCallback(
-    (value: Fields) => {
+    (value: Draft, allowDevice = false) => {
       const task = queue.current.then(async () => {
-        if (amend || !value.customerId || saved.current === value) return;
+        if (amend || !canConfirm) return;
+        if (saved.current === value) {
+          setMessage(ar.saved);
+          return;
+        }
+        const fields = noteFields(value);
+        const canSaveToServer =
+          navigator.onLine &&
+          !value.lines.some((l) => l.level === "YELLOW" || l.level === "RED") &&
+          noteInput.safeParse(fields).success;
+        if (!canSaveToServer) {
+          if (!allowDevice || !userId) return;
+          const id = (localId.current ??= crypto.randomUUID());
+          await putDraft({
+            id,
+            userId,
+            createdAt: Date.now(),
+            editor: {
+              data: value,
+              noteId: currentId.current,
+              updatedAt: timestamp.current,
+            },
+          });
+          setSavedData(value);
+          setMessage(t.savedOnDevice);
+          return;
+        }
         setMessage(t.waiting);
         const result = await command({
           action: currentId.current ? "edit" : "create",
           id: currentId.current,
           expected: timestamp.current,
-          fields: noteFields(value),
+          fields,
         });
-        if (!currentId.current) {
-          currentId.current = result.id;
+        currentId.current = result.id;
+        if (
+          mounted.current &&
+          window.location.pathname !== "/notes/" + result.id
+        ) {
           window.history.replaceState(null, "", "/notes/" + result.id);
+          setHasDraftUrl(true);
         }
         saved.current = value;
         setSavedData(value);
         timestamp.current = result.updatedAt;
+        if (localId.current) {
+          await deleteDraft(localId.current);
+          localId.current = undefined;
+        }
         setMessage(ar.saved);
       });
       queue.current = task.catch(() => {
@@ -100,35 +154,55 @@ export function Editor({
       });
       return task;
     },
-    [amend],
+    [amend, canConfirm, userId],
   );
   const autosave = useEffectEvent(() => {
     if (
-      !amend &&
+      online &&
       !busy &&
       saved.current !== data &&
-      data.lines.every(
-        (l) =>
-          Number.isInteger(l.quantity) &&
-          l.quantity > 0 &&
-          l.quantity <= 2147483647,
-      )
+      (voice || data !== initial)
     )
       void save(data).catch(() => {});
   });
   useEffect(() => {
+    mounted.current = true;
     const timer = setInterval(autosave, 2500);
-    return () => clearInterval(timer);
+    return () => {
+      mounted.current = false;
+      clearInterval(timer);
+    };
   }, []);
+  useEffect(() => {
+    if (!removed) return;
+    const timer = setTimeout(() => setRemoved(undefined), 5000);
+    return () => clearTimeout(timer);
+  }, [removed]);
   function changeLine(key: string, patch: Partial<Line>) {
     setData((d) => ({
       ...d,
       lines: d.lines.map((l) => (l.key === key ? { ...l, ...patch } : l)),
     }));
   }
-  function select(productId: string) {
-    if (replacing) changeLine(replacing, { productId });
-    else
+  function select(productId: string, key = replacing, learn = true) {
+    if (key) {
+      const line = data.lines.find((l) => l.key === key);
+      changeLine(key, { productId, level: line?.level ? "GREEN" : undefined });
+      if (
+        learn &&
+        line?.spokenText &&
+        (line.level !== "GREEN" || line.productId !== productId)
+      )
+        void fetch("/api/products/" + productId + "/aliases", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ alias: line.spokenText }),
+        })
+          .then((res) => {
+            if (!res.ok) setMessage(f.aliasFailed);
+          })
+          .catch(() => setMessage(f.aliasFailed));
+    } else
       setData((d) => ({
         ...d,
         lines: [
@@ -170,19 +244,14 @@ export function Editor({
   const exactMatch = matches.some((p) =>
     [p.nameAr, ...p.aliases].some((v) => normalizeArabic(v) === search),
   );
-  const name = (productId: string) =>
+  const name = (productId: string | null) =>
     products.find((p) => p.id === productId)?.nameAr;
-  const valid =
-    !!data.customerId &&
-    data.lines.length > 0 &&
-    data.lines.every(
-      (l) =>
-        l.quantity > 0 &&
-        Number.isInteger(l.quantity) &&
-        l.quantity <= 2147483647,
-    );
+  const blocker = blockers(data);
+  const canSaveDraft =
+    !!userId || (online && noteInput.safeParse(noteFields(data)).success);
+  const Container = voice ? "section" : "main";
   return (
-    <main className="desk note-desk">
+    <Container className={voice ? "note-desk" : "desk note-desk"}>
       <header>
         <p>{ar.appName}</p>
         <h1>{summary ? t.summary : amend ? t.supersede : t.editor}</h1>
@@ -194,9 +263,9 @@ export function Editor({
             <label>
               {t.customer}
               <select
-                value={data.customerId}
+                value={data.customerId ?? ""}
                 onChange={(e) =>
-                  setData({ ...data, customerId: e.target.value })
+                  setData({ ...data, customerId: e.target.value || null })
                 }
               >
                 <option value="">{t.choose}</option>
@@ -210,21 +279,43 @@ export function Editor({
               </select>
             </label>
             {data.lines.map((line, i) => (
-              <section className="line-card" key={line.key}>
+              <section
+                className={
+                  line.level
+                    ? "line-card review-line " + line.level
+                    : "line-card"
+                }
+                key={line.key}
+              >
                 <div className="line-title">
                   <h2>
-                    {i + 1}. {name(line.productId)}
+                    {i + 1}. {name(line.productId) ?? line.spokenText}
                   </h2>
                   <button
                     className="secondary"
                     onClick={() => {
                       setReplacing(line.key);
+                      setQuery("");
+                      setAdding(false);
                       picker.current?.focus();
                     }}
                   >
                     {ar.edit}
                   </button>
                 </div>
+                <MatchOptions
+                  line={line}
+                  choose={(id) => select(id, line.key)}
+                  create={() => {
+                    setReplacing(line.key);
+                    setQuery(line.spokenText ?? "");
+                    setNewName(line.spokenText ?? "");
+                    setAdding(true);
+                    requestAnimationFrame(() =>
+                      productNameInput.current?.focus(),
+                    );
+                  }}
+                />
                 <label>
                   {t.quantity}
                   <span className="stepper">
@@ -290,6 +381,7 @@ export function Editor({
                         lines: data.lines.filter((l) => l.key !== line.key),
                       });
                       if (replacing === line.key) setReplacing(null);
+                      if (voice) setRemoved({ line, index: i });
                     }}
                   >
                     {t.remove}
@@ -327,6 +419,9 @@ export function Editor({
                   onClick={() => {
                     setNewName(query.trim());
                     setAdding(true);
+                    requestAnimationFrame(() =>
+                      productNameInput.current?.focus(),
+                    );
                   }}
                 >
                   {t.addNew}
@@ -337,13 +432,14 @@ export function Editor({
                   <label>
                     {ar.name}
                     <input
+                      ref={productNameInput}
                       maxLength={180}
                       value={newName}
                       onChange={(e) => setNewName(e.target.value)}
                     />
                   </label>
                   <button
-                    disabled={!newName.trim()}
+                    disabled={!online || !newName.trim()}
                     onClick={() =>
                       run(async () => {
                         const nameAr = newName.trim();
@@ -358,7 +454,7 @@ export function Editor({
                           ...p,
                           { id, nameAr, active: true, aliases: [] },
                         ]);
-                        select(id);
+                        select(id, replacing, false);
                       })
                     }
                   >
@@ -366,25 +462,80 @@ export function Editor({
                   </button>
                 </div>
               )}
+              {replacing && (
+                <button
+                  className="secondary"
+                  onClick={() => {
+                    setReplacing(null);
+                    setQuery("");
+                    setAdding(false);
+                  }}
+                >
+                  {f.cancel}
+                </button>
+              )}
             </section>
+            {voice && (
+              <SpeechTools
+                draft={data}
+                update={(next) => {
+                  setData(next);
+                  setRemoved(undefined);
+                  setReplacing(null);
+                  setQuery("");
+                  setAdding(false);
+                }}
+                products={products}
+                customers={customers}
+                online={online}
+              />
+            )}
+            {removed && (
+              <button
+                className="secondary"
+                onClick={() => {
+                  const lines = [...data.lines];
+                  lines.splice(removed.index, 0, removed.line);
+                  setData({ ...data, lines });
+                  setRemoved(undefined);
+                }}
+              >
+                {f.undo} ·{" "}
+                {name(removed.line.productId) ?? removed.line.spokenText}
+              </button>
+            )}
           </>
         )}
-        <section className="note-table">
-          <h2>{t.preview}</h2>
-          <p>{customers.find((c) => c.id === data.customerId)?.nameAr}</p>
-          {summary && !amend && (
-            <dl>
-              <dt>{ar.notePdf.number}</dt>
-              <dd>
-                <NumberControl value={number} onChange={setNumber} />
-              </dd>
-            </dl>
-          )}
+        <section className="note-table" aria-labelledby="note-preview">
+          <h2 id="note-preview">{t.preview}</h2>
+          <dl>
+            <dt>{ar.notePdf.customer}</dt>
+            <dd>
+              {customers.find((c) => c.id === data.customerId)?.nameAr ??
+                t.choose}
+            </dd>
+            <dt>{ar.notePdf.date}</dt>
+            <dd suppressHydrationWarning>{previewDate.format(new Date())}</dd>
+            {!amend && (
+              <>
+                <dt>{ar.notePdf.number}</dt>
+                <dd>
+                  {summary ? (
+                    <NumberControl value={number} onChange={setNumber} />
+                  ) : (
+                    (number ?? t.numberPending)
+                  )}
+                </dd>
+              </>
+            )}
+          </dl>
           <table>
             <thead>
               <tr>
                 {[...ar.notePdf.headings].reverse().map((h) => (
-                  <th key={h}>{h}</th>
+                  <th key={h} scope="col">
+                    {h}
+                  </th>
                 ))}
               </tr>
             </thead>
@@ -392,7 +543,7 @@ export function Editor({
               {data.lines.map((l, i) => (
                 <tr key={l.key}>
                   <td>{i + 1}</td>
-                  <td>{name(l.productId)}</td>
+                  <td>{name(l.productId) ?? l.spokenText}</td>
                   <td>{l.quantity}</td>
                   <td className={l.redRemark ? "red-remark" : undefined}>
                     {l.remarks}
@@ -448,29 +599,51 @@ export function Editor({
             </button>
           </>
         ) : (
-          <button
-            disabled={!online || !valid}
-            onClick={() =>
-              run(async () => {
-                await save(data);
-                setSummary(true);
-              })
-            }
-          >
-            {t.summary}
-          </button>
+          (canConfirm || amend) && (
+            <>
+              {!amend && (
+                <button
+                  className="secondary"
+                  disabled={!canSaveDraft}
+                  onClick={() => run(() => save(data, true))}
+                >
+                  {t.saveDraft}
+                </button>
+              )}
+              {blocker && <p id="review-blocker">{blocker}</p>}
+              <button
+                disabled={!online || !!blocker}
+                aria-describedby={blocker ? "review-blocker" : undefined}
+                onClick={() =>
+                  run(async () => {
+                    await save(data);
+                    setSummary(true);
+                  })
+                }
+              >
+                {t.summary}
+              </button>
+            </>
+          )
         )}
       </fieldset>
       <p role="status" className={busy ? "navigation-progress" : undefined}>
         {busy || message === t.waiting ? (
           <PendingIndicator>{t.waiting}</PendingIndicator>
-        ) : message === ar.saved && savedData !== data ? (
+        ) : (message === ar.saved || message === t.savedOnDevice) &&
+          savedData !== data ? (
           ""
         ) : (
           message
         )}
       </p>
-      <Link href="/workspace">{ar.back}</Link>
-    </main>
+      {onBack && !hasDraftUrl ? (
+        <button className="secondary" disabled={busy} onClick={onBack}>
+          {ar.back}
+        </button>
+      ) : (
+        <Link href="/workspace">{ar.back}</Link>
+      )}
+    </Container>
   );
 }

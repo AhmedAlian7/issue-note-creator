@@ -76,7 +76,7 @@ test("keeper records, pauses, resumes and can recover by typing", async ({
     await page.getByLabel(ar.voice.text).fill("مكتب اتنين");
     await page.getByRole("button", { name: ar.voice.parse }).click();
     await expect(
-      page.getByRole("heading", { name: ar.notes.summary }),
+      page.getByRole("heading", { name: ar.notes.editor }),
     ).toBeVisible();
     const preview = page.getByRole("region", { name: ar.notes.preview });
     await expect(preview.getByText(ar.notes.numberPending)).toBeVisible();

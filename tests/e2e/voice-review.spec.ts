@@ -61,7 +61,9 @@ test("mobile keeper reviews speech, resolves matches, corrects and issues a PDF"
     page.getByRole("button", { name, exact: true });
   await button(f.skip).click();
   await record(page, ar.voice.start);
-  await expect(button(t.confirm)).toBeEnabled();
+  await expect(button(t.summary)).toBeEnabled();
+  await expect(button(t.confirm)).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: t.preview })).toBeVisible();
   await expect(page.getByText(f.green)).toBeVisible();
   await expect(page.getByLabel(t.remarks, { exact: true })).toHaveValue(
     t.defaultRemarks,
@@ -80,6 +82,7 @@ test("mobile keeper reviews speech, resolves matches, corrects and issues a PDF"
   );
   await page.getByLabel(t.remarks, { exact: true }).fill("فندق كارما");
   await page.getByRole("checkbox", { name: t.redRemark }).check();
+  await button(t.summary).click();
   await setNumber(page, "1300");
   await button(t.confirm).click();
   await expect(page.locator(".pdf-pages canvas")).toBeVisible({
@@ -98,7 +101,6 @@ test("mobile keeper reviews speech, resolves matches, corrects and issues a PDF"
   await button(f.type).click();
   await page.getByLabel(ar.voice.text).fill(fixtureSpeech.green);
   await button(ar.voice.parse).click();
-  await setNumber(page, "1301");
   await page.getByRole("button", { name: f.editVoice }).click();
   await record(page, f.editVoice);
   await expect(page.getByRole("spinbutton")).toHaveValue("20");
@@ -112,13 +114,19 @@ test("mobile keeper reviews speech, resolves matches, corrects and issues a PDF"
     await button(f.type).click();
     await page.getByLabel(ar.voice.text).fill(speech);
     await button(ar.voice.parse).click();
-    await expect(button(t.confirm)).toBeDisabled();
+    await expect(button(t.summary)).toBeDisabled();
     if (state === "yellow") {
       await page
         .locator(".review-line.YELLOW")
         .evaluate((el) => el.scrollIntoView({ block: "start" }));
       await screenshot("yellow");
-      await button(chair.nameAr).click();
+      await page
+        .locator(".review-line.YELLOW")
+        .getByRole("button", {
+          name: chair.nameAr,
+          exact: true,
+        })
+        .click();
       await expect
         .poll(
           async () =>
@@ -127,6 +135,17 @@ test("mobile keeper reviews speech, resolves matches, corrects and issues a PDF"
         )
         .toBe(1);
     } else {
+      await page.locator(".review-line.RED").getByRole("spinbutton").fill("3");
+      await button(t.saveDraft).click();
+      await expect(page.getByText(t.savedOnDevice)).toBeVisible();
+      await page.goto("/workspace");
+      await page
+        .getByRole("region", { name: ar.pwa.waiting })
+        .getByRole("button", { name: ar.pwa.review })
+        .click();
+      await expect(
+        page.locator(".review-line.RED").getByRole("spinbutton"),
+      ).toHaveValue("3");
       await page
         .locator(".review-line.RED")
         .evaluate((el) => el.scrollIntoView({ block: "start" }));
@@ -149,8 +168,27 @@ test("mobile keeper reviews speech, resolves matches, corrects and issues a PDF"
         )
         .toBe(1);
     }
-    await expect(button(t.confirm)).toBeEnabled();
+    await expect(button(t.summary)).toBeEnabled();
   }
+  await page.getByLabel(t.product).fill("كرسي اختبار جديد");
+  await button(t.addNew).click();
+  await expect(page.getByLabel(ar.name, { exact: true })).toHaveValue(
+    "كرسي اختبار جديد",
+  );
+  await button(ar.save).click();
+  await expect(
+    page.getByRole("heading", { name: "4. كرسي اختبار جديد" }),
+  ).toBeVisible();
+  await button(t.saveDraft).click();
+  await expect(page.getByText(ar.saved, { exact: true })).toBeVisible();
+  await button(t.saveDraft).click();
+  await expect(page.getByText(ar.saved, { exact: true })).toBeVisible();
+  await page.reload();
+  await expect(
+    page.getByRole("heading", { name: "4. كرسي اختبار جديد" }),
+  ).toBeVisible();
+  await button(t.summary).click();
+  await setNumber(page, "1301");
   await button(t.confirm).click();
   await expect(page.locator(".pdf-pages canvas").first()).toBeVisible({
     timeout: 30000,

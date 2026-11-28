@@ -66,12 +66,7 @@ export default async function Workspace() {
   return (
     <main className="desk">
       {catalog ? (
-        <VoiceFlow
-          userId={user.id}
-          header={header}
-          products={catalog.products.filter((p) => p.active)}
-          customers={catalog.customers.filter((c) => c.active)}
-        >
+        <VoiceFlow userId={user.id} header={header} {...catalog}>
           {shortcuts}
         </VoiceFlow>
       ) : (

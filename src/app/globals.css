@@ -409,14 +409,6 @@ body {
   padding: 0.55rem 0.75rem;
   background: var(--paper);
 }
-.review {
-  max-width: 34rem;
-  margin: auto;
-}
-.review .review-fields {
-  padding: 0.5rem 0;
-  min-width: 0;
-}
 .review-line {
   border-inline-start: 5px solid var(--match);
   background: white;
@@ -438,30 +430,11 @@ body {
 .match-state {
   color: var(--match);
 }
-.review .confirm-bar {
-  position: sticky;
-  bottom: 0;
-  background: white;
-  padding: 0.55rem 0 max(0.55rem, env(safe-area-inset-bottom));
-  border-top: 1px solid var(--border);
-  z-index: 1;
-}
-.confirm-bar button {
-  width: 100%;
-}
-.review summary,
-.review button,
-.review input,
 .desk dialog button {
   min-height: 48px;
   min-width: 48px;
 }
-.review .customer-button {
-  background: var(--stone);
-  color: var(--ink);
-  text-align: start;
-}
-.review details p {
+.note-desk details p {
   white-space: pre-line;
 }
 
