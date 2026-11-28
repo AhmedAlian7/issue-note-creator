@@ -1172,7 +1172,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "ai_fixture_provider_fixturespeech",
-      "community": 3,
+      "community": 29,
       "norm_label": "fixturespeech"
     },
     {
@@ -1482,7 +1482,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "section_page",
-      "community": 46,
+      "community": 45,
       "norm_label": "page.tsx"
     },
     {
@@ -1492,7 +1492,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "section_page_sections",
-      "community": 46,
+      "community": 45,
       "norm_label": "sections"
     },
     {
@@ -1502,7 +1502,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "section_page_catalog",
-      "community": 46,
+      "community": 45,
       "norm_label": "catalog()"
     },
     {
@@ -1522,7 +1522,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "reports_route",
-      "community": 5,
+      "community": 6,
       "norm_label": "route.ts"
     },
     {
@@ -1532,7 +1532,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "reports_route_handle",
-      "community": 5,
+      "community": 6,
       "norm_label": "handle"
     },
     {
@@ -1802,7 +1802,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "archive_page",
-      "community": 46,
+      "community": 45,
       "norm_label": "page.tsx"
     },
     {
@@ -1822,7 +1822,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "brand_navigation",
-      "community": 46,
+      "community": 45,
       "norm_label": "navigation.tsx"
     },
     {
@@ -1842,7 +1842,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "brand_pending_indicator",
-      "community": 46,
+      "community": 37,
       "norm_label": "pending-indicator.tsx"
     },
     {
@@ -1852,7 +1852,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "brand_pending_indicator_pendingindicator",
-      "community": 46,
+      "community": 37,
       "norm_label": "pendingindicator()"
     },
     {
@@ -1862,7 +1862,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "brand_pending_link",
-      "community": 46,
+      "community": 45,
       "norm_label": "pending-link.tsx"
     },
     {
@@ -1872,7 +1872,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "brand_pending_link_linkfeedback",
-      "community": 46,
+      "community": 45,
       "norm_label": "linkfeedback()"
     },
     {
@@ -1882,7 +1882,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "brand_pending_link_pendinglink",
-      "community": 46,
+      "community": 45,
       "norm_label": "pendinglink()"
     },
     {
@@ -1892,7 +1892,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "brand_search_form",
-      "community": 46,
+      "community": 37,
       "norm_label": "search-form.tsx"
     },
     {
@@ -1902,7 +1902,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "brand_search_form_searchform",
-      "community": 46,
+      "community": 45,
       "norm_label": "searchform()"
     },
     {
@@ -1972,7 +1972,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_catalog_forms",
-      "community": 46,
+      "community": 45,
       "norm_label": "catalog-forms.tsx"
     },
     {
@@ -1982,7 +1982,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_catalog_forms_entity",
-      "community": 46,
+      "community": 45,
       "norm_label": "entity"
     },
     {
@@ -1992,7 +1992,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_catalog_forms_recordfields",
-      "community": 46,
+      "community": 45,
       "norm_label": "recordfields"
     },
     {
@@ -2002,7 +2002,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "app_catalog_forms_usemutation",
-      "community": 46,
+      "community": 45,
       "norm_label": "usemutation()"
     },
     {
@@ -2012,7 +2012,7 @@
       "source_location": "L56",
       "_origin": "ast",
       "id": "app_catalog_forms_catalogform",
-      "community": 46,
+      "community": 45,
       "norm_label": "catalogform()"
     },
     {
@@ -2022,7 +2022,7 @@
       "source_location": "L171",
       "_origin": "ast",
       "id": "app_catalog_forms_statebutton",
-      "community": 46,
+      "community": 45,
       "norm_label": "statebutton()"
     },
     {
@@ -2032,7 +2032,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "dashboard_charts",
-      "community": 46,
+      "community": 5,
       "norm_label": "charts.tsx"
     },
     {
@@ -2042,7 +2042,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "dashboard_charts_feedrefresh",
-      "community": 46,
+      "community": 5,
       "norm_label": "feedrefresh()"
     },
     {
@@ -2052,7 +2052,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "dashboard_charts_chart",
-      "community": 46,
+      "community": 5,
       "norm_label": "chart()"
     },
     {
@@ -2072,7 +2072,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "dashboard_page",
-      "community": 46,
+      "community": 5,
       "norm_label": "page.tsx"
     },
     {
@@ -2092,7 +2092,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_error",
-      "community": 46,
+      "community": 37,
       "norm_label": "error.tsx"
     },
     {
@@ -2102,7 +2102,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_error_errorpage",
-      "community": 46,
+      "community": 37,
       "norm_label": "errorpage()"
     },
     {
@@ -2112,7 +2112,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_global_error",
-      "community": 46,
+      "community": 37,
       "norm_label": "global-error.tsx"
     },
     {
@@ -2122,7 +2122,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_global_error_globalerror",
-      "community": 46,
+      "community": 37,
       "norm_label": "globalerror()"
     },
     {
@@ -2132,7 +2132,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_layout",
-      "community": 46,
+      "community": 37,
       "norm_label": "layout.tsx"
     },
     {
@@ -2142,7 +2142,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_layout_metadata",
-      "community": 46,
+      "community": 37,
       "norm_label": "metadata"
     },
     {
@@ -2152,7 +2152,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "app_layout_rootlayout",
-      "community": 46,
+      "community": 37,
       "norm_label": "rootlayout()"
     },
     {
@@ -2162,7 +2162,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_loading",
-      "community": 46,
+      "community": 37,
       "norm_label": "loading.tsx"
     },
     {
@@ -2172,7 +2172,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "app_loading_loading",
-      "community": 46,
+      "community": 37,
       "norm_label": "loading()"
     },
     {
@@ -2252,7 +2252,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_manifest",
-      "community": 46,
+      "community": 37,
       "norm_label": "manifest.ts"
     },
     {
@@ -2262,7 +2262,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "app_manifest_manifest",
-      "community": 46,
+      "community": 37,
       "norm_label": "manifest()"
     },
     {
@@ -2272,7 +2272,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_not_found",
-      "community": 46,
+      "community": 45,
       "norm_label": "not-found.tsx"
     },
     {
@@ -2282,7 +2282,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "app_not_found_missingpage",
-      "community": 46,
+      "community": 45,
       "norm_label": "missingpage()"
     },
     {
@@ -2292,7 +2292,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "id_page",
-      "community": 0,
+      "community": 45,
       "norm_label": "page.tsx"
     },
     {
@@ -2302,7 +2302,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "id_page_notepage",
-      "community": 0,
+      "community": 45,
       "norm_label": "notepage()"
     },
     {
@@ -2312,7 +2312,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "notes_command",
-      "community": 46,
+      "community": 37,
       "norm_label": "command.ts"
     },
     {
@@ -2322,7 +2322,7 @@
       "source_location": "L2",
       "_origin": "ast",
       "id": "notes_command_command",
-      "community": 46,
+      "community": 37,
       "norm_label": "command()"
     },
     {
@@ -2332,77 +2332,57 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "notes_editor",
-      "community": 46,
+      "community": 37,
       "norm_label": "editor.tsx"
     },
     {
-      "label": "Choice",
+      "label": "previewDate",
       "file_type": "code",
       "source_file": "src/app/notes/editor.tsx",
-      "source_location": "L20",
+      "source_location": "L31",
       "_origin": "ast",
-      "id": "notes_editor_choice",
-      "community": 46,
-      "norm_label": "choice"
+      "id": "notes_editor_previewdate",
+      "community": 37,
+      "norm_label": "previewdate"
     },
     {
       "label": "Product",
       "file_type": "code",
       "source_file": "src/app/notes/editor.tsx",
-      "source_location": "L21",
+      "source_location": "L34",
       "_origin": "ast",
       "id": "notes_editor_product",
-      "community": 46,
+      "community": 37,
       "norm_label": "product"
-    },
-    {
-      "label": "Line",
-      "file_type": "code",
-      "source_file": "src/app/notes/editor.tsx",
-      "source_location": "L22",
-      "_origin": "ast",
-      "id": "notes_editor_line",
-      "community": 46,
-      "norm_label": "line"
-    },
-    {
-      "label": "Fields",
-      "file_type": "code",
-      "source_file": "src/app/notes/editor.tsx",
-      "source_location": "L29",
-      "_origin": "ast",
-      "id": "notes_editor_fields",
-      "community": 46,
-      "norm_label": "fields"
     },
     {
       "label": "noteFields()",
       "file_type": "code",
       "source_file": "src/app/notes/editor.tsx",
-      "source_location": "L30",
+      "source_location": "L35",
       "_origin": "ast",
       "id": "notes_editor_notefields",
-      "community": 46,
+      "community": 37,
       "norm_label": "notefields()"
     },
     {
       "label": "Props",
       "file_type": "code",
       "source_file": "src/app/notes/editor.tsx",
-      "source_location": "L41",
+      "source_location": "L46",
       "_origin": "ast",
       "id": "notes_editor_props",
-      "community": 46,
+      "community": 37,
       "norm_label": "props"
     },
     {
       "label": "Editor()",
       "file_type": "code",
       "source_file": "src/app/notes/editor.tsx",
-      "source_location": "L49",
+      "source_location": "L59",
       "_origin": "ast",
       "id": "notes_editor_editor",
-      "community": 46,
+      "community": 37,
       "norm_label": "editor()"
     },
     {
@@ -2422,7 +2402,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "notes_note_list",
-      "community": 46,
+      "community": 45,
       "norm_label": "note-list.tsx"
     },
     {
@@ -2432,7 +2412,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "notes_note_list_notelist",
-      "community": 46,
+      "community": 45,
       "norm_label": "notelist()"
     },
     {
@@ -2442,7 +2422,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "notes_number_control",
-      "community": 46,
+      "community": 37,
       "norm_label": "number-control.tsx"
     },
     {
@@ -2452,7 +2432,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "notes_number_control_numbercontrol",
-      "community": 46,
+      "community": 37,
       "norm_label": "numbercontrol()"
     },
     {
@@ -2462,7 +2442,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "notes_pdf_preview",
-      "community": 46,
+      "community": 37,
       "norm_label": "pdf-preview.tsx"
     },
     {
@@ -2472,7 +2452,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "notes_pdf_preview_sender",
-      "community": 46,
+      "community": 37,
       "norm_label": "sender"
     },
     {
@@ -2482,7 +2462,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "notes_pdf_preview_pdfpreview",
-      "community": 0,
+      "community": 45,
       "norm_label": "pdfpreview()"
     },
     {
@@ -2492,7 +2472,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "notes_remark_fields",
-      "community": 46,
+      "community": 37,
       "norm_label": "remark-fields.tsx"
     },
     {
@@ -2502,7 +2482,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "notes_remark_fields_remark",
-      "community": 46,
+      "community": 37,
       "norm_label": "remark"
     },
     {
@@ -2512,7 +2492,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "notes_remark_fields_remarkfields",
-      "community": 46,
+      "community": 37,
       "norm_label": "remarkfields()"
     },
     {
@@ -2522,7 +2502,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "notes_void_form",
-      "community": 46,
+      "community": 37,
       "norm_label": "void-form.tsx"
     },
     {
@@ -2532,7 +2512,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "notes_void_form_voidform",
-      "community": 0,
+      "community": 45,
       "norm_label": "voidform()"
     },
     {
@@ -2592,7 +2572,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_page",
-      "community": 46,
+      "community": 45,
       "norm_label": "page.tsx"
     },
     {
@@ -2602,7 +2582,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_page_home",
-      "community": 46,
+      "community": 45,
       "norm_label": "home()"
     },
     {
@@ -2622,7 +2602,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "new_page",
-      "community": 46,
+      "community": 45,
       "norm_label": "page.tsx"
     },
     {
@@ -2676,10 +2656,20 @@
       "norm_label": "drafts.ts"
     },
     {
+      "label": "EditorDraft",
+      "file_type": "code",
+      "source_file": "src/app/pwa/drafts.ts",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "pwa_drafts_editordraft",
+      "community": 37,
+      "norm_label": "editordraft"
+    },
+    {
       "label": "QueuedDraft",
       "file_type": "code",
       "source_file": "src/app/pwa/drafts.ts",
-      "source_location": "L3",
+      "source_location": "L10",
       "_origin": "ast",
       "id": "pwa_drafts_queueddraft",
       "community": 37,
@@ -2689,7 +2679,7 @@
       "label": "open()",
       "file_type": "code",
       "source_file": "src/app/pwa/drafts.ts",
-      "source_location": "L15",
+      "source_location": "L23",
       "_origin": "ast",
       "id": "pwa_drafts_open",
       "community": 37,
@@ -2699,7 +2689,7 @@
       "label": "transaction()",
       "file_type": "code",
       "source_file": "src/app/pwa/drafts.ts",
-      "source_location": "L28",
+      "source_location": "L36",
       "_origin": "ast",
       "id": "pwa_drafts_transaction",
       "community": 37,
@@ -2709,7 +2699,7 @@
       "label": "listDrafts()",
       "file_type": "code",
       "source_file": "src/app/pwa/drafts.ts",
-      "source_location": "L45",
+      "source_location": "L53",
       "_origin": "ast",
       "id": "pwa_drafts_listdrafts",
       "community": 37,
@@ -2719,7 +2709,7 @@
       "label": "putDraft()",
       "file_type": "code",
       "source_file": "src/app/pwa/drafts.ts",
-      "source_location": "L52",
+      "source_location": "L60",
       "_origin": "ast",
       "id": "pwa_drafts_putdraft",
       "community": 37,
@@ -2729,7 +2719,7 @@
       "label": "deleteDraft()",
       "file_type": "code",
       "source_file": "src/app/pwa/drafts.ts",
-      "source_location": "L57",
+      "source_location": "L65",
       "_origin": "ast",
       "id": "pwa_drafts_deletedraft",
       "community": 37,
@@ -2739,7 +2729,7 @@
       "label": "enqueue()",
       "file_type": "code",
       "source_file": "src/app/pwa/drafts.ts",
-      "source_location": "L62",
+      "source_location": "L70",
       "_origin": "ast",
       "id": "pwa_drafts_enqueue",
       "community": 37,
@@ -2749,7 +2739,7 @@
       "label": "sendVoice()",
       "file_type": "code",
       "source_file": "src/app/pwa/drafts.ts",
-      "source_location": "L71",
+      "source_location": "L79",
       "_origin": "ast",
       "id": "pwa_drafts_sendvoice",
       "community": 37,
@@ -2762,7 +2752,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "pwa_register",
-      "community": 46,
+      "community": 37,
       "norm_label": "register.tsx"
     },
     {
@@ -2772,7 +2762,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "pwa_register_registerworker",
-      "community": 46,
+      "community": 37,
       "norm_label": "registerworker()"
     },
     {
@@ -2812,7 +2802,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "settings_actions",
-      "community": 5,
+      "community": 42,
       "norm_label": "actions.ts"
     },
     {
@@ -2822,7 +2812,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "settings_actions_save",
-      "community": 5,
+      "community": 42,
       "norm_label": "save()"
     },
     {
@@ -2832,7 +2822,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "settings_actions_testreport",
-      "community": 5,
+      "community": 42,
       "norm_label": "testreport()"
     },
     {
@@ -2852,7 +2842,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "settings_page",
-      "community": 5,
+      "community": 42,
       "norm_label": "page.tsx"
     },
     {
@@ -2862,7 +2852,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "settings_page_settings",
-      "community": 5,
+      "community": 42,
       "norm_label": "settings()"
     },
     {
@@ -2872,7 +2862,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "settings_settings_form",
-      "community": 5,
+      "community": 42,
       "norm_label": "settings-form.tsx"
     },
     {
@@ -2882,7 +2872,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "settings_settings_form_settingsform",
-      "community": 5,
+      "community": 42,
       "norm_label": "settingsform()"
     },
     {
@@ -2922,7 +2912,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "voice_flow_voiceflow",
-      "community": 37,
+      "community": 45,
       "norm_label": "voiceflow()"
     },
     {
@@ -2956,34 +2946,24 @@
       "norm_label": "layout.tsx"
     },
     {
-      "label": "line-card.tsx",
+      "label": "match-options.tsx",
       "file_type": "code",
-      "source_file": "src/app/voice/line-card.tsx",
+      "source_file": "src/app/voice/match-options.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "voice_line_card",
+      "id": "voice_match_options",
       "community": 37,
-      "norm_label": "line-card.tsx"
+      "norm_label": "match-options.tsx"
     },
     {
-      "label": "Props",
+      "label": "MatchOptions()",
       "file_type": "code",
-      "source_file": "src/app/voice/line-card.tsx",
-      "source_location": "L6",
+      "source_file": "src/app/voice/match-options.tsx",
+      "source_location": "L5",
       "_origin": "ast",
-      "id": "voice_line_card_props",
+      "id": "voice_match_options_matchoptions",
       "community": 37,
-      "norm_label": "props"
-    },
-    {
-      "label": "LineCard()",
-      "file_type": "code",
-      "source_file": "src/app/voice/line-card.tsx",
-      "source_location": "L18",
-      "_origin": "ast",
-      "id": "voice_line_card_linecard",
-      "community": 37,
-      "norm_label": "linecard()"
+      "norm_label": "matchoptions()"
     },
     {
       "label": "page.tsx",
@@ -2992,7 +2972,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "voice_page",
-      "community": 37,
+      "community": 45,
       "norm_label": "page.tsx"
     },
     {
@@ -3069,7 +3049,7 @@
       "label": "Draft",
       "file_type": "code",
       "source_file": "src/app/voice/review-model.ts",
-      "source_location": "L10",
+      "source_location": "L11",
       "_origin": "ast",
       "id": "voice_review_model_draft",
       "community": 37,
@@ -3079,7 +3059,7 @@
       "label": "Item",
       "file_type": "code",
       "source_file": "src/app/voice/review-model.ts",
-      "source_location": "L15",
+      "source_location": "L16",
       "_origin": "ast",
       "id": "voice_review_model_item",
       "community": 37,
@@ -3089,7 +3069,7 @@
       "label": "reviewLine()",
       "file_type": "code",
       "source_file": "src/app/voice/review-model.ts",
-      "source_location": "L16",
+      "source_location": "L17",
       "_origin": "ast",
       "id": "voice_review_model_reviewline",
       "community": 37,
@@ -3099,7 +3079,7 @@
       "label": "fromSpeech()",
       "file_type": "code",
       "source_file": "src/app/voice/review-model.ts",
-      "source_location": "L26",
+      "source_location": "L27",
       "_origin": "ast",
       "id": "voice_review_model_fromspeech",
       "community": 37,
@@ -3109,61 +3089,51 @@
       "label": "blockers()",
       "file_type": "code",
       "source_file": "src/app/voice/review-model.ts",
-      "source_location": "L33",
+      "source_location": "L34",
       "_origin": "ast",
       "id": "voice_review_model_blockers",
       "community": 37,
       "norm_label": "blockers()"
     },
     {
-      "label": "review.tsx",
+      "label": "speech-tools.tsx",
       "file_type": "code",
-      "source_file": "src/app/voice/review.tsx",
+      "source_file": "src/app/voice/speech-tools.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "voice_review",
+      "id": "voice_speech_tools",
       "community": 37,
-      "norm_label": "review.tsx"
+      "norm_label": "speech-tools.tsx"
     },
     {
-      "label": "previewDate",
+      "label": "labels",
       "file_type": "code",
-      "source_file": "src/app/voice/review.tsx",
-      "source_location": "L23",
+      "source_file": "src/app/voice/speech-tools.tsx",
+      "source_location": "L10",
       "_origin": "ast",
-      "id": "voice_review_previewdate",
+      "id": "voice_speech_tools_labels",
       "community": 37,
-      "norm_label": "previewdate"
+      "norm_label": "labels"
     },
     {
-      "label": "Panel",
+      "label": "Mode",
       "file_type": "code",
-      "source_file": "src/app/voice/review.tsx",
-      "source_location": "L26",
+      "source_file": "src/app/voice/speech-tools.tsx",
+      "source_location": "L11",
       "_origin": "ast",
-      "id": "voice_review_panel",
+      "id": "voice_speech_tools_mode",
       "community": 37,
-      "norm_label": "panel"
+      "norm_label": "mode"
     },
     {
-      "label": "ConfirmControl()",
+      "label": "SpeechTools()",
       "file_type": "code",
-      "source_file": "src/app/voice/review.tsx",
-      "source_location": "L29",
+      "source_file": "src/app/voice/speech-tools.tsx",
+      "source_location": "L13",
       "_origin": "ast",
-      "id": "voice_review_confirmcontrol",
+      "id": "voice_speech_tools_speechtools",
       "community": 37,
-      "norm_label": "confirmcontrol()"
-    },
-    {
-      "label": "Review()",
-      "file_type": "code",
-      "source_file": "src/app/voice/review.tsx",
-      "source_location": "L52",
-      "_origin": "ast",
-      "id": "voice_review_review",
-      "community": 37,
-      "norm_label": "review()"
+      "norm_label": "speechtools()"
     },
     {
       "label": "layout.tsx",
@@ -3202,7 +3172,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_i18n",
-      "community": 46,
+      "community": 37,
       "norm_label": "i18n.ts"
     },
     {
@@ -3212,7 +3182,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_i18n_ar",
-      "community": 46,
+      "community": 37,
       "norm_label": "ar"
     },
     {
@@ -3282,7 +3252,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "lib_inputs_name",
-      "community": 0,
+      "community": 37,
       "norm_label": "name"
     },
     {
@@ -3412,7 +3382,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "lib_note_filters_normalizearabic",
-      "community": 46,
+      "community": 37,
       "norm_label": "normalizearabic()"
     },
     {
@@ -3452,7 +3422,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_remarks",
-      "community": 46,
+      "community": 37,
       "norm_label": "remarks.ts"
     },
     {
@@ -3462,7 +3432,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "lib_remarks_cancolorremark",
-      "community": 46,
+      "community": 37,
       "norm_label": "cancolorremark()"
     },
     {
@@ -3472,7 +3442,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_report_config",
-      "community": 5,
+      "community": 42,
       "norm_label": "report-config.ts"
     },
     {
@@ -3482,7 +3452,7 @@
       "source_location": "L2",
       "_origin": "ast",
       "id": "lib_report_config_frequencies",
-      "community": 5,
+      "community": 42,
       "norm_label": "frequencies"
     },
     {
@@ -3492,7 +3462,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "lib_report_config_frequency",
-      "community": 5,
+      "community": 42,
       "norm_label": "frequency"
     },
     {
@@ -3502,7 +3472,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "lib_report_config_schedule",
-      "community": 5,
+      "community": 42,
       "norm_label": "schedule"
     },
     {
@@ -3512,7 +3482,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "lib_report_config_reportschedule",
-      "community": 5,
+      "community": 42,
       "norm_label": "reportschedule"
     },
     {
@@ -3522,7 +3492,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "lib_report_config_base",
-      "community": 5,
+      "community": 42,
       "norm_label": "base"
     },
     {
@@ -3532,7 +3502,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "lib_report_config_defaultschedule",
-      "community": 5,
+      "community": 42,
       "norm_label": "defaultschedule"
     },
     {
@@ -3542,7 +3512,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "lib_report_config_field",
-      "community": 5,
+      "community": 42,
       "norm_label": "field"
     },
     {
@@ -3552,7 +3522,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "lib_report_config_company",
-      "community": 5,
+      "community": 42,
       "norm_label": "company"
     },
     {
@@ -3562,7 +3532,7 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "lib_report_config_defaultcompany",
-      "community": 5,
+      "community": 42,
       "norm_label": "defaultcompany"
     },
     {
@@ -3912,7 +3882,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_app_redirect",
-      "community": 45,
+      "community": 5,
       "norm_label": "app-redirect.ts"
     },
     {
@@ -4042,7 +4012,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_catalog_list",
-      "community": 45,
+      "community": 0,
       "norm_label": "catalog-list.ts"
     },
     {
@@ -4062,7 +4032,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "server_catalog_list_listcatalog",
-      "community": 46,
+      "community": 45,
       "norm_label": "listcatalog()"
     },
     {
@@ -4332,7 +4302,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "notes_index_archivestatus",
-      "community": 0,
+      "community": 45,
       "norm_label": "archivestatus()"
     },
     {
@@ -4472,7 +4442,7 @@
       "source_location": "L247",
       "_origin": "ast",
       "id": "notes_index_listnotes",
-      "community": 0,
+      "community": 45,
       "norm_label": "listnotes()"
     },
     {
@@ -4572,7 +4542,7 @@
       "source_location": "L51",
       "_origin": "ast",
       "id": "server_pdf_storage_haspdf",
-      "community": 0,
+      "community": 45,
       "norm_label": "haspdf()"
     },
     {
@@ -4582,7 +4552,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_permissions",
-      "community": 45,
+      "community": 0,
       "norm_label": "permissions.ts"
     },
     {
@@ -4592,7 +4562,7 @@
       "source_location": "L2",
       "_origin": "ast",
       "id": "server_permissions_actor",
-      "community": 45,
+      "community": 0,
       "norm_label": "actor"
     },
     {
@@ -4602,7 +4572,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "server_permissions_action",
-      "community": 45,
+      "community": 0,
       "norm_label": "action"
     },
     {
@@ -4692,7 +4662,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "reports_confirmation",
-      "community": 5,
+      "community": 42,
       "norm_label": "confirmation.ts"
     },
     {
@@ -4702,7 +4672,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "reports_confirmation_saveconfirmationjob",
-      "community": 5,
+      "community": 42,
       "norm_label": "saveconfirmationjob()"
     },
     {
@@ -4712,7 +4682,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "reports_confirmation_sendconfirmation",
-      "community": 5,
+      "community": 42,
       "norm_label": "sendconfirmation()"
     },
     {
@@ -4722,7 +4692,7 @@
       "source_location": "L62",
       "_origin": "ast",
       "id": "reports_confirmation_retryconfirmations",
-      "community": 5,
+      "community": 6,
       "norm_label": "retryconfirmations()"
     },
     {
@@ -4732,7 +4702,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "reports_cron_auth",
-      "community": 5,
+      "community": 6,
       "norm_label": "cron-auth.ts"
     },
     {
@@ -4742,7 +4712,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "reports_cron_auth_authorizedcron",
-      "community": 5,
+      "community": 6,
       "norm_label": "authorizedcron()"
     },
     {
@@ -4752,7 +4722,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "reports_delivery",
-      "community": 5,
+      "community": 42,
       "norm_label": "delivery.ts"
     },
     {
@@ -4762,7 +4732,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "reports_delivery_key",
-      "community": 5,
+      "community": 42,
       "norm_label": "key"
     },
     {
@@ -4772,7 +4742,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "reports_delivery_deliveryresult",
-      "community": 5,
+      "community": 42,
       "norm_label": "deliveryresult"
     },
     {
@@ -4782,7 +4752,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "reports_delivery_failedreports",
-      "community": 5,
+      "community": 42,
       "norm_label": "failedreports()"
     },
     {
@@ -4792,7 +4762,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "reports_delivery_deliveronce",
-      "community": 5,
+      "community": 42,
       "norm_label": "deliveronce()"
     },
     {
@@ -4802,7 +4772,7 @@
       "source_location": "L91",
       "_origin": "ast",
       "id": "reports_delivery_sendreport",
-      "community": 5,
+      "community": 42,
       "norm_label": "sendreport()"
     },
     {
@@ -4812,7 +4782,7 @@
       "source_location": "L132",
       "_origin": "ast",
       "id": "reports_delivery_retryreport",
-      "community": 5,
+      "community": 42,
       "norm_label": "retryreport()"
     },
     {
@@ -4982,7 +4952,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "reports_links_validpdf",
-      "community": 0,
+      "community": 5,
       "norm_label": "validpdf()"
     },
     {
@@ -4992,7 +4962,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "reports_mailer",
-      "community": 5,
+      "community": 42,
       "norm_label": "mailer.ts"
     },
     {
@@ -5002,7 +4972,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "reports_mailer_mailattachment",
-      "community": 5,
+      "community": 42,
       "norm_label": "mailattachment"
     },
     {
@@ -5012,7 +4982,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "reports_mailer_mail",
-      "community": 5,
+      "community": 42,
       "norm_label": "mail"
     },
     {
@@ -5022,7 +4992,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "reports_mailer_mailresult",
-      "community": 5,
+      "community": 42,
       "norm_label": "mailresult"
     },
     {
@@ -5032,7 +5002,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "reports_mailer_addressof",
-      "community": 5,
+      "community": 42,
       "norm_label": "addressof()"
     },
     {
@@ -5042,7 +5012,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "reports_mailer_resend",
-      "community": 5,
+      "community": 42,
       "norm_label": "resend()"
     },
     {
@@ -5052,7 +5022,7 @@
       "source_location": "L53",
       "_origin": "ast",
       "id": "reports_mailer_smtp",
-      "community": 5,
+      "community": 42,
       "norm_label": "smtp()"
     },
     {
@@ -5062,7 +5032,7 @@
       "source_location": "L80",
       "_origin": "ast",
       "id": "reports_mailer_sendmail",
-      "community": 5,
+      "community": 42,
       "norm_label": "sendmail()"
     },
     {
@@ -5182,7 +5152,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "reports_schedule",
-      "community": 5,
+      "community": 42,
       "norm_label": "schedule.ts"
     },
     {
@@ -5192,7 +5162,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "reports_schedule_reportrun",
-      "community": 5,
+      "community": 42,
       "norm_label": "reportrun"
     },
     {
@@ -5202,7 +5172,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "reports_schedule_runduereports",
-      "community": 5,
+      "community": 42,
       "norm_label": "runduereports()"
     },
     {
@@ -5262,7 +5232,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_settings",
-      "community": 5,
+      "community": 42,
       "norm_label": "settings.ts"
     },
     {
@@ -5272,7 +5242,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "server_settings_confirmationemailinput",
-      "community": 5,
+      "community": 42,
       "norm_label": "confirmationemailinput"
     },
     {
@@ -5282,7 +5252,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "server_settings_settinginput",
-      "community": 5,
+      "community": 42,
       "norm_label": "settinginput"
     },
     {
@@ -5292,7 +5262,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "server_settings_getschedule",
-      "community": 5,
+      "community": 42,
       "norm_label": "getschedule()"
     },
     {
@@ -5422,7 +5392,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_voice_alias",
-      "community": 29,
+      "community": 0,
       "norm_label": "voice-alias.ts"
     },
     {
@@ -5592,7 +5562,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "e2e_home_spec",
-      "community": 46,
+      "community": 37,
       "norm_label": "home.spec.ts"
     },
     {
@@ -5622,7 +5592,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "e2e_pending_spec",
-      "community": 46,
+      "community": 37,
       "norm_label": "pending.spec.ts"
     },
     {
@@ -5782,7 +5752,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_app_redirect_test",
-      "community": 45,
+      "community": 5,
       "norm_label": "app-redirect.test.ts"
     },
     {
@@ -5792,7 +5762,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "unit_app_redirect_test_setheaders",
-      "community": 45,
+      "community": 5,
       "norm_label": "setheaders()"
     },
     {
@@ -5802,7 +5772,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_confirmation_email_test",
-      "community": 5,
+      "community": 42,
       "norm_label": "confirmation-email.test.ts"
     },
     {
@@ -5832,7 +5802,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_cron_test",
-      "community": 5,
+      "community": 42,
       "norm_label": "cron.test.ts"
     },
     {
@@ -5842,7 +5812,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "unit_cron_test_sendmail",
-      "community": 5,
+      "community": 42,
       "norm_label": "sendmail"
     },
     {
@@ -5852,7 +5822,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "unit_cron_test_periods",
-      "community": 5,
+      "community": 42,
       "norm_label": "periods"
     },
     {
@@ -5862,7 +5832,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_home_test",
-      "community": 46,
+      "community": 37,
       "norm_label": "home.test.tsx"
     },
     {
@@ -5932,7 +5902,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_permissions_test",
-      "community": 45,
+      "community": 0,
       "norm_label": "permissions.test.ts"
     },
     {
@@ -6059,7 +6029,7 @@
       "label": "base",
       "file_type": "code",
       "source_file": "tests/unit/voice-review.test.tsx",
-      "source_location": "L7",
+      "source_location": "L6",
       "_origin": "ast",
       "id": "unit_voice_review_test_base",
       "community": 37,
@@ -6069,7 +6039,7 @@
       "label": "noop()",
       "file_type": "code",
       "source_file": "tests/unit/voice-review.test.tsx",
-      "source_location": "L19",
+      "source_location": "L16",
       "_origin": "ast",
       "id": "unit_voice_review_test_noop",
       "community": 37,
@@ -6079,7 +6049,7 @@
       "label": "valid",
       "file_type": "code",
       "source_file": "tests/unit/voice-review.test.tsx",
-      "source_location": "L48",
+      "source_location": "L34",
       "_origin": "ast",
       "id": "unit_voice_review_test_valid",
       "community": 37,
@@ -7439,7 +7409,7 @@
       "label": "\u0627\u0644\u062a\u0623\u0643\u064a\u062f \u0648\u0627\u0644\u0645\u0634\u0627\u0631\u0643\u0629",
       "file_type": "document",
       "source_file": "docs/KEEPER-GUIDE.md",
-      "source_location": "L16",
+      "source_location": "L17",
       "_origin": "ast",
       "id": "docs_keeper_guide_\u0627\u0644\u062a\u0623\u0643\u064a\u062f_\u0648\u0627\u0644\u0645\u0634\u0627\u0631\u0643\u0629",
       "community": 28,
@@ -7449,7 +7419,7 @@
       "label": "\u0639\u0646\u062f \u0627\u0646\u0642\u0637\u0627\u0639 \u0627\u0644\u0625\u0646\u062a\u0631\u0646\u062a",
       "file_type": "document",
       "source_file": "docs/KEEPER-GUIDE.md",
-      "source_location": "L22",
+      "source_location": "L24",
       "_origin": "ast",
       "id": "docs_keeper_guide_\u0639\u0646\u062f_\u0627\u0646\u0642\u0637\u0627\u0639_\u0627\u0644\u0625\u0646\u062a\u0631\u0646\u062a",
       "community": 28,
@@ -7584,6 +7554,366 @@
       "id": "docs_qa_report_acceptance_checks_that_need_a_real_deployment",
       "community": 39,
       "norm_label": "acceptance checks that need a real deployment"
+    },
+    {
+      "label": "TECHNICAL-AUDIT.md",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_technical_audit",
+      "community": 43,
+      "norm_label": "technical-audit.md"
+    },
+    {
+      "label": "Warehouse Issue Note Creator technical audit",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_technical_audit_warehouse_issue_note_creator_technical_audit",
+      "community": 43,
+      "norm_label": "warehouse issue note creator technical audit"
+    },
+    {
+      "label": "Current architecture and data flow",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "docs_technical_audit_current_architecture_and_data_flow",
+      "community": 43,
+      "norm_label": "current architecture and data flow"
+    },
+    {
+      "label": "Prioritized findings",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L45",
+      "_origin": "ast",
+      "id": "docs_technical_audit_prioritized_findings",
+      "community": 43,
+      "norm_label": "prioritized findings"
+    },
+    {
+      "label": "Release gates",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L49",
+      "_origin": "ast",
+      "id": "docs_technical_audit_release_gates",
+      "community": 43,
+      "norm_label": "release gates"
+    },
+    {
+      "label": "P0-01 Require verified account enrollment",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L51",
+      "_origin": "ast",
+      "id": "docs_technical_audit_p0_01_require_verified_account_enrollment",
+      "community": 43,
+      "norm_label": "p0-01 require verified account enrollment"
+    },
+    {
+      "label": "P0-02 Protect the final active owner",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L59",
+      "_origin": "ast",
+      "id": "docs_technical_audit_p0_02_protect_the_final_active_owner",
+      "community": 43,
+      "norm_label": "p0-02 protect the final active owner"
+    },
+    {
+      "label": "P0-03 Make confirmation recoverable",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L67",
+      "_origin": "ast",
+      "id": "docs_technical_audit_p0_03_make_confirmation_recoverable",
+      "community": 43,
+      "norm_label": "p0-03 make confirmation recoverable"
+    },
+    {
+      "label": "P0-04 Prove backup restoration",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L75",
+      "_origin": "ast",
+      "id": "docs_technical_audit_p0_04_prove_backup_restoration",
+      "community": 43,
+      "norm_label": "p0-04 prove backup restoration"
+    },
+    {
+      "label": "P0-05 Require a disposable test database",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L83",
+      "_origin": "ast",
+      "id": "docs_technical_audit_p0_05_require_a_disposable_test_database",
+      "community": 43,
+      "norm_label": "p0-05 require a disposable test database"
+    },
+    {
+      "label": "Protect daily operation",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L91",
+      "_origin": "ast",
+      "id": "docs_technical_audit_protect_daily_operation",
+      "community": 43,
+      "norm_label": "protect daily operation"
+    },
+    {
+      "label": "P1-06 Strengthen credential and session policy",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L93",
+      "_origin": "ast",
+      "id": "docs_technical_audit_p1_06_strengthen_credential_and_session_policy",
+      "community": 43,
+      "norm_label": "p1-06 strengthen credential and session policy"
+    },
+    {
+      "label": "P1-07 Review learned catalog aliases",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L101",
+      "_origin": "ast",
+      "id": "docs_technical_audit_p1_07_review_learned_catalog_aliases",
+      "community": 43,
+      "norm_label": "p1-07 review learned catalog aliases"
+    },
+    {
+      "label": "P1-08 Make offline replay safe and visible",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L109",
+      "_origin": "ast",
+      "id": "docs_technical_audit_p1_08_make_offline_replay_safe_and_visible",
+      "community": 43,
+      "norm_label": "p1-08 make offline replay safe and visible"
+    },
+    {
+      "label": "P1-09 Preserve report delivery identity",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L117",
+      "_origin": "ast",
+      "id": "docs_technical_audit_p1_09_preserve_report_delivery_identity",
+      "community": 43,
+      "norm_label": "p1-09 preserve report delivery identity"
+    },
+    {
+      "label": "P1-10 Link and retain voice data deliberately",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L125",
+      "_origin": "ast",
+      "id": "docs_technical_audit_p1_10_link_and_retain_voice_data_deliberately",
+      "community": 43,
+      "norm_label": "p1-10 link and retain voice data deliberately"
+    },
+    {
+      "label": "P1-11 Protect concurrent draft edits",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L133",
+      "_origin": "ast",
+      "id": "docs_technical_audit_p1_11_protect_concurrent_draft_edits",
+      "community": 43,
+      "norm_label": "p1-11 protect concurrent draft edits"
+    },
+    {
+      "label": "P1-12 Retain issued labels and historical dates",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L141",
+      "_origin": "ast",
+      "id": "docs_technical_audit_p1_12_retain_issued_labels_and_historical_dates",
+      "community": 43,
+      "norm_label": "p1-12 retain issued labels and historical dates"
+    },
+    {
+      "label": "P1-13 Bound archive, dashboard and export work",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L149",
+      "_origin": "ast",
+      "id": "docs_technical_audit_p1_13_bound_archive_dashboard_and_export_work",
+      "community": 43,
+      "norm_label": "p1-13 bound archive, dashboard and export work"
+    },
+    {
+      "label": "P1-14 Control emailed PDF grants",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L157",
+      "_origin": "ast",
+      "id": "docs_technical_audit_p1_14_control_emailed_pdf_grants",
+      "community": 43,
+      "norm_label": "p1-14 control emailed pdf grants"
+    },
+    {
+      "label": "P1-15 Make deployment, migration and rollback predictable",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L165",
+      "_origin": "ast",
+      "id": "docs_technical_audit_p1_15_make_deployment_migration_and_rollback_predictable",
+      "community": 43,
+      "norm_label": "p1-15 make deployment, migration and rollback predictable"
+    },
+    {
+      "label": "Improve maintainability and interaction quality",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L173",
+      "_origin": "ast",
+      "id": "docs_technical_audit_improve_maintainability_and_interaction_quality",
+      "community": 43,
+      "norm_label": "improve maintainability and interaction quality"
+    },
+    {
+      "label": "P2-16 Consolidate typed and voice editing contracts",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L175",
+      "_origin": "ast",
+      "id": "docs_technical_audit_p2_16_consolidate_typed_and_voice_editing_contracts",
+      "community": 43,
+      "norm_label": "p2-16 consolidate typed and voice editing contracts"
+    },
+    {
+      "label": "P2-17 Clarify service and browser boundaries",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L183",
+      "_origin": "ast",
+      "id": "docs_technical_audit_p2_17_clarify_service_and_browser_boundaries",
+      "community": 43,
+      "norm_label": "p2-17 clarify service and browser boundaries"
+    },
+    {
+      "label": "P2-18 Make verification reproducible",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L191",
+      "_origin": "ast",
+      "id": "docs_technical_audit_p2_18_make_verification_reproducible",
+      "community": 43,
+      "norm_label": "p2-18 make verification reproducible"
+    },
+    {
+      "label": "Proposed architecture",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L199",
+      "_origin": "ast",
+      "id": "docs_technical_audit_proposed_architecture",
+      "community": 43,
+      "norm_label": "proposed architecture"
+    },
+    {
+      "label": "Coding standards for the refactor",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L228",
+      "_origin": "ast",
+      "id": "docs_technical_audit_coding_standards_for_the_refactor",
+      "community": 43,
+      "norm_label": "coding standards for the refactor"
+    },
+    {
+      "label": "Data integrity and migrations",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L235",
+      "_origin": "ast",
+      "id": "docs_technical_audit_data_integrity_and_migrations",
+      "community": 43,
+      "norm_label": "data integrity and migrations"
+    },
+    {
+      "label": "UI and workflow review",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L242",
+      "_origin": "ast",
+      "id": "docs_technical_audit_ui_and_workflow_review",
+      "community": 43,
+      "norm_label": "ui and workflow review"
+    },
+    {
+      "label": "Design system and responsive rules",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L262",
+      "_origin": "ast",
+      "id": "docs_technical_audit_design_system_and_responsive_rules",
+      "community": 43,
+      "norm_label": "design system and responsive rules"
+    },
+    {
+      "label": "Defensive security review",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L280",
+      "_origin": "ast",
+      "id": "docs_technical_audit_defensive_security_review",
+      "community": 43,
+      "norm_label": "defensive security review"
+    },
+    {
+      "label": "API and role coverage",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L299",
+      "_origin": "ast",
+      "id": "docs_technical_audit_api_and_role_coverage",
+      "community": 43,
+      "norm_label": "api and role coverage"
+    },
+    {
+      "label": "Product acceptance and delivery plan",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L313",
+      "_origin": "ast",
+      "id": "docs_technical_audit_product_acceptance_and_delivery_plan",
+      "community": 43,
+      "norm_label": "product acceptance and delivery plan"
+    },
+    {
+      "label": "Requirements that need a product decision",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L322",
+      "_origin": "ast",
+      "id": "docs_technical_audit_requirements_that_need_a_product_decision",
+      "community": 43,
+      "norm_label": "requirements that need a product decision"
+    },
+    {
+      "label": "QA and operational acceptance",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L329",
+      "_origin": "ast",
+      "id": "docs_technical_audit_qa_and_operational_acceptance",
+      "community": 43,
+      "norm_label": "qa and operational acceptance"
+    },
+    {
+      "label": "Verification and limits",
+      "file_type": "document",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L340",
+      "_origin": "ast",
+      "id": "docs_technical_audit_verification_and_limits",
+      "community": 43,
+      "norm_label": "verification and limits"
     },
     {
       "label": "TEMPLATE-SPEC.md",
@@ -10392,17 +10722,6 @@
       "target": "ai_matching"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/review.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_review",
-      "target": "ai_matching"
-    },
-    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
@@ -10499,17 +10818,6 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "voice_alias_handler",
-      "target": "ai_matching_normalize"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/review.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_review",
       "target": "ai_matching_normalize"
     },
     {
@@ -13829,17 +14137,6 @@
       "target": "brand_pending_indicator"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/review.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_review",
-      "target": "brand_pending_indicator"
-    },
-    {
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -13947,17 +14244,6 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "voice_recorder",
-      "target": "brand_pending_indicator_pendingindicator"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/review.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_review",
       "target": "brand_pending_indicator_pendingindicator"
     },
     {
@@ -16155,17 +16441,6 @@
       "target": "notes_command"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/review.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_review",
-      "target": "notes_command"
-    },
-    {
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -16185,17 +16460,6 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "notes_void_form",
-      "target": "notes_command_command"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/review.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_review",
       "target": "notes_command_command"
     },
     {
@@ -16225,6 +16489,28 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/app/notes/editor.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "notes_editor",
+      "target": "lib_inputs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/notes/editor.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "notes_editor",
+      "target": "lib_inputs_noteinput",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/notes/editor.tsx",
       "source_location": "L11",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -16246,16 +16532,6 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/app/notes/editor.tsx",
-      "source_location": "L14",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "notes_editor",
-      "target": "notes_editor_choice"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/notes/editor.tsx",
       "source_location": "L32",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -16266,31 +16542,21 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/app/notes/editor.tsx",
-      "source_location": "L23",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "notes_editor",
-      "target": "notes_editor_fields"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/notes/editor.tsx",
-      "source_location": "L16",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "notes_editor",
-      "target": "notes_editor_line"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/notes/editor.tsx",
       "source_location": "L30",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "notes_editor",
       "target": "notes_editor_notefields"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/notes/editor.tsx",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "notes_editor",
+      "target": "notes_editor_previewdate",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16379,6 +16645,171 @@
       "target": "pwa_connectivity_useonline"
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/notes/editor.tsx",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "notes_editor",
+      "target": "pwa_drafts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/notes/editor.tsx",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "notes_editor",
+      "target": "pwa_drafts_deletedraft",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/notes/editor.tsx",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "notes_editor",
+      "target": "pwa_drafts_putdraft",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/notes/editor.tsx",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "notes_editor",
+      "target": "voice_match_options",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/notes/editor.tsx",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "notes_editor",
+      "target": "voice_match_options_matchoptions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/notes/editor.tsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "notes_editor",
+      "target": "voice_review_model",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/notes/editor.tsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "notes_editor",
+      "target": "voice_review_model_blockers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/notes/editor.tsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "notes_editor",
+      "target": "voice_review_model_draft",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/notes/editor.tsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "notes_editor",
+      "target": "voice_review_model_item",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/notes/editor.tsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "notes_editor",
+      "target": "voice_review_model_line",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/notes/editor.tsx",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "notes_editor",
+      "target": "voice_speech_tools",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/notes/editor.tsx",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "notes_editor",
+      "target": "voice_speech_tools_speechtools",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/voice/flow.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "voice_flow",
+      "target": "notes_editor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/notes/editor.tsx",
+      "source_location": "L247",
+      "weight": 1.0,
+      "source": "notes_editor_editor",
+      "target": "notes_editor_notefields",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/notes/editor.tsx",
+      "source_location": "L500",
+      "weight": 1.0,
+      "source": "notes_editor_editor",
+      "target": "lib_inputs_name"
+    },
+    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
@@ -16399,6 +16830,28 @@
       "weight": 1.0,
       "source": "notes_editor_editor",
       "target": "pwa_connectivity_useonline"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/notes/editor.tsx",
+      "source_location": "L245",
+      "weight": 1.0,
+      "source": "notes_editor_editor",
+      "target": "voice_review_model_blockers"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/voice/flow.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "voice_flow",
+      "target": "notes_editor_editor",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -16567,28 +17020,6 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/review.tsx",
-      "source_location": "L10",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_review",
-      "target": "notes_number_control"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/review.tsx",
-      "source_location": "L10",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_review",
-      "target": "notes_number_control_numbercontrol"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "src/app/notes/pdf-preview.tsx",
       "source_location": "L3",
       "weight": 1.0,
@@ -16714,17 +17145,6 @@
       "target": "notes_remark_fields_remarkfields"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/line-card.tsx",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_line_card",
-      "target": "notes_remark_fields"
-    },
-    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
@@ -16734,17 +17154,6 @@
       "weight": 1.0,
       "source": "notes_remark_fields_remarkfields",
       "target": "lib_remarks_cancolorremark"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/line-card.tsx",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_line_card",
-      "target": "notes_remark_fields_remarkfields"
     },
     {
       "relation": "imports_from",
@@ -17135,17 +17544,6 @@
       "target": "pwa_connectivity"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/review.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_review",
-      "target": "pwa_connectivity"
-    },
-    {
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -17212,28 +17610,6 @@
       "target": "pwa_connectivity_useonline"
     },
     {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/review.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_review",
-      "target": "pwa_connectivity_useonline"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/app/voice/review.tsx",
-      "source_location": "L81",
-      "weight": 1.0,
-      "source": "voice_review_review",
-      "target": "pwa_connectivity_useonline"
-    },
-    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/app/pwa/drafts.ts",
@@ -17242,6 +17618,16 @@
       "confidence_score": 1.0,
       "source": "pwa_drafts",
       "target": "pwa_drafts_deletedraft"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/pwa/drafts.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "pwa_drafts",
+      "target": "pwa_drafts_editordraft",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -17317,6 +17703,28 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "src/app/pwa/drafts.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "pwa_drafts",
+      "target": "voice_review_model",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/pwa/drafts.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "pwa_drafts",
+      "target": "voice_review_model_draft",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "src/app/pwa/register.tsx",
       "source_location": "L3",
       "weight": 1.0,
@@ -17356,6 +17764,17 @@
       "confidence_score": 1.0,
       "source": "voice_recorder",
       "target": "pwa_drafts"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/voice/flow.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "voice_flow",
+      "target": "pwa_drafts_editordraft",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -18189,17 +18608,6 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/app/voice/flow.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_flow",
-      "target": "voice_review"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/flow.tsx",
       "source_location": "L6",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -18238,17 +18646,6 @@
       "confidence_score": 1.0,
       "source": "voice_flow",
       "target": "voice_review_model_item"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/flow.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_flow",
-      "target": "voice_review_review"
     },
     {
       "relation": "imports_from",
@@ -18333,84 +18730,63 @@
       "source_file": "tests/unit/voice-review.test.tsx",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "unit_voice_review_test",
-      "target": "voice_line_card"
+      "target": "voice_match_options",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/line-card.tsx",
+      "source_file": "src/app/voice/match-options.tsx",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_line_card",
-      "target": "lib_i18n"
+      "source": "voice_match_options",
+      "target": "lib_i18n",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/line-card.tsx",
+      "source_file": "src/app/voice/match-options.tsx",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_line_card",
-      "target": "lib_i18n_ar"
+      "source": "voice_match_options",
+      "target": "lib_i18n_ar",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/line-card.tsx",
-      "source_location": "L17",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_line_card",
-      "target": "voice_line_card_linecard"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/line-card.tsx",
+      "source_file": "src/app/voice/match-options.tsx",
       "source_location": "L5",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_line_card",
-      "target": "voice_line_card_props"
+      "source": "voice_match_options",
+      "target": "voice_match_options_matchoptions",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/line-card.tsx",
+      "source_file": "src/app/voice/match-options.tsx",
       "source_location": "L2",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_line_card",
-      "target": "voice_review_model"
+      "source": "voice_match_options",
+      "target": "voice_review_model",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/line-card.tsx",
+      "source_file": "src/app/voice/match-options.tsx",
       "source_location": "L2",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_line_card",
-      "target": "voice_review_model_line"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/review.tsx",
-      "source_location": "L16",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_review",
-      "target": "voice_line_card"
+      "source": "voice_match_options",
+      "target": "voice_review_model_line",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -18419,20 +18795,9 @@
       "source_file": "tests/unit/voice-review.test.tsx",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "unit_voice_review_test",
-      "target": "voice_line_card_linecard"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/review.tsx",
-      "source_location": "L16",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_review",
-      "target": "voice_line_card_linecard"
+      "target": "voice_match_options_matchoptions",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -18655,23 +19020,23 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/review.tsx",
-      "source_location": "L17",
+      "source_file": "src/app/voice/speech-tools.tsx",
+      "source_location": "L7",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_review",
-      "target": "voice_recorder"
+      "source": "voice_speech_tools",
+      "target": "voice_recorder",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/review.tsx",
-      "source_location": "L17",
+      "source_file": "src/app/voice/speech-tools.tsx",
+      "source_location": "L7",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_review",
-      "target": "voice_recorder_voicerecorder"
+      "source": "voice_speech_tools",
+      "target": "voice_recorder_voicerecorder",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -18682,17 +19047,6 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "unit_voice_review_test",
-      "target": "voice_review_model"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/review.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_review",
       "target": "voice_review_model"
     },
     {
@@ -18788,6 +19142,17 @@
       "target": "voice_review_model_reviewline"
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/voice/speech-tools.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "voice_speech_tools",
+      "target": "voice_review_model",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -18796,17 +19161,6 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "unit_voice_review_test",
-      "target": "voice_review_model_line"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/review.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_review",
       "target": "voice_review_model_line"
     },
     {
@@ -18824,162 +19178,45 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/review.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_review",
-      "target": "voice_review_model_draft"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/review.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_review",
-      "target": "voice_review_model_item"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/review.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_review",
-      "target": "voice_review_model_reviewline"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/review.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_review",
-      "target": "voice_review_model_fromspeech"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/review.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_review",
-      "target": "voice_review_model_blockers"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/app/voice/review.tsx",
-      "source_location": "L30",
-      "weight": 1.0,
-      "source": "voice_review_confirmcontrol",
-      "target": "voice_review_model_blockers"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "tests/unit/voice-review.test.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "unit_voice_review_test",
-      "target": "voice_review"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/review.tsx",
+      "source_file": "src/app/voice/speech-tools.tsx",
       "source_location": "L6",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_review",
-      "target": "lib_i18n"
+      "source": "voice_speech_tools",
+      "target": "voice_review_model_draft",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/review.tsx",
+      "source_file": "src/app/voice/speech-tools.tsx",
       "source_location": "L6",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_review",
-      "target": "lib_i18n_ar"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/review.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_review",
-      "target": "server_voice"
+      "source": "voice_speech_tools",
+      "target": "voice_review_model_item",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/review.tsx",
-      "source_location": "L4",
+      "source_file": "src/app/voice/speech-tools.tsx",
+      "source_location": "L6",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_review",
-      "target": "server_voice_processedit"
+      "source": "voice_speech_tools",
+      "target": "voice_review_model_reviewline",
+      "confidence_score": 1.0
     },
     {
-      "relation": "contains",
+      "relation": "imports",
+      "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/review.tsx",
-      "source_location": "L23",
+      "source_file": "src/app/voice/speech-tools.tsx",
+      "source_location": "L6",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_review",
-      "target": "voice_review_confirmcontrol"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/review.tsx",
-      "source_location": "L20",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_review",
-      "target": "voice_review_panel"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/review.tsx",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_review",
-      "target": "voice_review_previewdate"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/voice/review.tsx",
-      "source_location": "L44",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "voice_review",
-      "target": "voice_review_review"
+      "source": "voice_speech_tools",
+      "target": "voice_review_model_fromspeech",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -18988,9 +19225,83 @@
       "source_file": "tests/unit/voice-review.test.tsx",
       "source_location": "L4",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "unit_voice_review_test",
-      "target": "voice_review_confirmcontrol"
+      "target": "voice_review_model_blockers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/voice/speech-tools.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "voice_speech_tools",
+      "target": "lib_i18n",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/voice/speech-tools.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "voice_speech_tools",
+      "target": "lib_i18n_ar",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/voice/speech-tools.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "voice_speech_tools",
+      "target": "server_voice",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/voice/speech-tools.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "voice_speech_tools",
+      "target": "server_voice_processedit",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/voice/speech-tools.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "voice_speech_tools",
+      "target": "voice_speech_tools_labels",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/voice/speech-tools.tsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "voice_speech_tools",
+      "target": "voice_speech_tools_mode",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/voice/speech-tools.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "voice_speech_tools",
+      "target": "voice_speech_tools_speechtools",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -21150,9 +21461,9 @@
       "source_file": "src/proxy.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_proxy",
-      "target": "server_request_origin",
-      "confidence_score": 1.0
+      "target": "server_request_origin"
     },
     {
       "relation": "imports",
@@ -21161,9 +21472,9 @@
       "source_file": "src/proxy.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_proxy",
-      "target": "server_request_origin_requestorigin",
-      "confidence_score": 1.0
+      "target": "server_request_origin_requestorigin"
     },
     {
       "relation": "contains",
@@ -21192,9 +21503,9 @@
       "source_file": "tests/unit/proxy.test.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_proxy_test",
-      "target": "src_proxy",
-      "confidence_score": 1.0
+      "target": "src_proxy"
     },
     {
       "relation": "calls",
@@ -21225,9 +21536,9 @@
       "source_file": "tests/unit/proxy.test.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_proxy_test",
-      "target": "src_proxy_proxy",
-      "confidence_score": 1.0
+      "target": "src_proxy_proxy"
     },
     {
       "relation": "contains",
@@ -21268,9 +21579,9 @@
       "source_file": "src/server/app-redirect.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "server_app_redirect",
-      "target": "server_app_url_isloopbackorigin",
-      "confidence_score": 1.0
+      "target": "server_app_url_isloopbackorigin"
     },
     {
       "relation": "imports_from",
@@ -21279,9 +21590,9 @@
       "source_file": "src/server/app-redirect.ts",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "server_app_redirect",
-      "target": "server_request_origin",
-      "confidence_score": 1.0
+      "target": "server_request_origin"
     },
     {
       "relation": "imports",
@@ -21290,9 +21601,9 @@
       "source_file": "src/server/app-redirect.ts",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "server_app_redirect",
-      "target": "server_request_origin_requestorigin",
-      "confidence_score": 1.0
+      "target": "server_request_origin_requestorigin"
     },
     {
       "relation": "imports_from",
@@ -21420,9 +21731,9 @@
       "source_file": "src/server/app-url.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "server_app_url",
-      "target": "server_app_url_isloopbackorigin",
-      "confidence_score": 1.0
+      "target": "server_app_url_isloopbackorigin"
     },
     {
       "relation": "imports_from",
@@ -21431,9 +21742,9 @@
       "source_file": "src/server/request-origin.ts",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "server_request_origin",
-      "target": "server_app_url",
-      "confidence_score": 1.0
+      "target": "server_app_url"
     },
     {
       "relation": "imports",
@@ -21442,9 +21753,9 @@
       "source_file": "src/server/request-origin.ts",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "server_request_origin",
-      "target": "server_app_url_isloopbackorigin",
-      "confidence_score": 1.0
+      "target": "server_app_url_isloopbackorigin"
     },
     {
       "relation": "calls",
@@ -25397,9 +25708,9 @@
       "source_file": "src/server/request-origin.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "server_request_origin",
-      "target": "server_request_origin_requestorigin",
-      "confidence_score": 1.0
+      "target": "server_request_origin_requestorigin"
     },
     {
       "relation": "contains",
@@ -25997,9 +26308,9 @@
       "source_file": "tests/unit/app-redirect.test.ts",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_app_redirect_test",
-      "target": "unit_app_redirect_test_setheaders",
-      "confidence_score": 1.0
+      "target": "unit_app_redirect_test_setheaders"
     },
     {
       "relation": "contains",
@@ -26057,9 +26368,9 @@
       "source_file": "tests/unit/proxy.test.ts",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_proxy_test",
-      "target": "unit_proxy_test_request",
-      "confidence_score": 1.0
+      "target": "unit_proxy_test_request"
     },
     {
       "relation": "contains",
@@ -27454,6 +27765,356 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "docs_technical_audit",
+      "target": "docs_technical_audit_warehouse_issue_note_creator_technical_audit",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "docs_technical_audit_warehouse_issue_note_creator_technical_audit",
+      "target": "docs_technical_audit_current_architecture_and_data_flow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L280",
+      "weight": 1.0,
+      "source": "docs_technical_audit_warehouse_issue_note_creator_technical_audit",
+      "target": "docs_technical_audit_defensive_security_review",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L45",
+      "weight": 1.0,
+      "source": "docs_technical_audit_warehouse_issue_note_creator_technical_audit",
+      "target": "docs_technical_audit_prioritized_findings",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L313",
+      "weight": 1.0,
+      "source": "docs_technical_audit_warehouse_issue_note_creator_technical_audit",
+      "target": "docs_technical_audit_product_acceptance_and_delivery_plan",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L199",
+      "weight": 1.0,
+      "source": "docs_technical_audit_warehouse_issue_note_creator_technical_audit",
+      "target": "docs_technical_audit_proposed_architecture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L242",
+      "weight": 1.0,
+      "source": "docs_technical_audit_warehouse_issue_note_creator_technical_audit",
+      "target": "docs_technical_audit_ui_and_workflow_review",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L340",
+      "weight": 1.0,
+      "source": "docs_technical_audit_warehouse_issue_note_creator_technical_audit",
+      "target": "docs_technical_audit_verification_and_limits",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L173",
+      "weight": 1.0,
+      "source": "docs_technical_audit_prioritized_findings",
+      "target": "docs_technical_audit_improve_maintainability_and_interaction_quality",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L91",
+      "weight": 1.0,
+      "source": "docs_technical_audit_prioritized_findings",
+      "target": "docs_technical_audit_protect_daily_operation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L49",
+      "weight": 1.0,
+      "source": "docs_technical_audit_prioritized_findings",
+      "target": "docs_technical_audit_release_gates",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L51",
+      "weight": 1.0,
+      "source": "docs_technical_audit_release_gates",
+      "target": "docs_technical_audit_p0_01_require_verified_account_enrollment",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L59",
+      "weight": 1.0,
+      "source": "docs_technical_audit_release_gates",
+      "target": "docs_technical_audit_p0_02_protect_the_final_active_owner",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L67",
+      "weight": 1.0,
+      "source": "docs_technical_audit_release_gates",
+      "target": "docs_technical_audit_p0_03_make_confirmation_recoverable",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L75",
+      "weight": 1.0,
+      "source": "docs_technical_audit_release_gates",
+      "target": "docs_technical_audit_p0_04_prove_backup_restoration",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L83",
+      "weight": 1.0,
+      "source": "docs_technical_audit_release_gates",
+      "target": "docs_technical_audit_p0_05_require_a_disposable_test_database",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L93",
+      "weight": 1.0,
+      "source": "docs_technical_audit_protect_daily_operation",
+      "target": "docs_technical_audit_p1_06_strengthen_credential_and_session_policy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L101",
+      "weight": 1.0,
+      "source": "docs_technical_audit_protect_daily_operation",
+      "target": "docs_technical_audit_p1_07_review_learned_catalog_aliases",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L109",
+      "weight": 1.0,
+      "source": "docs_technical_audit_protect_daily_operation",
+      "target": "docs_technical_audit_p1_08_make_offline_replay_safe_and_visible",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L117",
+      "weight": 1.0,
+      "source": "docs_technical_audit_protect_daily_operation",
+      "target": "docs_technical_audit_p1_09_preserve_report_delivery_identity",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L125",
+      "weight": 1.0,
+      "source": "docs_technical_audit_protect_daily_operation",
+      "target": "docs_technical_audit_p1_10_link_and_retain_voice_data_deliberately",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L133",
+      "weight": 1.0,
+      "source": "docs_technical_audit_protect_daily_operation",
+      "target": "docs_technical_audit_p1_11_protect_concurrent_draft_edits",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L141",
+      "weight": 1.0,
+      "source": "docs_technical_audit_protect_daily_operation",
+      "target": "docs_technical_audit_p1_12_retain_issued_labels_and_historical_dates",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L149",
+      "weight": 1.0,
+      "source": "docs_technical_audit_protect_daily_operation",
+      "target": "docs_technical_audit_p1_13_bound_archive_dashboard_and_export_work",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L157",
+      "weight": 1.0,
+      "source": "docs_technical_audit_protect_daily_operation",
+      "target": "docs_technical_audit_p1_14_control_emailed_pdf_grants",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L165",
+      "weight": 1.0,
+      "source": "docs_technical_audit_protect_daily_operation",
+      "target": "docs_technical_audit_p1_15_make_deployment_migration_and_rollback_predictable",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L175",
+      "weight": 1.0,
+      "source": "docs_technical_audit_improve_maintainability_and_interaction_quality",
+      "target": "docs_technical_audit_p2_16_consolidate_typed_and_voice_editing_contracts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L183",
+      "weight": 1.0,
+      "source": "docs_technical_audit_improve_maintainability_and_interaction_quality",
+      "target": "docs_technical_audit_p2_17_clarify_service_and_browser_boundaries",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L191",
+      "weight": 1.0,
+      "source": "docs_technical_audit_improve_maintainability_and_interaction_quality",
+      "target": "docs_technical_audit_p2_18_make_verification_reproducible",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L228",
+      "weight": 1.0,
+      "source": "docs_technical_audit_proposed_architecture",
+      "target": "docs_technical_audit_coding_standards_for_the_refactor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L235",
+      "weight": 1.0,
+      "source": "docs_technical_audit_proposed_architecture",
+      "target": "docs_technical_audit_data_integrity_and_migrations",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L262",
+      "weight": 1.0,
+      "source": "docs_technical_audit_ui_and_workflow_review",
+      "target": "docs_technical_audit_design_system_and_responsive_rules",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L299",
+      "weight": 1.0,
+      "source": "docs_technical_audit_defensive_security_review",
+      "target": "docs_technical_audit_api_and_role_coverage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L329",
+      "weight": 1.0,
+      "source": "docs_technical_audit_product_acceptance_and_delivery_plan",
+      "target": "docs_technical_audit_qa_and_operational_acceptance",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/TECHNICAL-AUDIT.md",
+      "source_location": "L322",
+      "weight": 1.0,
+      "source": "docs_technical_audit_product_acceptance_and_delivery_plan",
+      "target": "docs_technical_audit_requirements_that_need_a_product_decision",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "docs/TEMPLATE-SPEC.md",
       "source_location": "L1",
       "weight": 1.0,
@@ -27513,5 +28174,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "b06f7089fdfb38164654127875d29dfafef6039c"
+  "built_at_commit": "f6a49080c386456d6c9e72d0b487bf9b814a9aa4"
 }
