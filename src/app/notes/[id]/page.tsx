@@ -35,11 +35,9 @@ export default async function NotePage(props: PageProps<"/notes/[id]">) {
             notFound();
           throw e;
         });
-  const amend =
-    !!query.data.amend &&
-    note?.status === "CONFIRMED" &&
-    !note.successor &&
-    allowed(user.role, "note.supersede");
+  const confirmed = note?.status === "CONFIRMED" && !note.successor;
+  const canAmend = confirmed && allowed(user.role, "note.supersede");
+  const amend = !!query.data.amend && canAmend;
   if (
     !note ||
     amend ||
@@ -96,14 +94,10 @@ export default async function NotePage(props: PageProps<"/notes/[id]">) {
           <Link href="/workspace">{t.newNote}</Link>
         )}
         <Link href="/archive">{t.archive}</Link>
-        {note.status === "CONFIRMED" &&
-          !note.successor &&
-          allowed(user.role, "note.supersede") && (
-            <>
-              <Link href={"/notes/" + key + "?amend=1"}>{t.supersede}</Link>
-              <VoidForm id={key} />
-            </>
-          )}
+        {canAmend && (
+          <Link href={"/notes/" + key + "?amend=1"}>{t.editConfirmed}</Link>
+        )}
+        {confirmed && allowed(user.role, "note.void") && <VoidForm id={key} />}
       </nav>
     </main>
   );

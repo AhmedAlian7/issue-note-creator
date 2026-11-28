@@ -143,4 +143,33 @@ test("keeper types, issues, previews and downloads the numbered PDF on a phone",
   await expect(
     page.getByRole("link", { name: new RegExp(customer.nameAr) }),
   ).toBeVisible();
+  await page.getByRole("link", { name: new RegExp(customer.nameAr) }).click();
+  await expect(page).toHaveURL(/\/notes\/[a-f0-9-]+$/);
+  const originalUrl = page.url();
+  await expect(page.getByRole("button", { name: t.void })).toHaveCount(0);
+  await page.getByRole("link", { name: t.editConfirmed }).click();
+  await page.getByRole("spinbutton").first().fill("6");
+  await page.getByRole("button", { name: t.summary }).click();
+  await expect(page.getByRole("button", { name: t.supersede })).toBeDisabled();
+  await page.getByLabel(t.reason).fill("تصحيح الكمية");
+  await page.getByRole("button", { name: t.supersede }).click();
+  await expect(page.locator(".pdf-pages canvas")).toBeVisible({
+    timeout: 30000,
+  });
+  expect(page.url()).not.toBe(originalUrl);
+  const revision = await db.issueNote.findUniqueOrThrow({
+    where: { id: page.url().split("/").pop() },
+    include: { lines: { orderBy: { position: "asc" } } },
+  });
+  expect(revision).toMatchObject({
+    number: expected,
+    version: 2,
+    supersedesId: originalUrl.split("/").pop(),
+    lines: [expect.objectContaining({ quantity: 6 }), expect.anything()],
+  });
+  await page.goto(originalUrl);
+  await expect(page.getByText(new RegExp(t.SUPERSEDED))).toBeVisible();
+  await expect(page.getByRole("link", { name: t.editConfirmed })).toHaveCount(
+    0,
+  );
 });

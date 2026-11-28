@@ -24,7 +24,7 @@ Three roles cover the process; each user signs in with a username and PIN. On fi
 | Role | Main job | Can do | Cannot do |
 | --- | --- | --- | --- |
 | Admin / data manager | Keeps master data clean | Add, edit, archive products; manage customers and destinations; manage users | See financial insights unless granted |
-| Warehouse keeper | Creates notes | Record by voice, review, edit, confirm, print or share notes; see own recent notes; add a new product when the voice match finds none | Edit or delete existing products; delete confirmed notes |
+| Warehouse keeper | Creates notes | Record by voice, review, edit, confirm, print or share notes; see own recent notes; amend own confirmed notes; add a new product when a search or voice match finds none | Edit or delete existing products; void confirmed notes |
 | Owner | Oversees everything | Dashboard, report settings, email schedule, user management, void or reissue any note, view audit log | Nothing is blocked |
 
 **Rules that protect the data**

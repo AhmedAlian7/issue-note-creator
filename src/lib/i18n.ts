@@ -213,6 +213,7 @@ export const ar = {
     version: "النسخة",
     void: "إلغاء الإذن",
     supersede: "إصدار نسخة معدلة",
+    editConfirmed: "تعديل الإذن",
     reason: "سبب التغيير",
     cancel: "رجوع",
     search: "رقم الإذن أو اسم العميل",

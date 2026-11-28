@@ -12,7 +12,7 @@ const grants = {
   "note.edit": ["KEEPER"],
   "note.confirm": ["KEEPER"],
   "note.void": ["ADMIN"],
-  "note.supersede": ["ADMIN"],
+  "note.supersede": ["ADMIN", "KEEPER"],
   "note.read": ["ADMIN", "KEEPER"],
   "settings.manage": [],
   "audit.read": [],

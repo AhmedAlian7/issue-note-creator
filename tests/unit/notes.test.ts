@@ -86,9 +86,38 @@ it("rolls back failed issuance and serializes twenty full confirmations", async 
   );
   await expect(confirmNote(keeper, key)).rejects.toBeInstanceOf(NoteConflict);
   await expect(voidNote(keeper, key, "خطأ")).rejects.toBeInstanceOf(Denied);
+  const ownNote = issued[1];
+  const otherKeeper = await db.user.create({
+    data: {
+      name: "other",
+      username: "other-keeper",
+      pinHash: "unused",
+      role: "KEEPER",
+    },
+  });
   await expect(
-    supersedeNote(keeper, key, fields, "خطأ"),
-  ).rejects.toBeInstanceOf(Denied);
+    supersedeNote(otherKeeper, ownNote.id, fields, "تصحيح"),
+  ).rejects.toMatchObject({ code: "P2025" });
+  const keeperRevision = await supersedeNote(
+    keeper,
+    ownNote.id,
+    {
+      ...fields,
+      lines: [{ productId: product.id, quantity: 3 }],
+    },
+    "تصحيح",
+  );
+  expect(keeperRevision).toMatchObject({
+    number: ownNote.number,
+    version: 2,
+    supersedesId: ownNote.id,
+    status: "CONFIRMED",
+    lines: [expect.objectContaining({ quantity: 3 })],
+  });
+  expect(archiveStatus(await getNote(keeper, ownNote.id))).toBe("SUPERSEDED");
+  await expect(
+    supersedeNote(keeper, ownNote.id, fields, "تصحيح"),
+  ).rejects.toBeInstanceOf(NoteConflict);
   const before = await counter();
   const revision = await supersedeNote(admin, key, fields, "تصحيح");
   expect(revision).toMatchObject({
